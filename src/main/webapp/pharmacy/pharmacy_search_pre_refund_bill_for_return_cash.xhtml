@@ -1,0 +1,169 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="/resources/template/template.xhtml">
+            <ui:define name="content">
+                <h:form id="formSearchBillsForReturnPayments">
+                    <p:panel header="Search Purchase Orders" style="height: 100vh">
+                        <f:facet name="header" >
+                            <h:outputLabel value="Search Item Return Bills to Refund"/>
+                        </f:facet>
+
+                        <div class="row">
+                            <div class="col-2" >
+                                <h:panelGrid columns="1" class="w-100" >
+                                    <h:outputLabel value="From Date"/>
+                                    <p:calendar
+                                        styleClass="dateTimePicker"
+                                        id="fromDate"
+                                        value="#{pharmacyRefundForItemReturnsController.fromDate}"
+                                        navigator="false"
+                                        class="w-100"
+                                        inputStyleClass="w-100"
+                                        pattern="#{sessionController.applicationPreference.longDateTimeFormat}"
+                                        maxdate="#{commonFunctionsProxy.endOfDay}">
+                                    </p:calendar>
+                                    <h:outputLabel value="To Date"/>
+                                    <p:calendar
+                                        id="toDate"
+                                        class="w-100"
+                                        inputStyleClass="w-100"
+                                        value="#{pharmacyRefundForItemReturnsController.toDate}"
+                                        navigator="false"
+                                        pattern="#{sessionController.applicationPreference.longDateTimeFormat}"
+                                        maxdate="#{commonFunctionsProxy.endOfDay}">
+                                    </p:calendar>
+                                    <h:outputLabel value="Bill No"/>
+                                    <p:inputText class="w-100" autocomplete="off"  value="#{pharmacyRefundForItemReturnsController.searchKeyword.billNo}" />
+                                    <h:outputLabel value="Patient Name"/>
+                                    <p:inputText class="w-100" autocomplete="off" value="#{pharmacyRefundForItemReturnsController.searchKeyword.patientName}" />
+                                    <h:outputLabel value="Total"/>
+                                    <p:inputText class="w-100" autocomplete="off"  value="#{pharmacyRefundForItemReturnsController.searchKeyword.total}" />
+                                    <h:outputLabel value="Net Total"/>
+
+                                    <p:inputText class="w-100" autocomplete="off" value="#{pharmacyRefundForItemReturnsController.searchKeyword.netTotal}"/>
+
+                                    <h:outputLabel value="Search By Status"/>
+                                    <p:commandButton
+                                        class="w-100 my-1 ui-button-success"
+                                        icon="fas fa-hand-holding-usd"
+                                        id="btnBillsToRefund"
+                                        ajax="false"
+                                        value="Bills to Refund"
+                                        action="#{pharmacyRefundForItemReturnsController.fillBillsToRefundDTO}"/>
+                                    <p:commandButton
+                                        class="w-100 my-1 ui-button-info"
+                                        icon="fas fa-check-circle"
+                                        id="btnRefundedBills"
+                                        ajax="false"
+                                        value="Refunded Bills"
+                                        action="#{pharmacyRefundForItemReturnsController.fillRefundedBillsDTO}"/>
+                                    <p:commandButton
+                                        class="w-100 my-1 ui-button-warning"
+                                        icon="fas fa-search"
+                                        id="btnAllBills"
+                                        ajax="false"
+                                        value="All Bills"
+                                        action="#{pharmacyRefundForItemReturnsController.fillAllItemReturnBillsDTO}"/>
+
+                                </h:panelGrid>
+                            </div>
+                            <div class="col-10">
+                                <h:panelGrid columns="5">
+
+                                    <h:outputLabel/>
+                                </h:panelGrid>
+
+                                <p:dataTable id="tblBills"
+                                             value="#{pharmacyRefundForItemReturnsController.billDTOs}"
+                                             var="bill"
+                                             paginator="true"
+                                             rowKey="#{bill.id}"
+                                             paginatorPosition="bottom"
+                                             class="my-4"
+                                             rows="10"
+                                             paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                             rowsPerPageTemplate="5,10,15"
+                                             >
+
+                                    <p:column headerText="Item return Bill No"  width="7%">
+                                        <h:outputLabel value="#{bill.deptId}"  />
+                                    </p:column>
+                                    <p:column headerText="Item Returned At"  width="10%">
+                                        <h:outputLabel value="#{bill.createdAt}" >
+                                            <f:convertDateTime  timeZone="Asia/Colombo" pattern="#{sessionController.applicationPreference.longDateTimeFormat}" />
+                                        </h:outputLabel>
+                                        <br/>
+                                        <h:panelGroup rendered="#{bill.cancelled}" >
+                                            <p:outputLabel style="color: red;" value="Cancelled at " />
+                                            <h:outputLabel style="color: red;" rendered="#{bill.cancelled}"
+                                                           value="#{bill.cancelledBillCreatedAt}" >
+                                                <f:convertDateTime  timeZone="Asia/Colombo" pattern="#{sessionController.applicationPreference.longDateTimeFormat}" />
+                                            </h:outputLabel>
+                                        </h:panelGroup>
+                                    </p:column>
+                                    <p:column headerText="Item Returns accepted By" width="8%">
+                                        <h:outputLabel value="#{bill.creatorName}" >
+                                        </h:outputLabel>
+                                        <br/>
+                                        <h:panelGroup rendered="#{bill.cancelled}" >
+                                            <h:outputLabel style="color: red;" value="Cancelled By "  />
+                                            <h:outputLabel style="color: red;" rendered="#{bill.cancelled}" value="#{bill.cancelledBillCreatorName}" >
+                                            </h:outputLabel>
+                                        </h:panelGroup>
+                                    </p:column>
+                                    <p:column headerText="Return Value" width="5%">
+                                        <h:outputLabel value="#{bill.netTotal}" >
+                                            <f:convertNumber pattern="#,##0.00"/>
+                                        </h:outputLabel>
+                                    </p:column>
+
+                                    <p:column headerText="Refunded At" width="10%">
+                                        <h:outputLabel value="#{bill.paidBillCreatedAt}" rendered="#{bill.paid eq true}">
+                                            <f:convertDateTime  timeZone="Asia/Colombo" pattern="#{sessionController.applicationPreference.longDateTimeFormat}" />
+                                        </h:outputLabel>
+                                    </p:column>
+
+                                    <p:column headerText="Refunded By" width="8%">
+                                        <h:outputLabel value="#{bill.paidBillCreatorName}" rendered="#{bill.paid eq true}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Payment Method" width="8%">
+                                        <h:outputLabel value="#{bill.paymentMethod.label}" rendered="#{bill.paid eq true and bill.paymentMethod ne null}"/>
+                                    </p:column>
+
+                                    <p:column headerText="Action" width="5%">
+                                        <p:commandButton
+                                            ajax="false"
+                                            value="REFUND"
+                                            action="#{pharmacyRefundForItemReturnsController.toSettleReturnById(bill.id)}"
+                                            disabled="#{bill.cancelled eq true or bill.paid eq true}"
+                                            styleClass="#{bill.paid eq true ? 'ui-button-secondary' : ''}"
+                                            icon="#{bill.paid eq true ? 'fas fa-check' : 'fas fa-hand-holding-usd'}">
+                                        </p:commandButton>
+                                    </p:column>
+
+
+
+                                </p:dataTable>
+
+                            </div>
+                        </div>
+
+
+                    </p:panel>
+
+                </h:form>
+            </ui:define>
+
+
+        </ui:composition>
+
+    </h:body>
+</html>

@@ -1,0 +1,96 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:cc="http://xmlns.jcp.org/jsf/composite"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <!-- INTERFACE -->
+    <cc:interface>
+    </cc:interface>
+
+    <!-- IMPLEMENTATION -->
+    <cc:implementation>
+        <p:dataTable 
+            class="w-100 mt-3"
+            value="#{laboratoryDoctorDashboardController.orderedTests}" 
+            var="order" 
+            paginator="true"
+            rowKey="#{order.id}"
+            paginatorPosition="bottom"
+            rows="15"
+            paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+            rowsPerPageTemplate="15,50,100"
+            emptyMessage="No ordered tests found"
+            style="table-layout: fixed; width: 100%;">
+
+            <!-- Date/Time Column -->
+            <p:column headerText="Order Date/Time" style="width: 14em; vertical-align: top;">
+                <h:outputLabel value="#{order.encounter.createdAt}">
+                    <f:convertDateTime pattern="#{sessionController.applicationPreference.longDateTimeFormat}"></f:convertDateTime>
+                </h:outputLabel>
+            </p:column>
+
+            <!-- Patient Details Column with Icons -->
+            <p:column headerText="Patient" style="vertical-align: top;">
+                <i class="fas fa-user text-primary" style="width: 27px;"></i>
+                <h:outputLabel value="#{order.encounter.patient.person.nameWithTitle}" />
+                <br/>
+                <i class="fas fa-birthday-cake text-info" style="width: 27px;"></i>
+                <h:outputLabel value="#{order.encounter.patient.person.ageAsString}" />
+                <h:outputLabel value="/" class="text-center" style="width: 30px;"/>
+                <i class="fas fa-venus-mars text-danger" style="width: 27px;"></i>
+                <h:outputLabel value="#{order.encounter.patient.person.sex.label}" />
+                <br/>
+                <h:panelGroup rendered="#{!order.encounter.patient.person.mobile.blank}">
+                    <i class="fas fa-mobile-alt text-warning" style="width: 27px;"></i>
+                    <h:outputLabel value="#{order.encounter.patient.person.mobile}" />
+                </h:panelGroup>
+            </p:column>
+
+            <!-- Investigation Name Column -->
+            <p:column headerText="Investigation Ordered" style="width: 300px; vertical-align: top;">
+                <i class="fas fa-vial text-success" style="width: 27px;"></i>
+                <h:outputLabel value="#{order.itemValue.name}" style="font-weight: bold;"/>
+                <br/>
+                <h:panelGroup rendered="#{order.itemValue.total eq 0 or order.itemValue.total eq null}">
+                    <p:badge value="FREE" severity="success" style="margin-top: 5px;"/>
+                </h:panelGroup>
+                <h:panelGroup rendered="#{order.itemValue.total gt 0}">
+                    <small class="text-muted">Pay at checkout</small>
+                </h:panelGroup>
+            </p:column>
+
+            <!-- Ordered By Column -->
+            <p:column headerText="Ordered By" style="vertical-align: top;">
+                <i class="fas fa-user-md text-success" style="width: 27px;"></i>
+                <h:outputLabel value="#{order.encounter.creater.webUserPerson.name}" />
+                <br/>
+                <i class="fas fa-hospital text-info" style="width: 27px;"></i>
+                <h:outputLabel value="#{order.encounter.institution.name}" />
+                <br/>
+                <i class="fas fa-building text-primary" style="width: 27px;"></i>
+                <h:outputLabel value="#{order.encounter.department.name}" />
+            </p:column>
+
+            <!-- Status Column -->
+            <p:column headerText="Status" style="width: 14em; vertical-align: top;">
+                <p:badge value="READY FOR LAB" severity="success" style="width: 120px; font-size: 14px;"/>
+                <br/>
+                <small class="text-success mt-2">
+                    <i class="fas fa-check-circle"></i> Can be processed immediately
+                </small>
+            </p:column>
+
+            <!-- Actions Column -->
+            <p:column headerText="Actions" style="width: 200px; vertical-align: top;">
+                <div class="alert alert-success" style="padding: 10px; margin: 0;">
+                    <i class="fas fa-check-circle"></i>
+                    <small><strong>Ready:</strong> Collect samples and process</small>
+                </div>
+            </p:column>
+        </p:dataTable>
+    </cc:implementation>
+</html>

@@ -1,0 +1,249 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html">
+    <h:body>
+        <ui:composition template="/resources/template/template.xhtml">
+            <ui:define name="content">
+
+                <p:panel header="Pharmacy Administration ">
+                    <div class="row">
+                        <div class="col-md-3">
+                            <h:form >
+                                <p:accordionPanel activeIndex="#{pharmacyController.pharmacyAdminIndex}">
+                                    <p:tab title="Pharmaceutical Fundamentals">
+                                        <div class="d-grid gap-2">
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Pharmaceutical Item Categories" 
+                                                action="#{pharmacyController.navigateToPharmaceuticalItemCategories()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Dosage Forms" 
+                                                action="#{pharmacyController.navigateToDosageForms()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="ATC Classification" 
+                                                action="#{pharmacyController.navigateToAtc()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Add Unit" 
+                                                action="#{measurementUnitController.navigateToAddMeasurementUnit()}"  ></p:commandButton>
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="List Units" 
+                                                action="#{measurementUnitController.navigateToListAllMeasurementUnit()}"  ></p:commandButton>
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Manage Units" 
+                                                action="#{measurementUnitController.navigateToManageMeasurementUnit()}"  ></p:commandButton>
+                                            <p:commandButton class="w-100" ajax="false" value="Discard Categories" action="#{pharmacyController.navigateToDiscardCategory()}" ></p:commandButton>
+                                            <p:commandButton class="w-100" ajax="false" value="Adjustment Categories" action="/pharmacy/pharmacy_adjustment_category" ></p:commandButton>
+                                        </div>
+                                    </p:tab>
+                                    <p:tab title="Medicine Component Management">
+                                        <div class="d-grid gap-2">
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="VTMs" 
+                                                action="#{pharmacyController.navigateToVtm()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="ATMs" 
+                                                action="#{pharmacyController.navigateToAtm()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="VMPs" 
+                                                action="#{pharmacyController.navigateToVmp()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="AMPs" 
+                                                action="#{pharmacyController.navigateToAmp()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="VMPPs" 
+                                                action="#{pharmacyController.navigateToVmpp()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="AMPPs" 
+                                                action="#{pharmacyController.navigateToAmpp()}" />
+                                        </div>
+                                    </p:tab>
+
+                                    <p:tab title="Medicines Management - Multiple">
+                                        <div class="d-grid gap-2">
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Generic Names (VTMs)" 
+                                                action="#{pharmacyController.navigateToVtmMultiple()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Trade Names (ATMs)" 
+                                                action="#{pharmacyController.navigateToAtmMultiple()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="VMPs" 
+                                                action="#{pharmacyController.navigateToVmpMultiple()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="AMPs" 
+                                                action="#{pharmacyController.navigateToAmpMultiple()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="VMPPs" 
+                                                action="#{pharmacyController.navigateToVmppMultiple()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="AMPPs" 
+                                                action="#{pharmacyController.navigateToAmppMultiple()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Dosage Forms" 
+                                                action="#{pharmacyController.navigateToDosageFormsMultiple()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="ATC Classification" 
+                                                action="#{pharmacyController.navigateToAtcMultiple()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Measurement Units" 
+                                                action="#{measurementUnitController.navigateToManageMeasurementUnit()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Frequencies" action="pharmacy_frequency_unit" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Upload VTMs" 
+                                                action="#{dataUploadController.toUploadVtms()}"  ></p:commandButton>
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Upload ATMs" 
+                                                action="#{dataUploadController.toUploadAtms()}"  ></p:commandButton>
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Upload VMPs" 
+                                                action="#{dataUploadController.toUploadVmps()}"  ></p:commandButton>
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Upload AMPs" 
+                                                action="#{dataUploadController.toUploadAmps()}"  ></p:commandButton>
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Upload AMPs (Minimal)" 
+                                                action="#{dataUploadController.toUploadAmpsMin()}"  ></p:commandButton>
+                                            <p:commandButton class="w-100" ajax="false" value="Update Bulk Categery" 
+                                                             action="/pharmacy/pharmacy_update_categery_bulk" actionListener="#{pharmacyUpdateBulkController.calerAll()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Update Bulk Discount Allowed" 
+                                                             action="/pharmacy/pharmacy_update_discount_allowed_bulk" actionListener="#{pharmacyUpdateBulkController.calerAll()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Stock Item List" 
+                                                             action="/pharmacy/pharmacy_report_non_moving_items" actionListener="#{pharmacyUpdateBulkController.calerAll()}" />
+
+                                        </div>
+                                    </p:tab>
+                                    <p:tab title="Institutions">
+
+                                        <div class="d-grid gap-2">
+                                            <p:commandButton class="w-100" ajax="false" value="Manufacturers" action="#{pharmacyController.navigateToManufacturers()}" ></p:commandButton>
+                                            <p:commandButton class="w-100" ajax="false" value="Importers" action="#{pharmacyController.navigateToImporters()}" ></p:commandButton>
+                                            <p:commandButton class="w-100" ajax="false" value="Supplier" action="#{pharmacyController.navigateToSuppliers()}" ></p:commandButton>                                
+                                            <p:commandButton class="w-100" ajax="false" value="Item Suppliers" action="#{pharmacyController.navigateToItemSuppliers()}" ></p:commandButton>
+                                        </div>
+                                    </p:tab>
+                                    <p:tab title="Check Entered Data">
+                                        <div class="d-grid gap-2">
+                                            <p:commandButton class="w-100" ajax="false" value="Item Distributor" icon="fa fa-users" action="#{pharmacyController.navigateToItemByDistributor()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Error Detection" icon="fa fa-exclamation-triangle" action="#{pharmacyController.navigateToErrorChecking()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Error Detection By Date" icon="fa fa-calendar-check" action="#{pharmacyController.navigateToErrorCheckingByDate()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Error Detection Report" icon="fa fa-file-alt" action="#{pharmacyController.navigateToDepartmentErrorReport()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Department Stock By Batch minus" icon="fa fa-minus-circle" action="#{pharmacyController.navigateToDepartmentStockByBatchMinus()}" />
+                                            <p:commandButton   class="w-100" ajax="false" value="Remove Duplicates" action="#{pharmacyItemExcelManager.removeDuplicateAmpps()}" />
+                                        </div>
+                                    </p:tab>
+                                    <p:tab title="Set up">
+                                        <div class="d-grid gap-2">
+
+                                            <p:commandButton class="w-100" ajax="false" value="Import Items (AMPs)" icon="fa fa-file-excel" action="#{pharmacyController.navigateToItemImport()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Import Stocks" icon="fa fa-boxes" action="#{pharmacyController.navigateToItemImportWithStock()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Import from Excel With Stock with barcode" icon="fa fa-barcode" action="#{pharmacyController.navigateToItemImportByBarcode()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Import from Excel With Stock with name" icon="fa fa-tags" action="#{pharmacyController.navigateToItemImportStocksByName()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Purchase Opening Stock" icon="fa fa-truck-loading" action="#{pharmacyController.navigateToPurchaseOpeningStock()}" rendered="#{webUserController.hasPrivilege('PharmacyPurchase')}" actionListener="#{pharmacyPurchaseController.makeNull()}" />
+
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Import Bills from JSON" 
+                                                icon="fa fa-boxes"
+                                                action="#{pharmacyBillSearch.navigateToImportBillsFromJson()}" />
+
+                                            <p:commandButton class="w-100" ajax="false" value="Fix Categories from Excel" icon="fa fa-sitemap" action="#{pharmacyController.navigateToImporterCategory()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Fix Codes and Barcodes" icon="fa fa-barcode" action="#{pharmacyController.navigateToItemImportBarcode()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Error Correction" icon="fa fa-tools" action="#{pharmacyController.navigateToErrorCorrection()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Transfer Request All" icon="fa fa-exchange-alt" action="#{pharmacyController.navigateToTransferRequestAll()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Import Item Distributors" icon="fa fa-user-plus" action="#{pharmacyController.navigateToItemDistributorImport()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Correct Name by Barcode" icon="fa fa-barcode" action="#{pharmacyController.navigateToItemNameFromBarcode()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Correct Name by Barcode" icon="fa fa-barcode" action="#{pharmacyController.navigateToItemNamesMissing()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Correct Name by Snapshot" icon="fa fa-camera" action="#{pharmacyController.navigateToItemNamesCorrectionBySnapshot()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Import Pharmaceuticals" icon="fa fa-pills" action="#{pharmacyController.navigateToItemImportWithoutStock()}" />
+                                            <p:commandButton 
+                                                class="w-100" 
+                                                ajax="false" 
+                                                value="Add Item Name to All Stocks"
+                                                icon="fa fa-database"
+                                                action="#{stockController.addItemNamesToAllStocks()}" />
+                                            <p:commandButton class="w-100" ajax="false" value="Check Item Differences with other Database" icon="fa fa-database" action="#{pharmacyController.navigateToItemMismatchReport()}" />
+
+
+                                        </div>
+                                    </p:tab> 
+                                </p:accordionPanel>
+                            </h:form>
+                        </div>
+                        <div class="col-md-9">
+                            <ui:insert name="subcontent" >
+
+                            </ui:insert>
+                        </div>
+                    </div>
+                </p:panel>
+
+
+
+
+
+
+
+
+
+            </ui:define>
+
+
+        </ui:composition>
+
+    </h:body>
+</html>

@@ -1,0 +1,66 @@
+#!/bin/bash
+# Auto-fix tokens created without doctor assignment
+# Run this daily or after creating tokens
+
+mysql -u dan -p'Mun00nDa5#' hmis << 'EOSQL'
+USE hmis;
+
+-- Fix tokens using FROMSTAFF_ID
+UPDATE BILLSESSION bs
+JOIN BILL b ON bs.BILL_ID = b.ID
+SET bs.STAFF_ID = b.FROMSTAFF_ID
+WHERE bs.STAFF_ID IS NULL
+AND b.FROMSTAFF_ID IS NOT NULL
+AND bs.SESSIONDATE >= CURDATE() - INTERVAL 7 DAY;
+
+-- Fix tokens using REFERREDBY_ID (fallback)
+UPDATE BILLSESSION bs
+JOIN BILL b ON bs.BILL_ID = b.ID
+SET bs.STAFF_ID = b.REFERREDBY_ID
+WHERE bs.STAFF_ID IS NULL
+AND b.REFERREDBY_ID IS NOT NULL
+AND bs.SESSIONDATE >= CURDATE() - INTERVAL 7 DAY;
+
+-- Create ServiceSessions for any staff/date combinations missing them
+INSERT IGNORE INTO ITEM (ID, DTYPE, NAME, CREATEDAT, RETIRED)
+SELECT 
+    (SELECT COALESCE(MAX(ID), 0) + ROW_NUMBER() OVER (ORDER BY bs.STAFF_ID, bs.SESSIONDATE) FROM ITEM),
+    'ServiceSession',
+    CONCAT('Session - ', p.NAME, ' - ', bs.SESSIONDATE),
+    NOW(),
+    0
+FROM (
+    SELECT DISTINCT bs.STAFF_ID, bs.SESSIONDATE
+    FROM BILLSESSION bs
+    WHERE bs.STAFF_ID IS NOT NULL
+    AND bs.SESSIONDATE >= CURDATE() - INTERVAL 7 DAY
+    AND NOT EXISTS (
+        SELECT 1 FROM SERVICESESSION ss 
+        WHERE ss.STAFF_ID = bs.STAFF_ID 
+        AND ss.SESSIONDATE = bs.SESSIONDATE
+    )
+) bs
+JOIN STAFF s ON bs.STAFF_ID = s.ID
+JOIN PERSON p ON s.PERSON_ID = p.ID;
+
+-- Link BillSessions to ServiceSessions
+UPDATE BILLSESSION bs
+JOIN SERVICESESSION ss ON bs.STAFF_ID = ss.STAFF_ID 
+    AND bs.SESSIONDATE = ss.SESSIONDATE
+SET bs.SERVICESESSION_ID = ss.ID
+WHERE bs.SERVICESESSION_ID IS NULL
+AND bs.STAFF_ID IS NOT NULL
+AND bs.SESSIONDATE >= CURDATE() - INTERVAL 7 DAY;
+
+-- Report results
+SELECT 
+    COUNT(*) as TotalTokensFixed,
+    COUNT(DISTINCT SESSIONDATE) as DatesFixed,
+    COUNT(DISTINCT STAFF_ID) as DoctorsFixed
+FROM BILLSESSION
+WHERE SERVICESESSION_ID IS NOT NULL
+AND SESSIONDATE >= CURDATE() - INTERVAL 7 DAY;
+
+EOSQL
+
+echo "Token fixing complete!"

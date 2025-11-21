@@ -1,0 +1,1331 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/pharmacy/pharmacy_analytics.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:p="http://primefaces.org/ui"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                >
+
+    <ui:define name="subcontent">
+        <h:form>
+            <p:panel  header="All Department Sale Summary">
+                <div class="row p-2">
+                    <div class ="col-md-4">
+                        <h:outputLabel value="From Date"/>
+                        <p:calendar value="#{pharmacySaleReportController.fromDate}" navigator="true" pattern="#{sessionController.applicationPreference.longDateTimeFormat}"  class="w-100 p-4" >
+                        </p:calendar>
+                    </div>
+                    <div class ="col-md-4">
+                        <h:outputLabel value="To Date"/>
+                        <p:calendar value="#{pharmacySaleReportController.toDate}" navigator="true" pattern="#{sessionController.applicationPreference.longDateTimeFormat}"  class="w-100 p-4" >
+                        </p:calendar>
+                    </div>
+                </div>
+                <h:panelGrid columns="4" styleClass="noPrintButton">
+
+
+                    <p:commandButton 
+                        ajax="false" 
+                        value="Process" 
+                        icon="fa-solid fa-arrows-rotate"
+                        class="ui-button-warning" 
+                        style="float: right;" 
+                        action="#{pharmacySaleReportController.createPharmacyReport()}"/>
+                    <p:commandButton 
+                        ajax="false" 
+                        value="Excel" 
+                        icon="fa-solid fa-file-excel"
+                        class="mx-2 ui-button-success" 
+                        style="float: right;" >
+                        <p:dataExporter type="xlsx"  target="sum1" fileName="report_pharmacy_sale_by_date_summery_payment_method"  />
+                    </p:commandButton>
+                    <p:commandButton 
+                        ajax="false" 
+                        value="Print" 
+                        icon="fa-solid fa-print"
+                        class="ui-button-info" 
+                        style="float: right;" 
+                        styleClass="noPrintButton" >
+                        <p:printer target="panelPrint" />
+                    </p:commandButton>
+                </h:panelGrid>
+
+                <h:panelGrid styleClass="printBlock" columns="2" class="mt-2">                   
+
+                    <h:outputLabel value="Pharmacy Report Summary"/>    
+                    <h:outputLabel/>
+                    <h:outputLabel value="From Date :  "/>
+                    <h:outputLabel value="#{pharmacySaleReportController.fromDate}"  >
+                        <f:convertDateTime pattern="#{sessionController.applicationPreference.longDateFormat}" />
+                    </h:outputLabel>
+                    <h:outputLabel value="To Date :"/>
+                    <h:outputLabel value="#{pharmacySaleReportController.toDate}"  >
+                        <f:convertDateTime pattern="#{sessionController.applicationPreference.longDateFormat}" />
+                    </h:outputLabel>                       
+                </h:panelGrid>
+
+
+                <p:spacer height="15"/>
+                <p:panel id="panelPrint">
+                    <div class="row p-2" >
+                        <p:dataTable value="#{pharmacySaleReportController.saleValuesCash}" var="i" rowStyleClass="#{(i.value3 ne 0.0 and i.value6 ne 0.0 )? '':'noDisplayRow'}" >
+
+
+                            <f:facet name="header">
+                                <h:outputLabel value="All Department Sale Report : "/>
+
+                                <h:outputLabel style="margin-left: 20px" value="From  "/>
+                                <h:outputLabel style="margin-left: 10px" value="#{pharmacySaleReportController.fromDate}">
+                                    <f:convertDateTime  timeZone="Asia/Colombo" pattern="#{sessionController.applicationPreference.longDateFormat}"  ></f:convertDateTime>
+                                </h:outputLabel>
+                                <p:spacer width="10" height="1"/>
+                                <h:outputLabel style="margin-left: 20px" value="To  "/>
+                                <h:outputLabel style="margin-left: 10px" value="#{pharmacySaleReportController.toDate}">
+                                    <f:convertDateTime  timeZone="Asia/Colombo" pattern="#{sessionController.applicationPreference.longDateFormat}"  ></f:convertDateTime>
+                                </h:outputLabel>
+                                <br/>
+                            </f:facet>
+
+
+                            <f:facet name="header">
+                                <h:outputLabel value="Pharmacy Sale  - CASH"/>
+                            </f:facet>
+                            <p:column headerText="Department">
+                                <h:outputLabel value="#{i.string}"/>
+                            </p:column>
+                            <p:column headerText="Billed Value">
+                                <h:outputLabel value="#{i.value1}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Value">
+                                <h:outputLabel value="#{i.value2}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Value">
+                                <h:outputLabel value="#{i.value3}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>     
+                            <p:column headerText="Billed Count">
+                                <h:outputLabel value="#{i.value4}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Cancelled Count">
+                                <h:outputLabel value="#{i.value7}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Count">
+                                <h:outputLabel value="#{i.value5}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Count">
+                                <h:outputLabel value="#{i.value6}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column> 
+                            <p:columnGroup type="footer">
+                                <p:row>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer" >
+                                            Total
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCashBV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCashRV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCashNV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCashBC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCashCC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCashRC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCashNC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                    </div>
+
+
+                    <div class="row p-2">
+                        <p:dataTable value="#{pharmacySaleReportController.saleValuesCheque}" var="i" rowStyleClass="#{(i.value3 ne 0.0 and i.value6 ne 0.0 )? '':'noDisplayRow'}">
+                            <f:facet name="header">
+                                <h:outputLabel value="Pharmacy Sale - CHEQUE"/>
+                            </f:facet>
+                            <p:column headerText="Department">
+                                <h:outputLabel value="#{i.string}"/>
+                            </p:column>
+                            <p:column headerText="Billed Value">
+                                <h:outputLabel value="#{i.value1}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Value">
+                                <h:outputLabel value="#{i.value2}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Value">
+                                <h:outputLabel value="#{i.value3}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>     
+                            <p:column headerText="Billed Count">
+                                <h:outputLabel value="#{i.value4}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Cancelled Count">
+                                <h:outputLabel value="#{i.value7}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Count">
+                                <h:outputLabel value="#{i.value5}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Count">
+                                <h:outputLabel value="#{i.value6}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>   
+                            <p:columnGroup type="footer">
+                                <p:row>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer" >
+                                            Total
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSChequeBV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSChequeRV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSChequeNV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSChequeBC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSChequeCC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSChequeRC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSChequeNC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+
+
+                    </div>
+
+                    <div class="row p-2">
+                        <p:dataTable value="#{pharmacySaleReportController.saleValuesSlip}" var="i" rowStyleClass="#{(i.value3 ne 0.0 and i.value6 ne 0.0 )? '':'noDisplayRow'}">
+                            <f:facet name="header">
+                                <h:outputLabel value="Pharmacy Sale - SLIP"/>
+                            </f:facet>
+                            <p:column headerText="Department">
+                                <h:outputLabel value="#{i.string}"/>
+                            </p:column>
+                            <p:column headerText="Billed Value">
+                                <h:outputLabel value="#{i.value1}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Value">
+                                <h:outputLabel value="#{i.value2}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Value">
+                                <h:outputLabel value="#{i.value3}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>     
+                            <p:column headerText="Billed Count">
+                                <h:outputLabel value="#{i.value4}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Cancelled Count">
+                                <h:outputLabel value="#{i.value7}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Count">
+                                <h:outputLabel value="#{i.value5}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Count">
+                                <h:outputLabel value="#{i.value6}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:columnGroup type="footer">
+                                <p:row>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer" >
+                                            Total
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSSlipBV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSSlipRV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSSlipNV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSSlipBC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSSlipCC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSSlipRC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSSlipNC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                    </div>
+                    <div class="row p-2">
+                        <p:dataTable value="#{pharmacySaleReportController.saleValuesCard}" var="i" rowStyleClass="#{(i.value3 ne 0.0 and i.value6 ne 0.0 )? '':'noDisplayRow'}">
+                            <f:facet name="header">
+                                <h:outputLabel value="Pharmacy Sale - CARD"/>
+                            </f:facet>
+                            <p:column headerText="Department">
+                                <h:outputLabel value="#{i.string}"/>
+                            </p:column>
+                            <p:column headerText="Billed Value">
+                                <h:outputLabel value="#{i.value1}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Value">
+                                <h:outputLabel value="#{i.value2}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Value">
+                                <h:outputLabel value="#{i.value3}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>     
+                            <p:column headerText="Billed Count">
+                                <h:outputLabel value="#{i.value4}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Cancelled Count">
+                                <h:outputLabel value="#{i.value7}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Count">
+                                <h:outputLabel value="#{i.value5}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Count">
+                                <h:outputLabel value="#{i.value6}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>  
+                            <p:columnGroup type="footer">
+                                <p:row>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer" >
+                                            Total
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCardBV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCardRV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCardNV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCardBC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCardCC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCardRC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCardNC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                    </div>
+
+                    <div class="row p-2">
+                        <p:dataTable value="#{pharmacySaleReportController.saleValuesCredit}" var="i" rowStyleClass="#{(i.value3 ne 0.0 and i.value6 ne 0.0 )? '':'noDisplayRow'}">
+                            <f:facet name="header">
+                                <h:outputLabel value="Pharmacy Sale - CREDIT"/>
+                            </f:facet>
+                            <p:column headerText="Department">
+                                <h:outputLabel value="#{i.string}"/>
+                            </p:column>
+                            <p:column headerText="Billed Value">
+                                <h:outputLabel value="#{i.value1}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Value">
+                                <h:outputLabel value="#{i.value2}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Value">
+                                <h:outputLabel value="#{i.value3}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>     
+                            <p:column headerText="Billed Count">
+                                <h:outputLabel value="#{i.value4}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Cancelled Count">
+                                <h:outputLabel value="#{i.value7}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Count">
+                                <h:outputLabel value="#{i.value5}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Count">
+                                <h:outputLabel value="#{i.value6}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>   
+                            <p:columnGroup type="footer">
+                                <p:row>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer" >
+                                            Total
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCreditBV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCreditRV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCreditNV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCreditBC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCreditCC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCreditRC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPSCreditNC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                    </div>
+
+
+                    <div class="row p-2">
+                        <p:dataTable value="#{pharmacySaleReportController.wholeSaleValuesCash}" var="i" rowStyleClass="#{(i.value3 ne 0.0 and i.value6 ne 0.0 )? '':'noDisplayRow'}" >
+                            <f:facet name="header">
+                                <h:outputLabel value="Pharmacy Whole Sale  - CASH"/>
+                            </f:facet>
+                            <p:column headerText="Department">
+                                <h:outputLabel value="#{i.string}"/>
+                            </p:column>
+                            <p:column headerText="Billed Value">
+                                <h:outputLabel value="#{i.value1}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Value">
+                                <h:outputLabel value="#{i.value2}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Value">
+                                <h:outputLabel value="#{i.value3}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>     
+                            <p:column headerText="Billed Count">
+                                <h:outputLabel value="#{i.value4}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Cancelled Count">
+                                <h:outputLabel value="#{i.value7}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Count">
+                                <h:outputLabel value="#{i.value5}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Count">
+                                <h:outputLabel value="#{i.value6}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column> 
+                            <p:columnGroup type="footer">
+                                <p:row>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer" >
+                                            Total
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCashBV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCashRV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCashNV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCashBC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCashCC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCashRC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCashNC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                    </div>
+
+
+                    <div class="row p-2">
+                        <p:dataTable value="#{pharmacySaleReportController.wholeSaleValuesCheque}" var="i" rowStyleClass="#{(i.value3 ne 0.0 and i.value6 ne 0.0 )? '':'noDisplayRow'}">
+                            <f:facet name="header">
+                                <h:outputLabel value="Pharmacy Whole Sale - CHEQUE"/>
+                            </f:facet>
+                            <p:column headerText="Department">
+                                <h:outputLabel value="#{i.string}"/>
+                            </p:column>
+                            <p:column headerText="Billed Value">
+                                <h:outputLabel value="#{i.value1}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Value">
+                                <h:outputLabel value="#{i.value2}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Value">
+                                <h:outputLabel value="#{i.value3}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>     
+                            <p:column headerText="Billed Count">
+                                <h:outputLabel value="#{i.value4}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Cancelled Count">
+                                <h:outputLabel value="#{i.value7}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Count">
+                                <h:outputLabel value="#{i.value5}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Count">
+                                <h:outputLabel value="#{i.value6}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>   
+                            <p:columnGroup type="footer">
+                                <p:row>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer" >
+                                            Total
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSChequeBV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSChequeRV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSChequeNV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSChequeBC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSChequeCC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSChequeRC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSChequeNC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                    </div>
+
+                    <div class="row p-2">
+                        <p:dataTable value="#{pharmacySaleReportController.wholeSaleValuesSlip}" var="i" rowStyleClass="#{(i.value3 ne 0.0 and i.value6 ne 0.0 )? '':'noDisplayRow'}">
+                            <f:facet name="header">
+                                <h:outputLabel value="Pharmacy Whole Sale - SLIP"/>
+                            </f:facet>
+                            <p:column headerText="Department">
+                                <h:outputLabel value="#{i.string}"/>
+                            </p:column>
+                            <p:column headerText="Billed Value">
+                                <h:outputLabel value="#{i.value1}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Value">
+                                <h:outputLabel value="#{i.value2}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Value">
+                                <h:outputLabel value="#{i.value3}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>     
+                            <p:column headerText="Billed Count">
+                                <h:outputLabel value="#{i.value4}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Cancelled Count">
+                                <h:outputLabel value="#{i.value7}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Count">
+                                <h:outputLabel value="#{i.value5}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Count">
+                                <h:outputLabel value="#{i.value6}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:columnGroup type="footer">
+                                <p:row>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer" >
+                                            Total
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSSlipBV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSSlipRV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSSlipNV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSSlipBC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSSlipCC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSSlipRC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSSlipNC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                    </div>
+
+                    <div class="row p-2">
+                        <p:dataTable value="#{pharmacySaleReportController.wholeSaleValuesCard}" var="i" rowStyleClass="#{(i.value3 ne 0.0 and i.value6 ne 0.0 )? '':'noDisplayRow'}">
+                            <f:facet name="header">
+                                <h:outputLabel value="Pharmacy Whole Sale - CARD"/>
+                            </f:facet>
+                            <p:column headerText="Department">
+                                <h:outputLabel value="#{i.string}"/>
+                            </p:column>
+                            <p:column headerText="Billed Value">
+                                <h:outputLabel value="#{i.value1}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Value">
+                                <h:outputLabel value="#{i.value2}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Value">
+                                <h:outputLabel value="#{i.value3}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>     
+                            <p:column headerText="Billed Count">
+                                <h:outputLabel value="#{i.value4}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Cancelled Count">
+                                <h:outputLabel value="#{i.value7}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Count">
+                                <h:outputLabel value="#{i.value5}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Count">
+                                <h:outputLabel value="#{i.value6}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>  
+                            <p:columnGroup type="footer">
+                                <p:row>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer" >
+                                            Total
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCardBV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCardRV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCardNV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCardBC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCardCC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCardRC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCardNC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable> 
+                    </div>
+
+
+                    <div class="row p-2">
+                        <p:dataTable value="#{pharmacySaleReportController.wholeSaleValuesCredit}" var="i" rowStyleClass="#{(i.value3 ne 0.0 and i.value6 ne 0.0 )? '':'noDisplayRow'}">
+                            <f:facet name="header">
+                                <h:outputLabel value="Pharmacy Whole Sale - CREDIT"/>
+                            </f:facet>
+                            <p:column headerText="Department">
+                                <h:outputLabel value="#{i.string}"/>
+                            </p:column>
+                            <p:column headerText="Billed Value">
+                                <h:outputLabel value="#{i.value1}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Value">
+                                <h:outputLabel value="#{i.value2}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Value">
+                                <h:outputLabel value="#{i.value3}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>     
+                            <p:column headerText="Billed Count">
+                                <h:outputLabel value="#{i.value4}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Cancelled Count">
+                                <h:outputLabel value="#{i.value7}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Count">
+                                <h:outputLabel value="#{i.value5}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Count">
+                                <h:outputLabel value="#{i.value6}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>   
+                            <p:columnGroup type="footer">
+                                <p:row>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer" >
+                                            Total
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCreditBV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCreditRV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCreditNV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCreditBC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCreditCC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCreditRC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalPWSCreditNC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                    </div>
+
+                    <div class="row p-2">
+                        <p:dataTable value="#{pharmacySaleReportController.bhtIssues}" var="i" rowStyleClass="#{(i.value3 ne 0.0 and i.value6 ne 0.0 )? '':'noDisplayRow'}">
+                            <f:facet name="header">
+                                <h:outputLabel value="Pharmacy Bht Issue"/>
+                            </f:facet>
+                            <p:column headerText="Department">
+                                <h:outputLabel value="#{i.string}"/>
+                            </p:column>
+                            <p:column headerText="Billed Value">
+                                <h:outputLabel value="#{i.value1}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Value">
+                                <h:outputLabel value="#{i.value2}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Value">
+                                <h:outputLabel value="#{i.value3}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>     
+                            <p:column headerText="Billed Count">
+                                <h:outputLabel value="#{i.value4}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Count">
+                                <h:outputLabel value="#{i.value5}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Count">
+                                <h:outputLabel value="#{i.value6}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>    
+                            <p:columnGroup type="footer">
+                                <p:row>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer" >
+                                            Total
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalBHTIssueBV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalBHTIssueRV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalBHTIssueNV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalBHTIssueBC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalBHTIssueRC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalBHTIssueNC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+                    </div>
+
+                    <div class="row p-2">
+                        <p:dataTable value="#{pharmacySaleReportController.unitIssues}" var="i" rowStyleClass="#{(i.value3 ne 0.0 and i.value6 ne 0.0 )? '':'noDisplayRow'}">
+                            <f:facet name="header">
+                                <h:outputLabel value="Pharmacy Unit Issue"/>
+                            </f:facet>
+                            <p:column headerText="Department">
+                                <h:outputLabel value="#{i.string}"/>
+                            </p:column>
+                            <p:column headerText="Billed Value">
+                                <h:outputLabel value="#{i.value1}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Value">
+                                <h:outputLabel value="#{i.value2}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Value">
+                                <h:outputLabel value="#{i.value3}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>     
+                            <p:column headerText="Billed Count">
+                                <h:outputLabel value="#{i.value4}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Return Count">
+                                <h:outputLabel value="#{i.value5}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>
+                            <p:column headerText="Net Count">
+                                <h:outputLabel value="#{i.value6}">
+                                    <f:convertNumber pattern="#,##0.00" />
+                                </h:outputLabel>
+                            </p:column>     
+                            <p:columnGroup type="footer">
+                                <p:row>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer" >
+                                            Total
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalUnitIssueBV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalUnitIssueRV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalUnitIssueNV}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalUnitIssueBC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalUnitIssueRC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                    <p:column style="text-align: left;">
+                                        <f:facet name="footer">
+                                            <h:outputLabel  value="#{pharmacySaleReportController.totalUnitIssueNC}">
+                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                            </h:outputLabel>
+                                        </f:facet>
+                                    </p:column>
+                                </p:row>
+                            </p:columnGroup>
+                        </p:dataTable>
+
+                    </div>
+                </p:panel>
+
+
+
+            </p:panel>         
+
+
+        </h:form>
+
+    </ui:define>
+
+
+
+</ui:composition>

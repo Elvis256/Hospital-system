@@ -1,0 +1,170 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+    <h:body>
+        <ui:composition template="/resources/template/template.xhtml">
+            <ui:define name="content">
+                
+                <h:panelGroup rendered="#{!webUserController.hasPrivilege('LabReception')}" >
+                    You are NOT authorized
+                </h:panelGroup>
+                
+                <h:form rendered="#{webUserController.hasPrivilege('LabReception')}">
+                    <p:growl id="msg"/>
+                    
+                    <p:panel>
+                        <f:facet name="header">
+                            <div class="d-flex justify-content-between align-items-center">
+                                <div>
+                                    <h:outputText styleClass="fas fa-vials" />
+                                    <h:outputLabel value="Lab Order Queue - Tests Ordered by Doctors" class="mx-4"></h:outputLabel>
+                                </div>
+                            </div>
+                        </f:facet>
+                        
+                        <div class="row mb-3">
+                            <div class="col-md-3">
+                                <h:outputLabel value="From Date:" for="fromDate"/>
+                                <p:calendar 
+                                    id="fromDate" 
+                                    value="#{labOrderQueueController.fromDate}" 
+                                    pattern="dd MMMM yyyy"
+                                    navigator="true"
+                                    showButtonBar="true"
+                                    class="w-100">
+                                </p:calendar>
+                            </div>
+                            <div class="col-md-3">
+                                <h:outputLabel value="To Date:" for="toDate"/>
+                                <p:calendar 
+                                    id="toDate" 
+                                    value="#{labOrderQueueController.toDate}" 
+                                    pattern="dd MMMM yyyy"
+                                    navigator="true"
+                                    showButtonBar="true"
+                                    class="w-100">
+                                </p:calendar>
+                            </div>
+                            <div class="col-md-3">
+                                <h:outputLabel value="Status:" for="statusFilter"/>
+                                <p:selectOneMenu id="statusFilter" value="#{labOrderQueueController.statusFilter}" class="w-100">
+                                    <f:selectItem itemLabel="All" itemValue="ALL"/>
+                                    <f:selectItem itemLabel="Not Paid" itemValue="NOT_PAID"/>
+                                    <f:selectItem itemLabel="Paid - Not Sent" itemValue="PAID_NOT_SENT"/>
+                                    <f:selectItem itemLabel="Sent to Lab" itemValue="SENT_TO_LAB"/>
+                                </p:selectOneMenu>
+                            </div>
+                            <div class="col-md-3 d-flex align-items-end">
+                                <p:commandButton 
+                                    value="Search" 
+                                    icon="pi pi-search"
+                                    class="ui-button-primary w-100"
+                                    action="#{labOrderQueueController.loadOrders()}"
+                                    update="ordersTable msg"
+                                    process="@form"/>
+                            </div>
+                        </div>
+                        
+                        <p:dataTable 
+                            id="ordersTable"
+                            value="#{labOrderQueueController.orders}" 
+                            var="order"
+                            emptyMessage="No orders found"
+                            paginator="true"
+                            rows="20"
+                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="10,20,50,100"
+                            class="w-100">
+                            
+                            <p:column headerText="Date/Time" width="140" sortBy="#{order.createdAt}">
+                                <h:outputText value="#{order.createdAt}">
+                                    <f:convertDateTime pattern="dd MMM yyyy HH:mm"/>
+                                </h:outputText>
+                            </p:column>
+                            
+                            <p:column headerText="Patient" sortBy="#{order.patientEncounter.patient.person.name}">
+                                <h:outputText value="#{order.patientEncounter.patient.person.nameWithTitle}"/>
+                                <br/>
+                                <small class="text-muted">
+                                    PHN: #{order.patientEncounter.patient.phn}
+                                </small>
+                            </p:column>
+                            
+                            <p:column headerText="Test Ordered" sortBy="#{order.itemValue.name}">
+                                <h:outputText value="#{order.itemValue.name}" style="font-weight: bold;"/>
+                                <br/>
+                                <small class="text-muted">
+                                    <h:outputText value="#{order.lobValue}" rendered="#{order.lobValue ne null and order.lobValue ne ''}"/>
+                                </small>
+                            </p:column>
+                            
+                            <p:column headerText="Ordered By" width="180">
+                                <i class="fas fa-user-md"></i>
+                                <h:outputText value=" #{order.creater.webUserPerson.name}"/>
+                                <br/>
+                                <small class="text-muted">
+                                    #{order.creater.department.name}
+                                </small>
+                            </p:column>
+                            
+                            <p:column headerText="Bill Status" width="140">
+                                <h:panelGroup rendered="#{order.patientInvestigation eq null}">
+                                    <span class="badge badge-warning" style="padding: 5px 10px; background-color: #ffc107; color: #000;">
+                                        <i class="fas fa-clock"></i> NOT PAID
+                                    </span>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{order.patientInvestigation ne null and !order.patientInvestigation.collected}">
+                                    <span class="badge badge-success" style="padding: 5px 10px; background-color: #28a745; color: #fff;">
+                                        <i class="fas fa-check-circle"></i> PAID
+                                    </span>
+                                    <br/>
+                                    <small class="text-muted">
+                                        Bill: #{order.patientInvestigation.billItem.bill.deptId}
+                                    </small>
+                                </h:panelGroup>
+                                <h:panelGroup rendered="#{order.patientInvestigation ne null and order.patientInvestigation.collected}">
+                                    <span class="badge badge-info" style="padding: 5px 10px; background-color: #17a2b8; color: #fff;">
+                                        <i class="fas fa-vial"></i> SENT TO LAB
+                                    </span>
+                                </h:panelGroup>
+                            </p:column>
+                            
+                            <p:column headerText="Actions" width="100">
+                                <p:commandButton 
+                                    icon="pi pi-eye"
+                                    title="View Bill"
+                                    class="ui-button-info"
+                                    rendered="#{order.patientInvestigation ne null}"
+                                    action="#{billSearch.navigateToViewOpdBill()}"
+                                    ajax="false">
+                                    <f:setPropertyActionListener 
+                                        value="#{order.patientInvestigation.billItem.bill}" 
+                                        target="#{billSearch.bill}"/>
+                                </p:commandButton>
+                            </p:column>
+                            
+                        </p:dataTable>
+                        
+                        <div class="row mt-3">
+                            <div class="col-md-12">
+                                <div class="alert alert-info">
+                                    <h5><i class="fas fa-info-circle"></i> Order Status Legend:</h5>
+                                    <ul>
+                                        <li><strong>NOT PAID:</strong> Test ordered by doctor but patient hasn't paid yet at reception</li>
+                                        <li><strong>PAID:</strong> Patient has paid for the test. Lab can now collect samples</li>
+                                        <li><strong>SENT TO LAB:</strong> Test has been sent to lab and sample collection has begun</li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+                    </p:panel>
+                </h:form>
+                
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>
