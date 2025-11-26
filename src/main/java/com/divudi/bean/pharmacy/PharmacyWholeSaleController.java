@@ -601,10 +601,14 @@ public class PharmacyWholeSaleController implements Serializable, ControllerWith
     }
 
     public void handleSelectAction() {
-        //////System.out.println("Stock NOT selected.");
-        if (getBillItem() == null) {
-            getBillItem().getPharmaceuticalBillItem();
-        }  //////System.out.println("Internal Error at PharmacySaleController.java > handleSelectAction");
+        if (stock == null) {
+            //////System.out.println("Stock NOT selected.");
+            return;
+        }
+        if (getBillItem() == null || getBillItem().getPharmaceuticalBillItem() == null) {
+            //////System.out.println("Internal Error at PharmacyWholeSaleController.java > handleSelectAction");
+            return;
+        }
 
         getBillItem().getPharmaceuticalBillItem().setStock(stock);
         calculateRates(billItem);
