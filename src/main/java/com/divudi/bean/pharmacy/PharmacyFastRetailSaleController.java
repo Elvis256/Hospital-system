@@ -1364,13 +1364,8 @@ public class PharmacyFastRetailSaleController implements Serializable, Controlle
             PharmaceuticalBillItem tmpPh = tbi.getPharmaceuticalBillItem();
             tbi.setPharmaceuticalBillItem(null);
 
-            if (tbi.getPrescription() != null) {
-                if (tbi.getPrescription().getId() == null) {
-                    prescriptionFacade.create(tbi.getPrescription());
-                } else {
-                    prescriptionFacade.edit(tbi.getPrescription());
-                }
-            }
+            // Prescription is saved later in saveSaleBillItems() to avoid duplicate key errors
+            // Do not save prescription here during pre-bill creation
 
             if (tbi.getId() == null) {
                 getBillItemFacade().create(tbi);
