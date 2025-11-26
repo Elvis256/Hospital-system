@@ -602,16 +602,15 @@ public class PharmacyWholeSaleController implements Serializable, ControllerWith
 
     public void handleSelectAction() {
         if (stock == null) {
-            //////System.out.println("Stock NOT selected.");
             return;
         }
         if (getBillItem() == null || getBillItem().getPharmaceuticalBillItem() == null) {
-            //////System.out.println("Internal Error at PharmacyWholeSaleController.java > handleSelectAction");
             return;
         }
 
         getBillItem().getPharmaceuticalBillItem().setStock(stock);
         calculateRates(billItem);
+        
         if (stock != null && stock.getItemBatch() != null) {
             fillReplaceableStocksForAmp((Amp) stock.getItemBatch().getItem());
         }
@@ -663,17 +662,27 @@ public class PharmacyWholeSaleController implements Serializable, ControllerWith
     }
 
     public void calculateRates(BillItem bi) {
-        ////////System.out.println("calculating rates");
         if (bi.getPharmaceuticalBillItem().getStock() == null) {
-            ////////System.out.println("stock is null");
             return;
         }
         getBillItem();
-        bi.setRate(bi.getPharmaceuticalBillItem().getStock().getItemBatch().getWholesaleRate());
-        bi.setDiscount(calculateBillItemDiscountRate(bi));
-        //  ////System.err.println("Discount "+bi.getDiscount());
+        
+        Double wholesaleRate = bi.getPharmaceuticalBillItem().getStock().getItemBatch().getWholesaleRate();
+        
+        // Check if wholesale rate is not set or is zero
+        if (wholesaleRate == null || wholesaleRate == 0.0) {
+            String itemName = bi.getPharmaceuticalBillItem().getStock().getItemBatch().getItem().getName();
+            JsfUtil.addErrorMessage("Wholesale rate not set for " + itemName + ". Please configure wholesale rate in stock management.");
+            bi.setRate(0.0);
+            bi.setDiscount(0.0);
+            bi.setNetRate(0.0);
+            return;
+        }
+        
+        bi.setRate(wholesaleRate);
+        Double discount = calculateBillItemDiscountRate(bi);
+        bi.setDiscount(discount);
         bi.setNetRate(bi.getRate() - bi.getDiscount());
-        //  ////System.err.println("Net "+bi.getNetRate());
     }
 
     public void fillReplaceableStocksForAmp(Amp ampIn) {
