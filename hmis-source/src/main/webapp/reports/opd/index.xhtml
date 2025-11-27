@@ -1,0 +1,270 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/resources/template/template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+
+    <ui:define name="content">
+        
+        <p:panel header="OPD Reports &amp; Analytics">
+            <div class="row">
+                <div class="col-md-3">
+                    <h:form>
+                        <p:accordionPanel multiple="false">
+                            
+                            <!-- Bill Search & Management -->
+                            <p:tab title="Bill Search &amp; Management">
+                                <div class="d-grid gap-2">
+                                    <p:commandButton 
+                                        class="w-100 ui-button-success" 
+                                        ajax="false" 
+                                        icon="fa fa-search"
+                                        value="Search OPD Bills"
+                                        action="#{opdBillController.navigateToSearchOpdBills()}"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-print"
+                                        value="Bill Reprint"
+                                        action="/opd/bill_reprint?faces-redirect=true"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-list"
+                                        value="Full Paid Bills"
+                                        action="/opd_search_bill_full_paid?faces-redirect=true"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-user-check"
+                                        value="My Bills"
+                                        action="/opd_search_bill_own?faces-redirect=true"/>
+                                </div>
+                            </p:tab>
+                            
+                            <!-- OPD Service Reports -->
+                            <p:tab title="OPD Service Reports">
+                                <div class="d-grid gap-2">
+                                    <p:commandButton 
+                                        class="w-100 ui-button-info" 
+                                        ajax="false" 
+                                        icon="fa fa-chart-bar"
+                                        value="Service Count"
+                                        action="/reports/opd/service_count?faces-redirect=true"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100 ui-button-info" 
+                                        ajax="false" 
+                                        icon="fa fa-user-md"
+                                        value="Service Count Doctor Wise"
+                                        action="/reports/opd/service_count_doctor_wise?faces-redirect=true"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-stethoscope"
+                                        value="Patient Indications"
+                                        action="/reports/opd/patient_indications_report?faces-redirect=true"/>
+                                </div>
+                            </p:tab>
+                            
+                            <!-- Financial Reports -->
+                            <p:tab title="Financial Reports">
+                                <div class="d-grid gap-2">
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-dollar-sign"
+                                        value="OPD Income Report"
+                                        action="/opd/analytics/opd_income?faces-redirect=true"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-chart-line"
+                                        value="Daily Summary Report"
+                                        action="/reportInstitution/report_opd_daily_summery_credit_department?faces-redirect=true"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-file-invoice"
+                                        value="OPD Service Summary"
+                                        action="/reportInstitution/report_opd_service_summery?faces-redirect=true"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-receipt"
+                                        value="OPD Bills for VAT"
+                                        action="/reportInstitution/report_opd_bills_for_vat?faces-redirect=true"/>
+                                </div>
+                            </p:tab>
+                            
+                            <!-- Lab Reports (OPD Related) -->
+                            <p:tab title="Lab Reports">
+                                <div class="d-grid gap-2">
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-flask"
+                                        value="OPD Service Summary"
+                                        action="/reportLab/report_opd_service_summery?faces-redirect=true"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-vial"
+                                        value="OPD Service by Bill Types"
+                                        action="/reportLab/report_opd_service_summery_by_bill_types?faces-redirect=true"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-microscope"
+                                        value="Investigation Summary"
+                                        action="/reportLab/report_investigation_summery_by_inward_opd?faces-redirect=true"/>
+                                </div>
+                            </p:tab>
+                            
+                            <!-- Bill Lists & Views -->
+                            <p:tab title="Bill Lists &amp; Views">
+                                <div class="d-grid gap-2">
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-file-medical"
+                                        value="OPD Bill List"
+                                        action="/opd/view/opd_bill?faces-redirect=true"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-layer-group"
+                                        value="Batch Bill List"
+                                        action="/opd/view/opd_batch_bill?faces-redirect=true"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-ban"
+                                        value="Cancelled Bills"
+                                        action="/opd/view/cancelled_opd_bill?faces-redirect=true"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-undo"
+                                        value="Refund Bills"
+                                        action="/opd/view/opd_refund_bill?faces-redirect=true"/>
+                                </div>
+                            </p:tab>
+                            
+                            <!-- Professional Payments -->
+                            <p:tab title="Professional Payments">
+                                <div class="d-grid gap-2">
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-money-bill-wave"
+                                        value="Staff Payment Report"
+                                        action="/opd_staff_payment_report_own?faces-redirect=true"/>
+                                    
+                                    <p:commandButton 
+                                        class="w-100" 
+                                        ajax="false" 
+                                        icon="fa fa-user-md"
+                                        value="Professional Payments"
+                                        action="/opd/view/opd_professional_payment?faces-redirect=true"/>
+                                </div>
+                            </p:tab>
+                            
+                            <!-- Advanced Analytics -->
+                            <p:tab title="Advanced Analytics">
+                                <div class="d-grid gap-2">
+                                    <p:commandButton 
+                                        class="w-100 ui-button-warning" 
+                                        ajax="false" 
+                                        icon="fa fa-chart-pie"
+                                        value="Full OPD Analytics Dashboard"
+                                        action="#{opdBillController.navigateToOpdAnalyticsIndex()}"/>
+                                </div>
+                            </p:tab>
+                            
+                        </p:accordionPanel>
+                    </h:form>
+                </div>
+                
+                <div class="col-md-9">
+                    <ui:insert name="subcontent">
+                        
+                        <!-- Default content when no report is selected -->
+                        <p:panel header="Welcome to OPD Reports">
+                            <div class="text-center p-5">
+                                <i class="fa fa-hospital fa-5x text-muted mb-4"></i>
+                                <h3>OPD Reports &amp; Analytics</h3>
+                                <p class="lead text-muted">
+                                    Select a report category from the menu on the left to view bills, 
+                                    generate reports, and analyze OPD data.
+                                </p>
+                                
+                                <div class="row mt-5">
+                                    <div class="col-md-4">
+                                        <div class="card border-primary mb-3">
+                                            <div class="card-body text-center">
+                                                <i class="fa fa-search fa-3x text-primary mb-3"></i>
+                                                <h5 class="card-title">Bill Search</h5>
+                                                <p class="card-text">Search and view OPD bills by date, patient, or department.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="card border-success mb-3">
+                                            <div class="card-body text-center">
+                                                <i class="fa fa-chart-bar fa-3x text-success mb-3"></i>
+                                                <h5 class="card-title">Service Reports</h5>
+                                                <p class="card-text">Analyze service counts, doctor-wise statistics, and trends.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    
+                                    <div class="col-md-4">
+                                        <div class="card border-info mb-3">
+                                            <div class="card-body text-center">
+                                                <i class="fa fa-dollar-sign fa-3x text-info mb-3"></i>
+                                                <h5 class="card-title">Financial Reports</h5>
+                                                <p class="card-text">View income reports, daily summaries, and financial analytics.</p>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div class="mt-4">
+                                    <h:form>
+                                        <p:commandButton 
+                                            value="Go to Full Analytics Dashboard" 
+                                            icon="fa fa-tachometer-alt"
+                                            styleClass="ui-button-lg ui-button-success"
+                                            ajax="false"
+                                            action="#{opdBillController.navigateToOpdAnalyticsIndex()}"/>
+                                    </h:form>
+                                </div>
+                            </div>
+                        </p:panel>
+                        
+                    </ui:insert>
+                </div>
+            </div>
+        </p:panel>
+        
+    </ui:define>
+
+</ui:composition>

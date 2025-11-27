@@ -1,0 +1,324 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:na="http://xmlns.jcp.org/jsf/composite/template">
+
+    <h:body>
+        <ui:composition template="/resources/template/template.xhtml">
+            <ui:define name="content">
+                
+                <h:panelGroup rendered="#{!webUserController.hasPrivilege('NurseTriageStation')}" >
+                    <na:not_authorize />
+                </h:panelGroup>
+
+                <h:panelGroup rendered="#{webUserController.hasPrivilege('NurseTriageStation')}" >
+                    <h:form>
+                        <p:growl id="msg" />
+                        
+                        <!-- No Patient Selected Message -->
+                        <h:panelGroup rendered="#{nurseTriageController.selectedEncounter == null}">
+                            <div class="container-fluid">
+                                <div class="row">
+                                    <div class="col-12">
+                                        <p:panel header="No Patient Selected" styleClass="ui-panel-danger">
+                                            <div class="text-center p-5">
+                                                <i class="fas fa-exclamation-triangle fa-4x text-warning mb-3"></i>
+                                                <h3>No patient has been selected for triage</h3>
+                                                <p class="lead">Please select a patient from the nurse station queue.</p>
+                                                <p:commandButton 
+                                                    value="Go to Nurse Station" 
+                                                    icon="fas fa-arrow-left"
+                                                    action="#{nurseTriageController.navigateToNurseStation()}"
+                                                    class="ui-button-primary mt-3"
+                                                    ajax="false"/>
+                                            </div>
+                                        </p:panel>
+                                    </div>
+                                </div>
+                            </div>
+                        </h:panelGroup>
+                        
+                        <!-- Triage Form - Only shown when patient is selected -->
+                        <h:panelGroup rendered="#{nurseTriageController.selectedEncounter != null}">
+
+                        <div class="container-fluid">
+                            <!-- Header -->
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <div>
+                                            <h2>
+                                                <i class="fas fa-heartbeat" style="color: #e91e63;"></i>
+                                                Patient Triage
+                                            </h2>
+                                        </div>
+                                        <div>
+                                            <p:commandButton 
+                                                value="Back to Queue" 
+                                                icon="fas fa-arrow-left"
+                                                action="#{nurseTriageController.navigateToNurseStation()}"
+                                                class="ui-button-secondary"
+                                                ajax="false"/>
+                                            <p:commandButton 
+                                                value="Save &amp; Return to Queue" 
+                                                icon="fas fa-check"
+                                                action="#{nurseTriageController.completeTriageAndReturnToQueue()}"
+                                                update="@form"
+                                                class="ui-button-success ml-2"/>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+
+                            <!-- Patient Information Card -->
+                            <div class="row mb-3">
+                                <div class="col-12">
+                                    <p:panel styleClass="mb-3" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%); color: white;">
+                                        <div class="row">
+                                            <div class="col-md-3">
+                                                <h5><i class="fas fa-user"></i> Patient Name</h5>
+                                                <h3>#{nurseTriageController.selectedEncounter.patient.person.nameWithTitle}</h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h5><i class="fas fa-id-card"></i> PHN</h5>
+                                                <h3>#{nurseTriageController.selectedEncounter.patient.code}</h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h5><i class="fas fa-birthday-cake"></i> Age</h5>
+                                                <h3>#{nurseTriageController.selectedEncounter.patient.person.ageAsString}</h3>
+                                            </div>
+                                            <div class="col-md-2">
+                                                <h5><i class="fas fa-venus-mars"></i> Sex</h5>
+                                                <h3>#{nurseTriageController.selectedEncounter.patient.person.sex}</h3>
+                                            </div>
+                                            <div class="col-md-3">
+                                                <h5><i class="fas fa-phone"></i> Contact</h5>
+                                                <h3>#{nurseTriageController.selectedEncounter.patient.person.phone}</h3>
+                                            </div>
+                                        </div>
+                                    </p:panel>
+                                </div>
+                            </div>
+
+                            <!-- Vital Signs Section -->
+                            <div class="row">
+                                <div class="col-md-6">
+                                    <p:panel header="Vital Signs" styleClass="mb-3">
+                                        <div class="form-group row mb-3">
+                                            <label class="col-sm-4 col-form-label">
+                                                <i class="fas fa-weight"></i> Weight (kg):
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <p:inputText 
+                                                    value="#{nurseTriageController.selectedEncounter.weight}" 
+                                                    styleClass="form-control"
+                                                    placeholder="Enter weight in kg">
+                                                    <p:ajax event="keyup" update="bmi"/>
+                                                </p:inputText>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <label class="col-sm-4 col-form-label">
+                                                <i class="fas fa-ruler-vertical"></i> Height (cm):
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <p:inputText 
+                                                    value="#{nurseTriageController.selectedEncounter.height}" 
+                                                    styleClass="form-control"
+                                                    placeholder="Enter height in cm">
+                                                    <p:ajax event="keyup" update="bmi"/>
+                                                </p:inputText>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <label class="col-sm-4 col-form-label">
+                                                <i class="fas fa-calculator"></i> BMI:
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <h:outputText id="bmi" value="#{nurseTriageController.selectedEncounter.bmi}" styleClass="form-control-plaintext font-weight-bold">
+                                                    <f:convertNumber pattern="#0.0" />
+                                                </h:outputText>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <label class="col-sm-4 col-form-label">
+                                                <i class="fas fa-heartbeat"></i> Blood Pressure:
+                                            </label>
+                                            <div class="col-sm-4">
+                                                <p:inputText 
+                                                    value="#{nurseTriageController.selectedEncounter.sbp}" 
+                                                    styleClass="form-control"
+                                                    placeholder="Systolic"/>
+                                            </div>
+                                            <div class="col-sm-4">
+                                                <p:inputText 
+                                                    value="#{nurseTriageController.selectedEncounter.dbp}" 
+                                                    styleClass="form-control"
+                                                    placeholder="Diastolic"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <label class="col-sm-4 col-form-label">
+                                                <i class="fas fa-heart"></i> Pulse Rate (bpm):
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <p:inputText 
+                                                    value="#{nurseTriageController.selectedEncounter.pr}" 
+                                                    styleClass="form-control"
+                                                    placeholder="Enter pulse rate"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <label class="col-sm-4 col-form-label">
+                                                <i class="fas fa-lungs"></i> Respiratory Rate (bpm):
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <p:inputText 
+                                                    value="#{nurseTriageController.selectedEncounter.respiratoryRate}" 
+                                                    styleClass="form-control"
+                                                    placeholder="Enter respiratory rate"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <label class="col-sm-4 col-form-label">
+                                                <i class="fas fa-temperature-high"></i> Temperature (°C):
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <p:inputText 
+                                                    value="#{nurseTriageController.selectedEncounter.temperature}" 
+                                                    styleClass="form-control"
+                                                    placeholder="Enter temperature"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <label class="col-sm-4 col-form-label">
+                                                <i class="fas fa-wind"></i> Oxygen Saturation (%):
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <p:inputText 
+                                                    value="#{nurseTriageController.selectedEncounter.saturation}" 
+                                                    styleClass="form-control"
+                                                    placeholder="Enter O2 saturation"/>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group row mb-3">
+                                            <label class="col-sm-4 col-form-label">
+                                                <i class="fas fa-wind"></i> Peak Flow Rate:
+                                            </label>
+                                            <div class="col-sm-8">
+                                                <p:inputText 
+                                                    value="#{nurseTriageController.selectedEncounter.pfr}" 
+                                                    styleClass="form-control"
+                                                    placeholder="Enter PFR"/>
+                                            </div>
+                                        </div>
+                                    </p:panel>
+                                </div>
+
+                                <!-- Clinical Notes Section -->
+                                <div class="col-md-6">
+                                    <p:panel header="Triage Notes" styleClass="mb-3">
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">
+                                                <i class="fas fa-comment-medical"></i> Chief Complaint / Presenting Problem:
+                                            </label>
+                                            <p:inputTextarea 
+                                                value="#{nurseTriageController.selectedEncounter.comments}" 
+                                                styleClass="form-control"
+                                                rows="4"
+                                                placeholder="Enter patient's chief complaint or reason for visit"
+                                                autoResize="true"/>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">
+                                                <i class="fas fa-allergies"></i> Known Allergies:
+                                            </label>
+                                            <p:inputTextarea 
+                                                value="#{nurseTriageController.selectedEncounter.allergies}" 
+                                                styleClass="form-control"
+                                                rows="2"
+                                                placeholder="List any known allergies"
+                                                autoResize="true"/>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">
+                                                <i class="fas fa-pills"></i> Current Medications:
+                                            </label>
+                                            <p:inputTextarea 
+                                                value="#{nurseTriageController.selectedEncounter.currentMedications}" 
+                                                styleClass="form-control"
+                                                rows="2"
+                                                placeholder="List current medications"
+                                                autoResize="true"/>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">
+                                                <i class="fas fa-notes-medical"></i> Nursing Notes:
+                                            </label>
+                                            <p:inputTextarea 
+                                                value="#{nurseTriageController.selectedEncounter.nursingNotes}" 
+                                                styleClass="form-control"
+                                                rows="4"
+                                                placeholder="Enter nursing observations and notes"
+                                                autoResize="true"/>
+                                        </div>
+
+                                        <div class="form-group mb-3">
+                                            <label class="form-label">
+                                                <i class="fas fa-exclamation-triangle"></i> Triage Priority:
+                                            </label>
+                                            <p:selectOneMenu 
+                                                value="#{nurseTriageController.selectedEncounter.triagePriority}" 
+                                                styleClass="form-control">
+                                                <f:selectItem itemLabel="Select Priority" itemValue=""/>
+                                                <f:selectItem itemLabel="Emergency (Red)" itemValue="EMERGENCY" style="color: red; font-weight: bold;"/>
+                                                <f:selectItem itemLabel="Urgent (Orange)" itemValue="URGENT" style="color: orange; font-weight: bold;"/>
+                                                <f:selectItem itemLabel="Semi-Urgent (Yellow)" itemValue="SEMI_URGENT" style="color: #DAA520; font-weight: bold;"/>
+                                                <f:selectItem itemLabel="Non-Urgent (Green)" itemValue="NON_URGENT" style="color: green;"/>
+                                            </p:selectOneMenu>
+                                        </div>
+                                    </p:panel>
+
+                                    <!-- Action Buttons -->
+                                    <div class="text-right">
+                                        <p:commandButton 
+                                            value="Save Triage Information" 
+                                            icon="fas fa-save"
+                                            action="#{nurseTriageController.saveTriageInformation()}"
+                                            update="@form"
+                                            class="ui-button-warning mr-2"/>
+                                        <p:commandButton 
+                                            value="Complete &amp; Return to Queue" 
+                                            icon="fas fa-check-circle"
+                                            action="#{nurseTriageController.completeTriageAndReturnToQueue()}"
+                                            ajax="false"
+                                            class="ui-button-success"/>
+                                    </div>
+                                </div>
+                            </div>
+
+                        </div>
+                        </h:panelGroup><!-- End of Triage Form Panel -->
+                        
+                    </h:form>
+                </h:panelGroup>
+
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

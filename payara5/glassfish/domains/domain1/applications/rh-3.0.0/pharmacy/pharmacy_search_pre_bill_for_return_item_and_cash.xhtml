@@ -1,0 +1,163 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="/resources/template/template.xhtml">
+            <ui:define name="content">
+                <h:form>
+                    <p:panel header="Search Bill for Return Item and Cash">
+                        <div class="row">
+                            <div class="col-md-2">
+                                <h:outputLabel value="From Date"/>
+                                <p:calendar 
+                                    styleClass="dateTimePicker" 
+                                    id="fromDate" 
+                                    value="#{searchController.fromDate}" 
+                                    navigator="false" 
+                                    class="w-100"
+                                    inputStyleClass="form-control"
+                                    pattern="#{sessionController.applicationPreference.longDateTimeFormat}" >      
+                                </p:calendar>
+                                <h:outputLabel value="To Date"/>
+                                <p:calendar 
+                                    id="toDate" 
+                                    value="#{searchController.toDate}" 
+                                    navigator="false" 
+                                    inputStyleClass="form-control"
+                                    class="w-100"
+                                    pattern="#{sessionController.applicationPreference.longDateTimeFormat}" >                                                                              
+                                </p:calendar>
+                                <p:commandButton 
+                                    id="btnSearch" 
+                                    ajax="false" 
+                                    icon="fa fa-search"
+                                    class="w-100 ui-button-warning mt-2 mb-3"
+                                    value="Search" 
+                                    action="#{searchController.listBillsToReturnItemsAndPayments}"/>
+                                <h:outputLabel value="Item Name"/>    
+                                <p:autoComplete 
+                                    id="item"
+                                    value="#{searchController.searchKeyword.item}"
+                                    forceSelection="true"
+                                    class="w-100"
+                                    maxResults="50"
+                                    scrollHeight="600"
+                                    inputStyleClass="w-100"
+                                    completeMethod="#{itemController.completeAmpItem}" var="vt" itemLabel="#{vt.name}" itemValue="#{vt}" >
+                                    <p:column headerText="Item" style="padding: 6px;">
+                                        <h:outputLabel value="#{vt.name}"></h:outputLabel>
+                                    </p:column>
+                                    <p:column headerText="Code" style="padding: 6px;">
+                                        <h:outputLabel value="#{vt.code}"></h:outputLabel>
+                                    </p:column>
+                                </p:autoComplete>
+                                <h:outputLabel value="Bill No"/>
+                                <p:inputText autocomplete="off"  value="#{searchController.searchKeyword.billNo}" class="w-100"/> 
+                                <h:outputLabel value="Net Total"/>
+                                <p:inputText autocomplete="off" value="#{searchController.searchKeyword.netTotal}" class="w-100"/> 
+
+
+                            </div>
+                            <div class="col-md-10">
+                                <p:dataTable
+                                    id="tblBills"
+                                    value="#{searchController.preBillSearchDtos}"
+                                    var="billDto"
+                                    rowKey="#{billDto.id}"
+                                    paginator="true"
+                                    paginatorPosition="bottom"
+                                    rows="10"
+                                    paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                    rowsPerPageTemplate="5,10,15"
+                                    >
+
+
+                                    <p:column headerText="Pre Bill No"  width="16em">
+                                        <h:outputLabel value="#{billDto.deptId}"  ></h:outputLabel>
+                                    </p:column>
+
+                                    <p:column headerText="Billed At" width="10em">
+                                        <h:outputLabel value="#{billDto.createdAt}" >
+                                            <f:convertDateTime  timeZone="Asia/Colombo" pattern="#{sessionController.applicationPreference.longDateTimeFormat}" />
+                                        </h:outputLabel>
+                                        <br/>
+                                        <h:panelGroup rendered="#{billDto.cancelled}" >
+                                            <h:outputLabel style="color: red;" value="Cancelled at " />
+                                            <h:outputLabel style="color: red;" rendered="#{billDto.cancelled}"
+                                                           value="#{billDto.cancelledBillCreatedAt}" >
+                                                <f:convertDateTime  timeZone="Asia/Colombo" pattern="#{sessionController.applicationPreference.longDateTimeFormat}" />
+                                            </h:outputLabel>
+                                        </h:panelGroup>
+                                    </p:column>
+
+                                    <p:column headerText="Billed By"  width="8em">
+                                        <h:outputLabel value="#{billDto.creatorName}" >
+                                        </h:outputLabel>
+                                        <br/>
+                                        <h:panelGroup rendered="#{billDto.cancelled}" >
+                                            <h:outputLabel style="color: red;" value="Cancelled By " />
+                                            <h:outputLabel style="color: red;" rendered="#{billDto.cancelled}" value="#{billDto.cancelledBillCreatorName}" >
+                                            </h:outputLabel>
+                                        </h:panelGroup>
+                                    </p:column>
+
+                                    <p:column headerText="Client" >
+                                        <h:outputLabel value="#{billDto.patientName}" >
+                                        </h:outputLabel>
+                                    </p:column>
+
+                                    <p:column headerText="Payment Method"  width="8em">
+                                        <h:outputLabel value="#{billDto.paymentMethod.label}" >
+                                        </h:outputLabel>
+                                        <h:panelGroup styleClass="flex align-items-center p-2 bg-blue-100 text-blue-800 border-round" rendered="#{billDto.billTypeAtomic eq 'PHARMACY_RETAIL_SALE'}">
+                                            <i class="pi pi-heart mr-2 text-2xl"></i>
+                                        </h:panelGroup>
+
+                                        <h:panelGroup styleClass="flex align-items-center p-2 bg-green-100 text-green-800 border-round" rendered="#{billDto.billTypeAtomic eq 'PHARMACY_RETAIL_SALE_PREBILL_SETTLED_AT_CASHIER'}">
+                                            <i class="pi pi-money-bill mr-2 text-2xl"></i>
+                                        </h:panelGroup>
+                                    </p:column>
+
+                                    <p:column headerText="Net Value" width="10em" class="text-end">
+                                        <h:outputLabel value="#{billDto.netTotal}" >
+                                            <f:convertNumber pattern="#,##0.00"/>
+                                        </h:outputLabel>
+                                    </p:column>
+
+                                    <p:column headerText="Actions" width="25em" class="text-center">
+                                        <p:commandButton
+                                            ajax="false"
+                                            id="viewBill"
+                                            icon="fas fa-file-invoice"
+                                            value="View"
+                                            class="m-1 ui-button-success"
+                                            action="pharmacy_reprint_bill_sale?faces-redirect=true">
+                                            <f:setPropertyActionListener value="#{searchController.loadBillById(billDto.referenceBillId)}" target="#{pharmacyBillSearch.bill}"/>
+                                        </p:commandButton>
+                                        <p:commandButton
+                                            ajax="false"
+                                            class="m-1 ui-button-warning"
+                                            value="Accept Return Items &amp; Refund"
+                                            title="Return Items and Payments"
+                                            icon="pi pi-undo"
+                                            action="#{saleReturnController.navigateToReturnItemsAndPaymentsForPharmacyRetailSale()}"
+                                            disabled="#{billDto.cancelled eq true}">
+                                            <f:setPropertyActionListener value="#{searchController.loadBillById(billDto.id)}" target="#{saleReturnController.bill}"/>
+                                        </p:commandButton>
+                                    </p:column>
+
+                                </p:dataTable>
+
+                            </div>
+                        </div>
+                    </p:panel>
+                </h:form>
+            </ui:define>
+        </ui:composition>
+    </h:body>
+</html>

@@ -1,0 +1,7 @@
+backup/
+target/
+*.war
+*.war.backup*
+emr.sql
+*.log
+.git-rewrite/

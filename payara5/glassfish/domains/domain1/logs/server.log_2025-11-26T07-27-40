@@ -1,0 +1,1942 @@
+[2025-11-26T07:25:53.514+0300] [] [INFO] [NCLS-GFLAUNCHER-00005] [javax.enterprise.launcher] [tid: _ThreadID=1 _ThreadName=main] [timeMillis: 1764131153514] [levelValue: 800] [[
+  JVM invocation command line:
+/usr/lib/jvm/java-11-openjdk-amd64/bin/java
+-cp
+/home/elvis/it/HMISD/payara5/glassfish/domains/domain1/lib/ext/*:/home/elvis/it/HMISD/payara5/glassfish/modules/glassfish.jar
+-XX:+UnlockDiagnosticVMOptions
+--add-opens=java.base/java.net=ALL-UNNAMED
+--add-opens=java.base/sun.net.www.protocol.jrt=ALL-UNNAMED
+--add-opens=java.management/sun.management=ALL-UNNAMED
+--add-exports=java.base/jdk.internal.ref=ALL-UNNAMED
+--add-opens=java.naming/javax.naming.spi=ALL-UNNAMED
+--add-opens=jdk.management/com.sun.management.internal=ALL-UNNAMED
+--add-opens=java.base/java.nio=ALL-UNNAMED
+--add-opens=java.rmi/sun.rmi.transport=ALL-UNNAMED
+--add-opens=java.base/java.lang=ALL-UNNAMED
+--add-opens=java.logging/java.util.logging=ALL-UNNAMED
+--add-opens=java.base/sun.net.www.protocol.jar=ALL-UNNAMED
+--add-opens=java.base/jdk.internal.loader=ALL-UNNAMED
+--add-opens=java.base/java.util=ALL-UNNAMED
+--add-opens=java.base/sun.nio.ch=ALL-UNNAMED
+-XX:NewRatio=2
+-Xmx2048m
+-Xbootclasspath/a:/home/elvis/it/HMISD/payara5/glassfish/lib/grizzly-npn-api.jar
+-server
+-javaagent:/home/elvis/it/HMISD/payara5/glassfish/lib/monitor/flashlight-agent.jar
+-Djavax.xml.accessExternalSchema=all
+-Djavax.net.ssl.trustStore=/home/elvis/it/HMISD/payara5/glassfish/domains/domain1/config/cacerts.jks
+-Djdk.tls.rejectClientInitiatedRenegotiation=true
+-Djdk.corba.allowOutputStreamSubclass=true
+-Dfelix.fileinstall.dir=/home/elvis/it/HMISD/payara5/glassfish/modules/autostart/
+-Dorg.glassfish.additionalOSGiBundlesToStart=org.apache.felix.shell,org.apache.felix.gogo.runtime,org.apache.felix.gogo.shell,org.apache.felix.gogo.command,org.apache.felix.shell.remote,org.apache.felix.fileinstall
+-Dcom.sun.aas.installRoot=/home/elvis/it/HMISD/payara5/glassfish
+-Dfelix.fileinstall.poll=5000
+-Djava.security.policy=/home/elvis/it/HMISD/payara5/glassfish/domains/domain1/config/server.policy
+-Dosgi.shell.telnet.maxconn=1
+-Dfelix.fileinstall.bundles.startTransient=true
+-Dcom.sun.enterprise.config.config_environment_factory_class=com.sun.enterprise.config.serverbeans.AppserverConfigEnvironmentFactory
+-Dfelix.fileinstall.log.level=2
+-Djavax.net.ssl.keyStore=/home/elvis/it/HMISD/payara5/glassfish/domains/domain1/config/keystore.jks
+-Djava.security.auth.login.config=/home/elvis/it/HMISD/payara5/glassfish/domains/domain1/config/login.conf
+-Dfelix.fileinstall.disableConfigSave=false
+-Dorg.glassfish.grizzly.DEFAULT_MEMORY_MANAGER=org.glassfish.grizzly.memory.HeapMemoryManager
+-Dfelix.fileinstall.bundles.new.start=true
+-Dcom.sun.aas.instanceRoot=/home/elvis/it/HMISD/payara5/glassfish/domains/domain1
+-Dosgi.shell.telnet.port=6666
+-Dgosh.args=--nointeractive
+-Dcom.sun.enterprise.security.httpsOutboundKeyAlias=s1as
+-Dorg.jboss.weld.serialization.beanIdentifierIndexOptimization=false
+-Dosgi.shell.telnet.ip=127.0.0.1
+-Djdk.attach.allowAttachSelf=true
+-DANTLR_USE_DIRECT_CLASS_LOADING=true
+-Djava.awt.headless=true
+-Dcom.ctc.wstx.returnNullForDefaultNamespace=true
+-Djdbc.drivers=org.h2.Driver
+-Dorg.glassfish.grizzly.nio.DefaultSelectorHandler.force-selector-spin-detection=true
+-Djava.library.path=/home/elvis/it/HMISD/payara5/glassfish/lib:/usr/java/packages/lib:/usr/lib/x86_64-linux-gnu/jni:/lib/x86_64-linux-gnu:/usr/lib/x86_64-linux-gnu:/usr/lib/jni:/lib:/usr/lib
+com.sun.enterprise.glassfish.bootstrap.ASMain
+-upgrade
+false
+-domaindir
+/home/elvis/it/HMISD/payara5/glassfish/domains/domain1
+-read-stdin
+true
+-asadmin-args
+--host,,,localhost,,,--port,,,4848,,,--secure=false,,,--terse=false,,,--extraterse=false,,,--echo=false,,,--interactive=false,,,--autoname=false,,,start-domain,,,--verbose=false,,,--watchdog=false,,,--debug=false,,,--domaindir,,,/home/elvis/it/HMISD/payara5/glassfish/domains,,,domain1
+-domainname
+domain1
+-instancename
+server
+-type
+DAS
+-verbose
+false
+-asadmin-classpath
+/home/elvis/it/HMISD/payara5/glassfish/lib/client/appserver-cli.jar
+-debug
+false
+-asadmin-classname
+com.sun.enterprise.admin.cli.AdminMain
+-watchdog
+false]]
+
+[2025-11-26T07:26:01.583+0300] [Payara 5.2022.5] [INFO] [NCLS-LOGGING-00009] [javax.enterprise.logging] [tid: _ThreadID=23 _ThreadName=RunLevelControllerThread-1764131161180] [timeMillis: 1764131161583] [levelValue: 800] [[
+  Running Payara Version: Payara Server  5.2022.5 #badassfish (build 492)]]
+
+[2025-11-26T07:26:01.591+0300] [Payara 5.2022.5] [INFO] [NCLS-LOGGING-00010] [javax.enterprise.logging] [tid: _ThreadID=23 _ThreadName=RunLevelControllerThread-1764131161180] [timeMillis: 1764131161591] [levelValue: 800] [[
+  Server log file is using Formatter class: com.sun.enterprise.server.logging.ODLLogFormatter]]
+
+[2025-11-26T07:26:02.987+0300] [Payara 5.2022.5] [INFO] [] [org.glassfish.ha.store.spi.BackingStoreFactoryRegistry] [tid: _ThreadID=25 _ThreadName=RunLevelControllerThread-1764131161202] [timeMillis: 1764131162987] [levelValue: 800] [[
+  Registered fish.payara.ha.hazelcast.store.HazelcastBackingStoreFactoryProxy for persistence-type = hazelcast in BackingStoreFactoryRegistry]]
+
+[2025-11-26T07:26:07.106+0300] [Payara 5.2022.5] [INFO] [] [fish.payara.nucleus.hazelcast.HazelcastCore] [tid: _ThreadID=23 _ThreadName=RunLevelControllerThread-1764131161180] [timeMillis: 1764131167106] [levelValue: 800] [[
+  Hazelcast Instance Bound to JNDI at payara/Hazelcast]]
+
+[2025-11-26T07:26:07.107+0300] [Payara 5.2022.5] [INFO] [] [fish.payara.nucleus.hazelcast.HazelcastCore] [tid: _ThreadID=23 _ThreadName=RunLevelControllerThread-1764131161180] [timeMillis: 1764131167107] [levelValue: 800] [[
+  JSR107 Caching Provider Bound to JNDI at payara/CachingProvider]]
+
+[2025-11-26T07:26:07.107+0300] [Payara 5.2022.5] [INFO] [] [fish.payara.nucleus.hazelcast.HazelcastCore] [tid: _ThreadID=23 _ThreadName=RunLevelControllerThread-1764131161180] [timeMillis: 1764131167107] [levelValue: 800] [[
+  JSR107 Default Cache Manager Bound to JNDI at payara/CacheManager]]
+
+[2025-11-26T07:26:07.498+0300] [Payara 5.2022.5] [INFO] [NCLS-CORE-00101] [javax.enterprise.system.core] [tid: _ThreadID=24 _ThreadName=RunLevelControllerThread-1764131161202] [timeMillis: 1764131167498] [levelValue: 800] [[
+  Network Listener http-listener-1 started in: 27ms - bound to [/0.0.0.0:8080]]]
+
+[2025-11-26T07:26:07.506+0300] [Payara 5.2022.5] [INFO] [] [org.hibernate.validator.internal.util.Version] [tid: _ThreadID=25 _ThreadName=RunLevelControllerThread-1764131161202] [timeMillis: 1764131167506] [levelValue: 800] [[
+  HV000001: Hibernate Validator 6.2.5.Final]]
+
+[2025-11-26T07:26:07.873+0300] [Payara 5.2022.5] [INFO] [NCLS-CORE-00101] [javax.enterprise.system.core] [tid: _ThreadID=24 _ThreadName=RunLevelControllerThread-1764131161202] [timeMillis: 1764131167873] [levelValue: 800] [[
+  Network Listener http-listener-2 started in: 50ms - bound to [/0.0.0.0:8181]]]
+
+[2025-11-26T07:26:07.910+0300] [Payara 5.2022.5] [INFO] [NCLS-CORE-00101] [javax.enterprise.system.core] [tid: _ThreadID=24 _ThreadName=RunLevelControllerThread-1764131161202] [timeMillis: 1764131167910] [levelValue: 800] [[
+  Network Listener admin-listener started in: 9ms - bound to [/0.0.0.0:4848]]]
+
+[2025-11-26T07:26:07.911+0300] [Payara 5.2022.5] [INFO] [NCLS-CORE-00087] [javax.enterprise.system.core] [tid: _ThreadID=24 _ThreadName=RunLevelControllerThread-1764131161202] [timeMillis: 1764131167911] [levelValue: 800] [[
+  Grizzly 2.4.4 started in: 5256ms - bound to [http-listener-1:8080, http-listener-2:8181, admin-listener:4848]]]
+
+[2025-11-26T07:26:08.682+0300] [Payara 5.2022.5] [INFO] [NCLS-CORE-00101] [javax.enterprise.system.core] [tid: _ThreadID=23 _ThreadName=RunLevelControllerThread-1764131161180] [timeMillis: 1764131168682] [levelValue: 800] [[
+  Network Listener iiop-service started in: 15ms - bound to [/0.0.0.0:3700]]]
+
+[2025-11-26T07:26:26.833+0300] [Payara 5.2022.5] [INFO] [] [javax.enterprise.resource.corba.org.glassfish.enterprise.iiop.api] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131186833] [levelValue: 800] [[
+  GlassFishORBFactory service initialized.]]
+
+[2025-11-26T07:26:26.849+0300] [Payara 5.2022.5] [INFO] [] [] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131186849] [levelValue: 800] [[
+  Cannot find the resource bundle for the name com.sun.logging.enterprise.system.container.ejb for class com.sun.ejb.containers.EjbAsyncInvocationManager using fish.payara.server.internal.ejb.ejb-container [161]]]
+
+[2025-11-26T07:26:26.871+0300] [Payara 5.2022.5] [INFO] [] [] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131186871] [levelValue: 800] [[
+  Cannot find the resource bundle for the name com.sun.logging.enterprise.system.container.ejb for class com.sun.ejb.base.io.EJBObjectOutputStreamHandler using fish.payara.server.internal.ejb.ejb-container [161]]]
+
+[2025-11-26T07:26:27.104+0300] [Payara 5.2022.5] [WARNING] [NCLS-SECURITY-05054] [javax.enterprise.system.security.ssl] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187104] [levelValue: 900] [[
+  The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: OU=Security Communication RootCA1, O=SECOM Trust.net, C=JP
+  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5
+
+  Key:  Sun RSA public key, 2048 bits
+  params: null
+  modulus: 22685415006428200592833491962883484487168551771659798294854733780211541293353195301021419673625490780393305764607061385802290524116309077213686923226627090091654547764901452725019201966157070186182415870146235639783132356542776042920414778026123817062775425095240940908518300952728974111583882104748722341382283733954749826083238772064772768624092462858138095338007700353180760999777929264504829418107242179729222967684228493046848655508111652325414550570526591838661684974140725089508500881931337603205967142263298060989123154924616448912936228832215306052782571395150897002425570063612042041994623587241136717310067
+  public exponent: 65537
+  Validity: [From: Tue Sep 30 07:20:49 EAT 2003,
+               To: Sat Sep 30 07:20:49 EAT 2023]
+  Issuer: OU=Security Communication RootCA1, O=SECOM Trust.net, C=JP
+  SerialNumber: [    00]
+
+Certificate Extensions: 3
+[1]: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:2147483647
+]
+
+[2]: ObjectId: 2.5.29.15 Criticality=false
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+[3]: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: A0 73 49 99 68 DC 85 5B   65 E3 9B 28 2F 57 9F BD  .sI.h..[e..(/W..
+0010: 33 BC 07 48                                        3..H
+]
+]
+
+]
+  Algorithm: [SHA1withRSA]
+  Signature:
+0000: 68 40 A9 A8 BB E4 4F 5D   79 B3 05 B5 17 B3 60 13  h@....O]y.....`.
+0010: EB C6 92 5D E0 D1 D3 6A   FE FB BE 9B 6D BF C7 05  ...]...j....m...
+0020: 6D 59 20 C4 1C F0 B7 DA   84 58 02 63 FA 48 16 EF  mY ......X.c.H..
+0030: 4F A5 0B F7 4A 98 F2 3F   9E 1B AD 47 6B 63 CE 08  O...J..?...Gkc..
+0040: 47 EB 52 3F 78 9C AF 4D   AE F8 D5 4F CF 9A 98 2A  G.R?x..M...O...*
+0050: 10 41 39 52 C4 DD D9 9B   0E EF 93 01 AE B2 2E CA  .A9R............
+0060: 68 42 24 42 6C B0 B3 3A   3E CD E9 DA 48 C4 15 CB  hB$Bl..:>...H...
+0070: E9 F9 07 0F 92 50 49 8A   DD 31 97 5F C9 E9 37 AA  .....PI..1._..7.
+0080: 3B 59 65 97 94 32 C9 B3   9F 3E 3A 62 58 C5 49 AD  ;Ye..2...>:bX.I.
+0090: 62 0E 71 A5 32 AA 2F C6   89 76 43 40 13 13 67 3D  b.q.2./..vC@..g=
+00A0: A2 54 25 10 CB F1 3A F2   D9 FA DB 49 56 BB A6 FE  .T%...:....IV...
+00B0: A7 41 35 C3 E0 88 61 C9   88 C7 DF 36 10 22 98 59  .A5...a....6.".Y
+00C0: EA B0 4A FB 56 16 73 6E   AC 4D F7 22 A1 4F AD 1D  ..J.V.sn.M.".O..
+00D0: 7A 2D 45 27 E5 30 C1 5E   F2 DA 13 CB 25 42 51 95  z-E'.0.^....%BQ.
+00E0: 47 03 8C 6C 21 CC 74 42   ED 53 FF 33 8B 8F 0F 57  G..l!.tB.S.3...W
+00F0: 01 16 2F CF A6 EE C9 70   22 14 BD FD BE 6C 0B 03  ../....p"....l..
+
+]]]
+
+[2025-11-26T07:26:27.119+0300] [Payara 5.2022.5] [WARNING] [NCLS-SECURITY-05054] [javax.enterprise.system.security.ssl] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187119] [levelValue: 900] [[
+  The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: OU=Security Communication RootCA1, O=SECOM Trust.net, C=JP
+  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5
+
+  Key:  Sun RSA public key, 2048 bits
+  params: null
+  modulus: 22685415006428200592833491962883484487168551771659798294854733780211541293353195301021419673625490780393305764607061385802290524116309077213686923226627090091654547764901452725019201966157070186182415870146235639783132356542776042920414778026123817062775425095240940908518300952728974111583882104748722341382283733954749826083238772064772768624092462858138095338007700353180760999777929264504829418107242179729222967684228493046848655508111652325414550570526591838661684974140725089508500881931337603205967142263298060989123154924616448912936228832215306052782571395150897002425570063612042041994623587241136717310067
+  public exponent: 65537
+  Validity: [From: Tue Sep 30 07:20:49 EAT 2003,
+               To: Sat Sep 30 07:20:49 EAT 2023]
+  Issuer: OU=Security Communication RootCA1, O=SECOM Trust.net, C=JP
+  SerialNumber: [    00]
+
+Certificate Extensions: 3
+[1]: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:2147483647
+]
+
+[2]: ObjectId: 2.5.29.15 Criticality=false
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+[3]: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: A0 73 49 99 68 DC 85 5B   65 E3 9B 28 2F 57 9F BD  .sI.h..[e..(/W..
+0010: 33 BC 07 48                                        3..H
+]
+]
+
+]
+  Algorithm: [SHA1withRSA]
+  Signature:
+0000: 68 40 A9 A8 BB E4 4F 5D   79 B3 05 B5 17 B3 60 13  h@....O]y.....`.
+0010: EB C6 92 5D E0 D1 D3 6A   FE FB BE 9B 6D BF C7 05  ...]...j....m...
+0020: 6D 59 20 C4 1C F0 B7 DA   84 58 02 63 FA 48 16 EF  mY ......X.c.H..
+0030: 4F A5 0B F7 4A 98 F2 3F   9E 1B AD 47 6B 63 CE 08  O...J..?...Gkc..
+0040: 47 EB 52 3F 78 9C AF 4D   AE F8 D5 4F CF 9A 98 2A  G.R?x..M...O...*
+0050: 10 41 39 52 C4 DD D9 9B   0E EF 93 01 AE B2 2E CA  .A9R............
+0060: 68 42 24 42 6C B0 B3 3A   3E CD E9 DA 48 C4 15 CB  hB$Bl..:>...H...
+0070: E9 F9 07 0F 92 50 49 8A   DD 31 97 5F C9 E9 37 AA  .....PI..1._..7.
+0080: 3B 59 65 97 94 32 C9 B3   9F 3E 3A 62 58 C5 49 AD  ;Ye..2...>:bX.I.
+0090: 62 0E 71 A5 32 AA 2F C6   89 76 43 40 13 13 67 3D  b.q.2./..vC@..g=
+00A0: A2 54 25 10 CB F1 3A F2   D9 FA DB 49 56 BB A6 FE  .T%...:....IV...
+00B0: A7 41 35 C3 E0 88 61 C9   88 C7 DF 36 10 22 98 59  .A5...a....6.".Y
+00C0: EA B0 4A FB 56 16 73 6E   AC 4D F7 22 A1 4F AD 1D  ..J.V.sn.M.".O..
+00D0: 7A 2D 45 27 E5 30 C1 5E   F2 DA 13 CB 25 42 51 95  z-E'.0.^....%BQ.
+00E0: 47 03 8C 6C 21 CC 74 42   ED 53 FF 33 8B 8F 0F 57  G..l!.tB.S.3...W
+00F0: 01 16 2F CF A6 EE C9 70   22 14 BD FD BE 6C 0B 03  ../....p"....l..
+
+]]]
+
+[2025-11-26T07:26:27.123+0300] [Payara 5.2022.5] [WARNING] [NCLS-SECURITY-05054] [javax.enterprise.system.security.ssl] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187123] [levelValue: 900] [[
+  The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: OU=Security Communication RootCA1, O=SECOM Trust.net, C=JP
+  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5
+
+  Key:  Sun RSA public key, 2048 bits
+  params: null
+  modulus: 22685415006428200592833491962883484487168551771659798294854733780211541293353195301021419673625490780393305764607061385802290524116309077213686923226627090091654547764901452725019201966157070186182415870146235639783132356542776042920414778026123817062775425095240940908518300952728974111583882104748722341382283733954749826083238772064772768624092462858138095338007700353180760999777929264504829418107242179729222967684228493046848655508111652325414550570526591838661684974140725089508500881931337603205967142263298060989123154924616448912936228832215306052782571395150897002425570063612042041994623587241136717310067
+  public exponent: 65537
+  Validity: [From: Tue Sep 30 07:20:49 EAT 2003,
+               To: Sat Sep 30 07:20:49 EAT 2023]
+  Issuer: OU=Security Communication RootCA1, O=SECOM Trust.net, C=JP
+  SerialNumber: [    00]
+
+Certificate Extensions: 3
+[1]: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:2147483647
+]
+
+[2]: ObjectId: 2.5.29.15 Criticality=false
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+[3]: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: A0 73 49 99 68 DC 85 5B   65 E3 9B 28 2F 57 9F BD  .sI.h..[e..(/W..
+0010: 33 BC 07 48                                        3..H
+]
+]
+
+]
+  Algorithm: [SHA1withRSA]
+  Signature:
+0000: 68 40 A9 A8 BB E4 4F 5D   79 B3 05 B5 17 B3 60 13  h@....O]y.....`.
+0010: EB C6 92 5D E0 D1 D3 6A   FE FB BE 9B 6D BF C7 05  ...]...j....m...
+0020: 6D 59 20 C4 1C F0 B7 DA   84 58 02 63 FA 48 16 EF  mY ......X.c.H..
+0030: 4F A5 0B F7 4A 98 F2 3F   9E 1B AD 47 6B 63 CE 08  O...J..?...Gkc..
+0040: 47 EB 52 3F 78 9C AF 4D   AE F8 D5 4F CF 9A 98 2A  G.R?x..M...O...*
+0050: 10 41 39 52 C4 DD D9 9B   0E EF 93 01 AE B2 2E CA  .A9R............
+0060: 68 42 24 42 6C B0 B3 3A   3E CD E9 DA 48 C4 15 CB  hB$Bl..:>...H...
+0070: E9 F9 07 0F 92 50 49 8A   DD 31 97 5F C9 E9 37 AA  .....PI..1._..7.
+0080: 3B 59 65 97 94 32 C9 B3   9F 3E 3A 62 58 C5 49 AD  ;Ye..2...>:bX.I.
+0090: 62 0E 71 A5 32 AA 2F C6   89 76 43 40 13 13 67 3D  b.q.2./..vC@..g=
+00A0: A2 54 25 10 CB F1 3A F2   D9 FA DB 49 56 BB A6 FE  .T%...:....IV...
+00B0: A7 41 35 C3 E0 88 61 C9   88 C7 DF 36 10 22 98 59  .A5...a....6.".Y
+00C0: EA B0 4A FB 56 16 73 6E   AC 4D F7 22 A1 4F AD 1D  ..J.V.sn.M.".O..
+00D0: 7A 2D 45 27 E5 30 C1 5E   F2 DA 13 CB 25 42 51 95  z-E'.0.^....%BQ.
+00E0: 47 03 8C 6C 21 CC 74 42   ED 53 FF 33 8B 8F 0F 57  G..l!.tB.S.3...W
+00F0: 01 16 2F CF A6 EE C9 70   22 14 BD FD BE 6C 0B 03  ../....p"....l..
+
+]]]
+
+[2025-11-26T07:26:27.131+0300] [Payara 5.2022.5] [WARNING] [NCLS-SECURITY-05054] [javax.enterprise.system.security.ssl] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187131] [levelValue: 900] [[
+  The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: CN=Baltimore CyberTrust Root, OU=CyberTrust, O=Baltimore, C=IE
+  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5
+
+  Key:  Sun RSA public key, 2048 bits
+  params: null
+  modulus: 20579176651421167987106471718888186309534186253587759121109122482694167416584428920295678216035822449451639581023765122994089008826314029843654807108803739729565431642116323937940944378450034252354609020536286175863324156219063038927409933070688727356676027216359532593504366119272034244698731524943132462329205729047681997715455240148827523651706429854757422624117805863121520494307655271426986078917217383478420381375139154341613794371303682232583316393601620034638044186782252195438345309455714637508276892061355357785328168602107026282695945834955006612147350315937204256563720794300123948598669913435346712336953
+  public exponent: 65537
+  Validity: [From: Fri May 12 21:46:00 EAT 2000,
+               To: Tue May 13 02:59:00 EAT 2025]
+  Issuer: CN=Baltimore CyberTrust Root, OU=CyberTrust, O=Baltimore, C=IE
+  SerialNumber: [    020000b9]
+
+Certificate Extensions: 3
+[1]: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:3
+]
+
+[2]: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+[3]: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: E5 9D 59 30 82 47 58 CC   AC FA 08 54 36 86 7B 3A  ..Y0.GX....T6..:
+0010: B5 04 4D F0                                        ..M.
+]
+]
+
+]
+  Algorithm: [SHA1withRSA]
+  Signature:
+0000: 85 0C 5D 8E E4 6F 51 68   42 05 A0 DD BB 4F 27 25  ..]..oQhB....O'%
+0010: 84 03 BD F7 64 FD 2D D7   30 E3 A4 10 17 EB DA 29  ....d.-.0......)
+0020: 29 B6 79 3F 76 F6 19 13   23 B8 10 0A F9 58 A4 D4  ).y?v...#....X..
+0030: 61 70 BD 04 61 6A 12 8A   17 D5 0A BD C5 BC 30 7C  ap..aj........0.
+0040: D6 E9 0C 25 8D 86 40 4F   EC CC A3 7E 38 C6 37 11  ...%..@O....8.7.
+0050: 4F ED DD 68 31 8E 4C D2   B3 01 74 EE BE 75 5E 07  O..h1.L...t..u^.
+0060: 48 1A 7F 70 FF 16 5C 84   C0 79 85 B8 05 FD 7F BE  H..p..\..y......
+0070: 65 11 A3 0F C0 02 B4 F8   52 37 39 04 D5 A9 31 7A  e.......R79...1z
+0080: 18 BF A0 2A F4 12 99 F7   A3 45 82 E3 3C 5E F5 9D  ...*.....E..<^..
+0090: 9E B5 C8 9E 7C 2E C8 A4   9E 4E 08 14 4B 6D FD 70  .........N..Km.p
+00A0: 6D 6B 1A 63 BD 64 E6 1F   B7 CE F0 F2 9F 2E BB 1B  mk.c.d..........
+00B0: B7 F2 50 88 73 92 C2 E2   E3 16 8D 9A 32 02 AB 8E  ..P.s.......2...
+00C0: 18 DD E9 10 11 EE 7E 35   AB 90 AF 3E 30 94 7A D0  .......5...>0.z.
+00D0: 33 3D A7 65 0F F5 FC 8E   9E 62 CF 47 44 2C 01 5D  3=.e.....b.GD,.]
+00E0: BB 1D B5 32 D2 47 D2 38   2E D0 FE 81 DC 32 6A 1E  ...2.G.8.....2j.
+00F0: B5 EE 3C D5 FC E7 81 1D   19 C3 24 42 EA 63 39 A9  ..<.......$B.c9.
+
+]]]
+
+[2025-11-26T07:26:27.143+0300] [Payara 5.2022.5] [WARNING] [NCLS-SECURITY-05054] [javax.enterprise.system.security.ssl] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187143] [levelValue: 900] [[
+  The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: CN=Hongkong Post Root CA 1, O=Hongkong Post, C=HK
+  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5
+
+  Key:  Sun RSA public key, 2048 bits
+  params: null
+  modulus: 21838842886693663724158784403585651086528104296164385860161022739921373369707218030440506162102136558173436946849391294793307782954841942242024273695880348195893353627449588124799424784895102163646643691443106811950234631518233611566768492779470498453433790097889234697472188330775500811277774315685791867415626540129742998447505936911063048831531565774606692545305742615948612457260210732651168707753992847234653569046467370474286879899035889542471401156823937233107153209946260999805445553824772354779142234853024395292937233533541458297850158745682023984935736594691428586456965578890433083770465299339539844369287
+  public exponent: 65537
+  Validity: [From: Thu May 15 08:13:14 EAT 2003,
+               To: Mon May 15 07:52:29 EAT 2023]
+  Issuer: CN=Hongkong Post Root CA 1, O=Hongkong Post, C=HK
+  SerialNumber: [    03e8]
+
+Certificate Extensions: 2
+[1]: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:3
+]
+
+[2]: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  DigitalSignature
+  Non_repudiation
+  Key_CertSign
+  Crl_Sign
+]
+
+]
+  Algorithm: [SHA1withRSA]
+  Signature:
+0000: 0E 46 D5 3C AE E2 87 D9   5E 81 8B 02 98 41 08 8C  .F.<....^....A..
+0010: 4C BC DA DB EE 27 1B 82   E7 6A 45 EC 16 8B 4F 85  L....'...jE...O.
+0020: A0 F3 B2 70 BD 5A 96 BA   CA 6E 6D EE 46 8B 6E E7  ...p.Z...nm.F.n.
+0030: 2A 2E 96 B3 19 33 EB B4   9F A8 B2 37 EE 98 A8 97  *....3.....7....
+0040: B6 2E B6 67 27 D4 A6 49   FD 1C 93 65 76 9E 42 2F  ...g'..I...ev.B/
+0050: DC 22 6C 9A 4F F2 5A 15   39 B1 71 D7 2B 51 E8 6D  ."l.O.Z.9.q.+Q.m
+0060: 1C 98 C0 D9 2A F4 A1 82   7B D5 C9 41 A2 23 01 74  ....*......A.#.t
+0070: 38 55 8B 0F B9 2E 67 A2   20 04 37 DA 9C 0B D3 17  8U....g. .7.....
+0080: 21 E0 8F 97 79 34 6F 84   48 02 20 33 1B E6 34 44  !...y4o.H. 3..4D
+0090: 9F 91 70 F4 80 5E 84 43   C2 29 D2 6C 12 14 E4 61  ..p..^.C.).l...a
+00A0: 8D AC 10 90 9E 84 50 BB   F0 96 6F 45 9F 8A F3 CA  ......P...oE....
+00B0: 6C 4F FA 11 3A 15 15 46   C3 CD 1F 83 5B 2D 41 12  lO..:..F....[-A.
+00C0: ED 50 67 41 13 3D 21 AB   94 8A AA 4E 7C C1 B1 FB  .PgA.=!....N....
+00D0: A7 D6 B5 27 2F 97 AB 6E   E0 1D E2 D1 1C 2C 1F 44  ...'/..n.....,.D
+00E0: E2 FC BE 91 A1 9C FB D6   29 53 73 86 9F 53 D8 43  ........)Ss..S.C
+00F0: 0E 5D D6 63 82 71 1D 80   74 CA F6 E2 02 6B D9 5A  .].c.q..t....k.Z
+
+]]]
+
+[2025-11-26T07:26:27.150+0300] [Payara 5.2022.5] [WARNING] [NCLS-SECURITY-05054] [javax.enterprise.system.security.ssl] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187150] [levelValue: 900] [[
+  The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: CN=TÜRKTRUST Elektronik Sertifika Hizmet Sağlayıcısı H5, O=TÜRKTRUST Bilgi İletişim ve Bilişim Güvenliği Hizmetleri A.Ş., L=Ankara, C=TR
+  Signature Algorithm: SHA256withRSA, OID = 1.2.840.113549.1.1.11
+
+  Key:  Sun RSA public key, 2048 bits
+  params: null
+  modulus: 20721377246514367563605178619245714000909347889058872052522999502285159690767758422928664945631082901107138581598891539594009897753638962565517793764496705010157646265801963977234702978947940139940436661836018656037689891521109279394476149705022231702793379503370501623433916464946495347881225603819935014819158746410970414669132035197071218974299052756704526356034152912018525310215393993048991487777692565138509938057097499372856627277565069781582641378329296127042977004011991662454933709367833119961479844058573781954889837169338368688068324984635685760321236418143304246757405278580379076509554522300540333347817
+  public exponent: 65537
+  Validity: [From: Tue Apr 30 11:07:01 EAT 2013,
+               To: Fri Apr 28 11:07:01 EAT 2023]
+  Issuer: CN=TÜRKTRUST Elektronik Sertifika Hizmet Sağlayıcısı H5, O=TÜRKTRUST Bilgi İletişim ve Bilişim Güvenliği Hizmetleri A.Ş., L=Ankara, C=TR
+  SerialNumber: [    8e17fe24 2081]
+
+Certificate Extensions: 3
+[1]: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:2147483647
+]
+
+[2]: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+[3]: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 56 99 07 1E D3 AC 0C 69   64 B4 0C 50 47 DE 43 2C  V......id..PG.C,
+0010: BE 20 C0 FB                                        . ..
+]
+]
+
+]
+  Algorithm: [SHA256withRSA]
+  Signature:
+0000: 9E 45 76 7B 17 48 32 F2   38 8B 29 BD EE 96 4A 4E  .Ev..H2.8.)...JN
+0010: 81 18 B1 51 47 20 CD D0   64 B1 0E C9 D9 01 D9 09  ...QG ..d.......
+0020: CE C8 99 DC 68 25 13 D4   5C F2 A3 E8 04 FE 72 09  ....h%..\.....r.
+0030: C7 0B AA 1D 25 55 7E 96   9A 57 B7 BA C5 11 7A 19  ....%U...W....z.
+0040: E6 A7 7E 3D 85 0E F5 F9   2E 29 2F E7 F9 6C 58 16  ...=.....)/..lX.
+0050: 57 50 25 F6 3E 2E 3E AA   ED 77 71 AA AA 99 96 46  WP%.>.>..wq....F
+0060: 0A AE 8E EC 2A 51 16 B0   5E CD EA 67 04 1C 58 30  ....*Q..^..g..X0
+0070: F5 60 8A BD A6 BD 4D E5   96 B4 FC 42 89 01 6B F6  .`....M....B..k.
+0080: 70 C8 50 39 0C 2D D5 66   D9 C8 D2 B3 32 B7 1B 19  p.P9.-.f....2...
+0090: 6D CB 33 F9 DF A5 E6 15   84 37 F0 C2 F2 65 96 92  m.3......7...e..
+00A0: 90 77 F0 AD F4 90 E9 11   78 D7 93 89 C0 3D 0B BA  .w......x....=..
+00B0: 29 F4 E8 99 9D 72 8E ED   9D 2F EE 92 7D A1 F1 FF  )....r.../......
+00C0: 5D BA 33 60 85 62 FE 07   02 A1 84 56 46 BE 96 0A  ].3`.b.....VF...
+00D0: 9A 13 D7 21 4C B7 7C 07   9F 4E 4E 3F 91 74 FB 27  ...!L....NN?.t.'
+00E0: 9D 11 CC DD E6 B1 CA 71   4D 13 17 39 26 C5 29 21  .......qM..9&.)!
+00F0: 2B 93 29 6A 96 FA AB 41   E1 4B B6 35 0B C0 9B 15  +.)j...A.K.5....
+
+]]]
+
+[2025-11-26T07:26:27.162+0300] [Payara 5.2022.5] [WARNING] [NCLS-SECURITY-05054] [javax.enterprise.system.security.ssl] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187162] [levelValue: 900] [[
+  The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: OU=Trustis FPS Root CA, O=Trustis Limited, C=GB
+  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5
+
+  Key:  Sun RSA public key, 2048 bits
+  params: null
+  modulus: 24908633667180321967674873268814531635547921938344065146546904438489502673823487510936146573960061486273718694334781317348708908262947651303078579882700224692570831312368945979170373153648052597761950956395913615810736512525962630740585310636521594672085066580175665043758918430925599500808969653476864564698808991702431004110644739915567322643581281788777374680963817281333282843028696667329131753328247995199072853681672136148214770992098772732734082912115629981882473191620546572069699037050136366328673247895507219755706167110912566425482228784709797122932080366498493920541761658523188072646247208026589367964269
+  public exponent: 65537
+  Validity: [From: Tue Dec 23 15:14:06 EAT 2003,
+               To: Sun Jan 21 14:36:54 EAT 2024]
+  Issuer: OU=Trustis FPS Root CA, O=Trustis Limited, C=GB
+  SerialNumber: [    1b1fadb6 20f924d3 366bf7c7 f18ca059]
+
+Certificate Extensions: 3
+[1]: ObjectId: 2.5.29.35 Criticality=false
+AuthorityKeyIdentifier [
+KeyIdentifier [
+0000: BA FA 71 25 79 8B 57 41   25 21 86 0B 71 EB B2 64  ..q%y.WA%!..q..d
+0010: 0E 8B 21 67                                        ..!g
+]
+]
+
+[2]: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:2147483647
+]
+
+[3]: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: BA FA 71 25 79 8B 57 41   25 21 86 0B 71 EB B2 64  ..q%y.WA%!..q..d
+0010: 0E 8B 21 67                                        ..!g
+]
+]
+
+]
+  Algorithm: [SHA1withRSA]
+  Signature:
+0000: 7E 58 FF FD 35 19 7D 9C   18 4F 9E B0 2B BC 8E 8C  .X..5....O..+...
+0010: 14 FF 2C A0 DA 47 5B C3   EF 81 2D AF 05 EA 74 48  ..,..G[...-...tH
+0020: 5B F3 3E 4E 07 C7 6D C5   B3 93 CF 22 35 5C B6 3F  [.>N..m...."5\.?
+0030: 75 27 5F 09 96 CD A0 FE   BE 40 0C 5C 12 55 F8 93  u'_......@.\.U..
+0040: 82 CA 29 E9 5E 3F 56 57   8B 38 36 F7 45 1A 4C 28  ..).^?VW.86.E.L(
+0050: CD 9E 41 B8 ED 56 4C 84   A4 40 C8 B8 B0 A5 2B 69  ..A..VL..@....+i
+0060: 70 04 6A C3 F8 D4 12 32   F9 0E C3 B1 DC 32 84 44  p.j....2.....2.D
+0070: 2C 6F CB 46 0F EA 66 41   0F 4F F1 58 A5 A6 0D 0D  ,o.F..fA.O.X....
+0080: 0F 61 DE A5 9E 5D 7D 65   A1 3C 17 E7 A8 55 4E EF  .a...].e.<...UN.
+0090: A0 C7 ED C6 44 7F 54 F5   A3 E0 8F F0 7C 55 22 8F  ....D.T......U".
+00A0: 29 B6 81 A3 E1 6D 4E 2C   1B 80 67 EC AD 20 9F 0C  )....mN,..g.. ..
+00B0: 62 61 D5 97 FF 43 ED 2D   C1 DA 5D 29 2A 85 3F AC  ba...C.-..])*.?.
+00C0: 65 EE 86 0F 05 8D 90 5F   DF EE 9F F4 BF EE 1D FB  e......_........
+00D0: 98 E4 7F 90 2B 84 78 10   0E 6C 49 53 EF 15 5B 65  ....+.x..lIS..[e
+00E0: 46 4A 5D AF BA FB 3A 72   1D CD F6 25 88 1E 97 CC  FJ]...:r...%....
+00F0: 21 9C 29 01 0D 65 EB 57   D9 F3 57 96 BB 48 CD 81  !.)..e.W..W..H..
+
+]]]
+
+[2025-11-26T07:26:27.171+0300] [Payara 5.2022.5] [WARNING] [NCLS-SECURITY-05054] [javax.enterprise.system.security.ssl] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187171] [levelValue: 900] [[
+  The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: CN=Baltimore CyberTrust Root, OU=CyberTrust, O=Baltimore, C=IE
+  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5
+
+  Key:  Sun RSA public key, 2048 bits
+  params: null
+  modulus: 20579176651421167987106471718888186309534186253587759121109122482694167416584428920295678216035822449451639581023765122994089008826314029843654807108803739729565431642116323937940944378450034252354609020536286175863324156219063038927409933070688727356676027216359532593504366119272034244698731524943132462329205729047681997715455240148827523651706429854757422624117805863121520494307655271426986078917217383478420381375139154341613794371303682232583316393601620034638044186782252195438345309455714637508276892061355357785328168602107026282695945834955006612147350315937204256563720794300123948598669913435346712336953
+  public exponent: 65537
+  Validity: [From: Fri May 12 21:46:00 EAT 2000,
+               To: Tue May 13 02:59:00 EAT 2025]
+  Issuer: CN=Baltimore CyberTrust Root, OU=CyberTrust, O=Baltimore, C=IE
+  SerialNumber: [    020000b9]
+
+Certificate Extensions: 3
+[1]: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:3
+]
+
+[2]: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+[3]: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: E5 9D 59 30 82 47 58 CC   AC FA 08 54 36 86 7B 3A  ..Y0.GX....T6..:
+0010: B5 04 4D F0                                        ..M.
+]
+]
+
+]
+  Algorithm: [SHA1withRSA]
+  Signature:
+0000: 85 0C 5D 8E E4 6F 51 68   42 05 A0 DD BB 4F 27 25  ..]..oQhB....O'%
+0010: 84 03 BD F7 64 FD 2D D7   30 E3 A4 10 17 EB DA 29  ....d.-.0......)
+0020: 29 B6 79 3F 76 F6 19 13   23 B8 10 0A F9 58 A4 D4  ).y?v...#....X..
+0030: 61 70 BD 04 61 6A 12 8A   17 D5 0A BD C5 BC 30 7C  ap..aj........0.
+0040: D6 E9 0C 25 8D 86 40 4F   EC CC A3 7E 38 C6 37 11  ...%..@O....8.7.
+0050: 4F ED DD 68 31 8E 4C D2   B3 01 74 EE BE 75 5E 07  O..h1.L...t..u^.
+0060: 48 1A 7F 70 FF 16 5C 84   C0 79 85 B8 05 FD 7F BE  H..p..\..y......
+0070: 65 11 A3 0F C0 02 B4 F8   52 37 39 04 D5 A9 31 7A  e.......R79...1z
+0080: 18 BF A0 2A F4 12 99 F7   A3 45 82 E3 3C 5E F5 9D  ...*.....E..<^..
+0090: 9E B5 C8 9E 7C 2E C8 A4   9E 4E 08 14 4B 6D FD 70  .........N..Km.p
+00A0: 6D 6B 1A 63 BD 64 E6 1F   B7 CE F0 F2 9F 2E BB 1B  mk.c.d..........
+00B0: B7 F2 50 88 73 92 C2 E2   E3 16 8D 9A 32 02 AB 8E  ..P.s.......2...
+00C0: 18 DD E9 10 11 EE 7E 35   AB 90 AF 3E 30 94 7A D0  .......5...>0.z.
+00D0: 33 3D A7 65 0F F5 FC 8E   9E 62 CF 47 44 2C 01 5D  3=.e.....b.GD,.]
+00E0: BB 1D B5 32 D2 47 D2 38   2E D0 FE 81 DC 32 6A 1E  ...2.G.8.....2j.
+00F0: B5 EE 3C D5 FC E7 81 1D   19 C3 24 42 EA 63 39 A9  ..<.......$B.c9.
+
+]]]
+
+[2025-11-26T07:26:27.178+0300] [Payara 5.2022.5] [WARNING] [NCLS-SECURITY-05054] [javax.enterprise.system.security.ssl] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187178] [levelValue: 900] [[
+  The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: CN=E-Tugra Certification Authority, OU=E-Tugra Sertifikasyon Merkezi, O=E-Tuğra EBG Bilişim Teknolojileri ve Hizmetleri A.Ş., L=Ankara, C=TR
+  Signature Algorithm: SHA256withRSA, OID = 1.2.840.113549.1.1.11
+
+  Key:  Sun RSA public key, 4096 bits
+  params: null
+  modulus: 925907863761916409295939340272022838512281590831120474730757692207553291969767237036195626489459017348231853241795557249851217130206976446632880875945270654597036905832659041523192702524662364187597853474375518554163192165480120090551612540555067985588920051545071401185548245657395984236130467403484982318772253464584557781352039743741441872236800083673439734698667188885771807277074100174327480627402150462230083774986573889853294044239294820937978328955374377382112413733239442846343725766491183731270686950589320630053200722818736090929558628756149871013397723768628166785948114135272375646447922248901273261631837961610711833018120063730438272326764987738680278307148349891953980396860511943744858927542134688743940583155085513476888083735533359361083727270594915343432163357523686239997134124866129339699066010433601299159013516918879602903008025230482607742486419653630432571117622771043619847802631217196332362308744465125111406751251982799417660588510735193389199145249345848457738622605681990835310621659802576806722991899594907371291390432855751379056824652537268471115418297882023918122926865362323037776845485294279264923241140190728366713936009401951864236159617130548935789858796910181327937014273771901142953205221189
+  public exponent: 65537
+  Validity: [From: Tue Mar 05 15:09:48 EAT 2013,
+               To: Fri Mar 03 15:09:48 EAT 2023]
+  Issuer: CN=E-Tugra Certification Authority, OU=E-Tugra Sertifikasyon Merkezi, O=E-Tuğra EBG Bilişim Teknolojileri ve Hizmetleri A.Ş., L=Ankara, C=TR
+  SerialNumber: [    6a683e9c 519bcb53]
+
+Certificate Extensions: 4
+[1]: ObjectId: 2.5.29.35 Criticality=false
+AuthorityKeyIdentifier [
+KeyIdentifier [
+0000: 2E E3 DB B2 49 D0 9C 54   79 5C FA 27 2A FE CC 4E  ....I..Ty\.'*..N
+0010: D2 E8 4E 54                                        ..NT
+]
+]
+
+[2]: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:2147483647
+]
+
+[3]: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+[4]: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 2E E3 DB B2 49 D0 9C 54   79 5C FA 27 2A FE CC 4E  ....I..Ty\.'*..N
+0010: D2 E8 4E 54                                        ..NT
+]
+]
+
+]
+  Algorithm: [SHA256withRSA]
+  Signature:
+0000: 05 37 3A F4 4D B7 45 E2   45 75 24 8F B6 77 52 E8  .7:.M.E.Eu$..wR.
+0010: 1C D8 10 93 65 F3 F2 59   06 A4 3E 1E 29 EC 5D D1  ....e..Y..>.).].
+0020: D0 AB 7C E0 0A 90 48 78   ED 4E 98 03 99 FE 28 60  ......Hx.N....(`
+0030: 91 1D 30 1D B8 63 7C A8   E6 35 B5 FA D3 61 76 E6  ..0..c...5...av.
+0040: D6 07 4B CA 69 9A B2 84   7A 77 93 45 17 15 9F 24  ..K.i...zw.E...$
+0050: D0 98 13 12 FF BB A0 2E   FD 4E 4C 87 F8 CE 5C AA  .........NL...\.
+0060: 98 1B 05 E0 00 46 4A 82   80 A5 33 8B 28 DC ED 38  .....FJ...3.(..8
+0070: D3 DF E5 3E E9 FE FB 59   DD 61 84 4F D2 54 96 13  ...>...Y.a.O.T..
+0080: 61 13 3E 8F 80 69 BE 93   47 B5 35 43 D2 5A BB 3D  a.>..i..G.5C.Z.=
+0090: 5C EF B3 42 47 CD 3B 55   13 06 B0 09 DB FD 63 F6  \..BG.;U......c.
+00A0: 3A 88 0A 99 6F 7E E1 CE   1B 53 6A 44 66 23 51 08  :...o....SjDf#Q.
+00B0: 7B BC 5B 52 A2 FD 06 37   38 40 61 8F 4A 96 B8 90  ..[R...78@a.J...
+00C0: 37 F8 66 C7 78 90 00 15   2E 8B AD 51 35 53 07 A8  7.f.x......Q5S..
+00D0: 6B 68 AE F9 4E 3C 07 26   CD 08 05 70 CC 39 3F 76  kh..N<.&...p.9?v
+00E0: BD A5 D3 67 26 01 86 A6   53 D2 60 3B 7C 43 7F 55  ...g&...S.`;.C.U
+00F0: 8A BC 95 1A C1 28 39 4C   1F 43 D2 91 F4 72 59 8A  .....(9L.C...rY.
+0100: B9 56 FC 3F B4 9D DA 70   9C 76 5A 8C 43 50 EE 8E  .V.?...p.vZ.CP..
+0110: 30 72 4D DF FF 49 F7 C6   A9 67 D9 6D AC 02 11 E2  0rM..I...g.m....
+0120: 3A 16 25 A7 58 08 CB 6F   53 41 9C 48 38 47 68 33  :.%.X..oSA.H8Gh3
+0130: D1 D7 C7 8F D4 74 21 D4   C3 05 90 7A FF CE 96 88  .....t!....z....
+0140: B1 15 29 5D 23 AB D0 60   A1 12 4F DE F4 17 CD 32  ..)]#..`..O....2
+0150: E5 C9 BF C8 43 AD FD 2E   8E F1 AF E2 F4 98 FA 12  ....C...........
+0160: 1F 20 D8 C0 A7 0C 85 C5   90 F4 3B 2D 96 26 B1 2C  . ........;-.&.,
+0170: BE 4C AB EB B1 D2 8A C9   DB 78 13 0F 1E 09 9D 6D  .L.......x.....m
+0180: 8F 00 9F 02 DA C1 FA 1F   7A 7A 09 C4 4A E6 88 2A  ........zz..J..*
+0190: 97 9F 89 8B FD 37 5F 5F   3A CE 38 59 86 4B AF 71  .....7__:.8Y.K.q
+01A0: 0B B4 D8 F2 70 4F 9F 32   13 E3 B0 A7 57 E5 DA DA  ....pO.2....W...
+01B0: 43 CB 84 34 F2 28 C4 EA   6D F4 2A EF C1 6B 76 DA  C..4.(..m.*..kv.
+01C0: FB 7E BB 85 3C D2 53 C2   4D BE 71 E1 45 D1 FD 23  ....<.S.M.q.E..#
+01D0: 67 0D 13 75 FB CF 65 67   22 9D AE B0 09 D1 09 FF  g..u..eg".......
+01E0: 1D 34 BF FE 23 97 37 D2   39 FA 3D 0D 06 0B B4 DB  .4..#.7.9.=.....
+01F0: 3B A3 AB 6F 5C 1D B6 7E   E8 B3 82 34 ED 06 5C 24  ;..o\......4..\$
+
+]]]
+
+[2025-11-26T07:26:27.187+0300] [Payara 5.2022.5] [WARNING] [NCLS-SECURITY-05054] [javax.enterprise.system.security.ssl] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187187] [levelValue: 900] [[
+  The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: CN=Baltimore CyberTrust Root, OU=CyberTrust, O=Baltimore, C=IE
+  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5
+
+  Key:  Sun RSA public key, 2048 bits
+  params: null
+  modulus: 20579176651421167987106471718888186309534186253587759121109122482694167416584428920295678216035822449451639581023765122994089008826314029843654807108803739729565431642116323937940944378450034252354609020536286175863324156219063038927409933070688727356676027216359532593504366119272034244698731524943132462329205729047681997715455240148827523651706429854757422624117805863121520494307655271426986078917217383478420381375139154341613794371303682232583316393601620034638044186782252195438345309455714637508276892061355357785328168602107026282695945834955006612147350315937204256563720794300123948598669913435346712336953
+  public exponent: 65537
+  Validity: [From: Fri May 12 21:46:00 EAT 2000,
+               To: Tue May 13 02:59:00 EAT 2025]
+  Issuer: CN=Baltimore CyberTrust Root, OU=CyberTrust, O=Baltimore, C=IE
+  SerialNumber: [    020000b9]
+
+Certificate Extensions: 3
+[1]: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:3
+]
+
+[2]: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+[3]: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: E5 9D 59 30 82 47 58 CC   AC FA 08 54 36 86 7B 3A  ..Y0.GX....T6..:
+0010: B5 04 4D F0                                        ..M.
+]
+]
+
+]
+  Algorithm: [SHA1withRSA]
+  Signature:
+0000: 85 0C 5D 8E E4 6F 51 68   42 05 A0 DD BB 4F 27 25  ..]..oQhB....O'%
+0010: 84 03 BD F7 64 FD 2D D7   30 E3 A4 10 17 EB DA 29  ....d.-.0......)
+0020: 29 B6 79 3F 76 F6 19 13   23 B8 10 0A F9 58 A4 D4  ).y?v...#....X..
+0030: 61 70 BD 04 61 6A 12 8A   17 D5 0A BD C5 BC 30 7C  ap..aj........0.
+0040: D6 E9 0C 25 8D 86 40 4F   EC CC A3 7E 38 C6 37 11  ...%..@O....8.7.
+0050: 4F ED DD 68 31 8E 4C D2   B3 01 74 EE BE 75 5E 07  O..h1.L...t..u^.
+0060: 48 1A 7F 70 FF 16 5C 84   C0 79 85 B8 05 FD 7F BE  H..p..\..y......
+0070: 65 11 A3 0F C0 02 B4 F8   52 37 39 04 D5 A9 31 7A  e.......R79...1z
+0080: 18 BF A0 2A F4 12 99 F7   A3 45 82 E3 3C 5E F5 9D  ...*.....E..<^..
+0090: 9E B5 C8 9E 7C 2E C8 A4   9E 4E 08 14 4B 6D FD 70  .........N..Km.p
+00A0: 6D 6B 1A 63 BD 64 E6 1F   B7 CE F0 F2 9F 2E BB 1B  mk.c.d..........
+00B0: B7 F2 50 88 73 92 C2 E2   E3 16 8D 9A 32 02 AB 8E  ..P.s.......2...
+00C0: 18 DD E9 10 11 EE 7E 35   AB 90 AF 3E 30 94 7A D0  .......5...>0.z.
+00D0: 33 3D A7 65 0F F5 FC 8E   9E 62 CF 47 44 2C 01 5D  3=.e.....b.GD,.]
+00E0: BB 1D B5 32 D2 47 D2 38   2E D0 FE 81 DC 32 6A 1E  ...2.G.8.....2j.
+00F0: B5 EE 3C D5 FC E7 81 1D   19 C3 24 42 EA 63 39 A9  ..<.......$B.c9.
+
+]]]
+
+[2025-11-26T07:26:27.192+0300] [Payara 5.2022.5] [WARNING] [NCLS-SECURITY-05054] [javax.enterprise.system.security.ssl] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187192] [levelValue: 900] [[
+  The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: CN=Hongkong Post Root CA 1, O=Hongkong Post, C=HK
+  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5
+
+  Key:  Sun RSA public key, 2048 bits
+  params: null
+  modulus: 21838842886693663724158784403585651086528104296164385860161022739921373369707218030440506162102136558173436946849391294793307782954841942242024273695880348195893353627449588124799424784895102163646643691443106811950234631518233611566768492779470498453433790097889234697472188330775500811277774315685791867415626540129742998447505936911063048831531565774606692545305742615948612457260210732651168707753992847234653569046467370474286879899035889542471401156823937233107153209946260999805445553824772354779142234853024395292937233533541458297850158745682023984935736594691428586456965578890433083770465299339539844369287
+  public exponent: 65537
+  Validity: [From: Thu May 15 08:13:14 EAT 2003,
+               To: Mon May 15 07:52:29 EAT 2023]
+  Issuer: CN=Hongkong Post Root CA 1, O=Hongkong Post, C=HK
+  SerialNumber: [    03e8]
+
+Certificate Extensions: 2
+[1]: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:3
+]
+
+[2]: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  DigitalSignature
+  Non_repudiation
+  Key_CertSign
+  Crl_Sign
+]
+
+]
+  Algorithm: [SHA1withRSA]
+  Signature:
+0000: 0E 46 D5 3C AE E2 87 D9   5E 81 8B 02 98 41 08 8C  .F.<....^....A..
+0010: 4C BC DA DB EE 27 1B 82   E7 6A 45 EC 16 8B 4F 85  L....'...jE...O.
+0020: A0 F3 B2 70 BD 5A 96 BA   CA 6E 6D EE 46 8B 6E E7  ...p.Z...nm.F.n.
+0030: 2A 2E 96 B3 19 33 EB B4   9F A8 B2 37 EE 98 A8 97  *....3.....7....
+0040: B6 2E B6 67 27 D4 A6 49   FD 1C 93 65 76 9E 42 2F  ...g'..I...ev.B/
+0050: DC 22 6C 9A 4F F2 5A 15   39 B1 71 D7 2B 51 E8 6D  ."l.O.Z.9.q.+Q.m
+0060: 1C 98 C0 D9 2A F4 A1 82   7B D5 C9 41 A2 23 01 74  ....*......A.#.t
+0070: 38 55 8B 0F B9 2E 67 A2   20 04 37 DA 9C 0B D3 17  8U....g. .7.....
+0080: 21 E0 8F 97 79 34 6F 84   48 02 20 33 1B E6 34 44  !...y4o.H. 3..4D
+0090: 9F 91 70 F4 80 5E 84 43   C2 29 D2 6C 12 14 E4 61  ..p..^.C.).l...a
+00A0: 8D AC 10 90 9E 84 50 BB   F0 96 6F 45 9F 8A F3 CA  ......P...oE....
+00B0: 6C 4F FA 11 3A 15 15 46   C3 CD 1F 83 5B 2D 41 12  lO..:..F....[-A.
+00C0: ED 50 67 41 13 3D 21 AB   94 8A AA 4E 7C C1 B1 FB  .PgA.=!....N....
+00D0: A7 D6 B5 27 2F 97 AB 6E   E0 1D E2 D1 1C 2C 1F 44  ...'/..n.....,.D
+00E0: E2 FC BE 91 A1 9C FB D6   29 53 73 86 9F 53 D8 43  ........)Ss..S.C
+00F0: 0E 5D D6 63 82 71 1D 80   74 CA F6 E2 02 6B D9 5A  .].c.q..t....k.Z
+
+]]]
+
+[2025-11-26T07:26:27.197+0300] [Payara 5.2022.5] [WARNING] [NCLS-SECURITY-05054] [javax.enterprise.system.security.ssl] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187197] [levelValue: 900] [[
+  The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: CN=E-Tugra Certification Authority, OU=E-Tugra Sertifikasyon Merkezi, O=E-Tuğra EBG Bilişim Teknolojileri ve Hizmetleri A.Ş., L=Ankara, C=TR
+  Signature Algorithm: SHA256withRSA, OID = 1.2.840.113549.1.1.11
+
+  Key:  Sun RSA public key, 4096 bits
+  params: null
+  modulus: 925907863761916409295939340272022838512281590831120474730757692207553291969767237036195626489459017348231853241795557249851217130206976446632880875945270654597036905832659041523192702524662364187597853474375518554163192165480120090551612540555067985588920051545071401185548245657395984236130467403484982318772253464584557781352039743741441872236800083673439734698667188885771807277074100174327480627402150462230083774986573889853294044239294820937978328955374377382112413733239442846343725766491183731270686950589320630053200722818736090929558628756149871013397723768628166785948114135272375646447922248901273261631837961610711833018120063730438272326764987738680278307148349891953980396860511943744858927542134688743940583155085513476888083735533359361083727270594915343432163357523686239997134124866129339699066010433601299159013516918879602903008025230482607742486419653630432571117622771043619847802631217196332362308744465125111406751251982799417660588510735193389199145249345848457738622605681990835310621659802576806722991899594907371291390432855751379056824652537268471115418297882023918122926865362323037776845485294279264923241140190728366713936009401951864236159617130548935789858796910181327937014273771901142953205221189
+  public exponent: 65537
+  Validity: [From: Tue Mar 05 15:09:48 EAT 2013,
+               To: Fri Mar 03 15:09:48 EAT 2023]
+  Issuer: CN=E-Tugra Certification Authority, OU=E-Tugra Sertifikasyon Merkezi, O=E-Tuğra EBG Bilişim Teknolojileri ve Hizmetleri A.Ş., L=Ankara, C=TR
+  SerialNumber: [    6a683e9c 519bcb53]
+
+Certificate Extensions: 4
+[1]: ObjectId: 2.5.29.35 Criticality=false
+AuthorityKeyIdentifier [
+KeyIdentifier [
+0000: 2E E3 DB B2 49 D0 9C 54   79 5C FA 27 2A FE CC 4E  ....I..Ty\.'*..N
+0010: D2 E8 4E 54                                        ..NT
+]
+]
+
+[2]: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:2147483647
+]
+
+[3]: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+[4]: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: 2E E3 DB B2 49 D0 9C 54   79 5C FA 27 2A FE CC 4E  ....I..Ty\.'*..N
+0010: D2 E8 4E 54                                        ..NT
+]
+]
+
+]
+  Algorithm: [SHA256withRSA]
+  Signature:
+0000: 05 37 3A F4 4D B7 45 E2   45 75 24 8F B6 77 52 E8  .7:.M.E.Eu$..wR.
+0010: 1C D8 10 93 65 F3 F2 59   06 A4 3E 1E 29 EC 5D D1  ....e..Y..>.).].
+0020: D0 AB 7C E0 0A 90 48 78   ED 4E 98 03 99 FE 28 60  ......Hx.N....(`
+0030: 91 1D 30 1D B8 63 7C A8   E6 35 B5 FA D3 61 76 E6  ..0..c...5...av.
+0040: D6 07 4B CA 69 9A B2 84   7A 77 93 45 17 15 9F 24  ..K.i...zw.E...$
+0050: D0 98 13 12 FF BB A0 2E   FD 4E 4C 87 F8 CE 5C AA  .........NL...\.
+0060: 98 1B 05 E0 00 46 4A 82   80 A5 33 8B 28 DC ED 38  .....FJ...3.(..8
+0070: D3 DF E5 3E E9 FE FB 59   DD 61 84 4F D2 54 96 13  ...>...Y.a.O.T..
+0080: 61 13 3E 8F 80 69 BE 93   47 B5 35 43 D2 5A BB 3D  a.>..i..G.5C.Z.=
+0090: 5C EF B3 42 47 CD 3B 55   13 06 B0 09 DB FD 63 F6  \..BG.;U......c.
+00A0: 3A 88 0A 99 6F 7E E1 CE   1B 53 6A 44 66 23 51 08  :...o....SjDf#Q.
+00B0: 7B BC 5B 52 A2 FD 06 37   38 40 61 8F 4A 96 B8 90  ..[R...78@a.J...
+00C0: 37 F8 66 C7 78 90 00 15   2E 8B AD 51 35 53 07 A8  7.f.x......Q5S..
+00D0: 6B 68 AE F9 4E 3C 07 26   CD 08 05 70 CC 39 3F 76  kh..N<.&...p.9?v
+00E0: BD A5 D3 67 26 01 86 A6   53 D2 60 3B 7C 43 7F 55  ...g&...S.`;.C.U
+00F0: 8A BC 95 1A C1 28 39 4C   1F 43 D2 91 F4 72 59 8A  .....(9L.C...rY.
+0100: B9 56 FC 3F B4 9D DA 70   9C 76 5A 8C 43 50 EE 8E  .V.?...p.vZ.CP..
+0110: 30 72 4D DF FF 49 F7 C6   A9 67 D9 6D AC 02 11 E2  0rM..I...g.m....
+0120: 3A 16 25 A7 58 08 CB 6F   53 41 9C 48 38 47 68 33  :.%.X..oSA.H8Gh3
+0130: D1 D7 C7 8F D4 74 21 D4   C3 05 90 7A FF CE 96 88  .....t!....z....
+0140: B1 15 29 5D 23 AB D0 60   A1 12 4F DE F4 17 CD 32  ..)]#..`..O....2
+0150: E5 C9 BF C8 43 AD FD 2E   8E F1 AF E2 F4 98 FA 12  ....C...........
+0160: 1F 20 D8 C0 A7 0C 85 C5   90 F4 3B 2D 96 26 B1 2C  . ........;-.&.,
+0170: BE 4C AB EB B1 D2 8A C9   DB 78 13 0F 1E 09 9D 6D  .L.......x.....m
+0180: 8F 00 9F 02 DA C1 FA 1F   7A 7A 09 C4 4A E6 88 2A  ........zz..J..*
+0190: 97 9F 89 8B FD 37 5F 5F   3A CE 38 59 86 4B AF 71  .....7__:.8Y.K.q
+01A0: 0B B4 D8 F2 70 4F 9F 32   13 E3 B0 A7 57 E5 DA DA  ....pO.2....W...
+01B0: 43 CB 84 34 F2 28 C4 EA   6D F4 2A EF C1 6B 76 DA  C..4.(..m.*..kv.
+01C0: FB 7E BB 85 3C D2 53 C2   4D BE 71 E1 45 D1 FD 23  ....<.S.M.q.E..#
+01D0: 67 0D 13 75 FB CF 65 67   22 9D AE B0 09 D1 09 FF  g..u..eg".......
+01E0: 1D 34 BF FE 23 97 37 D2   39 FA 3D 0D 06 0B B4 DB  .4..#.7.9.=.....
+01F0: 3B A3 AB 6F 5C 1D B6 7E   E8 B3 82 34 ED 06 5C 24  ;..o\......4..\$
+
+]]]
+
+[2025-11-26T07:26:27.205+0300] [Payara 5.2022.5] [WARNING] [NCLS-SECURITY-05054] [javax.enterprise.system.security.ssl] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187205] [levelValue: 900] [[
+  The SSL certificate has expired: [
+[
+  Version: V3
+  Subject: CN=Baltimore CyberTrust Code Signing Root, OU=CyberTrust, O=Baltimore, C=IE
+  Signature Algorithm: SHA1withRSA, OID = 1.2.840.113549.1.1.5
+
+  Key:  Sun RSA public key, 2048 bits
+  params: null
+  modulus: 25303680192668640771588317139003263891033815944721015465395269092384705240935316941838442381318806010070626362319395690314791313398138936591948695530545680427400509758324933089823696610566743637339935203695013186947157183941988417011248366865479094246311348287906754288731048802378536028776275677190628623060960560765769168615982071922756472282835656320245320962403020896702650905611966212573124822842455100295487468363503270984024841945110064223684830737458073325215630484860211321235448938321322097099674375468321540270490386797226404084654487136142666695848215824414852632537689282042133811638922367737001775655789
+  public exponent: 65537
+  Validity: [From: Wed May 17 17:01:00 EAT 2000,
+               To: Sun May 18 02:59:00 EAT 2025]
+  Issuer: CN=Baltimore CyberTrust Code Signing Root, OU=CyberTrust, O=Baltimore, C=IE
+  SerialNumber: [    020000bf]
+
+Certificate Extensions: 4
+[1]: ObjectId: 2.5.29.19 Criticality=true
+BasicConstraints:[
+  CA:true
+  PathLen:3
+]
+
+[2]: ObjectId: 2.5.29.37 Criticality=false
+ExtendedKeyUsages [
+  codeSigning
+]
+
+[3]: ObjectId: 2.5.29.15 Criticality=true
+KeyUsage [
+  Key_CertSign
+  Crl_Sign
+]
+
+[4]: ObjectId: 2.5.29.14 Criticality=false
+SubjectKeyIdentifier [
+KeyIdentifier [
+0000: C8 41 34 5C 15 15 04 E5   40 F2 D1 AB 9A 6F 24 92  .A4\....@....o$.
+0010: 7A 87 42 5A                                        z.BZ
+]
+]
+
+]
+  Algorithm: [SHA1withRSA]
+  Signature:
+0000: 52 74 AA 95 4B 22 8C C7   3D 96 A4 FE 5D FA 2F B5  Rt..K"..=...]./.
+0010: BC EB F0 0B E9 56 38 1D   D1 6D 0D A1 BC 68 8B F0  .....V8..m...h..
+0020: C5 80 A5 24 34 FD F2 96   18 11 86 A1 36 F5 37 E7  ...$4.......6.7.
+0030: 54 40 D5 64 1F C3 5F 70   42 6B 2D 39 C7 9E 52 05  T@.d.._pBk-9..R.
+0040: CE E7 6A 72 D2 8D 72 3F   47 50 83 AB C7 8D 25 C9  ..jr..r?GP....%.
+0050: B0 E3 A7 53 16 95 A6 6A   53 EA 18 9D 8F 78 A9 77  ...S...jS....x.w
+0060: 77 1A F9 B4 97 47 59 88   27 28 B5 CA E1 2E D7 3E  w....GY.'(.....>
+0070: 0E A2 0D B8 22 44 03 E3   D1 63 B0 41 3A A1 F5 A4  ...."D...c.A:...
+0080: 2D F7 76 1E 04 54 99 78   32 40 D7 2B 7C 4D BA A6  -.v..T.x2@.+.M..
+0090: 9C B0 79 6E 07 BE 8C EC   EE D7 38 69 5B C1 0C 56  ..yn......8i[..V
+00A0: 68 9F FE EB D1 E1 C8 88   F9 F2 CD 7F BE 85 B4 44  h..............D
+00B0: 67 00 50 3E F4 26 03 64   EA 77 7D E8 5E 3E 1C 37  g.P>.&.d.w..^>.7
+00C0: 47 C8 D6 EA A4 F3 36 3C   97 C2 39 72 05 94 19 25  G.....6<..9r...%
+00D0: C3 D7 37 41 0F C1 1F 87   8A FD AA BE E9 B1 64 57  ..7A..........dW
+00E0: E4 DB 92 A1 CF E1 49 E8   3B 1F 91 13 5A C3 8F D9  ......I.;...Z...
+00F0: 25 58 49 80 47 0F C6 03   AE AC E3 BF B7 C0 AA 2A  %XI.G..........*
+
+]]]
+
+[2025-11-26T07:26:27.221+0300] [Payara 5.2022.5] [INFO] [NCLS-SECURITY-01002] [javax.enterprise.system.core.security] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187221] [levelValue: 800] [[
+  Java security manager is disabled.]]
+
+[2025-11-26T07:26:27.256+0300] [Payara 5.2022.5] [INFO] [NCLS-SECURITY-01010] [javax.enterprise.system.core.security] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187256] [levelValue: 800] [[
+  Entering Security Startup Service.]]
+
+[2025-11-26T07:26:27.262+0300] [Payara 5.2022.5] [INFO] [NCLS-SECURITY-01143] [javax.enterprise.system.core.security] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187262] [levelValue: 800] [[
+  Loading policy provider com.sun.enterprise.security.provider.PolicyWrapper.]]
+
+[2025-11-26T07:26:27.400+0300] [Payara 5.2022.5] [INFO] [NCLS-SECURITY-01011] [javax.enterprise.system.core.security] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187400] [levelValue: 800] [[
+  Security Service(s) started successfully.]]
+
+[2025-11-26T07:26:27.866+0300] [Payara 5.2022.5] [INFO] [AS-WEB-GLUE-00198] [javax.enterprise.web] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187866] [levelValue: 800] [[
+  Created HTTP listener http-listener-1 on host/port 0.0.0.0:8080]]
+
+[2025-11-26T07:26:27.881+0300] [Payara 5.2022.5] [INFO] [AS-WEB-GLUE-00198] [javax.enterprise.web] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187881] [levelValue: 800] [[
+  Created HTTP listener http-listener-2 on host/port 0.0.0.0:8181]]
+
+[2025-11-26T07:26:27.892+0300] [Payara 5.2022.5] [INFO] [AS-WEB-GLUE-00198] [javax.enterprise.web] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187892] [levelValue: 800] [[
+  Created HTTP listener admin-listener on host/port 0.0.0.0:4848]]
+
+[2025-11-26T07:26:27.948+0300] [Payara 5.2022.5] [INFO] [AS-WEB-GLUE-00200] [javax.enterprise.web] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187948] [levelValue: 800] [[
+  Created virtual server server]]
+
+[2025-11-26T07:26:27.957+0300] [Payara 5.2022.5] [INFO] [AS-WEB-GLUE-00200] [javax.enterprise.web] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131187957] [levelValue: 800] [[
+  Created virtual server __asadmin]]
+
+[2025-11-26T07:26:28.503+0300] [Payara 5.2022.5] [INFO] [AS-WEB-GLUE-00201] [javax.enterprise.web] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131188503] [levelValue: 800] [[
+  Virtual server server loaded default web module ]]
+
+[2025-11-26T07:26:43.080+0300] [Payara 5.2022.5] [WARNING] [AS-JMS-CORE-00027] [javax.enterprise.resource.jms] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131203080] [levelValue: 900] [[
+  Check for a new version of MQ installation failed : null/../imqjmsra.rar:null/imqjmsra.rar]]
+
+[2025-11-26T07:26:46.788+0300] [Payara 5.2022.5] [INFO] [] [org.jboss.weld.Version] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131206788] [levelValue: 800] [[
+  WELD-000900: 3.1.9 (Final)]]
+
+[2025-11-26T07:26:48.782+0300] [Payara 5.2022.5] [INFO] [NCLS-REST-00001] [javax.enterprise.admin.rest] [tid: _ThreadID=86 _ThreadName=admin-thread-pool::admin-listener(1)] [timeMillis: 1764131208782] [levelValue: 800] [[
+  Listening to REST requests at context: /command/domain.]]
+
+[2025-11-26T07:26:54.813+0300] [Payara 5.2022.5] [INFO] [] [] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131214813] [levelValue: 800] [[
+  Cannot find the resource bundle for the name com.sun.logging.enterprise.system.container.ejb for class org.glassfish.ejb.security.application.EjbSecurityComponentInvocationHandler using fish.payara.server.internal.ejb.ejb-container [161]]]
+
+[2025-11-26T07:26:54.882+0300] [Payara 5.2022.5] [INFO] [] [] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131214882] [levelValue: 800] [[
+  Cannot find the resource bundle for the name com.sun.logging.enterprise.system.container.ejb for class com.sun.ejb.EJBUtils using fish.payara.server.internal.ejb.ejb-container [161]]]
+
+[2025-11-26T07:26:55.015+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215015] [levelValue: 800] [[
+  Portable JNDI names for EJB ItemsDistributorsFacade: [java:global/rh-3.0.0/ItemsDistributorsFacade, java:global/rh-3.0.0/ItemsDistributorsFacade!com.divudi.core.facade.ItemsDistributorsFacade]]]
+
+[2025-11-26T07:26:55.128+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215128] [levelValue: 800] [[
+  Portable JNDI names for EJB BankAccountFacade: [java:global/rh-3.0.0/BankAccountFacade!com.divudi.core.facade.BankAccountFacade, java:global/rh-3.0.0/BankAccountFacade]]]
+
+[2025-11-26T07:26:55.171+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215171] [levelValue: 800] [[
+  Portable JNDI names for EJB ProcessService: [java:global/rh-3.0.0/ProcessService!com.divudi.service.ProcessService, java:global/rh-3.0.0/ProcessService]]]
+
+[2025-11-26T07:26:55.256+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215256] [levelValue: 800] [[
+  Portable JNDI names for EJB FamilyFacade: [java:global/rh-3.0.0/FamilyFacade, java:global/rh-3.0.0/FamilyFacade!com.divudi.core.facade.FamilyFacade]]]
+
+[2025-11-26T07:26:55.306+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215306] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientItemFacade: [java:global/rh-3.0.0/PatientItemFacade!com.divudi.core.facade.PatientItemFacade, java:global/rh-3.0.0/PatientItemFacade]]]
+
+[2025-11-26T07:26:55.342+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215342] [levelValue: 800] [[
+  Portable JNDI names for EJB ConfigOptionFacade: [java:global/rh-3.0.0/ConfigOptionFacade, java:global/rh-3.0.0/ConfigOptionFacade!com.divudi.core.facade.ConfigOptionFacade]]]
+
+[2025-11-26T07:26:55.393+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215393] [levelValue: 800] [[
+  Portable JNDI names for EJB AmppFacade: [java:global/rh-3.0.0/AmppFacade, java:global/rh-3.0.0/AmppFacade!com.divudi.core.facade.AmppFacade]]]
+
+[2025-11-26T07:26:55.430+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215430] [levelValue: 800] [[
+  Portable JNDI names for EJB ItemBatchFacade: [java:global/rh-3.0.0/ItemBatchFacade, java:global/rh-3.0.0/ItemBatchFacade!com.divudi.core.facade.ItemBatchFacade]]]
+
+[2025-11-26T07:26:55.472+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215472] [levelValue: 800] [[
+  Portable JNDI names for EJB BillNumberGenerator: [java:global/rh-3.0.0/BillNumberGenerator, java:global/rh-3.0.0/BillNumberGenerator!com.divudi.ejb.BillNumberGenerator]]]
+
+[2025-11-26T07:26:55.531+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215531] [levelValue: 800] [[
+  Portable JNDI names for EJB PaymentFacade: [java:global/rh-3.0.0/PaymentFacade, java:global/rh-3.0.0/PaymentFacade!com.divudi.core.facade.PaymentFacade]]]
+
+[2025-11-26T07:26:55.576+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215576] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffSalaryFacade: [java:global/rh-3.0.0/StaffSalaryFacade, java:global/rh-3.0.0/StaffSalaryFacade!com.divudi.core.facade.StaffSalaryFacade]]]
+
+[2025-11-26T07:26:55.690+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215690] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientDepositFacade: [java:global/rh-3.0.0/PatientDepositFacade, java:global/rh-3.0.0/PatientDepositFacade!com.divudi.core.facade.PatientDepositFacade]]]
+
+[2025-11-26T07:26:55.715+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215715] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffService: [java:global/rh-3.0.0/StaffService!com.divudi.service.StaffService, java:global/rh-3.0.0/StaffService]]]
+
+[2025-11-26T07:26:55.750+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215750] [levelValue: 800] [[
+  Portable JNDI names for EJB ProcessInstanceFacade: [java:global/rh-3.0.0/ProcessInstanceFacade!com.divudi.core.facade.ProcessInstanceFacade, java:global/rh-3.0.0/ProcessInstanceFacade]]]
+
+[2025-11-26T07:26:55.771+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215771] [levelValue: 800] [[
+  Portable JNDI names for EJB AuditEventService: [java:global/rh-3.0.0/AuditEventService!com.divudi.service.AuditEventService, java:global/rh-3.0.0/AuditEventService]]]
+
+[2025-11-26T07:26:55.801+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215801] [levelValue: 800] [[
+  Portable JNDI names for EJB CashBookEntryFacade: [java:global/rh-3.0.0/CashBookEntryFacade!com.divudi.core.facade.CashBookEntryFacade, java:global/rh-3.0.0/CashBookEntryFacade]]]
+
+[2025-11-26T07:26:55.836+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215836] [levelValue: 800] [[
+  Portable JNDI names for EJB ItemForItemFacade: [java:global/rh-3.0.0/ItemForItemFacade, java:global/rh-3.0.0/ItemForItemFacade!com.divudi.core.facade.ItemForItemFacade]]]
+
+[2025-11-26T07:26:55.873+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215873] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientRoomFacade: [java:global/rh-3.0.0/PatientRoomFacade, java:global/rh-3.0.0/PatientRoomFacade!com.divudi.core.facade.PatientRoomFacade]]]
+
+[2025-11-26T07:26:55.902+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215902] [levelValue: 800] [[
+  Portable JNDI names for EJB BillComponentFacade: [java:global/rh-3.0.0/BillComponentFacade, java:global/rh-3.0.0/BillComponentFacade!com.divudi.core.facade.BillComponentFacade]]]
+
+[2025-11-26T07:26:55.925+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215925] [levelValue: 800] [[
+  Portable JNDI names for EJB CacheAdminService: [java:global/rh-3.0.0/CacheAdminService, java:global/rh-3.0.0/CacheAdminService!com.divudi.service.CacheAdminService]]]
+
+[2025-11-26T07:26:55.942+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131215942] [levelValue: 800] [[
+  Portable JNDI names for EJB AuditService: [java:global/rh-3.0.0/AuditService!com.divudi.service.AuditService, java:global/rh-3.0.0/AuditService]]]
+
+[2025-11-26T07:26:56.099+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216099] [levelValue: 800] [[
+  Portable JNDI names for EJB LogFileService: [java:global/rh-3.0.0/LogFileService!com.divudi.service.LogFileService, java:global/rh-3.0.0/LogFileService]]]
+
+[2025-11-26T07:26:56.123+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216123] [levelValue: 800] [[
+  Portable JNDI names for EJB ClinicService: [java:global/rh-3.0.0/ClinicService, java:global/rh-3.0.0/ClinicService!com.divudi.service.ClinicService]]]
+
+[2025-11-26T07:26:56.158+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216158] [levelValue: 800] [[
+  Portable JNDI names for EJB UserPreferenceFacade: [java:global/rh-3.0.0/UserPreferenceFacade, java:global/rh-3.0.0/UserPreferenceFacade!com.divudi.core.facade.UserPreferenceFacade]]]
+
+[2025-11-26T07:26:56.194+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216194] [levelValue: 800] [[
+  Portable JNDI names for EJB PaymentHandoverItemFacade: [java:global/rh-3.0.0/PaymentHandoverItemFacade, java:global/rh-3.0.0/PaymentHandoverItemFacade!com.divudi.core.facade.PaymentHandoverItemFacade]]]
+
+[2025-11-26T07:26:56.214+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216214] [levelValue: 800] [[
+  Portable JNDI names for EJB ServiceSessionBean: [java:global/rh-3.0.0/ServiceSessionBean, java:global/rh-3.0.0/ServiceSessionBean!com.divudi.ejb.ServiceSessionBean]]]
+
+[2025-11-26T07:26:56.237+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216237] [levelValue: 800] [[
+  Portable JNDI names for EJB PharmacyErrorCheckingEjb: [java:global/rh-3.0.0/PharmacyErrorCheckingEjb, java:global/rh-3.0.0/PharmacyErrorCheckingEjb!com.divudi.ejb.PharmacyErrorCheckingEjb]]]
+
+[2025-11-26T07:26:56.263+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216263] [levelValue: 800] [[
+  Portable JNDI names for EJB DesignComponentAssignmentFacade: [java:global/rh-3.0.0/DesignComponentAssignmentFacade!com.divudi.core.facade.web.DesignComponentAssignmentFacade, java:global/rh-3.0.0/DesignComponentAssignmentFacade]]]
+
+[2025-11-26T07:26:56.299+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216299] [levelValue: 800] [[
+  Portable JNDI names for EJB PharmacyBean: [java:global/rh-3.0.0/PharmacyBean!com.divudi.ejb.PharmacyBean, java:global/rh-3.0.0/PharmacyBean]]]
+
+[2025-11-26T07:26:56.333+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216333] [levelValue: 800] [[
+  Portable JNDI names for EJB LabTestHistoryFacade: [java:global/rh-3.0.0/LabTestHistoryFacade!com.divudi.core.facade.lab.LabTestHistoryFacade, java:global/rh-3.0.0/LabTestHistoryFacade]]]
+
+[2025-11-26T07:26:56.361+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216361] [levelValue: 800] [[
+  Portable JNDI names for EJB InvestigationItemValueFacade: [java:global/rh-3.0.0/InvestigationItemValueFacade, java:global/rh-3.0.0/InvestigationItemValueFacade!com.divudi.core.facade.InvestigationItemValueFacade]]]
+
+[2025-11-26T07:26:56.389+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216389] [levelValue: 800] [[
+  Portable JNDI names for EJB UserStockContainerFacade: [java:global/rh-3.0.0/UserStockContainerFacade, java:global/rh-3.0.0/UserStockContainerFacade!com.divudi.core.facade.UserStockContainerFacade]]]
+
+[2025-11-26T07:26:56.419+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216419] [levelValue: 800] [[
+  Portable JNDI names for EJB DoctorInstitutionFacade: [java:global/rh-3.0.0/DoctorInstitutionFacade, java:global/rh-3.0.0/DoctorInstitutionFacade!com.divudi.core.facade.DoctorInstitutionFacade]]]
+
+[2025-11-26T07:26:56.448+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216448] [levelValue: 800] [[
+  Portable JNDI names for EJB WorkingTimeFacade: [java:global/rh-3.0.0/WorkingTimeFacade!com.divudi.core.facade.WorkingTimeFacade, java:global/rh-3.0.0/WorkingTimeFacade]]]
+
+[2025-11-26T07:26:56.477+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216477] [levelValue: 800] [[
+  Portable JNDI names for EJB InvestigationItemValueFlagFacade: [java:global/rh-3.0.0/InvestigationItemValueFlagFacade, java:global/rh-3.0.0/InvestigationItemValueFlagFacade!com.divudi.core.facade.InvestigationItemValueFlagFacade]]]
+
+[2025-11-26T07:26:56.506+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216506] [levelValue: 800] [[
+  Portable JNDI names for EJB ItemsCategoriesFacade: [java:global/rh-3.0.0/ItemsCategoriesFacade, java:global/rh-3.0.0/ItemsCategoriesFacade!com.divudi.core.facade.ItemsCategoriesFacade]]]
+
+[2025-11-26T07:26:56.534+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216534] [levelValue: 800] [[
+  Portable JNDI names for EJB BillFeeFacade: [java:global/rh-3.0.0/BillFeeFacade!com.divudi.core.facade.BillFeeFacade, java:global/rh-3.0.0/BillFeeFacade]]]
+
+[2025-11-26T07:26:56.564+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216564] [levelValue: 800] [[
+  Portable JNDI names for EJB FingerPrintRecordFacade: [java:global/rh-3.0.0/FingerPrintRecordFacade, java:global/rh-3.0.0/FingerPrintRecordFacade!com.divudi.core.facade.FingerPrintRecordFacade]]]
+
+[2025-11-26T07:26:56.593+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216593] [levelValue: 800] [[
+  Portable JNDI names for EJB AgentsFeesFacade: [java:global/rh-3.0.0/AgentsFeesFacade!com.divudi.core.facade.AgentsFeesFacade, java:global/rh-3.0.0/AgentsFeesFacade]]]
+
+[2025-11-26T07:26:56.633+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216633] [levelValue: 800] [[
+  Portable JNDI names for EJB WebThemeFacade: [java:global/rh-3.0.0/WebThemeFacade!com.divudi.core.facade.WebThemeFacade, java:global/rh-3.0.0/WebThemeFacade]]]
+
+[2025-11-26T07:26:56.669+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216669] [levelValue: 800] [[
+  Portable JNDI names for EJB StockHistoryFacade: [java:global/rh-3.0.0/StockHistoryFacade, java:global/rh-3.0.0/StockHistoryFacade!com.divudi.core.facade.StockHistoryFacade]]]
+
+[2025-11-26T07:26:56.698+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216698] [levelValue: 800] [[
+  Portable JNDI names for EJB PriceMatrixFacade: [java:global/rh-3.0.0/PriceMatrixFacade, java:global/rh-3.0.0/PriceMatrixFacade!com.divudi.core.facade.PriceMatrixFacade]]]
+
+[2025-11-26T07:26:56.728+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216728] [levelValue: 800] [[
+  Portable JNDI names for EJB InvestigationTubeFacade: [java:global/rh-3.0.0/InvestigationTubeFacade, java:global/rh-3.0.0/InvestigationTubeFacade!com.divudi.core.facade.InvestigationTubeFacade]]]
+
+[2025-11-26T07:26:56.757+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216757] [levelValue: 800] [[
+  Portable JNDI names for EJB CashBookFacade: [java:global/rh-3.0.0/CashBookFacade!com.divudi.core.facade.CashBookFacade, java:global/rh-3.0.0/CashBookFacade]]]
+
+[2025-11-26T07:26:56.787+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216787] [levelValue: 800] [[
+  Portable JNDI names for EJB ProcessStepInstanceFacade: [java:global/rh-3.0.0/ProcessStepInstanceFacade, java:global/rh-3.0.0/ProcessStepInstanceFacade!com.divudi.core.facade.ProcessStepInstanceFacade]]]
+
+[2025-11-26T07:26:56.818+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216818] [levelValue: 800] [[
+  Portable JNDI names for EJB RoomFacade: [java:global/rh-3.0.0/RoomFacade!com.divudi.core.facade.RoomFacade, java:global/rh-3.0.0/RoomFacade]]]
+
+[2025-11-26T07:26:56.861+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216861] [levelValue: 800] [[
+  Portable JNDI names for EJB RelationFacade: [java:global/rh-3.0.0/RelationFacade, java:global/rh-3.0.0/RelationFacade!com.divudi.core.facade.RelationFacade]]]
+
+[2025-11-26T07:26:56.882+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216882] [levelValue: 800] [[
+  Portable JNDI names for EJB StockHistoryRecorder: [java:global/rh-3.0.0/StockHistoryRecorder!com.divudi.ejb.StockHistoryRecorder, java:global/rh-3.0.0/StockHistoryRecorder]]]
+
+[2025-11-26T07:26:56.907+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216907] [levelValue: 800] [[
+  Portable JNDI names for EJB AllowedPaymentMethodFacade: [java:global/rh-3.0.0/AllowedPaymentMethodFacade, java:global/rh-3.0.0/AllowedPaymentMethodFacade!com.divudi.core.facade.AllowedPaymentMethodFacade]]]
+
+[2025-11-26T07:26:56.925+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216925] [levelValue: 800] [[
+  Portable JNDI names for EJB DiscountSchemeValidationService: [java:global/rh-3.0.0/DiscountSchemeValidationService, java:global/rh-3.0.0/DiscountSchemeValidationService!com.divudi.service.DiscountSchemeValidationService]]]
+
+[2025-11-26T07:26:56.945+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216945] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffLeaveEntitleFacade: [java:global/rh-3.0.0/StaffLeaveEntitleFacade, java:global/rh-3.0.0/StaffLeaveEntitleFacade!com.divudi.core.facade.StaffLeaveEntitleFacade]]]
+
+[2025-11-26T07:26:56.967+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216967] [levelValue: 800] [[
+  Portable JNDI names for EJB ServiceSessionFacade: [java:global/rh-3.0.0/ServiceSessionFacade!com.divudi.core.facade.ServiceSessionFacade, java:global/rh-3.0.0/ServiceSessionFacade]]]
+
+[2025-11-26T07:26:56.993+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131216993] [levelValue: 800] [[
+  Portable JNDI names for EJB AreaFacade: [java:global/rh-3.0.0/AreaFacade!com.divudi.core.facade.AreaFacade, java:global/rh-3.0.0/AreaFacade]]]
+
+[2025-11-26T07:26:57.017+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217017] [levelValue: 800] [[
+  Portable JNDI names for EJB FamilyMemberFacade: [java:global/rh-3.0.0/FamilyMemberFacade!com.divudi.core.facade.FamilyMemberFacade, java:global/rh-3.0.0/FamilyMemberFacade]]]
+
+[2025-11-26T07:26:57.041+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217041] [levelValue: 800] [[
+  Portable JNDI names for EJB PaymentSchemeDiscountFacade: [java:global/rh-3.0.0/PaymentSchemeDiscountFacade!com.divudi.core.facade.PaymentSchemeDiscountFacade, java:global/rh-3.0.0/PaymentSchemeDiscountFacade]]]
+
+[2025-11-26T07:26:57.054+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217054] [levelValue: 800] [[
+  Portable JNDI names for EJB StockTakeApprovalService: [java:global/rh-3.0.0/StockTakeApprovalService, java:global/rh-3.0.0/StockTakeApprovalService!com.divudi.service.pharmacy.StockTakeApprovalService]]]
+
+[2025-11-26T07:26:57.072+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217072] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffShiftHistoryFacade: [java:global/rh-3.0.0/StaffShiftHistoryFacade, java:global/rh-3.0.0/StaffShiftHistoryFacade!com.divudi.core.facade.StaffShiftHistoryFacade]]]
+
+[2025-11-26T07:26:57.093+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217093] [levelValue: 800] [[
+  Portable JNDI names for EJB PharmaceuticalBillItemFacade: [java:global/rh-3.0.0/PharmaceuticalBillItemFacade, java:global/rh-3.0.0/PharmaceuticalBillItemFacade!com.divudi.core.facade.PharmaceuticalBillItemFacade]]]
+
+[2025-11-26T07:26:57.108+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217108] [levelValue: 800] [[
+  Portable JNDI names for EJB PrescriptionToItemService: [java:global/rh-3.0.0/PrescriptionToItemService!com.divudi.ejb.PrescriptionToItemService, java:global/rh-3.0.0/PrescriptionToItemService]]]
+
+[2025-11-26T07:26:57.127+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217127] [levelValue: 800] [[
+  Portable JNDI names for EJB InvestigationItemCategoryFacade: [java:global/rh-3.0.0/InvestigationItemCategoryFacade, java:global/rh-3.0.0/InvestigationItemCategoryFacade!com.divudi.core.facade.InvestigationItemCategoryFacade]]]
+
+[2025-11-26T07:26:57.149+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217149] [levelValue: 800] [[
+  Portable JNDI names for EJB WorksheetItemFacade: [java:global/rh-3.0.0/WorksheetItemFacade, java:global/rh-3.0.0/WorksheetItemFacade!com.divudi.core.facade.WorksheetItemFacade]]]
+
+[2025-11-26T07:26:57.174+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217174] [levelValue: 800] [[
+  Portable JNDI names for EJB VirtualProductIngredientFacade: [java:global/rh-3.0.0/VirtualProductIngredientFacade!com.divudi.core.facade.VirtualProductIngredientFacade, java:global/rh-3.0.0/VirtualProductIngredientFacade]]]
+
+[2025-11-26T07:26:57.203+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217203] [levelValue: 800] [[
+  Portable JNDI names for EJB AggregatedRecordFacade: [java:global/rh-3.0.0/AggregatedRecordFacade, java:global/rh-3.0.0/AggregatedRecordFacade!com.divudi.core.facade.AggregatedRecordFacade]]]
+
+[2025-11-26T07:26:57.232+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217232] [levelValue: 800] [[
+  Portable JNDI names for EJB RefundBillFacade: [java:global/rh-3.0.0/RefundBillFacade!com.divudi.core.facade.RefundBillFacade, java:global/rh-3.0.0/RefundBillFacade]]]
+
+[2025-11-26T07:26:57.262+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217262] [levelValue: 800] [[
+  Portable JNDI names for EJB DocumentTemplateFacade: [java:global/rh-3.0.0/DocumentTemplateFacade!com.divudi.core.facade.DocumentTemplateFacade, java:global/rh-3.0.0/DocumentTemplateFacade]]]
+
+[2025-11-26T07:26:57.293+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217293] [levelValue: 800] [[
+  Portable JNDI names for EJB SessionInstanceFacade: [java:global/rh-3.0.0/SessionInstanceFacade, java:global/rh-3.0.0/SessionInstanceFacade!com.divudi.core.facade.SessionInstanceFacade]]]
+
+[2025-11-26T07:26:57.324+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217324] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientSessionInstanceActivityFacade: [java:global/rh-3.0.0/PatientSessionInstanceActivityFacade!com.divudi.core.facade.PatientSessionInstanceActivityFacade, java:global/rh-3.0.0/PatientSessionInstanceActivityFacade]]]
+
+[2025-11-26T07:26:57.430+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217430] [levelValue: 800] [[
+  Portable JNDI names for EJB DepartmentFacade: [java:global/rh-3.0.0/DepartmentFacade, java:global/rh-3.0.0/DepartmentFacade!com.divudi.core.facade.DepartmentFacade]]]
+
+[2025-11-26T07:26:57.460+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217460] [levelValue: 800] [[
+  Portable JNDI names for EJB ServiceSessionInstanceFacade: [java:global/rh-3.0.0/ServiceSessionInstanceFacade!com.divudi.core.facade.ServiceSessionInstanceFacade, java:global/rh-3.0.0/ServiceSessionInstanceFacade]]]
+
+[2025-11-26T07:26:57.488+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217488] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientReportFacade: [java:global/rh-3.0.0/PatientReportFacade!com.divudi.core.facade.PatientReportFacade, java:global/rh-3.0.0/PatientReportFacade]]]
+
+[2025-11-26T07:26:57.517+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217517] [levelValue: 800] [[
+  Portable JNDI names for EJB ConsultantFacade: [java:global/rh-3.0.0/ConsultantFacade, java:global/rh-3.0.0/ConsultantFacade!com.divudi.core.facade.ConsultantFacade]]]
+
+[2025-11-26T07:26:57.547+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217547] [levelValue: 800] [[
+  Portable JNDI names for EJB WebUserRoleFacade: [java:global/rh-3.0.0/WebUserRoleFacade!com.divudi.core.facade.WebUserRoleFacade, java:global/rh-3.0.0/WebUserRoleFacade]]]
+
+[2025-11-26T07:26:57.583+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217583] [levelValue: 800] [[
+  Portable JNDI names for EJB CancelledBillFacade: [java:global/rh-3.0.0/CancelledBillFacade!com.divudi.core.facade.CancelledBillFacade, java:global/rh-3.0.0/CancelledBillFacade]]]
+
+[2025-11-26T07:26:57.615+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217615] [levelValue: 800] [[
+  Portable JNDI names for EJB ChannelingFacade: [java:global/rh-3.0.0/ChannelingFacade!com.divudi.core.facade.ChannelingFacade, java:global/rh-3.0.0/ChannelingFacade]]]
+
+[2025-11-26T07:26:57.650+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217650] [levelValue: 800] [[
+  Portable JNDI names for EJB StockVarientBillItemFacade: [java:global/rh-3.0.0/StockVarientBillItemFacade, java:global/rh-3.0.0/StockVarientBillItemFacade!com.divudi.core.facade.StockVarientBillItemFacade]]]
+
+[2025-11-26T07:26:57.686+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217686] [levelValue: 800] [[
+  Portable JNDI names for EJB UserIconFacade: [java:global/rh-3.0.0/UserIconFacade!com.divudi.core.facade.UserIconFacade, java:global/rh-3.0.0/UserIconFacade]]]
+
+[2025-11-26T07:26:57.720+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217720] [levelValue: 800] [[
+  Portable JNDI names for EJB PharmaceuticalItemTypeFacade: [java:global/rh-3.0.0/PharmaceuticalItemTypeFacade, java:global/rh-3.0.0/PharmaceuticalItemTypeFacade!com.divudi.core.facade.PharmaceuticalItemTypeFacade]]]
+
+[2025-11-26T07:26:57.749+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217749] [levelValue: 800] [[
+  Portable JNDI names for EJB HistoricalRecordFacade: [java:global/rh-3.0.0/HistoricalRecordFacade!com.divudi.core.facade.HistoricalRecordFacade, java:global/rh-3.0.0/HistoricalRecordFacade]]]
+
+[2025-11-26T07:26:57.784+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217784] [levelValue: 800] [[
+  Portable JNDI names for EJB PharmacyService: [java:global/rh-3.0.0/PharmacyService, java:global/rh-3.0.0/PharmacyService!com.divudi.ejb.PharmacyService]]]
+
+[2025-11-26T07:26:57.901+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217901] [levelValue: 800] [[
+  Portable JNDI names for EJB ScheduledTaskManager: [java:global/rh-3.0.0/ScheduledTaskManager!com.divudi.service.ScheduledTaskManager, java:global/rh-3.0.0/ScheduledTaskManager]]]
+
+[2025-11-26T07:26:57.930+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217930] [levelValue: 800] [[
+  Portable JNDI names for EJB PhDateFacade: [java:global/rh-3.0.0/PhDateFacade, java:global/rh-3.0.0/PhDateFacade!com.divudi.core.facade.PhDateFacade]]]
+
+[2025-11-26T07:26:57.960+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217960] [levelValue: 800] [[
+  Portable JNDI names for EJB MembershipSchemeFacade: [java:global/rh-3.0.0/MembershipSchemeFacade!com.divudi.core.facade.MembershipSchemeFacade, java:global/rh-3.0.0/MembershipSchemeFacade]]]
+
+[2025-11-26T07:26:57.991+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131217991] [levelValue: 800] [[
+  Portable JNDI names for EJB SalaryCycleFacade: [java:global/rh-3.0.0/SalaryCycleFacade!com.divudi.core.facade.SalaryCycleFacade, java:global/rh-3.0.0/SalaryCycleFacade]]]
+
+[2025-11-26T07:26:58.020+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218020] [levelValue: 800] [[
+  Portable JNDI names for EJB WebLanguageFacade: [java:global/rh-3.0.0/WebLanguageFacade, java:global/rh-3.0.0/WebLanguageFacade!com.divudi.core.facade.WebLanguageFacade]]]
+
+[2025-11-26T07:26:58.048+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218048] [levelValue: 800] [[
+  Portable JNDI names for EJB SmsManagerEjb: [java:global/rh-3.0.0/SmsManagerEjb, java:global/rh-3.0.0/SmsManagerEjb!com.divudi.ejb.SmsManagerEjb]]]
+
+[2025-11-26T07:26:58.094+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218094] [levelValue: 800] [[
+  Portable JNDI names for EJB InvestigationFacade: [java:global/rh-3.0.0/InvestigationFacade!com.divudi.core.facade.InvestigationFacade, java:global/rh-3.0.0/InvestigationFacade]]]
+
+[2025-11-26T07:26:58.126+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218126] [levelValue: 800] [[
+  Portable JNDI names for EJB MakeFacade: [java:global/rh-3.0.0/MakeFacade, java:global/rh-3.0.0/MakeFacade!com.divudi.core.facade.MakeFacade]]]
+
+[2025-11-26T07:26:58.146+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218146] [levelValue: 800] [[
+  Portable JNDI names for EJB CashbookService: [java:global/rh-3.0.0/CashbookService!com.divudi.service.CashbookService, java:global/rh-3.0.0/CashbookService]]]
+
+[2025-11-26T07:26:58.175+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218175] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffSalaryComponantFacade: [java:global/rh-3.0.0/StaffSalaryComponantFacade, java:global/rh-3.0.0/StaffSalaryComponantFacade!com.divudi.core.facade.StaffSalaryComponantFacade]]]
+
+[2025-11-26T07:26:58.204+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218204] [levelValue: 800] [[
+  Portable JNDI names for EJB DesignComponentFacade: [java:global/rh-3.0.0/DesignComponentFacade!com.divudi.core.facade.web.DesignComponentFacade, java:global/rh-3.0.0/DesignComponentFacade]]]
+
+[2025-11-26T07:26:58.238+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218238] [levelValue: 800] [[
+  Portable JNDI names for EJB PaysheetComponentFacade: [java:global/rh-3.0.0/PaysheetComponentFacade, java:global/rh-3.0.0/PaysheetComponentFacade!com.divudi.core.facade.PaysheetComponentFacade]]]
+
+[2025-11-26T07:26:58.273+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218273] [levelValue: 800] [[
+  Portable JNDI names for EJB VocabularyFacade: [java:global/rh-3.0.0/VocabularyFacade, java:global/rh-3.0.0/VocabularyFacade!com.divudi.core.facade.VocabularyFacade]]]
+
+[2025-11-26T07:26:58.293+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218293] [levelValue: 800] [[
+  Portable JNDI names for EJB ReportLogAsyncService: [java:global/rh-3.0.0/ReportLogAsyncService, java:global/rh-3.0.0/ReportLogAsyncService!com.divudi.service.ReportLogAsyncService]]]
+
+[2025-11-26T07:26:58.318+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218318] [levelValue: 800] [[
+  Portable JNDI names for EJB DenominationFacade: [java:global/rh-3.0.0/DenominationFacade!com.divudi.core.facade.DenominationFacade, java:global/rh-3.0.0/DenominationFacade]]]
+
+[2025-11-26T07:26:58.349+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218349] [levelValue: 800] [[
+  Portable JNDI names for EJB AtmFacade: [java:global/rh-3.0.0/AtmFacade!com.divudi.core.facade.AtmFacade, java:global/rh-3.0.0/AtmFacade]]]
+
+[2025-11-26T07:26:58.377+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218377] [levelValue: 800] [[
+  Portable JNDI names for EJB TimedItemFeeFacade: [java:global/rh-3.0.0/TimedItemFeeFacade!com.divudi.core.facade.TimedItemFeeFacade, java:global/rh-3.0.0/TimedItemFeeFacade]]]
+
+[2025-11-26T07:26:58.407+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218407] [levelValue: 800] [[
+  Portable JNDI names for EJB TimedItemCategoryFacade: [java:global/rh-3.0.0/TimedItemCategoryFacade, java:global/rh-3.0.0/TimedItemCategoryFacade!com.divudi.core.facade.TimedItemCategoryFacade]]]
+
+[2025-11-26T07:26:58.434+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218434] [levelValue: 800] [[
+  Portable JNDI names for EJB PharmacyAsyncReportService: [java:global/rh-3.0.0/PharmacyAsyncReportService!com.divudi.service.PharmacyAsyncReportService, java:global/rh-3.0.0/PharmacyAsyncReportService]]]
+
+[2025-11-26T07:26:58.454+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218454] [levelValue: 800] [[
+  Portable JNDI names for EJB CreditBean: [java:global/rh-3.0.0/CreditBean!com.divudi.ejb.CreditBean, java:global/rh-3.0.0/CreditBean]]]
+
+[2025-11-26T07:26:58.485+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218485] [levelValue: 800] [[
+  Portable JNDI names for EJB BillSessionFacade: [java:global/rh-3.0.0/BillSessionFacade!com.divudi.core.facade.BillSessionFacade, java:global/rh-3.0.0/BillSessionFacade]]]
+
+[2025-11-26T07:26:58.516+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218516] [levelValue: 800] [[
+  Portable JNDI names for EJB DatabaseMigrationFacade: [java:global/rh-3.0.0/DatabaseMigrationFacade, java:global/rh-3.0.0/DatabaseMigrationFacade!com.divudi.core.facade.DatabaseMigrationFacade]]]
+
+[2025-11-26T07:26:58.544+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218544] [levelValue: 800] [[
+  Portable JNDI names for EJB WebUserDashboardFacade: [java:global/rh-3.0.0/WebUserDashboardFacade, java:global/rh-3.0.0/WebUserDashboardFacade!com.divudi.core.facade.WebUserDashboardFacade]]]
+
+[2025-11-26T07:26:58.571+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218571] [levelValue: 800] [[
+  Portable JNDI names for EJB WebUserPasswordHistoryFacade: [java:global/rh-3.0.0/WebUserPasswordHistoryFacade, java:global/rh-3.0.0/WebUserPasswordHistoryFacade!com.divudi.core.facade.WebUserPasswordHistoryFacade]]]
+
+[2025-11-26T07:26:58.601+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218601] [levelValue: 800] [[
+  Portable JNDI names for EJB PrescriptionFacade: [java:global/rh-3.0.0/PrescriptionFacade!com.divudi.core.facade.PrescriptionFacade, java:global/rh-3.0.0/PrescriptionFacade]]]
+
+[2025-11-26T07:26:58.630+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218630] [levelValue: 800] [[
+  Portable JNDI names for EJB OpdVisitFacade: [java:global/rh-3.0.0/OpdVisitFacade!com.divudi.core.facade.OpdVisitFacade, java:global/rh-3.0.0/OpdVisitFacade]]]
+
+[2025-11-26T07:26:58.663+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218663] [levelValue: 800] [[
+  Portable JNDI names for EJB StoreBean: [java:global/rh-3.0.0/StoreBean!com.divudi.bean.store.StoreBean, java:global/rh-3.0.0/StoreBean]]]
+
+[2025-11-26T07:26:58.697+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218697] [levelValue: 800] [[
+  Portable JNDI names for EJB RoomFacilityChargeFacade: [java:global/rh-3.0.0/RoomFacilityChargeFacade, java:global/rh-3.0.0/RoomFacilityChargeFacade!com.divudi.core.facade.RoomFacilityChargeFacade]]]
+
+[2025-11-26T07:26:58.747+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218747] [levelValue: 800] [[
+  Portable JNDI names for EJB SessionInstanceActivityFacade: [java:global/rh-3.0.0/SessionInstanceActivityFacade, java:global/rh-3.0.0/SessionInstanceActivityFacade!com.divudi.core.facade.SessionInstanceActivityFacade]]]
+
+[2025-11-26T07:26:58.831+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218831] [levelValue: 800] [[
+  Portable JNDI names for EJB InvestigationItemValueCategoryFacade: [java:global/rh-3.0.0/InvestigationItemValueCategoryFacade, java:global/rh-3.0.0/InvestigationItemValueCategoryFacade!com.divudi.core.facade.InvestigationItemValueCategoryFacade]]]
+
+[2025-11-26T07:26:58.862+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218862] [levelValue: 800] [[
+  Portable JNDI names for EJB EjbApplication: [java:global/rh-3.0.0/EjbApplication, java:global/rh-3.0.0/EjbApplication!com.divudi.ejb.EjbApplication]]]
+
+[2025-11-26T07:26:58.885+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218885] [levelValue: 800] [[
+  Portable JNDI names for EJB CategoryFacade: [java:global/rh-3.0.0/CategoryFacade!com.divudi.core.facade.CategoryFacade, java:global/rh-3.0.0/CategoryFacade]]]
+
+[2025-11-26T07:26:58.958+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218958] [levelValue: 800] [[
+  Portable JNDI names for EJB WebUserFacade: [java:global/rh-3.0.0/WebUserFacade, java:global/rh-3.0.0/WebUserFacade!com.divudi.core.facade.WebUserFacade]]]
+
+[2025-11-26T07:26:58.985+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131218985] [levelValue: 800] [[
+  Portable JNDI names for EJB ServiceSessionLeaveFacade: [java:global/rh-3.0.0/ServiceSessionLeaveFacade!com.divudi.core.facade.ServiceSessionLeaveFacade, java:global/rh-3.0.0/ServiceSessionLeaveFacade]]]
+
+[2025-11-26T07:26:59.019+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219019] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffEmployeeStatusFacade: [java:global/rh-3.0.0/StaffEmployeeStatusFacade!com.divudi.core.facade.StaffEmployeeStatusFacade, java:global/rh-3.0.0/StaffEmployeeStatusFacade]]]
+
+[2025-11-26T07:26:59.053+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219053] [levelValue: 800] [[
+  Portable JNDI names for EJB ItemFacade: [java:global/rh-3.0.0/ItemFacade, java:global/rh-3.0.0/ItemFacade!com.divudi.core.facade.ItemFacade]]]
+
+[2025-11-26T07:26:59.082+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219082] [levelValue: 800] [[
+  Portable JNDI names for EJB FeeChangeFacade: [java:global/rh-3.0.0/FeeChangeFacade!com.divudi.core.facade.FeeChangeFacade, java:global/rh-3.0.0/FeeChangeFacade]]]
+
+[2025-11-26T07:26:59.113+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219113] [levelValue: 800] [[
+  Portable JNDI names for EJB PharmaceuticalItemCategoryFacade: [java:global/rh-3.0.0/PharmaceuticalItemCategoryFacade!com.divudi.core.facade.PharmaceuticalItemCategoryFacade, java:global/rh-3.0.0/PharmaceuticalItemCategoryFacade]]]
+
+[2025-11-26T07:26:59.140+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219140] [levelValue: 800] [[
+  Portable JNDI names for EJB AppointmentActivityFacade: [java:global/rh-3.0.0/AppointmentActivityFacade, java:global/rh-3.0.0/AppointmentActivityFacade!com.divudi.core.facade.AppointmentActivityFacade]]]
+
+[2025-11-26T07:26:59.172+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219172] [levelValue: 800] [[
+  Portable JNDI names for EJB AssetCategoryFacade: [java:global/rh-3.0.0/AssetCategoryFacade!com.divudi.core.facade.AssetCategoryFacade, java:global/rh-3.0.0/AssetCategoryFacade]]]
+
+[2025-11-26T07:26:59.205+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219205] [levelValue: 800] [[
+  Portable JNDI names for EJB MachineFacade: [java:global/rh-3.0.0/MachineFacade!com.divudi.core.facade.MachineFacade, java:global/rh-3.0.0/MachineFacade]]]
+
+[2025-11-26T07:26:59.243+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219243] [levelValue: 800] [[
+  Portable JNDI names for EJB TriggerSubscriptionFacade: [java:global/rh-3.0.0/TriggerSubscriptionFacade, java:global/rh-3.0.0/TriggerSubscriptionFacade!com.divudi.core.facade.TriggerSubscriptionFacade]]]
+
+[2025-11-26T07:26:59.408+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219408] [levelValue: 800] [[
+  Portable JNDI names for EJB PersonInstitutionFacade: [java:global/rh-3.0.0/PersonInstitutionFacade, java:global/rh-3.0.0/PersonInstitutionFacade!com.divudi.core.facade.PersonInstitutionFacade]]]
+
+[2025-11-26T07:26:59.452+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219452] [levelValue: 800] [[
+  Portable JNDI names for EJB ReportLogFacade: [java:global/rh-3.0.0/ReportLogFacade, java:global/rh-3.0.0/ReportLogFacade!com.divudi.core.facade.ReportLogFacade]]]
+
+[2025-11-26T07:26:59.483+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219483] [levelValue: 800] [[
+  Portable JNDI names for EJB AgentHistoryService: [java:global/rh-3.0.0/AgentHistoryService, java:global/rh-3.0.0/AgentHistoryService!com.divudi.service.AgentHistoryService]]]
+
+[2025-11-26T07:26:59.520+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219520] [levelValue: 800] [[
+  Portable JNDI names for EJB BillFeePaymentFacade: [java:global/rh-3.0.0/BillFeePaymentFacade!com.divudi.core.facade.BillFeePaymentFacade, java:global/rh-3.0.0/BillFeePaymentFacade]]]
+
+[2025-11-26T07:26:59.542+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219542] [levelValue: 800] [[
+  Portable JNDI names for EJB ProfessionalPaymentService: [java:global/rh-3.0.0/ProfessionalPaymentService, java:global/rh-3.0.0/ProfessionalPaymentService!com.divudi.service.ProfessionalPaymentService]]]
+
+[2025-11-26T07:26:59.559+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219559] [levelValue: 800] [[
+  Portable JNDI names for EJB OptimizedPharmacyBean: [java:global/rh-3.0.0/OptimizedPharmacyBean!com.divudi.ejb.OptimizedPharmacyBean, java:global/rh-3.0.0/OptimizedPharmacyBean]]]
+
+[2025-11-26T07:26:59.586+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219586] [levelValue: 800] [[
+  Portable JNDI names for EJB WebContentFacade: [java:global/rh-3.0.0/WebContentFacade!com.divudi.core.facade.WebContentFacade, java:global/rh-3.0.0/WebContentFacade]]]
+
+[2025-11-26T07:26:59.620+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219620] [levelValue: 800] [[
+  Portable JNDI names for EJB SpecialityFacade: [java:global/rh-3.0.0/SpecialityFacade, java:global/rh-3.0.0/SpecialityFacade!com.divudi.core.facade.SpecialityFacade]]]
+
+[2025-11-26T07:26:59.648+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219648] [levelValue: 800] [[
+  Portable JNDI names for EJB UserNotificationFacade: [java:global/rh-3.0.0/UserNotificationFacade!com.divudi.core.facade.UserNotificationFacade, java:global/rh-3.0.0/UserNotificationFacade]]]
+
+[2025-11-26T07:26:59.674+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219674] [levelValue: 800] [[
+  Portable JNDI names for EJB ProcessStepActionDefinitionFacade: [java:global/rh-3.0.0/ProcessStepActionDefinitionFacade, java:global/rh-3.0.0/ProcessStepActionDefinitionFacade!com.divudi.core.facade.ProcessStepActionDefinitionFacade]]]
+
+[2025-11-26T07:26:59.704+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219704] [levelValue: 800] [[
+  Portable JNDI names for EJB MedicalPackageFeeFacade: [java:global/rh-3.0.0/MedicalPackageFeeFacade!com.divudi.core.facade.MedicalPackageFeeFacade, java:global/rh-3.0.0/MedicalPackageFeeFacade]]]
+
+[2025-11-26T07:26:59.731+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219731] [levelValue: 800] [[
+  Portable JNDI names for EJB PackageItemFacade: [java:global/rh-3.0.0/PackageItemFacade, java:global/rh-3.0.0/PackageItemFacade!com.divudi.core.facade.PackageItemFacade]]]
+
+[2025-11-26T07:26:59.757+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219757] [levelValue: 800] [[
+  Portable JNDI names for EJB CashTransactionFacade: [java:global/rh-3.0.0/CashTransactionFacade, java:global/rh-3.0.0/CashTransactionFacade!com.divudi.core.facade.CashTransactionFacade]]]
+
+[2025-11-26T07:26:59.785+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219785] [levelValue: 800] [[
+  Portable JNDI names for EJB FormItemValueFacade: [java:global/rh-3.0.0/FormItemValueFacade, java:global/rh-3.0.0/FormItemValueFacade!com.divudi.core.facade.FormItemValueFacade]]]
+
+[2025-11-26T07:26:59.812+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219812] [levelValue: 800] [[
+  Portable JNDI names for EJB FeeValueFacade: [java:global/rh-3.0.0/FeeValueFacade!com.divudi.core.facade.FeeValueFacade, java:global/rh-3.0.0/FeeValueFacade]]]
+
+[2025-11-26T07:26:59.841+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219841] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientFlagFacade: [java:global/rh-3.0.0/PatientFlagFacade, java:global/rh-3.0.0/PatientFlagFacade!com.divudi.core.facade.PatientFlagFacade]]]
+
+[2025-11-26T07:26:59.872+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219872] [levelValue: 800] [[
+  Portable JNDI names for EJB CategoryItemFacade: [java:global/rh-3.0.0/CategoryItemFacade, java:global/rh-3.0.0/CategoryItemFacade!com.divudi.core.facade.CategoryItemFacade]]]
+
+[2025-11-26T07:26:59.890+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219890] [levelValue: 800] [[
+  Portable JNDI names for EJB eSmsManager: [java:global/rh-3.0.0/eSmsManager, java:global/rh-3.0.0/eSmsManager!com.divudi.ejb.eSmsManager]]]
+
+[2025-11-26T07:26:59.912+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219912] [levelValue: 800] [[
+  Portable JNDI names for EJB DailyReturnDtoService: [java:global/rh-3.0.0/DailyReturnDtoService!com.divudi.service.DailyReturnDtoService, java:global/rh-3.0.0/DailyReturnDtoService]]]
+
+[2025-11-26T07:26:59.937+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219937] [levelValue: 800] [[
+  Portable JNDI names for EJB BillDataAccess: [java:global/rh-3.0.0/BillDataAccess, java:global/rh-3.0.0/BillDataAccess!com.divudi.core.facade.BillDataAccess]]]
+
+[2025-11-26T07:26:59.965+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219965] [levelValue: 800] [[
+  Portable JNDI names for EJB MetadataSuperCategoryFacade: [java:global/rh-3.0.0/MetadataSuperCategoryFacade, java:global/rh-3.0.0/MetadataSuperCategoryFacade!com.divudi.core.facade.MetadataSuperCategoryFacade]]]
+
+[2025-11-26T07:26:59.993+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131219993] [levelValue: 800] [[
+  Portable JNDI names for EJB ShiftFacade: [java:global/rh-3.0.0/ShiftFacade, java:global/rh-3.0.0/ShiftFacade!com.divudi.core.facade.ShiftFacade]]]
+
+[2025-11-26T07:27:00.023+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220023] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffPaysheetComponentFacade: [java:global/rh-3.0.0/StaffPaysheetComponentFacade, java:global/rh-3.0.0/StaffPaysheetComponentFacade!com.divudi.core.facade.StaffPaysheetComponentFacade]]]
+
+[2025-11-26T07:27:00.052+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220052] [levelValue: 800] [[
+  Portable JNDI names for EJB CashTransactionBean: [java:global/rh-3.0.0/CashTransactionBean, java:global/rh-3.0.0/CashTransactionBean!com.divudi.ejb.CashTransactionBean]]]
+
+[2025-11-26T07:27:00.079+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220079] [levelValue: 800] [[
+  Portable JNDI names for EJB ProcessDefinitionFacade: [java:global/rh-3.0.0/ProcessDefinitionFacade, java:global/rh-3.0.0/ProcessDefinitionFacade!com.divudi.core.facade.ProcessDefinitionFacade]]]
+
+[2025-11-26T07:27:00.104+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220104] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffGradeFacade: [java:global/rh-3.0.0/StaffGradeFacade!com.divudi.core.facade.StaffGradeFacade, java:global/rh-3.0.0/StaffGradeFacade]]]
+
+[2025-11-26T07:27:00.127+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220127] [levelValue: 800] [[
+  Portable JNDI names for EJB ServiceCategoryFacade: [java:global/rh-3.0.0/ServiceCategoryFacade, java:global/rh-3.0.0/ServiceCategoryFacade!com.divudi.core.facade.ServiceCategoryFacade]]]
+
+[2025-11-26T07:27:00.144+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220144] [levelValue: 800] [[
+  Portable JNDI names for EJB StockCountGenerationTracker: [java:global/rh-3.0.0/StockCountGenerationTracker, java:global/rh-3.0.0/StockCountGenerationTracker!com.divudi.service.pharmacy.StockCountGenerationTracker]]]
+
+[2025-11-26T07:27:00.171+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220171] [levelValue: 800] [[
+  Portable JNDI names for EJB BilledBillFacade: [java:global/rh-3.0.0/BilledBillFacade, java:global/rh-3.0.0/BilledBillFacade!com.divudi.core.facade.BilledBillFacade]]]
+
+[2025-11-26T07:27:00.202+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220202] [levelValue: 800] [[
+  Portable JNDI names for EJB RequestFacade: [java:global/rh-3.0.0/RequestFacade, java:global/rh-3.0.0/RequestFacade!com.divudi.core.facade.RequestFacade]]]
+
+[2025-11-26T07:27:00.227+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220227] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientInvestigationFacade: [java:global/rh-3.0.0/PatientInvestigationFacade, java:global/rh-3.0.0/PatientInvestigationFacade!com.divudi.core.facade.PatientInvestigationFacade]]]
+
+[2025-11-26T07:27:00.251+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220251] [levelValue: 800] [[
+  Portable JNDI names for EJB SexFacade: [java:global/rh-3.0.0/SexFacade, java:global/rh-3.0.0/SexFacade!com.divudi.core.facade.SexFacade]]]
+
+[2025-11-26T07:27:00.279+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220279] [levelValue: 800] [[
+  Portable JNDI names for EJB BillNumberFacade: [java:global/rh-3.0.0/BillNumberFacade, java:global/rh-3.0.0/BillNumberFacade!com.divudi.core.facade.BillNumberFacade]]]
+
+[2025-11-26T07:27:00.305+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220305] [levelValue: 800] [[
+  Portable JNDI names for EJB WebTemplateFacade: [java:global/rh-3.0.0/WebTemplateFacade, java:global/rh-3.0.0/WebTemplateFacade!com.divudi.core.facade.web.WebTemplateFacade]]]
+
+[2025-11-26T07:27:00.330+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220330] [levelValue: 800] [[
+  Portable JNDI names for EJB PackegeFacade: [java:global/rh-3.0.0/PackegeFacade!com.divudi.core.facade.PackegeFacade, java:global/rh-3.0.0/PackegeFacade]]]
+
+[2025-11-26T07:27:00.357+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220357] [levelValue: 800] [[
+  Portable JNDI names for EJB LoanFacade: [java:global/rh-3.0.0/LoanFacade, java:global/rh-3.0.0/LoanFacade!com.divudi.core.facade.LoanFacade]]]
+
+[2025-11-26T07:27:00.382+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220382] [levelValue: 800] [[
+  Portable JNDI names for EJB WebUserPrivilegeFacade: [java:global/rh-3.0.0/WebUserPrivilegeFacade, java:global/rh-3.0.0/WebUserPrivilegeFacade!com.divudi.core.facade.WebUserPrivilegeFacade]]]
+
+[2025-11-26T07:27:00.408+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220408] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientDepositHistoryFacade: [java:global/rh-3.0.0/PatientDepositHistoryFacade, java:global/rh-3.0.0/PatientDepositHistoryFacade!com.divudi.core.facade.PatientDepositHistoryFacade]]]
+
+[2025-11-26T07:27:00.437+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220437] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientFacade: [java:global/rh-3.0.0/PatientFacade!com.divudi.core.facade.PatientFacade, java:global/rh-3.0.0/PatientFacade]]]
+
+[2025-11-26T07:27:00.461+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220461] [levelValue: 800] [[
+  Portable JNDI names for EJB DenominationTransactionFacade: [java:global/rh-3.0.0/DenominationTransactionFacade, java:global/rh-3.0.0/DenominationTransactionFacade!com.divudi.core.facade.DenominationTransactionFacade]]]
+
+[2025-11-26T07:27:00.488+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220488] [levelValue: 800] [[
+  Portable JNDI names for EJB ReportTemplateFacade: [java:global/rh-3.0.0/ReportTemplateFacade!com.divudi.core.facade.ReportTemplateFacade, java:global/rh-3.0.0/ReportTemplateFacade]]]
+
+[2025-11-26T07:27:00.502+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220502] [levelValue: 800] [[
+  Portable JNDI names for EJB HistoricalRecordService: [java:global/rh-3.0.0/HistoricalRecordService, java:global/rh-3.0.0/HistoricalRecordService!com.divudi.service.HistoricalRecordService]]]
+
+[2025-11-26T07:27:00.515+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220515] [levelValue: 800] [[
+  Portable JNDI names for EJB BillEjb: [java:global/rh-3.0.0/BillEjb, java:global/rh-3.0.0/BillEjb!com.divudi.ejb.BillEjb]]]
+
+[2025-11-26T07:27:00.538+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220538] [levelValue: 800] [[
+  Portable JNDI names for EJB ItemMappingFacade: [java:global/rh-3.0.0/ItemMappingFacade, java:global/rh-3.0.0/ItemMappingFacade!com.divudi.core.facade.ItemMappingFacade]]]
+
+[2025-11-26T07:27:00.563+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220563] [levelValue: 800] [[
+  Portable JNDI names for EJB ShiftAmendmentFacade: [java:global/rh-3.0.0/ShiftAmendmentFacade, java:global/rh-3.0.0/ShiftAmendmentFacade!com.divudi.core.facade.ShiftAmendmentFacade]]]
+
+[2025-11-26T07:27:00.586+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220586] [levelValue: 800] [[
+  Portable JNDI names for EJB VmpFacade: [java:global/rh-3.0.0/VmpFacade!com.divudi.core.facade.VmpFacade, java:global/rh-3.0.0/VmpFacade]]]
+
+[2025-11-26T07:27:00.600+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220600] [levelValue: 800] [[
+  Portable JNDI names for EJB DepartmentResolver: [java:global/rh-3.0.0/DepartmentResolver!com.divudi.service.DepartmentResolver, java:global/rh-3.0.0/DepartmentResolver]]]
+
+[2025-11-26T07:27:00.620+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220620] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffDesignationFacade: [java:global/rh-3.0.0/StaffDesignationFacade, java:global/rh-3.0.0/StaffDesignationFacade!com.divudi.core.facade.StaffDesignationFacade]]]
+
+[2025-11-26T07:27:00.644+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220644] [levelValue: 800] [[
+  Portable JNDI names for EJB DrawerFacade: [java:global/rh-3.0.0/DrawerFacade, java:global/rh-3.0.0/DrawerFacade!com.divudi.core.facade.DrawerFacade]]]
+
+[2025-11-26T07:27:00.668+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220668] [levelValue: 800] [[
+  Portable JNDI names for EJB RoomCategoryFacade: [java:global/rh-3.0.0/RoomCategoryFacade, java:global/rh-3.0.0/RoomCategoryFacade!com.divudi.core.facade.RoomCategoryFacade]]]
+
+[2025-11-26T07:27:00.692+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220692] [levelValue: 800] [[
+  Portable JNDI names for EJB InvestigationCategoryFacade: [java:global/rh-3.0.0/InvestigationCategoryFacade, java:global/rh-3.0.0/InvestigationCategoryFacade!com.divudi.core.facade.InvestigationCategoryFacade]]]
+
+[2025-11-26T07:27:00.707+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220707] [levelValue: 800] [[
+  Portable JNDI names for EJB PaymentProcessingService: [java:global/rh-3.0.0/PaymentProcessingService!com.divudi.service.pharmacy.PaymentProcessingService, java:global/rh-3.0.0/PaymentProcessingService]]]
+
+[2025-11-26T07:27:00.727+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220727] [levelValue: 800] [[
+  Portable JNDI names for EJB AdjustmentCategoryFacade: [java:global/rh-3.0.0/AdjustmentCategoryFacade, java:global/rh-3.0.0/AdjustmentCategoryFacade!com.divudi.core.facade.AdjustmentCategoryFacade]]]
+
+[2025-11-26T07:27:00.751+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220751] [levelValue: 800] [[
+  Portable JNDI names for EJB StockFacade: [java:global/rh-3.0.0/StockFacade, java:global/rh-3.0.0/StockFacade!com.divudi.core.facade.StockFacade]]]
+
+[2025-11-26T07:27:00.774+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220774] [levelValue: 800] [[
+  Portable JNDI names for EJB EncounterComponentFacade: [java:global/rh-3.0.0/EncounterComponentFacade, java:global/rh-3.0.0/EncounterComponentFacade!com.divudi.core.facade.EncounterComponentFacade]]]
+
+[2025-11-26T07:27:00.797+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220797] [levelValue: 800] [[
+  Portable JNDI names for EJB AmpFacade: [java:global/rh-3.0.0/AmpFacade!com.divudi.core.facade.AmpFacade, java:global/rh-3.0.0/AmpFacade]]]
+
+[2025-11-26T07:27:00.820+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220820] [levelValue: 800] [[
+  Portable JNDI names for EJB WebUserDepartmentFacade: [java:global/rh-3.0.0/WebUserDepartmentFacade, java:global/rh-3.0.0/WebUserDepartmentFacade!com.divudi.core.facade.WebUserDepartmentFacade]]]
+
+[2025-11-26T07:27:00.845+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220845] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientReportItemValueFacade: [java:global/rh-3.0.0/PatientReportItemValueFacade!com.divudi.core.facade.PatientReportItemValueFacade, java:global/rh-3.0.0/PatientReportItemValueFacade]]]
+
+[2025-11-26T07:27:00.868+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220868] [levelValue: 800] [[
+  Portable JNDI names for EJB IxCalFacade: [java:global/rh-3.0.0/IxCalFacade, java:global/rh-3.0.0/IxCalFacade!com.divudi.core.facade.IxCalFacade]]]
+
+[2025-11-26T07:27:00.885+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220885] [levelValue: 800] [[
+  Portable JNDI names for EJB ChannelBean: [java:global/rh-3.0.0/ChannelBean, java:global/rh-3.0.0/ChannelBean!com.divudi.ejb.ChannelBean]]]
+
+[2025-11-26T07:27:00.902+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220902] [levelValue: 800] [[
+  Portable JNDI names for EJB StockHistoryService: [java:global/rh-3.0.0/StockHistoryService!com.divudi.service.StockHistoryService, java:global/rh-3.0.0/StockHistoryService]]]
+
+[2025-11-26T07:27:00.914+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220914] [levelValue: 800] [[
+  Portable JNDI names for EJB BillAnalyticsService: [java:global/rh-3.0.0/BillAnalyticsService, java:global/rh-3.0.0/BillAnalyticsService!com.divudi.service.BillAnalyticsService]]]
+
+[2025-11-26T07:27:00.936+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220936] [levelValue: 800] [[
+  Portable JNDI names for EJB DiscardCategoryFacade: [java:global/rh-3.0.0/DiscardCategoryFacade!com.divudi.core.facade.DiscardCategoryFacade, java:global/rh-3.0.0/DiscardCategoryFacade]]]
+
+[2025-11-26T07:27:00.958+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220958] [levelValue: 800] [[
+  Portable JNDI names for EJB FingerPrintRecordHistoryFacade: [java:global/rh-3.0.0/FingerPrintRecordHistoryFacade, java:global/rh-3.0.0/FingerPrintRecordHistoryFacade!com.divudi.core.facade.FingerPrintRecordHistoryFacade]]]
+
+[2025-11-26T07:27:00.979+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131220979] [levelValue: 800] [[
+  Portable JNDI names for EJB DepartmentMachineFacade: [java:global/rh-3.0.0/DepartmentMachineFacade, java:global/rh-3.0.0/DepartmentMachineFacade!com.divudi.core.facade.DepartmentMachineFacade]]]
+
+[2025-11-26T07:27:01.001+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221001] [levelValue: 800] [[
+  Portable JNDI names for EJB WebUserRoleUserFacade: [java:global/rh-3.0.0/WebUserRoleUserFacade, java:global/rh-3.0.0/WebUserRoleUserFacade!com.divudi.core.facade.WebUserRoleUserFacade]]]
+
+[2025-11-26T07:27:01.157+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221157] [levelValue: 800] [[
+  Portable JNDI names for EJB WorksheetFormatFacade: [java:global/rh-3.0.0/WorksheetFormatFacade, java:global/rh-3.0.0/WorksheetFormatFacade!com.divudi.core.facade.WorksheetFormatFacade]]]
+
+[2025-11-26T07:27:01.182+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221182] [levelValue: 800] [[
+  Portable JNDI names for EJB HrmVariablesFacade: [java:global/rh-3.0.0/HrmVariablesFacade, java:global/rh-3.0.0/HrmVariablesFacade!com.divudi.core.facade.HrmVariablesFacade]]]
+
+[2025-11-26T07:27:01.206+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221206] [levelValue: 800] [[
+  Portable JNDI names for EJB AgentReferenceBookFacade: [java:global/rh-3.0.0/AgentReferenceBookFacade, java:global/rh-3.0.0/AgentReferenceBookFacade!com.divudi.core.facade.AgentReferenceBookFacade]]]
+
+[2025-11-26T07:27:01.229+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221229] [levelValue: 800] [[
+  Portable JNDI names for EJB AntibioticFacade: [java:global/rh-3.0.0/AntibioticFacade!com.divudi.core.facade.AntibioticFacade, java:global/rh-3.0.0/AntibioticFacade]]]
+
+[2025-11-26T07:27:01.253+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221253] [levelValue: 800] [[
+  Portable JNDI names for EJB FormFormatFacade: [java:global/rh-3.0.0/FormFormatFacade, java:global/rh-3.0.0/FormFormatFacade!com.divudi.core.facade.FormFormatFacade]]]
+
+[2025-11-26T07:27:01.278+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221278] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffWorkingDepartmentFacade: [java:global/rh-3.0.0/StaffWorkingDepartmentFacade, java:global/rh-3.0.0/StaffWorkingDepartmentFacade!com.divudi.core.facade.StaffWorkingDepartmentFacade]]]
+
+[2025-11-26T07:27:01.302+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221302] [levelValue: 800] [[
+  Portable JNDI names for EJB ConsumableCategoryFacade: [java:global/rh-3.0.0/ConsumableCategoryFacade, java:global/rh-3.0.0/ConsumableCategoryFacade!com.divudi.core.facade.ConsumableCategoryFacade]]]
+
+[2025-11-26T07:27:01.326+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221326] [levelValue: 800] [[
+  Portable JNDI names for EJB DesignationFacade: [java:global/rh-3.0.0/DesignationFacade, java:global/rh-3.0.0/DesignationFacade!com.divudi.core.facade.DesignationFacade]]]
+
+[2025-11-26T07:27:01.350+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221350] [levelValue: 800] [[
+  Portable JNDI names for EJB ServiceSubCategoryFacade: [java:global/rh-3.0.0/ServiceSubCategoryFacade, java:global/rh-3.0.0/ServiceSubCategoryFacade!com.divudi.core.facade.ServiceSubCategoryFacade]]]
+
+[2025-11-26T07:27:01.374+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221374] [levelValue: 800] [[
+  Portable JNDI names for EJB AdmissionFacade: [java:global/rh-3.0.0/AdmissionFacade!com.divudi.core.facade.AdmissionFacade, java:global/rh-3.0.0/AdmissionFacade]]]
+
+[2025-11-26T07:27:01.397+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221397] [levelValue: 800] [[
+  Portable JNDI names for EJB TimedItemFacade: [java:global/rh-3.0.0/TimedItemFacade, java:global/rh-3.0.0/TimedItemFacade!com.divudi.core.facade.TimedItemFacade]]]
+
+[2025-11-26T07:27:01.422+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221422] [levelValue: 800] [[
+  Portable JNDI names for EJB DosageFormFacade: [java:global/rh-3.0.0/DosageFormFacade, java:global/rh-3.0.0/DosageFormFacade!com.divudi.core.facade.DosageFormFacade]]]
+
+[2025-11-26T07:27:01.446+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221446] [levelValue: 800] [[
+  Portable JNDI names for EJB WebUserPaymentSchemeFacade: [java:global/rh-3.0.0/WebUserPaymentSchemeFacade, java:global/rh-3.0.0/WebUserPaymentSchemeFacade!com.divudi.core.facade.WebUserPaymentSchemeFacade]]]
+
+[2025-11-26T07:27:01.472+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221472] [levelValue: 800] [[
+  Portable JNDI names for EJB PaymentGatewayTransactionFacade: [java:global/rh-3.0.0/PaymentGatewayTransactionFacade, java:global/rh-3.0.0/PaymentGatewayTransactionFacade!com.divudi.core.facade.PaymentGatewayTransactionFacade]]]
+
+[2025-11-26T07:27:01.487+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221487] [levelValue: 800] [[
+  Portable JNDI names for EJB ItemFeeService: [java:global/rh-3.0.0/ItemFeeService, java:global/rh-3.0.0/ItemFeeService!com.divudi.service.ItemFeeService]]]
+
+[2025-11-26T07:27:01.508+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221508] [levelValue: 800] [[
+  Portable JNDI names for EJB RetailSalePriceFacade: [java:global/rh-3.0.0/RetailSalePriceFacade, java:global/rh-3.0.0/RetailSalePriceFacade!com.divudi.core.facade.RetailSalePriceFacade]]]
+
+[2025-11-26T07:27:01.533+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221533] [levelValue: 800] [[
+  Portable JNDI names for EJB PaymentMethodValueFacade: [java:global/rh-3.0.0/PaymentMethodValueFacade, java:global/rh-3.0.0/PaymentMethodValueFacade!com.divudi.core.facade.PaymentMethodValueFacade]]]
+
+[2025-11-26T07:27:01.558+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221558] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientEncounterFacade: [java:global/rh-3.0.0/PatientEncounterFacade, java:global/rh-3.0.0/PatientEncounterFacade!com.divudi.core.facade.PatientEncounterFacade]]]
+
+[2025-11-26T07:27:01.587+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221587] [levelValue: 800] [[
+  Portable JNDI names for EJB HumanResourceBean: [java:global/rh-3.0.0/HumanResourceBean!com.divudi.ejb.HumanResourceBean, java:global/rh-3.0.0/HumanResourceBean]]]
+
+[2025-11-26T07:27:01.624+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221624] [levelValue: 800] [[
+  Portable JNDI names for EJB FeeFacade: [java:global/rh-3.0.0/FeeFacade, java:global/rh-3.0.0/FeeFacade!com.divudi.core.facade.FeeFacade]]]
+
+[2025-11-26T07:27:01.646+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221646] [levelValue: 800] [[
+  Portable JNDI names for EJB ScheduledProcessConfigurationFacade: [java:global/rh-3.0.0/ScheduledProcessConfigurationFacade, java:global/rh-3.0.0/ScheduledProcessConfigurationFacade!com.divudi.core.facade.ScheduledProcessConfigurationFacade]]]
+
+[2025-11-26T07:27:01.669+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221669] [levelValue: 800] [[
+  Portable JNDI names for EJB BillFacade: [java:global/rh-3.0.0/BillFacade, java:global/rh-3.0.0/BillFacade!com.divudi.core.facade.BillFacade]]]
+
+[2025-11-26T07:27:01.693+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221693] [levelValue: 800] [[
+  Portable JNDI names for EJB TransferFormFacade: [java:global/rh-3.0.0/TransferFormFacade!com.divudi.core.facade.TransferFormFacade, java:global/rh-3.0.0/TransferFormFacade]]]
+
+[2025-11-26T07:27:01.708+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221708] [levelValue: 800] [[
+  Portable JNDI names for EJB PrescriptionService: [java:global/rh-3.0.0/PrescriptionService!com.divudi.ejb.PrescriptionService, java:global/rh-3.0.0/PrescriptionService]]]
+
+[2025-11-26T07:27:01.729+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221729] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffHistoryFacade: [java:global/rh-3.0.0/StaffHistoryFacade, java:global/rh-3.0.0/StaffHistoryFacade!com.divudi.core.facade.StaffHistoryFacade]]]
+
+[2025-11-26T07:27:01.752+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221752] [levelValue: 800] [[
+  Portable JNDI names for EJB BillItemFacade: [java:global/rh-3.0.0/BillItemFacade, java:global/rh-3.0.0/BillItemFacade!com.divudi.core.facade.BillItemFacade]]]
+
+[2025-11-26T07:27:01.776+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221776] [levelValue: 800] [[
+  Portable JNDI names for EJB FormFacade: [java:global/rh-3.0.0/FormFacade, java:global/rh-3.0.0/FormFacade!com.divudi.core.facade.FormFacade]]]
+
+[2025-11-26T07:27:01.810+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221810] [levelValue: 800] [[
+  Portable JNDI names for EJB TestFlagFacade: [java:global/rh-3.0.0/TestFlagFacade, java:global/rh-3.0.0/TestFlagFacade!com.divudi.core.facade.TestFlagFacade]]]
+
+[2025-11-26T07:27:01.829+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221829] [levelValue: 800] [[
+  Portable JNDI names for EJB ApprovalProgressTracker: [java:global/rh-3.0.0/ApprovalProgressTracker!com.divudi.service.pharmacy.ApprovalProgressTracker, java:global/rh-3.0.0/ApprovalProgressTracker]]]
+
+[2025-11-26T07:27:01.849+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221849] [levelValue: 800] [[
+  Portable JNDI names for EJB PersonFacade: [java:global/rh-3.0.0/PersonFacade, java:global/rh-3.0.0/PersonFacade!com.divudi.core.facade.PersonFacade]]]
+
+[2025-11-26T07:27:01.864+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221864] [levelValue: 800] [[
+  Portable JNDI names for EJB TokenService: [java:global/rh-3.0.0/TokenService!com.divudi.service.pharmacy.TokenService, java:global/rh-3.0.0/TokenService]]]
+
+[2025-11-26T07:27:01.887+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221887] [levelValue: 800] [[
+  Portable JNDI names for EJB ReorderFacade: [java:global/rh-3.0.0/ReorderFacade, java:global/rh-3.0.0/ReorderFacade!com.divudi.core.facade.ReorderFacade]]]
+
+[2025-11-26T07:27:01.911+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221911] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientInvestigationItemValueFacade: [java:global/rh-3.0.0/PatientInvestigationItemValueFacade!com.divudi.core.facade.PatientInvestigationItemValueFacade, java:global/rh-3.0.0/PatientInvestigationItemValueFacade]]]
+
+[2025-11-26T07:27:01.935+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221935] [levelValue: 800] [[
+  Portable JNDI names for EJB ArrivalRecordFacade: [java:global/rh-3.0.0/ArrivalRecordFacade!com.divudi.core.facade.ArrivalRecordFacade, java:global/rh-3.0.0/ArrivalRecordFacade]]]
+
+[2025-11-26T07:27:01.951+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221951] [levelValue: 800] [[
+  Portable JNDI names for EJB FinalVariables: [java:global/rh-3.0.0/FinalVariables!com.divudi.ejb.FinalVariables, java:global/rh-3.0.0/FinalVariables]]]
+
+[2025-11-26T07:27:01.971+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221971] [levelValue: 800] [[
+  Portable JNDI names for EJB SessionNumberGeneratorFacade: [java:global/rh-3.0.0/SessionNumberGeneratorFacade!com.divudi.core.facade.SessionNumberGeneratorFacade, java:global/rh-3.0.0/SessionNumberGeneratorFacade]]]
+
+[2025-11-26T07:27:01.995+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131221995] [levelValue: 800] [[
+  Portable JNDI names for EJB MeasurementUnitFacade: [java:global/rh-3.0.0/MeasurementUnitFacade!com.divudi.core.facade.MeasurementUnitFacade, java:global/rh-3.0.0/MeasurementUnitFacade]]]
+
+[2025-11-26T07:27:02.010+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222010] [levelValue: 800] [[
+  Portable JNDI names for EJB RequestService: [java:global/rh-3.0.0/RequestService!com.divudi.service.RequestService, java:global/rh-3.0.0/RequestService]]]
+
+[2025-11-26T07:27:02.031+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222031] [levelValue: 800] [[
+  Portable JNDI names for EJB DefaultServiceDepartmentFacade: [java:global/rh-3.0.0/DefaultServiceDepartmentFacade!com.divudi.core.facade.DefaultServiceDepartmentFacade, java:global/rh-3.0.0/DefaultServiceDepartmentFacade]]]
+
+[2025-11-26T07:27:02.055+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222055] [levelValue: 800] [[
+  Portable JNDI names for EJB ClinicalEntityFacade: [java:global/rh-3.0.0/ClinicalEntityFacade!com.divudi.core.facade.ClinicalEntityFacade, java:global/rh-3.0.0/ClinicalEntityFacade]]]
+
+[2025-11-26T07:27:02.083+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222083] [levelValue: 800] [[
+  Portable JNDI names for EJB BillService: [java:global/rh-3.0.0/BillService!com.divudi.service.BillService, java:global/rh-3.0.0/BillService]]]
+
+[2025-11-26T07:27:02.109+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222109] [levelValue: 800] [[
+  Portable JNDI names for EJB BillEntryFacade: [java:global/rh-3.0.0/BillEntryFacade!com.divudi.core.facade.BillEntryFacade, java:global/rh-3.0.0/BillEntryFacade]]]
+
+[2025-11-26T07:27:02.135+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222135] [levelValue: 800] [[
+  Portable JNDI names for EJB TheatreServiceFacade: [java:global/rh-3.0.0/TheatreServiceFacade, java:global/rh-3.0.0/TheatreServiceFacade!com.divudi.core.facade.TheatreServiceFacade]]]
+
+[2025-11-26T07:27:02.152+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222152] [levelValue: 800] [[
+  Portable JNDI names for EJB DrawerService: [java:global/rh-3.0.0/DrawerService, java:global/rh-3.0.0/DrawerService!com.divudi.service.DrawerService]]]
+
+[2025-11-26T07:27:02.174+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222174] [levelValue: 800] [[
+  Portable JNDI names for EJB PackageFeeFacade: [java:global/rh-3.0.0/PackageFeeFacade!com.divudi.core.facade.PackageFeeFacade, java:global/rh-3.0.0/PackageFeeFacade]]]
+
+[2025-11-26T07:27:02.197+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222197] [levelValue: 800] [[
+  Portable JNDI names for EJB InstitutionFacade: [java:global/rh-3.0.0/InstitutionFacade!com.divudi.core.facade.InstitutionFacade, java:global/rh-3.0.0/InstitutionFacade]]]
+
+[2025-11-26T07:27:02.220+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222220] [levelValue: 800] [[
+  Portable JNDI names for EJB InwardServiceFacade: [java:global/rh-3.0.0/InwardServiceFacade!com.divudi.core.facade.InwardServiceFacade, java:global/rh-3.0.0/InwardServiceFacade]]]
+
+[2025-11-26T07:27:02.245+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222245] [levelValue: 800] [[
+  Portable JNDI names for EJB InvestigationItemFacade: [java:global/rh-3.0.0/InvestigationItemFacade, java:global/rh-3.0.0/InvestigationItemFacade!com.divudi.core.facade.InvestigationItemFacade]]]
+
+[2025-11-26T07:27:02.269+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222269] [levelValue: 800] [[
+  Portable JNDI names for EJB AmendmentFormFacade: [java:global/rh-3.0.0/AmendmentFormFacade, java:global/rh-3.0.0/AmendmentFormFacade!com.divudi.core.facade.AmendmentFormFacade]]]
+
+[2025-11-26T07:27:02.293+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222293] [levelValue: 800] [[
+  Portable JNDI names for EJB ProcessStepDefinitionFacade: [java:global/rh-3.0.0/ProcessStepDefinitionFacade!com.divudi.core.facade.ProcessStepDefinitionFacade, java:global/rh-3.0.0/ProcessStepDefinitionFacade]]]
+
+[2025-11-26T07:27:02.318+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222318] [levelValue: 800] [[
+  Portable JNDI names for EJB WebUserRouteFacade: [java:global/rh-3.0.0/WebUserRouteFacade!com.divudi.core.facade.WebUserRouteFacade, java:global/rh-3.0.0/WebUserRouteFacade]]]
+
+[2025-11-26T07:27:02.347+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222347] [levelValue: 800] [[
+  Portable JNDI names for EJB GradeFacade: [java:global/rh-3.0.0/GradeFacade, java:global/rh-3.0.0/GradeFacade!com.divudi.core.facade.GradeFacade]]]
+
+[2025-11-26T07:27:02.363+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222363] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientInvestigationService: [java:global/rh-3.0.0/PatientInvestigationService, java:global/rh-3.0.0/PatientInvestigationService!com.divudi.service.PatientInvestigationService]]]
+
+[2025-11-26T07:27:02.384+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222384] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientSampleFacade: [java:global/rh-3.0.0/PatientSampleFacade!com.divudi.core.facade.PatientSampleFacade, java:global/rh-3.0.0/PatientSampleFacade]]]
+
+[2025-11-26T07:27:02.409+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222409] [levelValue: 800] [[
+  Portable JNDI names for EJB SampleFacade: [java:global/rh-3.0.0/SampleFacade, java:global/rh-3.0.0/SampleFacade!com.divudi.core.facade.SampleFacade]]]
+
+[2025-11-26T07:27:02.435+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222435] [levelValue: 800] [[
+  Portable JNDI names for EJB BillExpenseFacade: [java:global/rh-3.0.0/BillExpenseFacade!com.divudi.bean.common.BillExpenseFacade, java:global/rh-3.0.0/BillExpenseFacade]]]
+
+[2025-11-26T07:27:02.461+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222461] [levelValue: 800] [[
+  Portable JNDI names for EJB InvestigationValidatorFacade: [java:global/rh-3.0.0/InvestigationValidatorFacade, java:global/rh-3.0.0/InvestigationValidatorFacade!com.divudi.core.facade.InvestigationValidatorFacade]]]
+
+[2025-11-26T07:27:02.485+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222485] [levelValue: 800] [[
+  Portable JNDI names for EJB UserStockFacade: [java:global/rh-3.0.0/UserStockFacade, java:global/rh-3.0.0/UserStockFacade!com.divudi.core.facade.UserStockFacade]]]
+
+[2025-11-26T07:27:02.509+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222509] [levelValue: 800] [[
+  Portable JNDI names for EJB ReportFormatFacade: [java:global/rh-3.0.0/ReportFormatFacade, java:global/rh-3.0.0/ReportFormatFacade!com.divudi.core.facade.ReportFormatFacade]]]
+
+[2025-11-26T07:27:02.533+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222533] [levelValue: 800] [[
+  Portable JNDI names for EJB ChannelService: [java:global/rh-3.0.0/ChannelService!com.divudi.service.ChannelService, java:global/rh-3.0.0/ChannelService]]]
+
+[2025-11-26T07:27:02.554+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222554] [levelValue: 800] [[
+  Portable JNDI names for EJB StockSearchService: [java:global/rh-3.0.0/StockSearchService!com.divudi.service.pharmacy.StockSearchService, java:global/rh-3.0.0/StockSearchService]]]
+
+[2025-11-26T07:27:02.574+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222574] [levelValue: 800] [[
+  Portable JNDI names for EJB IssueRateMarginsFacade: [java:global/rh-3.0.0/IssueRateMarginsFacade, java:global/rh-3.0.0/IssueRateMarginsFacade!com.divudi.core.facade.IssueRateMarginsFacade]]]
+
+[2025-11-26T07:27:02.598+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222598] [levelValue: 800] [[
+  Portable JNDI names for EJB PaymentSchemeFacade: [java:global/rh-3.0.0/PaymentSchemeFacade!com.divudi.core.facade.PaymentSchemeFacade, java:global/rh-3.0.0/PaymentSchemeFacade]]]
+
+[2025-11-26T07:27:02.622+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222622] [levelValue: 800] [[
+  Portable JNDI names for EJB CashTransactionHistoryFacade: [java:global/rh-3.0.0/CashTransactionHistoryFacade!com.divudi.core.facade.CashTransactionHistoryFacade, java:global/rh-3.0.0/CashTransactionHistoryFacade]]]
+
+[2025-11-26T07:27:02.647+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222647] [levelValue: 800] [[
+  Portable JNDI names for EJB ComponentAssignmentFacade: [java:global/rh-3.0.0/ComponentAssignmentFacade!com.divudi.core.facade.forms.ComponentAssignmentFacade, java:global/rh-3.0.0/ComponentAssignmentFacade]]]
+
+[2025-11-26T07:27:02.671+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222671] [levelValue: 800] [[
+  Portable JNDI names for EJB ReportItemFacade: [java:global/rh-3.0.0/ReportItemFacade, java:global/rh-3.0.0/ReportItemFacade!com.divudi.core.facade.ReportItemFacade]]]
+
+[2025-11-26T07:27:02.694+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222694] [levelValue: 800] [[
+  Portable JNDI names for EJB PurchasePriceFacade: [java:global/rh-3.0.0/PurchasePriceFacade, java:global/rh-3.0.0/PurchasePriceFacade!com.divudi.core.facade.PurchasePriceFacade]]]
+
+[2025-11-26T07:27:02.795+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222795] [levelValue: 800] [[
+  Portable JNDI names for EJB InvestigationValueComponentFacade: [java:global/rh-3.0.0/InvestigationValueComponentFacade!com.divudi.core.facade.InvestigationValueComponentFacade, java:global/rh-3.0.0/InvestigationValueComponentFacade]]]
+
+[2025-11-26T07:27:02.818+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222818] [levelValue: 800] [[
+  Portable JNDI names for EJB PaymentService: [java:global/rh-3.0.0/PaymentService!com.divudi.service.PaymentService, java:global/rh-3.0.0/PaymentService]]]
+
+[2025-11-26T07:27:02.839+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222839] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffStaffCategoryFacade: [java:global/rh-3.0.0/StaffStaffCategoryFacade, java:global/rh-3.0.0/StaffStaffCategoryFacade!com.divudi.core.facade.StaffStaffCategoryFacade]]]
+
+[2025-11-26T07:27:02.864+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222864] [levelValue: 800] [[
+  Portable JNDI names for EJB OnlineBookingFacade: [java:global/rh-3.0.0/OnlineBookingFacade, java:global/rh-3.0.0/OnlineBookingFacade!com.divudi.core.facade.OnlineBookingFacade]]]
+
+[2025-11-26T07:27:02.888+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222888] [levelValue: 800] [[
+  Portable JNDI names for EJB ItemUsageFacade: [java:global/rh-3.0.0/ItemUsageFacade!com.divudi.core.facade.ItemUsageFacade, java:global/rh-3.0.0/ItemUsageFacade]]]
+
+[2025-11-26T07:27:02.913+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222913] [levelValue: 800] [[
+  Portable JNDI names for EJB WebUserRolePrivilegeFacade: [java:global/rh-3.0.0/WebUserRolePrivilegeFacade, java:global/rh-3.0.0/WebUserRolePrivilegeFacade!com.divudi.core.facade.WebUserRolePrivilegeFacade]]]
+
+[2025-11-26T07:27:02.936+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222936] [levelValue: 800] [[
+  Portable JNDI names for EJB LeaveFormFacade: [java:global/rh-3.0.0/LeaveFormFacade, java:global/rh-3.0.0/LeaveFormFacade!com.divudi.core.facade.LeaveFormFacade]]]
+
+[2025-11-26T07:27:02.960+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222960] [levelValue: 800] [[
+  Portable JNDI names for EJB ServiceFacade: [java:global/rh-3.0.0/ServiceFacade, java:global/rh-3.0.0/ServiceFacade!com.divudi.core.facade.ServiceFacade]]]
+
+[2025-11-26T07:27:02.984+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131222984] [levelValue: 800] [[
+  Portable JNDI names for EJB DetailedFinancialBillFacade: [java:global/rh-3.0.0/DetailedFinancialBillFacade, java:global/rh-3.0.0/DetailedFinancialBillFacade!com.divudi.core.facade.DetailedFinancialBillFacade]]]
+
+[2025-11-26T07:27:03.008+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223008] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffLeaveFacade: [java:global/rh-3.0.0/StaffLeaveFacade, java:global/rh-3.0.0/StaffLeaveFacade!com.divudi.core.facade.StaffLeaveFacade]]]
+
+[2025-11-26T07:27:03.032+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223032] [levelValue: 800] [[
+  Portable JNDI names for EJB CommonReportItemFacade: [java:global/rh-3.0.0/CommonReportItemFacade!com.divudi.core.facade.CommonReportItemFacade, java:global/rh-3.0.0/CommonReportItemFacade]]]
+
+[2025-11-26T07:27:03.056+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223056] [levelValue: 800] [[
+  Portable JNDI names for EJB PrescriptionTemplateFacade: [java:global/rh-3.0.0/PrescriptionTemplateFacade, java:global/rh-3.0.0/PrescriptionTemplateFacade!com.divudi.core.facade.PrescriptionTemplateFacade]]]
+
+[2025-11-26T07:27:03.082+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223082] [levelValue: 800] [[
+  Portable JNDI names for EJB VmppFacade: [java:global/rh-3.0.0/VmppFacade, java:global/rh-3.0.0/VmppFacade!com.divudi.core.facade.VmppFacade]]]
+
+[2025-11-26T07:27:03.107+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223107] [levelValue: 800] [[
+  Portable JNDI names for EJB TokenFacade: [java:global/rh-3.0.0/TokenFacade, java:global/rh-3.0.0/TokenFacade!com.divudi.core.facade.TokenFacade]]]
+
+[2025-11-26T07:27:03.131+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223131] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffCategoryFacade: [java:global/rh-3.0.0/StaffCategoryFacade!com.divudi.core.facade.StaffCategoryFacade, java:global/rh-3.0.0/StaffCategoryFacade]]]
+
+[2025-11-26T07:27:03.155+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223155] [levelValue: 800] [[
+  Portable JNDI names for EJB StoreItemCategoryFacade: [java:global/rh-3.0.0/StoreItemCategoryFacade, java:global/rh-3.0.0/StoreItemCategoryFacade!com.divudi.core.facade.StoreItemCategoryFacade]]]
+
+[2025-11-26T07:27:03.179+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223179] [levelValue: 800] [[
+  Portable JNDI names for EJB HrFormFacade: [java:global/rh-3.0.0/HrFormFacade!com.divudi.core.facade.HrFormFacade, java:global/rh-3.0.0/HrFormFacade]]]
+
+[2025-11-26T07:27:03.193+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223193] [levelValue: 800] [[
+  Portable JNDI names for EJB MembershipService: [java:global/rh-3.0.0/MembershipService, java:global/rh-3.0.0/MembershipService!com.divudi.service.MembershipService]]]
+
+[2025-11-26T07:27:03.213+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223213] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffShiftFacade: [java:global/rh-3.0.0/StaffShiftFacade!com.divudi.core.facade.StaffShiftFacade, java:global/rh-3.0.0/StaffShiftFacade]]]
+
+[2025-11-26T07:27:03.237+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223237] [levelValue: 800] [[
+  Portable JNDI names for EJB ClinicalFindingValueFacade: [java:global/rh-3.0.0/ClinicalFindingValueFacade!com.divudi.core.facade.ClinicalFindingValueFacade, java:global/rh-3.0.0/ClinicalFindingValueFacade]]]
+
+[2025-11-26T07:27:03.251+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223251] [levelValue: 800] [[
+  Portable JNDI names for EJB ClinicalSearch: [java:global/rh-3.0.0/ClinicalSearch, java:global/rh-3.0.0/ClinicalSearch!com.divudi.ejb.clinical.ClinicalSearch]]]
+
+[2025-11-26T07:27:03.271+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223271] [levelValue: 800] [[
+  Portable JNDI names for EJB MedicalPackageFacade: [java:global/rh-3.0.0/MedicalPackageFacade!com.divudi.core.facade.MedicalPackageFacade, java:global/rh-3.0.0/MedicalPackageFacade]]]
+
+[2025-11-26T07:27:03.296+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223296] [levelValue: 800] [[
+  Portable JNDI names for EJB AppointmentFacade: [java:global/rh-3.0.0/AppointmentFacade!com.divudi.core.facade.AppointmentFacade, java:global/rh-3.0.0/AppointmentFacade]]]
+
+[2025-11-26T07:27:03.313+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223313] [levelValue: 800] [[
+  Portable JNDI names for EJB StockCountGenerationService: [java:global/rh-3.0.0/StockCountGenerationService, java:global/rh-3.0.0/StockCountGenerationService!com.divudi.service.pharmacy.StockCountGenerationService]]]
+
+[2025-11-26T07:27:03.333+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223333] [levelValue: 800] [[
+  Portable JNDI names for EJB PriceFacade: [java:global/rh-3.0.0/PriceFacade, java:global/rh-3.0.0/PriceFacade!com.divudi.core.facade.PriceFacade]]]
+
+[2025-11-26T07:27:03.357+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223357] [levelValue: 800] [[
+  Portable JNDI names for EJB DoctorFacade: [java:global/rh-3.0.0/DoctorFacade, java:global/rh-3.0.0/DoctorFacade!com.divudi.core.facade.DoctorFacade]]]
+
+[2025-11-26T07:27:03.381+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223381] [levelValue: 800] [[
+  Portable JNDI names for EJB VtmFacade: [java:global/rh-3.0.0/VtmFacade, java:global/rh-3.0.0/VtmFacade!com.divudi.core.facade.VtmFacade]]]
+
+[2025-11-26T07:27:03.405+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223405] [levelValue: 800] [[
+  Portable JNDI names for EJB RosterFacade: [java:global/rh-3.0.0/RosterFacade!com.divudi.core.facade.RosterFacade, java:global/rh-3.0.0/RosterFacade]]]
+
+[2025-11-26T07:27:03.429+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223429] [levelValue: 800] [[
+  Portable JNDI names for EJB ReservationFacade: [java:global/rh-3.0.0/ReservationFacade!com.divudi.core.facade.ReservationFacade, java:global/rh-3.0.0/ReservationFacade]]]
+
+[2025-11-26T07:27:03.452+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223452] [levelValue: 800] [[
+  Portable JNDI names for EJB WholeSalePriceFacade: [java:global/rh-3.0.0/WholeSalePriceFacade, java:global/rh-3.0.0/WholeSalePriceFacade!com.divudi.core.facade.WholeSalePriceFacade]]]
+
+[2025-11-26T07:27:03.477+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223477] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffWorkDayFacade: [java:global/rh-3.0.0/StaffWorkDayFacade, java:global/rh-3.0.0/StaffWorkDayFacade!com.divudi.core.facade.StaffWorkDayFacade]]]
+
+[2025-11-26T07:27:03.501+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223501] [levelValue: 800] [[
+  Portable JNDI names for EJB AgentHistoryFacade: [java:global/rh-3.0.0/AgentHistoryFacade, java:global/rh-3.0.0/AgentHistoryFacade!com.divudi.core.facade.AgentHistoryFacade]]]
+
+[2025-11-26T07:27:03.525+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223525] [levelValue: 800] [[
+  Portable JNDI names for EJB MedicalPackageItemFacade: [java:global/rh-3.0.0/MedicalPackageItemFacade!com.divudi.core.facade.MedicalPackageItemFacade, java:global/rh-3.0.0/MedicalPackageItemFacade]]]
+
+[2025-11-26T07:27:03.549+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223549] [levelValue: 800] [[
+  Portable JNDI names for EJB SmsFacade: [java:global/rh-3.0.0/SmsFacade, java:global/rh-3.0.0/SmsFacade!com.divudi.core.facade.SmsFacade]]]
+
+[2025-11-26T07:27:03.572+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223572] [levelValue: 800] [[
+  Portable JNDI names for EJB AdditionalFormFacade: [java:global/rh-3.0.0/AdditionalFormFacade!com.divudi.core.facade.AdditionalFormFacade, java:global/rh-3.0.0/AdditionalFormFacade]]]
+
+[2025-11-26T07:27:03.596+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223596] [levelValue: 800] [[
+  Portable JNDI names for EJB UploadFacade: [java:global/rh-3.0.0/UploadFacade!com.divudi.core.facade.UploadFacade, java:global/rh-3.0.0/UploadFacade]]]
+
+[2025-11-26T07:27:03.612+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223612] [levelValue: 800] [[
+  Portable JNDI names for EJB RevenueBean: [java:global/rh-3.0.0/RevenueBean, java:global/rh-3.0.0/RevenueBean!com.divudi.ejb.RevenueBean]]]
+
+[2025-11-26T07:27:03.632+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223632] [levelValue: 800] [[
+  Portable JNDI names for EJB FrequencyUnitFacade: [java:global/rh-3.0.0/FrequencyUnitFacade, java:global/rh-3.0.0/FrequencyUnitFacade!com.divudi.core.facade.FrequencyUnitFacade]]]
+
+[2025-11-26T07:27:03.646+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223646] [levelValue: 800] [[
+  Portable JNDI names for EJB ItemService: [java:global/rh-3.0.0/ItemService!com.divudi.service.ItemService, java:global/rh-3.0.0/ItemService]]]
+
+[2025-11-26T07:27:03.657+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223657] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientService: [java:global/rh-3.0.0/PatientService, java:global/rh-3.0.0/PatientService!com.divudi.service.PatientService]]]
+
+[2025-11-26T07:27:03.677+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223677] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffEmploymentFacade: [java:global/rh-3.0.0/StaffEmploymentFacade, java:global/rh-3.0.0/StaffEmploymentFacade!com.divudi.core.facade.StaffEmploymentFacade]]]
+
+[2025-11-26T07:27:03.700+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223700] [levelValue: 800] [[
+  Portable JNDI names for EJB ApiKeyFacade: [java:global/rh-3.0.0/ApiKeyFacade, java:global/rh-3.0.0/ApiKeyFacade!com.divudi.core.facade.ApiKeyFacade]]]
+
+[2025-11-26T07:27:03.724+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223724] [levelValue: 800] [[
+  Portable JNDI names for EJB TemplateComponentFacade: [java:global/rh-3.0.0/TemplateComponentFacade, java:global/rh-3.0.0/TemplateComponentFacade!com.divudi.core.facade.web.TemplateComponentFacade]]]
+
+[2025-11-26T07:27:03.747+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223747] [levelValue: 800] [[
+  Portable JNDI names for EJB NotificationFacade: [java:global/rh-3.0.0/NotificationFacade, java:global/rh-3.0.0/NotificationFacade!com.divudi.core.facade.NotificationFacade]]]
+
+[2025-11-26T07:27:03.770+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223770] [levelValue: 800] [[
+  Portable JNDI names for EJB EncounterCreditCompanyFacade: [java:global/rh-3.0.0/EncounterCreditCompanyFacade!com.divudi.core.facade.EncounterCreditCompanyFacade, java:global/rh-3.0.0/EncounterCreditCompanyFacade]]]
+
+[2025-11-26T07:27:03.795+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223795] [levelValue: 800] [[
+  Portable JNDI names for EJB StaffFacade: [java:global/rh-3.0.0/StaffFacade!com.divudi.core.facade.StaffFacade, java:global/rh-3.0.0/StaffFacade]]]
+
+[2025-11-26T07:27:03.819+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223819] [levelValue: 800] [[
+  Portable JNDI names for EJB PharmaceuticalItemFacade: [java:global/rh-3.0.0/PharmaceuticalItemFacade, java:global/rh-3.0.0/PharmaceuticalItemFacade!com.divudi.core.facade.PharmaceuticalItemFacade]]]
+
+[2025-11-26T07:27:03.834+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223834] [levelValue: 800] [[
+  Portable JNDI names for EJB ReportTimerController: [java:global/rh-3.0.0/ReportTimerController, java:global/rh-3.0.0/ReportTimerController!com.divudi.bean.common.ReportTimerController]]]
+
+[2025-11-26T07:27:03.845+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223845] [levelValue: 800] [[
+  Portable JNDI names for EJB ScheduledProcessService: [java:global/rh-3.0.0/ScheduledProcessService, java:global/rh-3.0.0/ScheduledProcessService!com.divudi.service.ScheduledProcessService]]]
+
+[2025-11-26T07:27:03.857+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223857] [levelValue: 800] [[
+  Portable JNDI names for EJB PharmacyCostingService: [java:global/rh-3.0.0/PharmacyCostingService, java:global/rh-3.0.0/PharmacyCostingService!com.divudi.service.pharmacy.PharmacyCostingService]]]
+
+[2025-11-26T07:27:03.879+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223879] [levelValue: 800] [[
+  Portable JNDI names for EJB DoctorSpecialityFacade: [java:global/rh-3.0.0/DoctorSpecialityFacade!com.divudi.core.facade.DoctorSpecialityFacade, java:global/rh-3.0.0/DoctorSpecialityFacade]]]
+
+[2025-11-26T07:27:03.902+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223902] [levelValue: 800] [[
+  Portable JNDI names for EJB EmailFacade: [java:global/rh-3.0.0/EmailFacade, java:global/rh-3.0.0/EmailFacade!com.divudi.core.facade.EmailFacade]]]
+
+[2025-11-26T07:27:03.925+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223925] [levelValue: 800] [[
+  Portable JNDI names for EJB LoginsFacade: [java:global/rh-3.0.0/LoginsFacade!com.divudi.core.facade.LoginsFacade, java:global/rh-3.0.0/LoginsFacade]]]
+
+[2025-11-26T07:27:03.948+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223948] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientSampleComponantFacade: [java:global/rh-3.0.0/PatientSampleComponantFacade, java:global/rh-3.0.0/PatientSampleComponantFacade!com.divudi.core.facade.PatientSampleComponantFacade]]]
+
+[2025-11-26T07:27:03.964+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223964] [levelValue: 800] [[
+  Portable JNDI names for EJB EmailManagerEjb: [java:global/rh-3.0.0/EmailManagerEjb!com.divudi.ejb.EmailManagerEjb, java:global/rh-3.0.0/EmailManagerEjb]]]
+
+[2025-11-26T07:27:03.984+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131223984] [levelValue: 800] [[
+  Portable JNDI names for EJB CaptureComponentFacade: [java:global/rh-3.0.0/CaptureComponentFacade, java:global/rh-3.0.0/CaptureComponentFacade!com.divudi.core.facade.web.CaptureComponentFacade]]]
+
+[2025-11-26T07:27:04.008+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131224008] [levelValue: 800] [[
+  Portable JNDI names for EJB AdmissionTypeFacade: [java:global/rh-3.0.0/AdmissionTypeFacade, java:global/rh-3.0.0/AdmissionTypeFacade!com.divudi.core.facade.AdmissionTypeFacade]]]
+
+[2025-11-26T07:27:04.032+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131224032] [levelValue: 800] [[
+  Portable JNDI names for EJB RouteFacade: [java:global/rh-3.0.0/RouteFacade!com.divudi.core.facade.RouteFacade, java:global/rh-3.0.0/RouteFacade]]]
+
+[2025-11-26T07:27:04.047+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131224047] [levelValue: 800] [[
+  Portable JNDI names for EJB AggregatedRecordService: [java:global/rh-3.0.0/AggregatedRecordService!com.divudi.service.AggregatedRecordService, java:global/rh-3.0.0/AggregatedRecordService]]]
+
+[2025-11-26T07:27:04.059+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131224059] [levelValue: 800] [[
+  Portable JNDI names for EJB StockService: [java:global/rh-3.0.0/StockService, java:global/rh-3.0.0/StockService!com.divudi.service.StockService]]]
+
+[2025-11-26T07:27:04.073+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131224073] [levelValue: 800] [[
+  Portable JNDI names for EJB PatientDepositService: [java:global/rh-3.0.0/PatientDepositService!com.divudi.service.PatientDepositService, java:global/rh-3.0.0/PatientDepositService]]]
+
+[2025-11-26T07:27:04.096+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131224096] [levelValue: 800] [[
+  Portable JNDI names for EJB PersonRelationshipFacade: [java:global/rh-3.0.0/PersonRelationshipFacade!com.divudi.core.facade.PersonRelationshipFacade, java:global/rh-3.0.0/PersonRelationshipFacade]]]
+
+[2025-11-26T07:27:04.121+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131224121] [levelValue: 800] [[
+  Portable JNDI names for EJB ItemFeeFacade: [java:global/rh-3.0.0/ItemFeeFacade!com.divudi.core.facade.ItemFeeFacade, java:global/rh-3.0.0/ItemFeeFacade]]]
+
+[2025-11-26T07:27:04.145+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131224145] [levelValue: 800] [[
+  Portable JNDI names for EJB AuditEventFacade: [java:global/rh-3.0.0/AuditEventFacade!com.divudi.core.facade.AuditEventFacade, java:global/rh-3.0.0/AuditEventFacade]]]
+
+[2025-11-26T07:27:04.169+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131224169] [levelValue: 800] [[
+  Portable JNDI names for EJB DrawerEntryFacade: [java:global/rh-3.0.0/DrawerEntryFacade!com.divudi.core.facade.DrawerEntryFacade, java:global/rh-3.0.0/DrawerEntryFacade]]]
+
+[2025-11-26T07:27:04.192+0300] [Payara 5.2022.5] [INFO] [AS-EJB-00054] [javax.enterprise.ejb.container] [tid: _ThreadID=22 _ThreadName=RunLevelControllerThread-1764131161172] [timeMillis: 1764131224192] [levelValue: 800] [[
+  Portable JNDI names for EJB LabVisitFacade: [java:global/rh-3.0.0/LabVisitFacade, java:global/rh-3.0.0/LabVisitFacade!com.divudi.core.facade.LabVisitFacade]]]
+

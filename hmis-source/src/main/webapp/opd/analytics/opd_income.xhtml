@@ -1,0 +1,129 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+        <ui:composition template="/opd/analytics/index.xhtml">
+            <ui:define name="subcontent">
+                <h:form>
+                    <p:panel header="OPD Income Summary">
+
+                        <h:panelGrid columns="2" class="mb-2">
+                            <h:outputLabel value="From"/>
+                            <p:calendar id="fromDate"
+                                        value="#{opdBillController.fromDate}"
+                                        navigator="false"
+                                        pattern="#{sessionController.applicationPreference.longDateTimeFormat}"
+                                        class="mt-1 mx-2 w-100"
+                                        inputStyleClass="w-100"
+                                        maxdate="#{commonFunctionsProxy.currentDateTime}">
+                            </p:calendar>
+                            <h:outputLabel value="To"/>
+                            <p:calendar id="toDate"
+                                        value="#{opdBillController.toDate}"
+                                        navigator="false"
+                                        pattern="#{sessionController.applicationPreference.longDateTimeFormat}"
+                                        class="mt-1 mx-2 w-100"
+                                        inputStyleClass="w-100">
+                            </p:calendar>
+                            <p:outputLabel value="Billing Department" ></p:outputLabel>
+                            <p:selectOneMenu
+                                id="cmdFromDepartment"
+                                value="#{opdBillController.fromDepartment}"
+                                class="w-100 mx-2"
+                                filter="true">
+                                <f:selectItem itemLabel="All" ></f:selectItem>
+                                <f:selectItems value="#{departmentController.fillAllItems()}"
+                                               var="d"
+                                               itemLabel="#{d.name}"
+                                               itemValue="#{d}" ></f:selectItems>
+                            </p:selectOneMenu>
+                        </h:panelGrid>
+
+                        <p:commandButton
+                            icon="fas fa-cogs"
+                            id="btnSearch"
+                            ajax="false"
+                            value="Process"
+                            class="ui-button-warning my-2"
+                            action="#{opdBillController.fillOpdBillItems}" />
+
+                        <p:defaultCommand target="btnSearch" />
+
+                        <p:dataTable rowIndexVar="i"
+                                     id="tblBills"
+                                     value="#{opdBillController.lstBillItems}"
+                                     var="billItem"
+                                     style="min-width: 100%;"
+                                     class="mt-1"
+                                     rows ="10"
+                                     paginator="true"
+                                     paginatorPosition="bottom"
+                                     paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                     rowsPerPageTemplate="5,10,25,50"
+                                     >
+                            <p:column headerText="ID" filterBy="#{billItem.bill.id}" filterMatchMode="contains"
+                                      sortBy="#{billItem.bill.id}"
+                                      styleClass="alignTop" width="15">
+                                <h:outputLabel value="#{billItem.bill.id}"/>
+                            </p:column>
+                            <p:column headerText="Date">
+                                <h:outputLabel value="#{billItem.createdAt}"/>
+                            </p:column>
+                            <p:column headerText="Department">
+                                <h:outputLabel value="#{billItem.bill.fromDepartment.name}"/>
+                            </p:column>
+                            <p:column headerText="Procedure / Test">
+                                <h:outputLabel value="#{billItem.item.name}"/>
+                            </p:column>
+
+                            <p:column headerText="Invoice" >
+                                <p:outputLabel id="paymentTime" value="#{billItem.bill.id}"/>
+                            </p:column>
+                            <p:column headerText="Patient"   >
+                                <h:outputLabel value="#{billItem.bill.patient.person.name}"/>
+                            </p:column>
+                            <p:column headerText="Ref Doctor">
+                                <h:outputLabel value="#{billItem.bill.referredBy.person.nameWithTitle}" />
+                            </p:column>
+                            <p:column headerText="Doctor">
+                                <h:outputLabel value="#{billItem.bill.fromStaff.person.nameWithTitle}" />
+                            </p:column>
+                            <p:column headerText="OPD Fee">
+                                <h:outputLabel value="#{billItem.totalHospitalFeeValueTransient}" />
+                                <f:facet name="footer" >
+                                    <h:outputText value="#{opdBillController.totalHospitalFee}" >
+                                        <f:convertDateTime pattern="#,##0.00" ></f:convertDateTime>
+                                    </h:outputText>
+                                </f:facet>
+                            </p:column>
+                            <p:column headerText="Doctor Fee">
+                                <h:outputLabel value="#{billItem.totalDoctorFeeValueTransient}" />
+                                <f:facet name="footer" >
+                                    <h:outputText value="#{opdBillController.totalSaffFee}" >
+                                        <f:convertDateTime pattern="#,##0.00" ></f:convertDateTime>
+                                    </h:outputText>
+                                </f:facet>
+                            </p:column>
+                            <p:column headerText="Procedure Fee">
+                                <h:outputLabel value="#{billItem.netValue}" />
+                            </p:column>
+                            <p:column headerText="Total">
+                                <h:outputLabel value="#{billItem.netValue}" />
+                            </p:column>
+                        </p:dataTable>
+
+                    </p:panel>
+
+                </h:form>
+            </ui:define>
+
+
+        </ui:composition>
+
+    </h:body>
+</html>

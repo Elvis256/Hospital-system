@@ -1,0 +1,30 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui">
+
+    <h:body>
+
+        <ui:composition template="/payments/credit_company_pay_index.xhtml" >
+
+            <ui:define name="admin">
+                <h:form>
+                    <h:panelGrid columns="3" >    
+                        
+                        <p:panel header="BHT Credit Payment Report">
+                            <p:commandButton ajax="false" value="BHT Payment" action="inward_bht_credit_payment_report"/>
+                        </p:panel>
+
+                        <p:panel header="OPD Credit Payment Report">
+                              <p:commandButton ajax="false" value="OPD Payment" action="opd_credit_payment_report"/>
+                        </p:panel>
+                    </h:panelGrid>
+                </h:form>
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>

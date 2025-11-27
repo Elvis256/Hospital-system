@@ -1,0 +1,111 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <h:body>
+
+        <ui:composition template="./../resources/template/template.xhtml">
+
+            <ui:define name="content">
+
+                <h:form>
+                    <p:panel header="Investigation Results" >
+
+                        <p:panelGrid columns="2" >
+                            <p:outputLabel value="Date From" />
+                            <p:calendar value="#{patientInvestigationController.fromDate}" pattern="yyyy-MM-dd" />
+                            <p:outputLabel value="Date To" />
+                            <p:calendar value="#{patientInvestigationController.toDate}" pattern="yyyy-MM-dd" />
+                            <p:outputLabel value="ID From" />
+                            <p:inputText value="#{patientInvestigationController.fromId}" />
+                            <p:outputLabel value="ID To" />
+                            <p:inputText value="#{patientInvestigationController.toId}" />
+                            <p:spacer></p:spacer>
+                            <p:commandButton ajax="false"
+                                             action="#{patientInvestigationController.fillPatientReportItemValues(patientInvestigationController.fromId, patientInvestigationController.toId, patientInvestigationController.fromDate, patientInvestigationController.toDate)}"
+                                             value="Fill" />
+                            <p:spacer></p:spacer>
+                            <p:commandButton value="Export" ajax="false">
+                                <p:dataExporter target="tbl" type="xlsx" fileName="test_results" ></p:dataExporter>
+
+                            </p:commandButton>
+
+                            <p:outputLabel value="Passed Time" ></p:outputLabel>
+                            <h:outputText id="txt_count" value="#{patientInvestigationController.number} - #{patientInvestigationController.patientReportItemValues eq null}" />
+
+                        </p:panelGrid>
+
+
+
+                        <p:poll interval="3" listener="#{patientInvestigationController.increment}" update="txt_count" />
+
+
+
+
+                        <p:dataTable
+                            id="tbl"
+                            var="v" value="#{patientInvestigationController.patientReportItemValues}" rows="10"
+                            rowKey="#{v.id}"
+                            rowIndexVar="n"
+                            paginator="true"
+                            paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                            rowsPerPageTemplate="5,10,15">
+
+
+
+                            <p:column headerText="No">
+                                <h:outputText value="#{n+1}" />
+                            </p:column>
+
+                            <p:column headerText="Sex">
+                                <h:outputText value="#{v.patient.person.sex}" />
+                            </p:column>
+
+                            <p:column headerText="Age">
+                                <h:outputText value="#{v.patient.person.age}" />
+                            </p:column>
+
+                            <p:column headerText="Date of Birth">
+                                <h:outputText value="#{v.patient.person.dob}" >
+                                    <f:convertDateTime pattern="#{sessionController.applicationPreference.longDateFormat}" ></f:convertDateTime>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Approved At">
+                                <h:outputText value="#{v.patientReport.approveAt}" >
+                                    <f:convertDateTime pattern="#{sessionController.applicationPreference.longDateFormat}" ></f:convertDateTime>
+                                </h:outputText>
+                            </p:column>
+
+                            <p:column headerText="Investigation">
+                                <h:outputText value="#{v.patientReport.item.name}" />
+                            </p:column>
+
+                            <p:column headerText="Test">
+                                <h:outputText value="#{v.investigationItem.name}" />
+                            </p:column>
+
+                            <p:column headerText="Value">
+                                <h:outputText value="#{v.value}" />
+                            </p:column>
+
+
+
+                        </p:dataTable>
+
+
+
+
+                    </p:panel>
+                </h:form>
+
+            </ui:define>
+
+        </ui:composition>
+
+    </h:body>
+</html>
