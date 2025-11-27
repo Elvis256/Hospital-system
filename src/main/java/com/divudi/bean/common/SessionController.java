@@ -2821,10 +2821,27 @@ public class SessionController implements Serializable, HttpSessionListener {
     
     /**
      * Check if user is a doctor (for clinical access)
-     * @return true if user has Doctor role
+     * Hybrid access model: checks BOTH Role AND Staff Category
+     * @return true if user has Doctor role OR Doctor staff category
      */
     public boolean isDoctor() {
-        return hasRole("Doctor");
+        // Check if user has Doctor role
+        if (hasRole("Doctor")) {
+            return true;
+        }
+        
+        // Check if user's staff category is Doctor
+        if (loggedUser != null && loggedUser.getStaff() != null) {
+            Staff staff = loggedUser.getStaff();
+            if (staff.getStaffCategory() != null) {
+                String categoryName = staff.getStaffCategory().getName();
+                if (categoryName != null && categoryName.equalsIgnoreCase("Doctor")) {
+                    return true;
+                }
+            }
+        }
+        
+        return false;
     }
     
     /**
