@@ -570,64 +570,82 @@ public class SessionController implements Serializable, HttpSessionListener {
     }
 
     public String createFirstLogin() {
-        Institution ins = new Institution();
-        ins.setName(institutionName);
-        ins.setInstitutionCode(institutionName);
-        ins.setCreatedAt(new Date());
-        ins.setInstitutionType(InstitutionType.Company);
-        institutionFacade.create(ins);
-        institutionFacade.flush();
-        Department dep = new Department();
-        dep.setInstitution(ins);
-        dep.setName(departmentName);
-        dep.setPrintingName(departmentName);
-        dep.setDepartmentCode(departmentName);
-        departmentFacade.create(dep);
-        departmentFacade.flush();
-
-        Person p = new Person();
-        p.setName(userName);
-        p.setCreatedAt(new Date());
-        personFacade.create(p);
-        personFacade.flush();
-
-        Staff staff = new Staff();
-        staff.setPerson(p);
-        staffFacade.create(staff);
-        staffFacade.flush();
-
-        WebUser wu = new WebUser();
-        wu.setWebUserPerson(p);
-        wu.setStaff(staff);
-        wu.setInstitution(ins);
-        wu.setDepartment(dep);
-        wu.setCreatedAt(new Date());
-        wu.setActivated(true);
-        wu.setActivatedAt(new Date());
-        wu.setName(userName);
-        wu.setWebUserPassword(getSecurityController().hashAndCheck(password));
-        webUserFacade.create(wu);
-        webUserFacade.flush();
-
-        for (Privileges pv : Privileges.values()) {
-            WebUserPrivilege wup = new WebUserPrivilege();
-            wup.setWebUser(wu);
-            wup.setPrivilege(pv);
-            wup.setCreatedAt(new Date());
-            wup.setDepartment(dep);
-            webUserPrivilegeFacade.create(wup);
+        // Check if user already exists
+        String jpql = "select count(u) from WebUser u where u.name = :name";
+        Map<String, Object> params = new HashMap<>();
+        params.put("name", userName);
+        Long userCount = webUserFacade.countByJpql(jpql, params);
+        
+        if (userCount != null && userCount > 0) {
+            JsfUtil.addErrorMessage("First login already created. Please use the login page.");
+            return "/index";
         }
+        
+        try {
+            Institution ins = new Institution();
+            ins.setName(institutionName);
+            ins.setInstitutionCode(institutionName);
+            ins.setCreatedAt(new Date());
+            ins.setInstitutionType(InstitutionType.Company);
+            institutionFacade.create(ins);
+            institutionFacade.flush();
+            
+            Department dep = new Department();
+            dep.setInstitution(ins);
+            dep.setName(departmentName);
+            dep.setPrintingName(departmentName);
+            dep.setDepartmentCode(departmentName);
+            departmentFacade.create(dep);
+            departmentFacade.flush();
 
-        WebUserDepartment wud = new WebUserDepartment();
-        wud.setCreatedAt(new Date());
-        wud.setDepartment(dep);
-        wud.setWebUser(wu);
-        webUserDepartmentFacade.create(wud);
+            Person p = new Person();
+            p.setName(userName);
+            p.setCreatedAt(new Date());
+            personFacade.create(p);
+            personFacade.flush();
 
-        firstLogin = null;
+            Staff staff = new Staff();
+            staff.setPerson(p);
+            staffFacade.create(staff);
+            staffFacade.flush();
 
-        return "/index";
+            WebUser wu = new WebUser();
+            wu.setWebUserPerson(p);
+            wu.setStaff(staff);
+            wu.setInstitution(ins);
+            wu.setDepartment(dep);
+            wu.setCreatedAt(new Date());
+            wu.setActivated(true);
+            wu.setActivatedAt(new Date());
+            wu.setName(userName);
+            wu.setWebUserPassword(getSecurityController().hashAndCheck(password));
+            webUserFacade.create(wu);
+            webUserFacade.flush();
 
+            for (Privileges pv : Privileges.values()) {
+                WebUserPrivilege wup = new WebUserPrivilege();
+                wup.setWebUser(wu);
+                wup.setPrivilege(pv);
+                wup.setCreatedAt(new Date());
+                wup.setDepartment(dep);
+                webUserPrivilegeFacade.create(wup);
+            }
+
+            WebUserDepartment wud = new WebUserDepartment();
+            wud.setCreatedAt(new Date());
+            wud.setDepartment(dep);
+            wud.setWebUser(wu);
+            webUserDepartmentFacade.create(wud);
+
+            firstLogin = null;
+            
+            JsfUtil.addSuccessMessage("First login created successfully. Please login with your credentials.");
+            return "/index";
+            
+        } catch (Exception e) {
+            JsfUtil.addErrorMessage("Error creating first login: " + e.getMessage());
+            return "";
+        }
     }
 
     public String toLoginFromWeb() {
