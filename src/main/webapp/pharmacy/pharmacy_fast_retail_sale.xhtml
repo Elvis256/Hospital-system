@@ -124,23 +124,40 @@
                                                         maxResults="10"
                                                         class="w-100"
                                                         forceSelection="true"
-                                                        value="#{pharmacyFastRetailSaleController.selectedAmp}"
+                                                        value="#{pharmacyFastRetailSaleController.selectedStockDto}"
                                                         completeMethod="#{pharmacyFastRetailSaleController.completeAmp}"
-                                                        var="amp"
-                                                        itemLabel="#{amp.name}"
-                                                        itemValue="#{amp}">
+                                                        converter="#{pharmacyFastRetailSaleController.stockDtoConverter}"
+                                                        var="stock"
+                                                        scrollHeight="400"
+                                                        itemLabel="#{stock.itemName}"
+                                                        itemValue="#{stock}">
                                                         <p:column headerText="Medicine Name" style="padding: 8px;">
-                                                            <h:outputText value="#{amp.name}" style="width: 300px!important;" />
+                                                            <h:outputText value="#{stock.itemName}" style="width: 300px!important;" />
                                                         </p:column>
                                                         <p:column
                                                             rendered="#{configOptionApplicationController.getBooleanValueByKey('Medicine Identification Codes Used',true)}"
                                                             headerText="Code" style="padding: 8px;">
-                                                            <h:outputText value="#{amp.code}" style="width: 50px!important;" />
+                                                            <h:outputText value="#{stock.code}" style="width: 50px!important;" />
                                                         </p:column>
-                                                        <p:column headerText="VMP" style="padding: 8px;">
-                                                            <h:outputText value="#{amp.vmp.name}" style="width: 150px!important;" />
+                                                        <p:column headerText="Generic" style="padding: 8px;">
+                                                            <h:outputText value="#{stock.genericName}" style="width: 150px!important;" />
                                                         </p:column>
-                                                        <p:ajax event="itemSelect" listener="#{pharmacyFastRetailSaleController.handleAmpSelect}" process="@this" update="txtQty focusQty" ></p:ajax>
+                                                        <p:column headerText="Rate" style="padding: 8px;">
+                                                            <h:outputLabel value="#{stock.retailRate}" style="width: 80px!important;">
+                                                                <f:convertNumber pattern="#,##0.00" ></f:convertNumber>
+                                                            </h:outputLabel>
+                                                        </p:column>
+                                                        <p:column headerText="Stocks" style="padding: 8px;">
+                                                            <h:outputLabel value="#{stock.stockQty}" >
+                                                                <f:convertNumber pattern="#,###" ></f:convertNumber>
+                                                            </h:outputLabel>
+                                                        </p:column>
+                                                        <p:column headerText="Expiry" style="padding: 8px;">
+                                                            <h:outputLabel value="#{stock.dateOfExpire}" style="width: 100px!important;" >
+                                                                <f:convertDateTime pattern="#{sessionController.applicationPreference.shortDateFormat}" ></f:convertDateTime>
+                                                            </h:outputLabel>
+                                                        </p:column>
+                                                        <p:ajax event="itemSelect" listener="#{pharmacyFastRetailSaleController.handleAmpSelect}" process="@this" update="txtQty txtRate txtVal focusQty" ></p:ajax>
                                                     </p:autoComplete>
 
 
@@ -158,22 +175,54 @@
                                                         onfocus="this.select()"
                                                         style="text-align: right;"
                                                         value="#{pharmacyFastRetailSaleController.intQty}">
+                                                        <p:ajax event="keyup" listener="#{pharmacyFastRetailSaleController.calculateBillItemListner}" process="acAmp txtQty" update="txtRate txtVal"></p:ajax>
+                                                        <p:ajax event="blur" listener="#{pharmacyFastRetailSaleController.calculateBillItemListner}" process="acAmp txtQty" update="txtRate txtVal"></p:ajax>
                                                     </p:inputText>
                                                     <p:focus id="focusQty" for="txtQty" />
 
                                                 </div>
                                                 <div class="col-md-5">
-                                                    <p:outputLabel value="&nbsp;" class="w-100" ></p:outputLabel>
-                                                    <p:commandButton
-                                                        id="btnAdd"
-                                                        accesskey="a"
-                                                        icon="fa fa-plus"
-                                                        value="Add"
-                                                        styleClass="ui-button-success"
-                                                        action="#{pharmacyFastRetailSaleController.addBillItemMultipleBatches()}"
-                                                        process="@this acAmp txtQty"
-                                                        update=":#{p:resolveFirstComponentWithId('netTotal',view).clientId} :#{p:resolveFirstComponentWithId('dis',view).clientId} :#{p:resolveFirstComponentWithId('total',view).clientId} :#{p:resolveFirstComponentWithId('panelBillDetails',view).clientId} :#{p:resolveFirstComponentWithId('tblBillItem',view).clientId} acAmp txtQty focusItem :#{p:resolveFirstComponentWithId('panelError',view).clientId}"
-                                                        oncomplete="setTimeout(function(){document.getElementById('acAmp').focus();}, 100);" />
+                                                    <div class="row" >
+                                                        <div class="col-md-4">
+                                                            <p:outputLabel value="&nbsp;" class="w-100" ></p:outputLabel>
+                                                            <p:commandButton
+                                                                id="btnAdd"
+                                                                accesskey="a"
+                                                                icon="fa fa-plus"
+                                                                value="Add"
+                                                                styleClass="ui-button-success"
+                                                                action="#{pharmacyFastRetailSaleController.addBillItemMultipleBatches()}"
+                                                                process="@this acAmp txtQty"
+                                                                update=":#{p:resolveFirstComponentWithId('netTotal',view).clientId} :#{p:resolveFirstComponentWithId('dis',view).clientId} :#{p:resolveFirstComponentWithId('total',view).clientId} :#{p:resolveFirstComponentWithId('panelBillDetails',view).clientId} :#{p:resolveFirstComponentWithId('tblBillItem',view).clientId} acAmp txtQty txtRate txtVal focusItem :#{p:resolveFirstComponentWithId('panelError',view).clientId}"
+                                                                oncomplete="setTimeout(function(){document.getElementById('acAmp').focus();}, 100);" />
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <p:outputLabel class="w-100" for="txtRate">Rate</p:outputLabel>
+                                                            <p:inputText
+                                                                id="txtRate"
+                                                                style="text-align: right;"
+                                                                class="w-100"
+                                                                readonly="true"
+                                                                value="#{pharmacyFastRetailSaleController.billItem.netRate}">
+                                                                <f:convertNumber pattern="#,##0.00" />
+                                                            </p:inputText>
+                                                        </div>
+                                                        <div class="col-md-4">
+                                                            <p:outputLabel
+                                                                class="w-100"
+                                                                value="Value"
+                                                                for="txtVal">
+                                                            </p:outputLabel>
+                                                            <p:inputText
+                                                                readonly="true"
+                                                                id="txtVal"
+                                                                class="w-100"
+                                                                style="text-align: right;"
+                                                                value="#{pharmacyFastRetailSaleController.billItem.netValue}">
+                                                                <f:convertNumber pattern="#,##0.00" />
+                                                            </p:inputText>
+                                                        </div>
+                                                    </div>
                                                 </div>
                                             </div>
                                             <div class="row w-100 m-1 p-1 boder-1">

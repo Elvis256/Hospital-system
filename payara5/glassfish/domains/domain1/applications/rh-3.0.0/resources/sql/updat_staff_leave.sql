@@ -1,1 +1,0 @@
-select id,name, `DEPARTMENT_ID`, `RETIRED`,`ACTIVE` from item where name = 'OPD';

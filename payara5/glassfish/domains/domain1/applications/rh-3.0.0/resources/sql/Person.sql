@@ -1,1 +1,0 @@
-select id,title,name,`CREATEDAT` from Person where name like '%pahandi%' ;

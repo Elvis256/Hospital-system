@@ -1196,6 +1196,7 @@ public class PatientEncounterController implements Serializable {
         e.getPatient();
         sql = "Select e "
                 + " from ClinicalFindingValue e "
+                + " LEFT JOIN FETCH e.patientInvestigation pi "
                 + " where e.encounter=:e "
                 + " and e.retired=:ret ";
         if (clinicalFindingValueTypes != null) {
@@ -2350,24 +2351,57 @@ public class PatientEncounterController implements Serializable {
 
         int sentCount = 0;
         
-        for (ClinicalFindingValue cfv : encounterInvestigations) {
-            if (cfv.getItemValue() == null) {
-                continue;
+        try {
+            for (ClinicalFindingValue cfv : encounterInvestigations) {
+                if (cfv.getItemValue() == null || !(cfv.getItemValue() instanceof Investigation)) {
+                    continue;
+                }
+                
+                Investigation investigation = (Investigation) cfv.getItemValue();
+                
+                // Workflow B: No payment required before lab processing
+                cfv.setRequirePaymentBeforeLab(false);
+                
+                // Create PatientInvestigation directly (without bill/billitem for now)
+                // Bill will be created at checkout when patient pays
+                PatientInvestigation pi = new PatientInvestigation();
+                pi.setInvestigation(investigation);
+                pi.setPatient(current.getPatient());
+                pi.setEncounter(current);
+                pi.setBillItem(null); // Will be linked when bill is created at checkout
+                pi.setCreatedAt(new Date());
+                pi.setCreater(sessionController.getLoggedUser());
+                pi.setCollected(false);
+                pi.setDataEntered(false);
+                pi.setApproved(false);
+                pi.setOrdered(true);
+                pi.setOrderedBy(sessionController.getLoggedUser());
+                pi.setOrderedAt(new Date());
+                pi.setOrderedDepartment(sessionController.getDepartment());
+                pi.setStatus(com.divudi.core.data.lab.PatientInvestigationStatus.ORDERED);
+                pi.setPerformDepartment(sessionController.getDepartment());
+                pi.setPerformInstitution(sessionController.getInstitution());
+                piFacade.create(pi);
+                
+                // Link PatientInvestigation back to ClinicalFindingValue
+                cfv.setPatientInvestigation(pi);
+                clinicalFindingValueFacade.edit(cfv);
+                
+                System.out.println("✓ Created PatientInvestigation for: " + investigation.getName() + " (ID: " + pi.getId() + ") - Workflow B");
+                sentCount++;
             }
             
-            // Workflow B: No payment required before lab processing
-            cfv.setRequirePaymentBeforeLab(false); // Can process immediately, pay at checkout
+            if (sentCount > 0) {
+                JsfUtil.addSuccessMessage(sentCount + " test(s) ordered and sent to laboratory (no payment required). Patient will pay at checkout.");
+                System.out.println("=== orderLabTestsWithoutCash: Created " + sentCount + " PatientInvestigation records ===");
+            } else {
+                JsfUtil.addErrorMessage("No tests were sent to lab");
+            }
             
-            // Mark as sent to lab by saving
-            clinicalFindingValueFacade.edit(cfv);
-            
-            sentCount++;
-        }
-
-        if (sentCount > 0) {
-            JsfUtil.addSuccessMessage(sentCount + " test(s) ordered and sent to laboratory (no payment required).");
-        } else {
-            JsfUtil.addErrorMessage("No tests were sent to lab");
+        } catch (Exception e) {
+            System.err.println("ERROR in orderLabTestsWithoutCash: " + e.getMessage());
+            e.printStackTrace();
+            JsfUtil.addErrorMessage("Error sending tests to lab: " + e.getMessage());
         }
     }
 

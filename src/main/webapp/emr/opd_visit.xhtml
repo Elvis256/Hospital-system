@@ -447,6 +447,15 @@
                                                 <f:facet name="header">
                                                     <h:outputText styleClass="fas fa-vial"/>
                                                     <h:outputText class="mx-4" value="Order Tests For Visit"/>
+                                                    <div style="float: right;">
+                                                        <p:commandButton 
+                                                            value="Refresh Status" 
+                                                            icon="fas fa-sync"
+                                                            class="ui-button-info"
+                                                            ajax="false"
+                                                            title="Reload test statuses to see payment and lab processing updates">
+                                                        </p:commandButton>
+                                                    </div>
                                                 </f:facet>
                                                 <div class="row" >
                                                     <div class="col-9" >
@@ -494,24 +503,69 @@
                                                                  paginator="true"
                                                                  paginatorTemplate="{CurrentPageReport}  {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink}"
                                                                  var="ix" class="w-100">
-                                                        <p:column headerText="Test" >
-                                                            <h:outputLabel value="#{ix.itemValue.name}"></h:outputLabel>
-
+                                                        <p:column headerText="Test" style="width: 30%;">
+                                                            <h:outputLabel value="#{ix.itemValue.name}" style="font-weight: bold;"></h:outputLabel>
                                                         </p:column>
-                                                        <p:column headerText="Details">
+                                                        <p:column headerText="Details" style="width: 25%;">
                                                             <h:outputLabel value="#{ix.lobValue}"></h:outputLabel>
                                                         </p:column>
-                                                        <p:column width="80">
+                                                        <p:column headerText="Payment Status" style="width: 20%;">
+                                                            <!-- Show if payment is required or not -->
+                                                            <h:panelGroup rendered="#{ix.requirePaymentBeforeLab eq true}">
+                                                                <h:panelGroup rendered="#{ix.patientInvestigation eq null}">
+                                                                    <span class="badge badge-warning">
+                                                                        <i class="fas fa-money-bill-wave"></i> AWAITING PAYMENT
+                                                                    </span>
+                                                                </h:panelGroup>
+                                                                <h:panelGroup rendered="#{ix.patientInvestigation ne null}">
+                                                                    <span class="badge badge-success">
+                                                                        <i class="fas fa-check-circle"></i> PAID
+                                                                    </span>
+                                                                </h:panelGroup>
+                                                            </h:panelGroup>
+                                                            <h:panelGroup rendered="#{ix.requirePaymentBeforeLab eq false or ix.requirePaymentBeforeLab eq null}">
+                                                                <span class="badge badge-info">
+                                                                    <i class="fas fa-clock"></i> PAY AT CHECKOUT
+                                                                </span>
+                                                            </h:panelGroup>
+                                                        </p:column>
+                                                        <p:column headerText="Lab Status" style="width: 15%;">
+                                                            <!-- Show lab processing status -->
+                                                            <h:panelGroup rendered="#{ix.patientInvestigation ne null}">
+                                                                <h:panelGroup rendered="#{ix.patientInvestigation.status.name() eq 'ORDERED' or ix.patientInvestigation.status eq null}">
+                                                                    <span class="badge badge-info">
+                                                                        <i class="fas fa-flask"></i> ORDERED
+                                                                    </span>
+                                                                </h:panelGroup>
+                                                                <h:panelGroup rendered="#{ix.patientInvestigation.status.name() eq 'SAMPLE_COLLECTED'}">
+                                                                    <span class="badge" style="background-color: #17a2b8; color: white;">
+                                                                        <i class="fas fa-vial"></i> SAMPLE COLLECTED
+                                                                    </span>
+                                                                </h:panelGroup>
+                                                                <h:panelGroup rendered="#{ix.patientInvestigation.status.name() eq 'REPORT_APPROVED' or ix.patientInvestigation.status.name() eq 'REPORT_PRINTED'}">
+                                                                    <span class="badge badge-success">
+                                                                        <i class="fas fa-check-double"></i> RESULTS READY
+                                                                    </span>
+                                                                </h:panelGroup>
+                                                            </h:panelGroup>
+                                                            <h:panelGroup rendered="#{ix.patientInvestigation eq null}">
+                                                                <span class="badge" style="background-color: #6c757d; color: white;">
+                                                                    <i class="fas fa-hourglass-start"></i> NOT SENT
+                                                                </span>
+                                                            </h:panelGroup>
+                                                        </p:column>
+                                                        <p:column headerText="Action" style="width: 10%;">
                                                             <p:commandButton
                                                                 id="clRemoveIx"
                                                                 action="#{patientEncounterController.removeEncounterInvestigation()}" 
                                                                 process="clRemoveIx"
                                                                 update=":#{p:resolveFirstComponentWithId('gpIx',view).clientId} :#{p:resolveFirstComponentWithId('msg',view).clientId}"
                                                                 class="ui-button-danger"
-                                                                icon="fas fa-trash">
+                                                                icon="fas fa-trash"
+                                                                disabled="#{ix.patientInvestigation ne null}"
+                                                                title="#{ix.patientInvestigation ne null ? 'Cannot delete - already sent to lab' : 'Remove test'}">
                                                                 <f:setPropertyActionListener value="#{ix}" target="#{patientEncounterController.removingCfv}" />
                                                             </p:commandButton>
-
                                                         </p:column>
                                                     </p:dataTable>
                                                 </h:panelGroup>

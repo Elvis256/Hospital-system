@@ -708,26 +708,62 @@ public class PharmacyFastRetailSaleController implements Serializable, Controlle
 
     /**
      * Autocomplete method for AMP (Active Medicinal Product) selection
+     * Returns StockDTO objects which include stock, rate, expiry, and generic info
      */
-    public List<Amp> completeAmp(String qry) {
+    public List<StockDTO> completeAmp(String qry) {
         if (qry == null || qry.trim().length() < 3) {
-            return new ArrayList<>();
+            cachedStockDtos = new ArrayList<>();
+            return cachedStockDtos;
         }
-        return ampController.completeAmp(qry);
+        cachedStockDtos = stockController.completeAvailableStocksWithItemStockDtoWithoutTotalStock(qry);
+        return cachedStockDtos;
+    }
+    
+    /**
+     * Getter for the StockDTO converter
+     */
+    public Converter getStockDtoConverter() {
+        return new StockDtoConverter();
     }
 
     /**
      * Handler for AMP selection - loads available stocks and focuses quantity
+     * Now works with StockDTO which contains stock, rate, expiry data
      */
     public void handleAmpSelect(SelectEvent event) {
-        Amp selectedAmpObj = (Amp) event.getObject();
-        if (selectedAmpObj == null) {
+        StockDTO selectedStockDto = (StockDTO) event.getObject();
+        if (selectedStockDto == null) {
             return;
         }
-        this.selectedAmp = selectedAmpObj;
+        
+        // Store the selected StockDTO for later use
+        this.selectedStockDto = selectedStockDto;
+        
+        // Load the Stock entity and get the Amp from it
+        Long stockId = selectedStockDto.getId();
+        if (stockId != null) {
+            this.stock = stockFacade.find(stockId);
+            if (stock != null && stock.getItemBatch() != null && stock.getItemBatch().getItem() instanceof Amp) {
+                this.selectedAmp = (Amp) stock.getItemBatch().getItem();
+            }
+        }
+        
+        // Set default quantity if not set
         if (intQty == null || intQty == 0) {
             setIntQty(1);
         }
+        
+        // Initialize billItem if needed
+        if (billItem == null) {
+            billItem = new BillItem();
+        }
+        if (billItem.getPharmaceuticalBillItem() == null) {
+            PharmaceuticalBillItem pbi = new PharmaceuticalBillItem();
+            billItem.setPharmaceuticalBillItem(pbi);
+        }
+        
+        // Calculate rate and value immediately
+        calculateBillItem();
     }
 
     /**
@@ -883,16 +919,20 @@ public class PharmacyFastRetailSaleController implements Serializable, Controlle
         if (billItem.getPharmaceuticalBillItem().getStock() == null) {
             getBillItem().getPharmaceuticalBillItem().setStock(stock);
         }
-        if (getQty() == null) {
-            qty = 0.0;
+        
+        // Convert intQty to qty (Double)
+        if (intQty != null && intQty > 0) {
+            qty = intQty.doubleValue();
+        } else {
+            qty = 0.0; // Always reset to 0.0 when intQty is null or zero to prevent stale data
         }
+        
         if (getQty() > getStock().getStock()) {
             JsfUtil.addErrorMessage("No Sufficient Stocks?");
             return;
         }
 
         //Bill Item
-//        billItem.setInwardChargeType(InwardChargeType.Medicine);
         billItem.setItem(getStock().getItemBatch().getItem());
         billItem.setQty(qty);
 
@@ -902,12 +942,18 @@ public class PharmacyFastRetailSaleController implements Serializable, Controlle
         billItem.getPharmaceuticalBillItem().setItemBatch(getStock().getItemBatch());
         billItem.getPharmaceuticalBillItem().setQtyInUnit(0 - qty);
 
-        //Rates
+        //Rates - get from stock's item batch
+        Double retailRate = getStock().getItemBatch().getRetailsaleRate();
+        if (retailRate == null) {
+            retailRate = 0.0;
+        }
+        billItem.setRate(retailRate);
+        billItem.setNetRate(retailRate);
+        
         //Values
-        billItem.setGrossValue(getStock().getItemBatch().getRetailsaleRate() * qty);
+        billItem.setGrossValue(retailRate * qty);
         billItem.setNetValue(qty * billItem.getNetRate());
         billItem.setDiscount(billItem.getGrossValue() - billItem.getNetValue());
-
     }
 
     public void addBillItem() {
@@ -2538,10 +2584,22 @@ public class PharmacyFastRetailSaleController implements Serializable, Controlle
             return;
         }
 
-        bi.setRate(stock.getItemBatch().getRetailsaleRate());
-        bi.setGrossValue(bi.getQty() * bi.getRate());
+        // Get retail rate from stock
+        Double retailRate = stock.getItemBatch().getRetailsaleRate();
+        if (retailRate == null) {
+            retailRate = 0.0;
+        }
+        
+        // Set rates
+        bi.setRate(retailRate);
+        bi.setNetRate(retailRate);  // Set net rate as well
+        
+        // Calculate values
+        bi.setGrossValue(bi.getQty() * retailRate);
+        bi.setNetValue(bi.getQty() * bi.getNetRate());
+        bi.setDiscount(bi.getGrossValue() - bi.getNetValue());
 
-        // Calculate discounts and other values as needed
+        // Calculate totals for the bill
         calculateTotals();
     }
 

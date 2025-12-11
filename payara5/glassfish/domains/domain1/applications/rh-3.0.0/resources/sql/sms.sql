@@ -1,1 +1,0 @@
-select * from sms order by id desc limit 100;1

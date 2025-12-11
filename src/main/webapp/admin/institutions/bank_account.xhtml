@@ -66,8 +66,9 @@
                                         id="cmbIns"
                                         styleClass="w-100 form-control" 
                                         value="#{searchController.institution}" 
-                                        filter="true">
-                                        <f:selectItem itemLabel="All Institutions" />
+                                        filter="true"
+                                        filterMatchMode="contains">
+                                        <f:selectItem itemLabel="All Institutions" noSelectionOption="true" />
                                         <f:selectItems value="#{institutionController.companies}" var="ins" itemLabel="#{ins.name}" itemValue="#{ins}" />
                                         <p:ajax process="cmbIns" update="cmbDept" />
                                     </p:selectOneMenu>
@@ -112,8 +113,8 @@
                                     </h:panelGroup>
 
                                     <h:outputText value="Bank" ></h:outputText>
-                                    <p:selectOneMenu id="cmbBank" value="#{bankAccountController.current.bank}" class="w-100" >
-                                        <f:selectItem itemLabel="Select the Bank" />
+                                    <p:selectOneMenu id="cmbBank" value="#{bankAccountController.current.bank}" class="w-100" filter="true" filterMatchMode="contains">
+                                        <f:selectItem itemLabel="Select the Bank" noSelectionOption="true" />
                                         <f:selectItems value="#{institutionController.banks}" var="i" itemLabel="#{i.name}" itemValue="#{i}" />
                                         <p:ajax process="cmbBank" update="gpBranch" ></p:ajax>
                                     </p:selectOneMenu>
@@ -123,8 +124,10 @@
                                             id="cmbbB"
                                             rendered="#{bankAccountController.current.bank ne null}"
                                             value="#{bankAccountController.current.bankBranch}" 
-                                            class="w-100" >
-                                            <f:selectItem itemLabel="Select the Brnach" />
+                                            class="w-100" 
+                                            filter="true" 
+                                            filterMatchMode="contains">
+                                            <f:selectItem itemLabel="Select the Branch" noSelectionOption="true" />
                                             <f:selectItems value="#{institutionController.getBranches(bankAccountController.current.bank)}" var="i" itemLabel="#{i.name}" itemValue="#{i}" />
                                         </p:selectOneMenu>
                                     </h:panelGroup>

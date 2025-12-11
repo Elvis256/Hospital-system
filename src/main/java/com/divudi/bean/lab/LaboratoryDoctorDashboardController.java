@@ -112,6 +112,7 @@ public class LaboratoryDoctorDashboardController implements Serializable {
     private String filteringStatus;
     private String comment;
     private List<LaboratoryDashboardDTO> patientInvestigationsDtos;
+    private boolean filterByStaff = false; // Default: show all tests, not just assigned to specific staff
 
     // </editor-fold>
     
@@ -282,26 +283,33 @@ public class LaboratoryDoctorDashboardController implements Serializable {
         jpql = "SELECT i "
                 + " FROM PatientInvestigation i "
                 + " WHERE i.retired = :ret "
-                + " AND (i.billItem.bill.createdAt BETWEEN :fd AND :td OR i.createdAt BETWEEN :fd AND :td) "
-                + " AND (i.investigation.staff = :staff OR i.investigation.staff IS NULL)";
+                + " AND ((i.billItem IS NOT NULL AND i.billItem.bill.createdAt BETWEEN :fd AND :td) OR i.createdAt BETWEEN :fd AND :td) ";
+        
+        // Only filter by staff if user has a staff record and wants to filter
+        if (sessionController.getLoggedUser() != null 
+            && sessionController.getLoggedUser().getStaff() != null 
+            && filterByStaff) {
+            jpql += " AND (i.investigation.staff = :staff OR i.investigation.staff IS NULL)";
+            params.put("staff", sessionController.getLoggedUser().getStaff());
+        }
 
         if (billNo != null && !billNo.trim().isEmpty()) {
-            jpql += " AND i.billItem.bill.deptId LIKE :billNo";
+            jpql += " AND i.billItem IS NOT NULL AND i.billItem.bill.deptId LIKE :billNo";
             params.put("billNo", "%" + getBillNo().trim() + "%");
         }
 
         if (bhtNo != null && !bhtNo.trim().isEmpty()) {
-            jpql += " AND i.billItem.bill.patientEncounter is not null AND i.billItem.bill.patientEncounter.bhtNo LIKE :bht";
+            jpql += " AND i.encounter is not null AND i.encounter.bhtNo LIKE :bht";
             params.put("bht", "%" + getBhtNo().trim() + "%");
         }
 
         if (orderedInstitution != null) {
-            jpql += " AND i.billItem.bill.institution = :orderedInstitution ";
+            jpql += " AND ((i.billItem IS NOT NULL AND i.billItem.bill.institution = :orderedInstitution) OR (i.encounter IS NOT NULL AND i.encounter.institution = :orderedInstitution)) ";
             params.put("orderedInstitution", getOrderedInstitution());
         }
 
         if (orderedDepartment != null) {
-            jpql += " AND i.billItem.bill.department = :orderedDepartment ";
+            jpql += " AND ((i.billItem IS NOT NULL AND i.billItem.bill.department = :orderedDepartment) OR (i.encounter IS NOT NULL AND i.encounter.department = :orderedDepartment)) ";
             params.put("orderedDepartment", getOrderedDepartment());
         }
 
@@ -316,32 +324,32 @@ public class LaboratoryDoctorDashboardController implements Serializable {
         }
 
         if (collectionCenter != null) {
-            jpql += " AND (i.billItem.bill.collectingCentre = :collectionCenter OR i.billItem.bill.fromInstitution = :collectionCenter) ";
+            jpql += " AND i.billItem IS NOT NULL AND (i.billItem.bill.collectingCentre = :collectionCenter OR i.billItem.bill.fromInstitution = :collectionCenter) ";
             params.put("collectionCenter", getCollectionCenter());
         }
 
         if (route != null) {
-            jpql += " AND (i.billItem.bill.collectingCentre.route = :route OR i.billItem.bill.fromInstitution.route = :route) ";
+            jpql += " AND i.billItem IS NOT NULL AND (i.billItem.bill.collectingCentre.route = :route OR i.billItem.bill.fromInstitution.route = :route) ";
             params.put("route", getRoute());
         }
 
         if (patientName != null && !patientName.trim().isEmpty()) {
-            jpql += " AND i.billItem.bill.patient.person.name LIKE :patientName ";
+            jpql += " AND ((i.billItem IS NOT NULL AND i.billItem.bill.patient.person.name LIKE :patientName) OR (i.patient IS NOT NULL AND i.patient.person.name LIKE :patientName)) ";
             params.put("patientName", "%" + getPatientName().trim() + "%");
         }
 
         if (type != null && !type.trim().isEmpty()) {
-            jpql += " AND i.billItem.bill.ipOpOrCc = :tp ";
+            jpql += " AND i.billItem IS NOT NULL AND i.billItem.bill.ipOpOrCc = :tp ";
             params.put("tp", getType().trim());
         }
 
         if (referringDoctor != null) {
-            jpql += " AND i.billItem.bill.referredBy = :referringDoctor ";
+            jpql += " AND i.billItem IS NOT NULL AND i.billItem.bill.referredBy = :referringDoctor ";
             params.put("referringDoctor", getReferringDoctor());
         }
 
         if (investigationName != null && !investigationName.trim().isEmpty()) {
-            jpql += " AND i.billItem.item.name like :investigation ";
+            jpql += " AND ((i.billItem IS NOT NULL AND i.billItem.item.name like :investigation) OR (i.investigation IS NOT NULL AND i.investigation.name like :investigation)) ";
             params.put("investigation", "%" + investigationName.trim() + "%");
         }
 
@@ -355,16 +363,25 @@ public class LaboratoryDoctorDashboardController implements Serializable {
         params.put("ret", false);
         params.put("fd", getFromDate());
         params.put("td", getToDate());
-        params.put("staff", sessionController.getLoggedUser().getStaff());
+        // staff param only added if filterByStaff is true (see above)
 
         items = patientInvestigationFacade.findByJpql(jpql, params, TemporalType.TIMESTAMP);
+        System.out.println("=== DASHBOARD QUERY DEBUG ===");
+        System.out.println("Query: " + jpql);
+        System.out.println("Date Range: " + getFromDate() + " to " + getToDate());
+        System.out.println("FilterByStaff: " + filterByStaff);
+        System.out.println("Params: " + params.keySet());
         System.out.println("Found " + items.size() + " PatientInvestigation records (Already Paid)");
         for (PatientInvestigation pi : items) {
+            String patientName = "NULL";
+            if (pi.getBillItem() != null && pi.getBillItem().getBill() != null && pi.getBillItem().getBill().getPatient() != null) {
+                patientName = pi.getBillItem().getBill().getPatient().getPerson().getName();
+            } else if (pi.getPatient() != null && pi.getPatient().getPerson() != null) {
+                patientName = pi.getPatient().getPerson().getName();
+            }
             System.out.println("  - Already Paid: PI ID=" + pi.getId() + ", Investigation=" + 
                 (pi.getInvestigation() != null ? pi.getInvestigation().getName() : "NULL") + 
-                ", Patient=" + (pi.getBillItem() != null && pi.getBillItem().getBill() != null && 
-                    pi.getBillItem().getBill().getPatient() != null ? 
-                    pi.getBillItem().getBill().getPatient().getPerson().getName() : "NULL") +
+                ", Patient=" + patientName +
                 ", Status=" + pi.getStatus());
         }
 
@@ -898,6 +915,14 @@ public class LaboratoryDoctorDashboardController implements Serializable {
 
     public List<ClinicalFindingValue> getUnpaidOrders() {
         return orderedTestsRequirePayment;
+    }
+
+    public boolean isFilterByStaff() {
+        return filterByStaff;
+    }
+
+    public void setFilterByStaff(boolean filterByStaff) {
+        this.filterByStaff = filterByStaff;
     }
 
 // </editor-fold>

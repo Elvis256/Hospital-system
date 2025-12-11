@@ -844,15 +844,38 @@ public class OpdTokenController implements Serializable, ControllerWithPatient {
         parameters.put("date", sessionDate);
         parameters.put("staff", doctor);
 
-        // Get tokens for this doctor
+        // Get tokens for this doctor with PatientEncounter join fetch
         String jpql = "SELECT t FROM Token t "
+                + "LEFT JOIN FETCH t.patientEncounter pe "
+                + "LEFT JOIN FETCH t.patient p "
+                + "LEFT JOIN FETCH p.person "
                 + "WHERE t.tokenType = :tokenType "
                 + "AND t.tokenDate = :date "
                 + "AND t.staff = :staff "
                 + "AND t.retired = false "
                 + "ORDER BY t.tokenNumber";
 
-        List<Token> allTokens = tokenFacade.findByJpql(jpql, parameters);
+        List<Token> allTokens = tokenFacade.findByJpql(jpql, parameters, TemporalType.DATE);
+        
+        // For tokens without PatientEncounter, try to find it
+        for (Token token : allTokens) {
+            if (token.getPatientEncounter() == null && token.getPatient() != null) {
+                // Find PatientEncounter for this token
+                Map<String, Object> params = new HashMap<>();
+                params.put("patient", token.getPatient());
+                params.put("date", sessionDate);
+                params.put("staff", doctor);
+                String encounterJpql = "SELECT pe FROM PatientEncounter pe "
+                        + "WHERE pe.patient = :patient "
+                        + "AND pe.encounterDate = :date "
+                        + "AND pe.opdDoctor = :staff "
+                        + "ORDER BY pe.id DESC";
+                PatientEncounter encounter = patientEncounterFacade.findFirstByJpql(encounterJpql, params, TemporalType.DATE);
+                if (encounter != null) {
+                    token.setPatientEncounter(encounter);
+                }
+            }
+        }
 
         toCompleteTokens = new ArrayList<>();
         completedTokens = new ArrayList<>();

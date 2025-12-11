@@ -1,2 +1,0 @@
-ALTER TABLE reportlog MODIFY ENDTIME datetime NULL;
-
