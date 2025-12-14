@@ -251,7 +251,7 @@
                             </h:outputLabel>
                         </p:column>
                         <p:column headerText="Comments">
-                            <h:outputLabel value="Added by #{ti.creater.webUserPerson.name}"/>     
+                            <h:outputLabel value="Added by #{ti.creater ne null and ti.creater.webUserPerson ne null ? ti.creater.webUserPerson.name : 'N/A'}"/>     
                             <br/>
                             <h:panelGroup rendered="#{ti.retired}" >
                                 <h:outputLabel style="color: red;" value="Deleted By " />

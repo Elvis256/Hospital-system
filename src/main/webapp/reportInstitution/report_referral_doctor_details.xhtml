@@ -81,14 +81,14 @@
                                 <f:facet name="header">
                                     <h:outputLabel value="Bill Created By" style="float: left"/>
                                 </f:facet>
-                                <h:outputLabel value="#{b.creater.webUserPerson.name}"/>
+                                <h:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}"/>
                             </p:column>
 
                             <p:column headerText="Billed By" >
                                 <f:facet name="header">
                                     <h:outputLabel value="Billed By" style="float: left"/>
                                 </f:facet>
-                                <h:outputLabel value="#{b.paidBill.creater.webUserPerson.name}"/>
+                                <h:outputLabel value="#{b.paidBill.creater ne null and b.paidBill.creater.webUserPerson ne null ? b.paidBill.creater.webUserPerson.name : 'N/A'}"/>
                             </p:column>
 
                             <p:column >

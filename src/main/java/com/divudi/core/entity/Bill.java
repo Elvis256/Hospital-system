@@ -8,6 +8,7 @@ import com.divudi.core.data.BillClassType;
 import com.divudi.core.data.BillType;
 import com.divudi.core.data.BillTypeAtomic;
 import static com.divudi.core.data.BillTypeAtomic.PHARMACY_GRN_RETURN;
+import com.divudi.core.data.Currency;
 import com.divudi.core.data.IdentifiableWithNameOrCode;
 import com.divudi.core.data.PaymentMethod;
 import com.divudi.core.data.inward.SurgeryBillType;
@@ -177,6 +178,18 @@ public class Bill implements Serializable, RetirableEntity {
     private double refundAmount;
     private double balance;
     private double serviceCharge;
+    
+    // Currency and Exchange Rate fields
+    @Enumerated(EnumType.STRING)
+    @Column(name = "currency")
+    private Currency currency = Currency.UGX; // Default to Ugandan Shilling
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exchange_rate_id")
+    private ExchangeRate exchangeRate; // Snapshot of exchange rate at transaction time
+    
+    @Column(name = "exchange_rate_value")
+    private Double exchangeRateValue; // Value stored for historical record
     private Double tax = 0.0;
     private Double cashPaid = 0.0;
     private Double cashBalance = 0.0;
@@ -3065,6 +3078,36 @@ public class Bill implements Serializable, RetirableEntity {
 
     public void setCurrentRequest(Request currentRequest) {
         this.currentRequest = currentRequest;
+    }
+    
+    public Currency getCurrency() {
+        if (currency == null) {
+            currency = Currency.UGX; // Default to Ugandan Shilling
+        }
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public ExchangeRate getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public void setExchangeRate(ExchangeRate exchangeRate) {
+        this.exchangeRate = exchangeRate;
+        if (exchangeRate != null) {
+            this.exchangeRateValue = exchangeRate.getExchangeRate();
+        }
+    }
+
+    public Double getExchangeRateValue() {
+        return exchangeRateValue;
+    }
+
+    public void setExchangeRateValue(Double exchangeRateValue) {
+        this.exchangeRateValue = exchangeRateValue;
     }
     
     

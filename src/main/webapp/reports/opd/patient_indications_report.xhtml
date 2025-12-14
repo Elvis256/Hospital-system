@@ -176,7 +176,7 @@
                             <h:outputLabel value="#{bill.indication}" />
                         </p:column>
                         <p:column headerText="Billed By">
-                            <h:outputLabel value="#{bill.creater.webUserPerson.name}" />
+                            <h:outputLabel value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" />
                         </p:column>
                         <p:column headerText="Billed Department">
                             <h:outputLabel id="byDep" value="#{bill.fromDepartment.name}" />

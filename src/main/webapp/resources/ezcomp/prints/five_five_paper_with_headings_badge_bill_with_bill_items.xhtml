@@ -423,7 +423,7 @@
                 </div>
 
                 <div style="text-decoration: overline; margin-top: 20px;">
-                    <h:outputLabel value="Cashier : #{cc.attrs.billController.batchBill.creater.webUserPerson.name}"/>
+                    <h:outputLabel value="Cashier : #{cc.attrs.billController.batchBill.creater ne null and cc.attrs.billController.batchBill.creater.webUserPerson ne null ? cc.attrs.billController.batchBill.creater.webUserPerson.name : 'N/A'}"/>
                 </div>
 
                 <h:panelGroup rendered="#{cc.attrs.billController.batchBill.paymentMethod eq 'Card'}" style="font-size: 8pt">
@@ -855,7 +855,7 @@
                 </div>
 
                 <div style="text-decoration: overline; margin-top: 20px;">
-                    <h:outputLabel value="Cashier : #{cc.attrs.billController.batchBill.creater.webUserPerson.name}"/>
+                    <h:outputLabel value="Cashier : #{cc.attrs.billController.batchBill.creater ne null and cc.attrs.billController.batchBill.creater.webUserPerson ne null ? cc.attrs.billController.batchBill.creater.webUserPerson.name : 'N/A'}"/>
                 </div>
 
                 <h:panelGroup rendered="#{cc.attrs.billController.batchBill.paymentMethod eq 'Card'}" style="font-size: 8pt">

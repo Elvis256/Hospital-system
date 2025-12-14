@@ -86,7 +86,7 @@
                                     <f:facet name="header">
                                         <h:outputLabel value="Changed by"/>
                                     </f:facet>
-                                    <p:outputLabel value=" #{ss.creater.webUserPerson.name}" ></p:outputLabel>
+                                    <p:outputLabel value=" #{ss.creater ne null and ss.creater.webUserPerson ne null ? ss.creater.webUserPerson.name : 'N/A'}" ></p:outputLabel>
 
                                 </p:column>
                                 <p:column headerText="Employee">

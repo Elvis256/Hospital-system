@@ -91,7 +91,7 @@
                                 <p:outputLabel value="Payment Creation"/>
                                 <h:panelGroup>
                                     <h:outputText value="Created by " />
-                                    <h:outputText value="#{supplierPaymentController.current.creater.webUserPerson.name}" />
+                                    <h:outputText value="#{supplierPaymentController.current.creater ne null and supplierPaymentController.current.creater.webUserPerson ne null ? supplierPaymentController.current.creater.webUserPerson.name : 'N/A'}" />
                                     <h:outputText value=" at " />
                                     <h:outputText value="#{supplierPaymentController.current.createdAt}">
                                         <f:convertDateTime pattern="#{sessionController.applicationPreference.longDateTimeFormat}" />

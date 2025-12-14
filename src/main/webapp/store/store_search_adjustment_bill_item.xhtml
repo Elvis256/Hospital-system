@@ -129,7 +129,7 @@
                                     </p:column>     
 
                                     <p:column headerText="Creater"  style="padding: 10px;  width: 20em;" >
-                                        <h:outputLabel value="#{pi.bill.creater.webUserPerson.nameWithTitle}" />
+                                        <h:outputLabel value="#{pi.bill.creater ne null and pi.bill.creater.webUserPerson ne null ? pi.bill.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                                     </p:column>
                                 </p:dataTable>
                             </div>

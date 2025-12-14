@@ -95,7 +95,7 @@
 
                 <p:outputLabel value="Creator"/>
                 <h:outputLabel value=":"/>
-                <p:outputLabel value="#{cc.attrs.staffShift.creater.webUserPerson.name}"/>
+                <p:outputLabel value="#{cc.attrs.staffShift.creater ne null and cc.attrs.staffShift.creater.webUserPerson ne null ? cc.attrs.staffShift.creater.webUserPerson.name : 'N/A'}"/>
 
                 <p:outputLabel value="Created At"/>
                 <h:outputLabel value=":"/>

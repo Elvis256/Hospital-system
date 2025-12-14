@@ -8,65 +8,43 @@
 
     <ui:composition>
 
-        <p:dialog id="SpecialityCreateDlg" widgetVar="SpecialityCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateSpecialityTitle}">
+        <p:dialog id="SpecialityCreateDlg" widgetVar="SpecialityCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="Create Medical Speciality" width="600">
             <h:form id="SpecialityCreateForm">
                 <h:panelGroup id="display">
-                    <p:panelGrid columns="2" rendered="#{specialityController.selected != null}">
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_categoryClass}" for="categoryClass" />
-                        <p:inputText id="categoryClass" value="#{specialityController.selected.categoryClass}" title="#{bundle.CreateSpecialityTitle_categoryClass}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_symanticType}" for="symanticType" />
-                        <p:inputText id="symanticType" value="#{specialityController.selected.symanticType}" title="#{bundle.CreateSpecialityTitle_symanticType}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_code}" for="code" />
-                        <p:inputText id="code" value="#{specialityController.selected.code}" title="#{bundle.CreateSpecialityTitle_code}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_saleMargin}" for="saleMargin" />
-                        <p:inputText id="saleMargin" value="#{specialityController.selected.saleMargin}" title="#{bundle.CreateSpecialityTitle_saleMargin}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_wholeSaleMargin}" for="wholeSaleMargin" />
-                        <p:inputText id="wholeSaleMargin" value="#{specialityController.selected.wholeSaleMargin}" title="#{bundle.CreateSpecialityTitle_wholeSaleMargin}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_dblValue}" for="dblValue" />
-                        <p:inputText id="dblValue" value="#{specialityController.selected.dblValue}" title="#{bundle.CreateSpecialityTitle_dblValue}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_longValue}" for="longValue" />
-                        <p:inputText id="longValue" value="#{specialityController.selected.longValue}" title="#{bundle.CreateSpecialityTitle_longValue}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_parentCategory}" for="parentCategory" />
-                        <p:selectOneMenu id="parentCategory" value="#{specialityController.selected.parentCategory}" >
-                            <f:selectItems value="#{categoryController.itemsAvailableSelectOne}"
-                                           var="parentCategoryItem"
-                                           itemValue="#{parentCategoryItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_createdAt}" for="createdAt" />
-                        <p:calendar id="createdAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{specialityController.selected.createdAt}" title="#{bundle.EditSpecialityTitle_createdAt}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_creater}" for="creater" />
-                        <p:selectOneMenu id="creater" value="#{specialityController.selected.creater}" >
-                            <f:selectItems value="#{webUserController.itemsAvailableSelectOne}"
-                                           var="createrItem"
-                                           itemValue="#{createrItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_description}" for="description" />
-                        <p:inputText id="description" value="#{specialityController.selected.description}" title="#{bundle.CreateSpecialityTitle_description}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_name}" for="name" />
-                        <p:inputText id="name" value="#{specialityController.selected.name}" title="#{bundle.CreateSpecialityTitle_name}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_retireComments}" for="retireComments" />
-                        <p:inputText id="retireComments" value="#{specialityController.selected.retireComments}" title="#{bundle.CreateSpecialityTitle_retireComments}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_retiredAt}" for="retiredAt" />
-                        <p:calendar id="retiredAt" pattern="MM/dd/yyyy HH:mm:ss" value="#{specialityController.selected.retiredAt}" title="#{bundle.EditSpecialityTitle_retiredAt}"  showOn="button"/>
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_retirer}" for="retirer" />
-                        <p:selectOneMenu id="retirer" value="#{specialityController.selected.retirer}" >
-                            <f:selectItems value="#{webUserController.itemsAvailableSelectOne}"
-                                           var="retirerItem"
-                                           itemValue="#{retirerItem}"/>
-                        </p:selectOneMenu>
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_orderNo}" for="orderNo" />
-                        <p:inputText id="orderNo" value="#{specialityController.selected.orderNo}" title="#{bundle.CreateSpecialityTitle_orderNo}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_id}" for="id" />
-                        <p:inputText id="id" value="#{specialityController.selected.id}" title="#{bundle.CreateSpecialityTitle_id}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_tName}" for="tName" />
-                        <p:inputText id="tName" value="#{specialityController.selected.tName}" title="#{bundle.CreateSpecialityTitle_tName}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_sName}" for="sName" />
-                        <p:inputText id="sName" value="#{specialityController.selected.sName}" title="#{bundle.CreateSpecialityTitle_sName}" />
-                        <p:outputLabel value="#{bundle.CreateSpecialityLabel_entityClass}" for="entityClass" />
-                        <p:inputText id="entityClass" value="#{specialityController.selected.entityClass}" title="#{bundle.CreateSpecialityTitle_entityClass}" />
+                    <p:panelGrid columns="2" rendered="#{specialityController.selected != null}" styleClass="ui-panelgrid-blank" style="width: 100%">
+                        
+                        <p:outputLabel value="Name *" for="name" />
+                        <p:inputText id="name" value="#{specialityController.selected.name}" 
+                                     required="true" requiredMessage="Speciality Name is required"
+                                     style="width: 100%"/>
+                        
+                        <p:outputLabel value="Code" for="code" />
+                        <p:inputText id="code" value="#{specialityController.selected.code}" 
+                                     style="width: 100%"/>
+                        
+                        <p:outputLabel value="Description" for="description" />
+                        <p:inputTextarea id="description" value="#{specialityController.selected.description}" 
+                                         rows="3" style="width: 100%"/>
+                        
+                        <p:outputLabel value="Order No" for="orderNo" />
+                        <p:inputNumber id="orderNo" value="#{specialityController.selected.orderNo}" 
+                                       decimalPlaces="0" style="width: 100%"/>
+                        
                     </p:panelGrid>
-                    <p:commandButton actionListener="#{specialityController.create}" value="#{bundle.Save}" update="display,:SpecialityListForm:datalist,:growl" oncomplete="handleSubmit(args,'SpecialityCreateDialog');"/>
-                    <p:commandButton value="#{bundle.Cancel}" onclick="SpecialityCreateDialog.hide()"/>
+                    <p:separator/>
+                    <div class="p-2">
+                        <p:commandButton actionListener="#{specialityController.create}" 
+                                        value="Save" 
+                                        icon="pi pi-save"
+                                        styleClass="ui-button-success"
+                                        update="display,:SpecialityListForm:datalist,:growl" 
+                                        oncomplete="handleSubmit(args,'SpecialityCreateDialog');"/>
+                        <p:commandButton value="Cancel" 
+                                        icon="pi pi-times"
+                                        styleClass="ui-button-secondary"
+                                        onclick="SpecialityCreateDialog.hide()" 
+                                        type="button"/>
+                    </div>
                 </h:panelGroup>
             </h:form>
         </p:dialog>

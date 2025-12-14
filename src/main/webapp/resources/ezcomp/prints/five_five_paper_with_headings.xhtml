@@ -381,7 +381,7 @@
             </div>
 
             <div style=" margin-top: 10px;" class="d-flex justify-content-between">
-                <h:outputLabel value="Cashier : #{cc.attrs.bill.creater.webUserPerson.name}"/>
+                <h:outputLabel value="Cashier : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"/>
                 <h:outputLabel value="Original Bill : #{cc.attrs.bill.deptId}" rendered="#{cc.attrs.bill.cancelled and configOptionApplicationController.getBooleanValueByKey('Package Billing - Display the Original Bill Number in Canceled Bill',false)}"/>
             </div>
 

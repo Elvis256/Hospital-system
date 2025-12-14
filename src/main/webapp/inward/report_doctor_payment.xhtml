@@ -128,7 +128,7 @@
                                     <f:facet name="header">
                                         <p:outputLabel value="Paid By" />
                                     </f:facet>
-                                    <p:outputLabel value="#{bf.bill.creater.webUserPerson.nameWithTitle}" >
+                                    <p:outputLabel value="#{bf.bill.creater ne null and bf.bill.creater.webUserPerson ne null ? bf.bill.creater.webUserPerson.nameWithTitle : 'N/A'}" >
                                     </p:outputLabel>
                                 </p:column>
 

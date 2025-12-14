@@ -63,10 +63,10 @@
 
                                                     <h:panelGrid columns="2">
                                                         <h:outputLabel value="TO : "/>
-                                                        <h:outputLabel value="#{cc.attrs.bill.toWebUser.webUserPerson.name}"
+                                                        <h:outputLabel value="#{cc.attrs.bill.toWebUser ne null and cc.attrs.bill.toWebUser.webUserPerson ne null ? cc.attrs.bill.toWebUser.webUserPerson.name : 'N/A'}"
                                                                        style="float: right;"/>
                                                         <h:outputLabel value="Issued User : "/>
-                                                        <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}"
+                                                        <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"
                                                                        style="float: right;"/>
                                                         <h:outputLabel value="Cash Value :"/>
                                                         <h:outputLabel value="#{cc.attrs.bill.cashTransaction.cashValue}"

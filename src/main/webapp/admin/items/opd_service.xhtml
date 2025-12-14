@@ -180,7 +180,7 @@
                                                 <h:outputText value="" ></h:outputText>
                                                 <p:selectBooleanCheckbox value="#{serviceController.current.patientNotRequired}" itemLabel="Patient Not Required"/>
                                                 <h:outputText value="Created Person"/>
-                                                <h:outputText value="#{serviceController.current.creater.webUserPerson.nameWithTitle}"/>
+                                                <h:outputText value="#{serviceController.current.creater ne null and serviceController.current.creater.webUserPerson ne null ? serviceController.current.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
                                                 <h:outputText value="Item Id"/>
                                                 <h:outputText value="#{serviceController.current.id}"/>
                                                 <h:outputText value="" ></h:outputText>

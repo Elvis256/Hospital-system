@@ -117,7 +117,7 @@
                             </p:column>
 
                             <p:column headerText="Billed by" width="200">
-                                <p:outputLabel value="#{bill.creater.webUserPerson.name}" />
+                                <p:outputLabel value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" />
                             </p:column>
 
                             <p:column headerText="Payment Method" width="150">

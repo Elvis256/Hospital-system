@@ -95,7 +95,7 @@
                             </f:facet>
                             <h:panelGrid columns="2">      
                                 <h:outputLabel value="Cashier : "/>
-                                <h:outputLabel value="#{cashInController.referenceBill.fromWebUser.webUserPerson.nameWithTitle}"
+                                <h:outputLabel value="#{cashInController.referenceBill.fromWebUser ne null and cashInController.referenceBill.fromWebUser.webUserPerson ne null ? cashInController.referenceBill.fromWebUser.webUserPerson.nameWithTitle : 'N/A'}"
                                                style="float:  right;"/>
                                 <h:outputLabel value="Cash :" />
                                 <h:outputLabel value="#{cashInController.referenceBill.fromWebUser.drawer.runningBallance}"

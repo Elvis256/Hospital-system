@@ -139,7 +139,7 @@
                                     <strong>User:</strong>
                                 </div>
                                 <div class="col-6">
-                                    #{paymentController.bill.creater.webUserPerson.name}
+                                    #{paymentController.bill.creater ne null and paymentController.bill.creater.webUserPerson ne null ? paymentController.bill.creater.webUserPerson.name : 'N/A'}
                                 </div>
                             </div>
 

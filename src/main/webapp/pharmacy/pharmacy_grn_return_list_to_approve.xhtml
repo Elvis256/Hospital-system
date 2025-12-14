@@ -190,7 +190,7 @@
 
                             <p:column headerText="Requested By">
                                 <h:commandLink action="pharmacy_reprint_grn_return_request">
-                                    <h:outputLabel value="#{b.creater.webUserPerson.name}">                                      
+                                    <h:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}">                                      
                                     </h:outputLabel>
                                     <f:setPropertyActionListener value="#{b}" target="#{billSearch.bill}"/>
                                 </h:commandLink>
@@ -198,7 +198,7 @@
                                 <h:panelGroup rendered="#{b.cancelled}">
                                     <h:outputLabel style="color: red;" value="Cancelled By " />
                                     <h:outputLabel style="color: red;" rendered="#{b.cancelled}"
-                                                   value="#{b.cancelledBill.creater.webUserPerson.name}">                                       
+                                                   value="#{b.cancelledBill.creater ne null and b.cancelledBill.creater.webUserPerson ne null ? b.cancelledBill.creater.webUserPerson.name : 'N/A'}">                                       
                                     </h:outputLabel>
                                 </h:panelGroup>
                             </p:column>    

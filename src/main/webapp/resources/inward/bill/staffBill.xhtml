@@ -245,7 +245,7 @@
                 <div class="footer" >
                     <div class="row" >
                         <div class="col-4" >
-                            <h:outputLabel value="Cashier :  #{cc.attrs.bill.creater.webUserPerson.name}"/>
+                            <h:outputLabel value="Cashier :  #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"/>
                         </div>
                         <div class="col-4" >
                             <br/>

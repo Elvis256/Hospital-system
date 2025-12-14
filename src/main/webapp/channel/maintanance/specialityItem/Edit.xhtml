@@ -1,0 +1,119 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/resources/template/template.xhtml">
+
+        <ui:define name="content">
+            <h:form id="SpecialityItemEditForm">
+                <p:panel header="Edit Speciality Item">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" rendered="#{itemController.current != null}" styleClass="ui-panelgrid-blank" style="width: 100%">
+                            
+                            <p:outputLabel value="Item Name *" for="name" />
+                            <p:inputText id="name" value="#{itemController.current.name}" 
+                                         required="true" requiredMessage="Item Name is required"
+                                         style="width: 100%"/>
+                            
+                            <p:outputLabel value="Code" for="code" />
+                            <p:inputText id="code" value="#{itemController.current.code}" 
+                                         style="width: 100%"/>
+                            
+                            <p:outputLabel value="Print Name" for="printName" />
+                            <p:inputText id="printName" value="#{itemController.current.printName}" 
+                                         style="width: 100%"/>
+                            
+                            <p:outputLabel value="Short Name" for="shortName" />
+                            <p:inputText id="shortName" value="#{itemController.current.shortName}" 
+                                         style="width: 100%"/>
+                            
+                            <p:outputLabel value="Full Name" for="fullName" />
+                            <p:inputText id="fullName" value="#{itemController.current.fullName}" 
+                                         style="width: 100%"/>
+                            
+                            <p:outputLabel value="Description" for="description" />
+                            <p:inputTextarea id="description" value="#{itemController.current.descreption}" 
+                                             rows="3" style="width: 100%"/>
+                            
+                            <p:outputLabel value="Speciality *" for="speciality" />
+                            <p:selectOneMenu id="speciality" 
+                                           value="#{itemController.current.speciality}" 
+                                           filter="true"
+                                           filterMatchMode="contains"
+                                           required="true"
+                                           requiredMessage="Speciality is required"
+                                           style="width: 100%">
+                                <f:selectItem itemLabel="Select Speciality" itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItems value="#{specialityController.items}" 
+                                             var="spc" 
+                                             itemLabel="#{spc.name}" 
+                                             itemValue="#{spc}"/>
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel value="Category" for="category" />
+                            <p:selectOneMenu id="category" 
+                                           value="#{itemController.current.category}" 
+                                           filter="true"
+                                           filterMatchMode="contains"
+                                           style="width: 100%">
+                                <f:selectItem itemLabel="Select Category" itemValue="#{null}" noSelectionOption="true"/>
+                                <f:selectItems value="#{categoryController.items}" 
+                                             var="cat" 
+                                             itemLabel="#{cat.name}" 
+                                             itemValue="#{cat}"/>
+                            </p:selectOneMenu>
+                            
+                            <p:outputLabel value="Order No" for="orderNo" />
+                            <p:inputNumber id="orderNo" value="#{itemController.current.orderNo}" 
+                                           decimalPlaces="0" style="width: 100%"/>
+                            
+                            <p:outputLabel value="Total Fee" for="total" />
+                            <p:inputNumber id="total" value="#{itemController.current.total}" 
+                                           decimalPlaces="2" minFractionDigits="2" style="width: 100%"/>
+                            
+                            <p:outputLabel value="Hospital Fee" for="hospitalFee" />
+                            <p:inputNumber id="hospitalFee" value="#{itemController.current.hospitalFfee}" 
+                                           decimalPlaces="2" minFractionDigits="2" style="width: 100%"/>
+                            
+                            <p:outputLabel value="Professional Fee" for="professionalFee" />
+                            <p:inputNumber id="professionalFee" value="#{itemController.current.professionalFfee}" 
+                                           decimalPlaces="2" minFractionDigits="2" style="width: 100%"/>
+                            
+                            <p:outputLabel value="Total Fee (Foreigner)" for="totalForeigner" />
+                            <p:inputNumber id="totalForeigner" value="#{itemController.current.totalForForeigner}" 
+                                           decimalPlaces="2" minFractionDigits="2" style="width: 100%"/>
+                            
+                            <p:outputLabel value="Discount Allowed" for="discountAllowed" />
+                            <p:selectBooleanCheckbox id="discountAllowed" value="#{itemController.current.discountAllowed}"/>
+                            
+                            <p:outputLabel value="Active" for="retired" />
+                            <p:selectBooleanCheckbox id="retired" value="#{itemController.current.retired}">
+                                <p:ajax update="@this"/>
+                            </p:selectBooleanCheckbox>
+                            
+                        </p:panelGrid>
+                        <p:separator/>
+                        <div class="p-2">
+                            <p:commandButton actionListener="#{itemController.saveSelected}" 
+                                            value="Save" 
+                                            icon="pi pi-save"
+                                            styleClass="ui-button-success"
+                                            update="display,:growl"
+                                            action="/channel/maintanance/specialityItem/List?faces-redirect=true"/>
+                            <p:commandButton value="Cancel" 
+                                            icon="pi pi-times"
+                                            styleClass="ui-button-secondary"
+                                            action="/channel/maintanance/specialityItem/List?faces-redirect=true"
+                                            immediate="true"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+</html>

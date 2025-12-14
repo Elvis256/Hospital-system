@@ -118,7 +118,7 @@
                                     </p:column>
 
                                     <p:column headerText="User" >                               
-                                        <h:outputLabel value="#{rb.creater.webUserPerson.name}" >                                      
+                                        <h:outputLabel value="#{rb.creater ne null and rb.creater.webUserPerson ne null ? rb.creater.webUserPerson.name : 'N/A'}" >                                      
                                         </h:outputLabel>                                
                                     </p:column>  
 
@@ -151,7 +151,7 @@
                                             </h:outputLabel>
                                             <h:outputLabel style="color: red;" value=" by " />
                                             <h:outputLabel style="color: red;" rendered="#{rb.cancelled}"
-                                                           value="#{rb.cancelledBill.creater.webUserPerson.name}" >                                       
+                                                           value="#{rb.cancelledBill.creater ne null and rb.cancelledBill.creater.webUserPerson ne null ? rb.cancelledBill.creater.webUserPerson.name : 'N/A'}" >                                       
                                             </h:outputLabel>
                                         </h:panelGroup> 
                                         <h:panelGroup rendered="#{rb.refunded}" >

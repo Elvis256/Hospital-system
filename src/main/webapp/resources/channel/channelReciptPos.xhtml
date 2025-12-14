@@ -304,7 +304,7 @@
                                 <h:outputLabel value=":" ></h:outputLabel>
                             </td>
                             <td>
-                                <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}" rendered="#{cc.attrs.bill.paidBill eq null}" ></h:outputLabel>
+                                <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}" rendered="#{cc.attrs.bill.paidBill eq null}" ></h:outputLabel>
                                 <h:outputLabel value="#{cc.attrs.bill.paidBill.creater.code}" rendered="#{cc.attrs.bill.paidBill ne null}" ></h:outputLabel>
                             </td>
                         </tr>

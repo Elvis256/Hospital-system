@@ -60,7 +60,7 @@
                 <div class="col-md-4 p-1" >
                     <h:panelGrid columns="2" columnClasses="text-start, text-end" >
                         <h:outputLabel value="Prepaired By : " />
-                        <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}" >
+                        <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}" >
                         </h:outputLabel>
                         <h:outputLabel value="Comments : " />
                         <h:outputLabel value="#{cc.attrs.bill.paymentGenerationComments}" >

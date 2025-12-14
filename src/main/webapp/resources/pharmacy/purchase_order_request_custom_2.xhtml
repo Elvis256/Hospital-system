@@ -137,7 +137,7 @@
             <div>
                 <h:outputLabel value="Order Initiated By"/>
                 <h:outputLabel value=":" style="width: 15px; text-align: center"/>
-                <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}"/>
+                <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"/>
             </div>
             <div>
                 <h:outputLabel value="Order Finalized By"/>

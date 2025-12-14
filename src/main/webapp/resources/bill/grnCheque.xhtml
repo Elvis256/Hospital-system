@@ -135,11 +135,11 @@
                                 <div>
                                     <br></br>
                                     <h:outputLabel value="Prepared By :" />
-                                    <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.nameWithTitle}" style="text-align: right!important;text-decoration: underline; text-decoration-style: dotted;"/>
+                                    <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}" style="text-align: right!important;text-decoration: underline; text-decoration-style: dotted;"/>
                                     <br></br>
                                     <br></br>
                                     <h:outputLabel value="Approved By :"/>
-                                    <h:outputLabel value="#{cc.attrs.bill.referenceBill.creater.webUserPerson.nameWithTitle}"/>
+                                    <h:outputLabel value="#{cc.attrs.bill.referenceBill.creater ne null and cc.attrs.bill.referenceBill.creater.webUserPerson ne null ? cc.attrs.bill.referenceBill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
                                     <br></br>
                                     <br></br>
                                     <h:outputLabel value="Authorized By :"/>

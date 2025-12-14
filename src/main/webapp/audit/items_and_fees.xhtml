@@ -69,7 +69,7 @@
                             </p:outputLabel>
 
                             <p:outputLabel value="Created By" />
-                            <p:outputLabel  value="#{itemFeeManager.item.creater.webUserPerson.name}" >
+                            <p:outputLabel  value="#{itemFeeManager.item.creater ne null and itemFeeManager.item.creater.webUserPerson ne null ? itemFeeManager.item.creater.webUserPerson.name : 'N/A'}" >
                             </p:outputLabel>
 
                             <p:outputLabel value="Created At" />
@@ -128,7 +128,7 @@
                                     </p:outputLabel>
                                 </p:column>
                                 <p:column headerText="Created By">
-                                    <p:outputLabel value="#{f.creater.webUserPerson.nameWithTitle}" />
+                                    <p:outputLabel value="#{f.creater ne null and f.creater.webUserPerson ne null ? f.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                                 </p:column>
                                  <p:column headerText="Retired">
                                      <p:outputLabel value="#{f.retired ? 'Retired' : ''}" />

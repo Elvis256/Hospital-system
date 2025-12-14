@@ -86,8 +86,8 @@
                                         <p:column rowspan="2" headerText="Changed at" sortBy="#{ss.createdAt}"/>
                                         <p:column rowspan="2"
                                                   headerText="Changed by"
-                                                  sortBy="#{ss.creater.webUserPerson.name}"
-                                                  filterBy="#{ss.creater.webUserPerson.name}"
+                                                  sortBy="#{ss.creater ne null and ss.creater.webUserPerson ne null ? ss.creater.webUserPerson.name : 'N/A'}"
+                                                  filterBy="#{ss.creater ne null and ss.creater.webUserPerson ne null ? ss.creater.webUserPerson.name : 'N/A'}"
                                                   filterMatchMode="contains"
                                                   />
                                         <p:column colspan="4" headerText="Changed from" />
@@ -142,7 +142,7 @@
                                     <f:facet name="header">
                                         <h:outputLabel value="Changed by"/>
                                     </f:facet>
-                                    <p:outputLabel value="#{ss.creater.webUserPerson.name}" ></p:outputLabel>
+                                    <p:outputLabel value="#{ss.creater ne null and ss.creater.webUserPerson ne null ? ss.creater.webUserPerson.name : 'N/A'}" ></p:outputLabel>
                                 </p:column>
                                 <p:column >
                                     <f:facet name="header">

@@ -110,7 +110,7 @@
                             </h:outputLabel>
                         </p:column>                       
                         <p:column>
-                            <h:outputLabel value="#{b.creater.webUserPerson.name}"/>
+                            <h:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}"/>
                         </p:column>                        
                         <p:column style="text-align: right;">
                             <h:outputLabel value="#{b.discount}">
@@ -268,7 +268,7 @@
                             </h:outputLabel>
                         </p:column>                       
                         <p:column>
-                            <h:outputLabel value="#{b.creater.webUserPerson.name}"/>
+                            <h:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}"/>
                         </p:column>                        
                         <p:column style="text-align: right;">
                             <h:outputLabel value="#{b.discount}">
@@ -426,7 +426,7 @@
                             </h:outputLabel>
                         </p:column>                       
                         <p:column>
-                            <h:outputLabel value="#{b.creater.webUserPerson.name}"/>
+                            <h:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}"/>
                         </p:column>                        
                         <p:column style="text-align: right;">
                             <h:outputLabel value="#{b.discount}">

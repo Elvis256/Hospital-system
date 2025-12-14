@@ -81,7 +81,7 @@
                                     <h:outputLabel   value="#{bf.bill.bookingId}"/>
                                 </p:column>
                                 <p:column headerText="User">
-                                    <p:outputLabel value="#{bf.bill.creater.webUserPerson.nameWithTitle}"></p:outputLabel>
+                                    <p:outputLabel value="#{bf.bill.creater ne null and bf.bill.creater.webUserPerson ne null ? bf.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"></p:outputLabel>
                                 </p:column>
                                 <p:column headerText="Staff">
                                     <p:outputLabel value="#{bf.staff.person.nameWithTitle}"></p:outputLabel>
@@ -125,17 +125,17 @@
 
                                 </p:column>  
                                 <p:column headerText="Billed by" >
-                                    <h:outputLabel value="#{bf.bill.creater.webUserPerson.name}" >                                      
+                                    <h:outputLabel value="#{bf.bill.creater ne null and bf.bill.creater.webUserPerson ne null ? bf.bill.creater.webUserPerson.name : 'N/A'}" >                                      
                                     </h:outputLabel>
                                     <br/>
                                     <h:panelGroup rendered="#{bf.bill.cancelled}" >
                                         <h:outputLabel style="color: red;" value="Cancelled By " />
-                                        <h:outputLabel style="color: red;" rendered="#{bf.bill.cancelled}" value="#{bf.bill.cancelledBill.creater.webUserPerson.name}" >                                       
+                                        <h:outputLabel style="color: red;" rendered="#{bf.bill.cancelled}" value="#{bf.bill.cancelledBill.creater ne null and bf.bill.cancelledBill.creater.webUserPerson ne null ? bf.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >                                       
                                         </h:outputLabel>
                                     </h:panelGroup>
                                     <h:panelGroup rendered="#{bf.bill.refunded}" >
                                         <h:outputLabel style="color: red;" value="Refunded By " />
-                                        <h:outputLabel style="color: red;" rendered="#{bf.bill.refunded}" value="#{bf.bill.refundedBill.creater.webUserPerson.name}" >
+                                        <h:outputLabel style="color: red;" rendered="#{bf.bill.refunded}" value="#{bf.bill.refundedBill.creater ne null and bf.bill.refundedBill.creater.webUserPerson ne null ? bf.bill.refundedBill.creater.webUserPerson.name : 'N/A'}" >
                                         </h:outputLabel>
                                     </h:panelGroup>
                                 </p:column>    
@@ -189,7 +189,7 @@
                                     <h:outputLabel   value="#{bf.bill.bookingId}"/>
                                 </p:column>
                                 <p:column headerText="User">
-                                    <p:outputLabel value="#{bf.bill.creater.webUserPerson.nameWithTitle}"></p:outputLabel>
+                                    <p:outputLabel value="#{bf.bill.creater ne null and bf.bill.creater.webUserPerson ne null ? bf.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"></p:outputLabel>
                                 </p:column>
                                 <p:column headerText="Staff">
                                     <p:outputLabel value="#{bf.staff.person.nameWithTitle}"></p:outputLabel>
@@ -233,17 +233,17 @@
 
                                 </p:column>  
                                 <p:column headerText="Billed by" >
-                                    <h:outputLabel value="#{bf.bill.creater.webUserPerson.name}" >                                      
+                                    <h:outputLabel value="#{bf.bill.creater ne null and bf.bill.creater.webUserPerson ne null ? bf.bill.creater.webUserPerson.name : 'N/A'}" >                                      
                                     </h:outputLabel>
                                     <br/>
                                     <h:panelGroup rendered="#{bf.bill.cancelled}" >
                                         <h:outputLabel style="color: red;" value="Cancelled By " />
-                                        <h:outputLabel style="color: red;" rendered="#{bf.bill.cancelled}" value="#{bf.bill.cancelledBill.creater.webUserPerson.name}" >                                       
+                                        <h:outputLabel style="color: red;" rendered="#{bf.bill.cancelled}" value="#{bf.bill.cancelledBill.creater ne null and bf.bill.cancelledBill.creater.webUserPerson ne null ? bf.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >                                       
                                         </h:outputLabel>
                                     </h:panelGroup>
                                     <h:panelGroup rendered="#{bf.bill.refunded}" >
                                         <h:outputLabel style="color: red;" value="Refunded By " />
-                                        <h:outputLabel style="color: red;" rendered="#{bf.bill.refunded}" value="#{bf.bill.refundedBill.creater.webUserPerson.name}" >
+                                        <h:outputLabel style="color: red;" rendered="#{bf.bill.refunded}" value="#{bf.bill.refundedBill.creater ne null and bf.bill.refundedBill.creater.webUserPerson ne null ? bf.bill.refundedBill.creater.webUserPerson.name : 'N/A'}" >
                                         </h:outputLabel>
                                     </h:panelGroup>
                                 </p:column>    
@@ -297,7 +297,7 @@
                                     <h:outputLabel   value="#{bf.bill.bookingId}"/>
                                 </p:column>
                                 <p:column headerText="User">
-                                    <p:outputLabel value="#{bf.bill.creater.webUserPerson.nameWithTitle}"></p:outputLabel>
+                                    <p:outputLabel value="#{bf.bill.creater ne null and bf.bill.creater.webUserPerson ne null ? bf.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"></p:outputLabel>
                                 </p:column>
                                 <p:column headerText="Staff">
                                     <p:outputLabel value="#{bf.staff.person.nameWithTitle}"></p:outputLabel>
@@ -341,17 +341,17 @@
 
                                 </p:column>  
                                 <p:column headerText="Billed by" >
-                                    <h:outputLabel value="#{bf.bill.creater.webUserPerson.name}" >                                      
+                                    <h:outputLabel value="#{bf.bill.creater ne null and bf.bill.creater.webUserPerson ne null ? bf.bill.creater.webUserPerson.name : 'N/A'}" >                                      
                                     </h:outputLabel>
                                     <br/>
                                     <h:panelGroup rendered="#{bf.bill.cancelled}" >
                                         <h:outputLabel style="color: red;" value="Cancelled By " />
-                                        <h:outputLabel style="color: red;" rendered="#{bf.bill.cancelled}" value="#{bf.bill.cancelledBill.creater.webUserPerson.name}" >                                       
+                                        <h:outputLabel style="color: red;" rendered="#{bf.bill.cancelled}" value="#{bf.bill.cancelledBill.creater ne null and bf.bill.cancelledBill.creater.webUserPerson ne null ? bf.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >                                       
                                         </h:outputLabel>
                                     </h:panelGroup>
                                     <h:panelGroup rendered="#{bf.bill.refunded}" >
                                         <h:outputLabel style="color: red;" value="Refunded By " />
-                                        <h:outputLabel style="color: red;" rendered="#{bf.bill.refunded}" value="#{bf.bill.refundedBill.creater.webUserPerson.name}" >
+                                        <h:outputLabel style="color: red;" rendered="#{bf.bill.refunded}" value="#{bf.bill.refundedBill.creater ne null and bf.bill.refundedBill.creater.webUserPerson ne null ? bf.bill.refundedBill.creater.webUserPerson.name : 'N/A'}" >
                                         </h:outputLabel>
                                     </h:panelGroup>
                                 </p:column>    

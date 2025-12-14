@@ -326,14 +326,14 @@
                     </td>
                     <td>
                         <h:panelGroup rendered="#{cc.attrs.bill.paidBill ne null}">
-                            <h:outputLabel value="#{cc.attrs.bill.paidBill.creater.webUserPerson.name}"></h:outputLabel>
+                            <h:outputLabel value="#{cc.attrs.bill.paidBill.creater ne null and cc.attrs.bill.paidBill.creater.webUserPerson ne null ? cc.attrs.bill.paidBill.creater.webUserPerson.name : 'N/A'}"></h:outputLabel>
                             <p:spacer height="1" width="10" ></p:spacer>
                             <h:outputLabel value="#{cc.attrs.bill.paidBill.billTime}">
                                 <f:convertDateTime pattern="#{sessionController.applicationPreference.longDateTimeFormat}"  ></f:convertDateTime>
                             </h:outputLabel>
                         </h:panelGroup>
                        <h:panelGroup rendered="#{cc.attrs.bill.paidBill eq null}">
-                            <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}"></h:outputLabel>
+                            <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"></h:outputLabel>
                             <p:spacer height="1" width="10" ></p:spacer>
                             <h:outputLabel value="#{cc.attrs.bill.billTime}">
                                 <f:convertDateTime pattern="#{sessionController.applicationPreference.longDateTimeFormat}"  ></f:convertDateTime>

@@ -422,7 +422,7 @@
                                         </div>
 
                                         <div style="text-decoration: overline; margin-top: 10px;">
-                                            <h:outputLabel value="Cashier : #{billController.opdBill.creater.webUserPerson.name}"/>
+                                            <h:outputLabel value="Cashier : #{billController.opdBill.creater ne null and billController.opdBill.creater.webUserPerson ne null ? billController.opdBill.creater.webUserPerson.name : 'N/A'}"/>
                                         </div>
 
 

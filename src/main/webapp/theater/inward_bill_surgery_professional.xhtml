@@ -249,7 +249,7 @@
                                 </h:panelGroup>
                             </p:column>
                             <p:column headerText="Added By" >
-                                <h:outputLabel value="#{c.billFee.creater.webUserPerson.name}"/>     
+                                <h:outputLabel value="#{c.billFee.creater ne null and c.billFee.creater.webUserPerson ne null ? c.billFee.creater.webUserPerson.name : 'N/A'}"/>     
                                 <br/>
                                 <h:panelGroup rendered="#{c.billFee.retired}" >
                                     <h:outputLabel style="color: red;" value="Deleted By " />

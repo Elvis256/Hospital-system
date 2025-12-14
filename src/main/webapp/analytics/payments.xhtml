@@ -107,10 +107,10 @@
                             
                             <p:column 
                                 headerText="Payment Creator"
-                                sortBy="#{payment.creater.webUserPerson.nameWithTitle}" 
-                                filterBy="#{payment.creater.webUserPerson.nameWithTitle}" 
+                                sortBy="#{payment.creater ne null and payment.creater.webUserPerson ne null ? payment.creater.webUserPerson.nameWithTitle : 'N/A'}" 
+                                filterBy="#{payment.creater ne null and payment.creater.webUserPerson ne null ? payment.creater.webUserPerson.nameWithTitle : 'N/A'}" 
                                 filterMatchMode="contains">
-                                <p:outputLabel value="#{payment.creater.webUserPerson.nameWithTitle}" />
+                                <p:outputLabel value="#{payment.creater ne null and payment.creater.webUserPerson ne null ? payment.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                             </p:column>
                             
                              <p:column 

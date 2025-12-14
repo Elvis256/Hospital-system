@@ -100,8 +100,8 @@
                                         </h:outputLabel>                               
                                     </p:column>  
 
-                                    <p:column headerText="Billed by" sortable="true" filterBy="#{bill.creater.webUserPerson.name}" filterMatchMode="contains">                               
-                                        <h:outputLabel value="#{bill.creater.webUserPerson.name}" />                             
+                                    <p:column headerText="Billed by" sortable="true" filterBy="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" filterMatchMode="contains">                               
+                                        <h:outputLabel value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" />                             
                                     </p:column> 
 
                                     <p:column headerText="Payment Approval" sortable="true" filterBy="#{bill.paymentApprovedAt}" rendered="#{supplierPaymentController.supplierPaymentStatus ne 'Pending Payment Approval'}">                               

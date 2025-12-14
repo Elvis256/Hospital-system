@@ -45,7 +45,7 @@
                                     columnClasses="text-start, text-end">
                                     <h:outputText value="Transfer From" >
                                     </h:outputText>
-                                    <h:outputText value="#{financialTransactionController.currentBill.referenceBill.fromWebUser.webUserPerson.nameWithTitle}" >
+                                    <h:outputText value="#{financialTransactionController.currentBill.referenceBill.fromWebUser ne null and financialTransactionController.currentBill.referenceBill.fromWebUser.webUserPerson ne null ? financialTransactionController.currentBill.referenceBill.fromWebUser.webUserPerson.nameWithTitle : 'N/A'}" >
                                     </h:outputText>
 
                                     <h:outputText value="Transfer At" >

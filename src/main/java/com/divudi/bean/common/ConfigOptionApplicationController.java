@@ -1,6 +1,7 @@
 package com.divudi.bean.common;
 
 import com.divudi.core.util.JsfUtil;
+import com.divudi.core.data.Currency;
 import com.divudi.core.data.OptionScope;
 import com.divudi.core.data.OptionValueType;
 import com.divudi.core.data.PaymentMethod;
@@ -111,6 +112,7 @@ public class ConfigOptionApplicationController implements Serializable {
             loadAllCashierSummaryConfigurationDefaults();
             loadOpdBillingConfigurationDefaults();
             loadDatabaseVersionConfigurationDefaults();
+            loadCurrencyConfigurationDefaults();
         } finally {
             isLoadingApplicationOptions = false;
         }
@@ -130,6 +132,14 @@ public class ConfigOptionApplicationController implements Serializable {
         getBooleanValueByKey("Require Migration Confirmation", true);
         getBooleanValueByKey("Enable Migration Progress Tracking", true);
         getBooleanValueByKey("Log Migration Execution Details", true);
+    }
+
+    private void loadCurrencyConfigurationDefaults() {
+        // Currency configuration - defaults to Ugandan Shilling (UGX)
+        getEnumValueByKey("System Default Currency", Currency.class, Currency.UGX);
+        getBooleanValueByKey("Enable Multi-Currency Support", true);
+        getBooleanValueByKey("Show Currency Symbol in Bills", true);
+        getBooleanValueByKey("Show Currency Code in Reports", true);
     }
 
     private void loadEmailGatewayConfigurationDefaults() {
@@ -1166,6 +1176,32 @@ public class ConfigOptionApplicationController implements Serializable {
         return getEnumValue(option, enumClass);
     }
 
+    public <E extends Enum<E>> E getEnumValueByKey(String key, Class<E> enumClass, E defaultValue) {
+        ConfigOption option = getApplicationOption(key);
+        if (option == null || option.getValueType() != OptionValueType.ENUM || option.getEnumValue() == null || option.getEnumValue().isEmpty()) {
+            option = createApplicationOptionIfAbsent(key, OptionValueType.ENUM, defaultValue.name());
+            option.setEnumType(enumClass.getName());
+            option.setEnumValue(defaultValue.name());
+            optionFacade.edit(option);
+            return defaultValue;
+        }
+
+        if (!option.getEnumType().equals(enumClass.getName())) {
+            option.setEnumType(enumClass.getName());
+            option.setEnumValue(defaultValue.name());
+            optionFacade.edit(option);
+            return defaultValue;
+        }
+
+        try {
+            return E.valueOf(enumClass, option.getEnumValue());
+        } catch (IllegalArgumentException e) {
+            option.setEnumValue(defaultValue.name());
+            optionFacade.edit(option);
+            return defaultValue;
+        }
+    }
+
     public Integer getIntegerValueByKey(String key) {
         ConfigOption option = getApplicationOption(key);
         if (option == null || option.getValueType() != OptionValueType.INTEGER) {
@@ -1492,6 +1528,48 @@ public class ConfigOptionApplicationController implements Serializable {
 
     public void listApplicationOptions() {
         options = getApplicationOptions();
+    }
+
+    public Currency getSystemCurrency() {
+        return getEnumValueByKey("System Default Currency", Currency.class, Currency.UGX);
+    }
+
+    public void setSystemCurrency(Currency currency) {
+        ConfigOption option = getApplicationOption("System Default Currency");
+        if (option == null) {
+            option = createApplicationOptionIfAbsent("System Default Currency", OptionValueType.ENUM, currency.name());
+            option.setEnumType(Currency.class.getName());
+        }
+        option.setEnumValue(currency.name());
+        optionFacade.edit(option);
+        loadApplicationOptions();
+    }
+
+    public String getCurrencySymbol() {
+        Currency currency = getSystemCurrency();
+        return currency != null ? currency.getSymbol() : "USh";
+    }
+
+    public String getCurrencyCode() {
+        Currency currency = getSystemCurrency();
+        return currency != null ? currency.getCode() : "UGX";
+    }
+
+    public boolean isMultiCurrencyEnabled() {
+        return getBooleanValueByKey("Enable Multi-Currency Support", true);
+    }
+
+    public boolean isShowCurrencySymbolInBills() {
+        return getBooleanValueByKey("Show Currency Symbol in Bills", true);
+    }
+
+    public boolean isShowCurrencyCodeInReports() {
+        return getBooleanValueByKey("Show Currency Code in Reports", true);
+    }
+
+    public void saveCurrencySettings() {
+        loadApplicationOptions();
+        JsfUtil.addSuccessMessage("Currency Settings Saved Successfully");
     }
 
 }

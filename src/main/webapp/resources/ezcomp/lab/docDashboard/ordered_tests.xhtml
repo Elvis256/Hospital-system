@@ -66,7 +66,7 @@
             <!-- Ordered By Column -->
             <p:column headerText="Ordered By" style="vertical-align: top;">
                 <i class="fas fa-user-md text-success" style="width: 27px;"></i>
-                <h:outputLabel value="#{order.encounter.creater.webUserPerson.name}" />
+                <h:outputLabel value="#{order.encounter.creater ne null and order.encounter.creater.webUserPerson ne null ? order.encounter.creater.webUserPerson.name : 'N/A'}" />
                 <br/>
                 <i class="fas fa-hospital text-info" style="width: 27px;"></i>
                 <h:outputLabel value="#{order.encounter.institution.name}" />

@@ -65,10 +65,10 @@
                                     <p:selectOneMenu
                                         id="cmbIns"
                                         styleClass="w-100 form-control" 
-                                        value="#{searchController.institution}" 
+                                        value="#{bankAccountController.current.institution}" 
                                         filter="true"
                                         filterMatchMode="contains">
-                                        <f:selectItem itemLabel="All Institutions" noSelectionOption="true" />
+                                        <f:selectItem itemLabel="Select Institution" itemValue="#{null}" />
                                         <f:selectItems value="#{institutionController.companies}" var="ins" itemLabel="#{ins.name}" itemValue="#{ins}" />
                                         <p:ajax process="cmbIns" update="cmbDept" />
                                     </p:selectOneMenu>
@@ -78,37 +78,35 @@
                                     </h:panelGroup>
                                     <h:panelGroup id="cmbDept">
 
-                                        <!-- Component 1: Without Institution and Site -->
+                                        <!-- Component 1: Without Institution -->
                                         <p:selectOneMenu
-                                            rendered="#{searchController.institution eq null}"
+                                            rendered="#{bankAccountController.current.institution eq null}"
                                             styleClass="w-100 form-control"
-                                            value="#{searchController.department}"
+                                            value="#{bankAccountController.current.department}"
                                             filterMatchMode="contains"
                                             filter="true">
-                                            <f:selectItem itemLabel="All Departments" />
+                                            <f:selectItem itemLabel="Select Department" itemValue="#{null}" />
                                             <f:selectItems 
-                                                value="#{departmentController.getDepartmentsOfInstitutionAndSite()}"
+                                                value="#{departmentController.items}"
                                                 var="d"
                                                 itemLabel="#{d.name}"
                                                 itemValue="#{d}" />
                                         </p:selectOneMenu>
 
-                                        <!-- Component 3: With Institution Only -->
+                                        <!-- Component 2: With Institution -->
                                         <p:selectOneMenu
-                                            rendered="#{searchController.institution ne null}"
+                                            rendered="#{bankAccountController.current.institution ne null}"
                                             styleClass="w-100 form-control"
-                                            value="#{searchController.department}"
+                                            value="#{bankAccountController.current.department}"
                                             filterMatchMode="contains"
                                             filter="true">
-                                            <f:selectItem itemLabel="All Departments" />
+                                            <f:selectItem itemLabel="Select Department" itemValue="#{null}" />
                                             <f:selectItems 
-                                                value="#{departmentController.getDepartmentsOfInstitutionAndSiteForInstitution(searchController.institution)}"
+                                                value="#{departmentController.getDepartmentsOfInstitutionAndSiteForInstitution(bankAccountController.current.institution)}"
                                                 var="d"
                                                 itemLabel="#{d.name}"
                                                 itemValue="#{d}" />
                                         </p:selectOneMenu>
-
-                                        
 
                                     </h:panelGroup>
 

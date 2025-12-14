@@ -67,7 +67,7 @@
 
 
                     <p:outputLabel value="User" ></p:outputLabel>
-                    <p:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}" ></p:outputLabel>
+                    <p:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}" ></p:outputLabel>
 
 
                     <h:outputLabel value="Payment Type " ></h:outputLabel>
@@ -355,11 +355,11 @@
 
 
                     <p:outputLabel value="From User" ></p:outputLabel>
-                    <p:outputLabel value="#{cc.attrs.bill.fromWebUser.webUserPerson.name}" ></p:outputLabel>
+                    <p:outputLabel value="#{cc.attrs.bill.fromWebUser ne null and cc.attrs.bill.fromWebUser.webUserPerson ne null ? cc.attrs.bill.fromWebUser.webUserPerson.name : 'N/A'}" ></p:outputLabel>
 
 
                     <p:outputLabel value="To User" ></p:outputLabel>
-                    <p:outputLabel value="#{cc.attrs.bill.toWebUser.webUserPerson.name}" ></p:outputLabel>
+                    <p:outputLabel value="#{cc.attrs.bill.toWebUser ne null and cc.attrs.bill.toWebUser.webUserPerson ne null ? cc.attrs.bill.toWebUser.webUserPerson.name : 'N/A'}" ></p:outputLabel>
                 </h:panelGrid>
             </p:tab>
 

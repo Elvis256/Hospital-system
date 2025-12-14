@@ -178,7 +178,7 @@
             </div>
 
             <div class="preparedBy" style="padding-left: 20px; margin: 20px; padding-bottom: 2px; margin-bottom: 2px;">
-                <h:outputLabel style="margin-right: 34%;" value="Prepared By : #{cc.attrs.bill.referenceBill.creater.webUserPerson.name}"/>
+                <h:outputLabel style="margin-right: 34%;" value="Prepared By : #{cc.attrs.bill.referenceBill.creater ne null and cc.attrs.bill.referenceBill.creater.webUserPerson ne null ? cc.attrs.bill.referenceBill.creater.webUserPerson.name : 'N/A'}"/>
                 <h:outputLabel value="Created Date/Time :&nbsp;&nbsp;"/>
                 <p:outputLabel value="#{sessionController.currentDate}">
                     <f:convertDateTime pattern="#{sessionController.applicationPreference.shortDateTimeFormat}"/>
@@ -193,7 +193,7 @@
                         </div>-->
 
             <div class="authorizedBy" style="padding-left: 20px; padding-top: 2px; margin-left: 20px; margin-top: 2px;">
-                <h:outputLabel style="margin-right: 32%;" value="Approved By : #{cc.attrs.bill.creater.webUserPerson.name}"/>
+                <h:outputLabel style="margin-right: 32%;" value="Approved By : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"/>
                 <h:outputLabel value="Approved Date/Time :&nbsp;"/>
                 <p:outputLabel value="#{cc.attrs.bill.approveAt}">
                     <f:convertDateTime pattern="#{sessionController.applicationPreference.shortDateTimeFormat}"/>

@@ -56,7 +56,7 @@
                             </p:column>
 
                             <p:column headerText="Created By"  width="15em;">
-                                <h:outputText value="#{e.creater.webUserPerson.name}" />
+                                <h:outputText value="#{e.creater ne null and e.creater.webUserPerson ne null ? e.creater.webUserPerson.name : 'N/A'}" />
                             </p:column>
 
                             <p:column headerText="Success"  width="6em;">

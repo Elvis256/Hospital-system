@@ -1,0 +1,241 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE composition PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<ui:composition xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+                template="/resources/template/template.xhtml"
+                xmlns:h="http://xmlns.jcp.org/jsf/html"
+                xmlns:f="http://xmlns.jcp.org/jsf/core"
+                xmlns="http://www.w3.org/1999/xhtml"
+                xmlns:p="http://primefaces.org/ui">
+
+    <ui:define name="content">
+        <h:form>
+            <p:growl />
+            
+            <p:panel header="Exchange Rate Management">
+                <p:toolbar>
+                    <p:toolbarGroup>
+                        <p:commandButton value="Add New Exchange Rate" 
+                                       icon="pi pi-plus" 
+                                       action="#{exchangeRateController.prepareAdd()}"
+                                       update="@form"
+                                       styleClass="ui-button-success"/>
+                    </p:toolbarGroup>
+                </p:toolbar>
+                
+                <p:spacer height="10"/>
+                
+                <!-- Add/Edit Form -->
+                <p:panel header="#{exchangeRateController.current.id == null ? 'Add' : 'Edit'} Exchange Rate" 
+                        rendered="#{exchangeRateController.current != null}">
+                    <h:panelGrid columns="2" cellpadding="5" styleClass="ui-fluid">
+                        
+                        <h:outputLabel value="From Currency*" />
+                        <p:selectOneMenu value="#{exchangeRateController.current.fromCurrency}" 
+                                        required="true" requiredMessage="From Currency is required">
+                            <f:selectItem itemLabel="Select Currency" itemValue="#{null}" noSelectionOption="true"/>
+                            <f:selectItems value="#{exchangeRateController.currencies}" 
+                                         var="curr" 
+                                         itemLabel="#{curr.displayName} (#{curr.symbol})" 
+                                         itemValue="#{curr}"/>
+                        </p:selectOneMenu>
+                        
+                        <h:outputLabel value="To Currency*" />
+                        <p:selectOneMenu value="#{exchangeRateController.current.toCurrency}"
+                                        required="true" requiredMessage="To Currency is required">
+                            <f:selectItem itemLabel="Select Currency" itemValue="#{null}" noSelectionOption="true"/>
+                            <f:selectItems value="#{exchangeRateController.currencies}" 
+                                         var="curr" 
+                                         itemLabel="#{curr.displayName} (#{curr.symbol})" 
+                                         itemValue="#{curr}"/>
+                        </p:selectOneMenu>
+                        
+                        <h:outputLabel value="Exchange Rate*" />
+                        <p:inputNumber value="#{exchangeRateController.current.exchangeRate}" 
+                                      decimalPlaces="6"
+                                      minValue="0"
+                                      required="true" 
+                                      requiredMessage="Exchange Rate is required">
+                            <f:converter converterId="javax.faces.Double"/>
+                        </p:inputNumber>
+                        
+                        <h:outputLabel value="Effective From*" />
+                        <p:calendar value="#{exchangeRateController.current.effectiveFrom}" 
+                                   pattern="dd/MM/yyyy HH:mm"
+                                   showTime="true"
+                                   required="true"
+                                   requiredMessage="Effective From date is required"/>
+                        
+                        <h:outputLabel value="Effective To" />
+                        <p:calendar value="#{exchangeRateController.current.effectiveTo}" 
+                                   pattern="dd/MM/yyyy HH:mm"
+                                   showTime="true"/>
+                        
+                        <h:outputLabel value="Active" />
+                        <p:selectBooleanCheckbox value="#{exchangeRateController.current.isActive}"/>
+                        
+                        <h:outputLabel value="Notes" />
+                        <p:inputTextarea value="#{exchangeRateController.current.notes}" 
+                                        rows="3" 
+                                        cols="30"
+                                        autoResize="false"/>
+                    </h:panelGrid>
+                    
+                    <p:commandButton value="Save" 
+                                    action="#{exchangeRateController.save()}"
+                                    update="@form"
+                                    icon="pi pi-save"
+                                    styleClass="ui-button-success"/>
+                    <p:commandButton value="Cancel" 
+                                    action="#{exchangeRateController.prepareAdd()}"
+                                    update="@form"
+                                    immediate="true"
+                                    icon="pi pi-times"
+                                    styleClass="ui-button-secondary"/>
+                </p:panel>
+                
+                <p:spacer height="20"/>
+                
+                <!-- Active Rates Display -->
+                <p:panel header="Active Exchange Rates" toggleable="true">
+                    <p:dataTable value="#{exchangeRateController.activeRates}" 
+                                var="rate"
+                                emptyMessage="No active exchange rates"
+                                paginator="true" 
+                                rows="10"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="10,25,50">
+                        
+                        <p:column headerText="From" sortBy="#{rate.fromCurrency}">
+                            <h:outputText value="#{rate.fromCurrency.displayName} (#{rate.fromCurrency.symbol})"/>
+                        </p:column>
+                        
+                        <p:column headerText="To" sortBy="#{rate.toCurrency}">
+                            <h:outputText value="#{rate.toCurrency.displayName} (#{rate.toCurrency.symbol})"/>
+                        </p:column>
+                        
+                        <p:column headerText="Rate" sortBy="#{rate.exchangeRate}">
+                            <h:outputText value="#{rate.exchangeRate}">
+                                <f:convertNumber pattern="#,##0.000000"/>
+                            </h:outputText>
+                        </p:column>
+                        
+                        <p:column headerText="Effective From" sortBy="#{rate.effectiveFrom}">
+                            <h:outputText value="#{rate.effectiveFrom}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                            </h:outputText>
+                        </p:column>
+                        
+                        <p:column headerText="Created By">
+                            <h:outputText value="#{rate.createdBy.webUserPerson.name}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Actions" style="width:200px">
+                            <p:commandButton value="Edit" 
+                                           action="#{exchangeRateController.prepareEdit(rate)}"
+                                           update="@form"
+                                           icon="pi pi-pencil"
+                                           styleClass="ui-button-warning"/>
+                            <p:commandButton value="Deactivate" 
+                                           action="#{exchangeRateController.deactivate(rate)}"
+                                           update="@form"
+                                           icon="pi pi-ban"
+                                           styleClass="ui-button-danger"
+                                           onclick="return confirm('Deactivate this exchange rate?');"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+                
+                <p:spacer height="20"/>
+                
+                <!-- All Rates Table -->
+                <p:panel header="All Exchange Rates" toggleable="true" collapsed="true">
+                    <p:dataTable value="#{exchangeRateController.items}" 
+                                var="rate"
+                                emptyMessage="No exchange rates found"
+                                paginator="true" 
+                                rows="10"
+                                paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
+                                rowsPerPageTemplate="10,25,50">
+                        
+                        <p:column headerText="From" sortBy="#{rate.fromCurrency}">
+                            <h:outputText value="#{rate.fromCurrency.displayName} (#{rate.fromCurrency.symbol})"/>
+                        </p:column>
+                        
+                        <p:column headerText="To" sortBy="#{rate.toCurrency}">
+                            <h:outputText value="#{rate.toCurrency.displayName} (#{rate.toCurrency.symbol})"/>
+                        </p:column>
+                        
+                        <p:column headerText="Rate" sortBy="#{rate.exchangeRate}">
+                            <h:outputText value="#{rate.exchangeRate}">
+                                <f:convertNumber pattern="#,##0.000000"/>
+                            </h:outputText>
+                        </p:column>
+                        
+                        <p:column headerText="Status" sortBy="#{rate.isActive}">
+                            <h:outputText value="Active" 
+                                        styleClass="badge badge-success"
+                                        rendered="#{rate.isActive}"/>
+                            <h:outputText value="Inactive" 
+                                        styleClass="badge badge-secondary"
+                                        rendered="#{!rate.isActive}"/>
+                        </p:column>
+                        
+                        <p:column headerText="Effective From" sortBy="#{rate.effectiveFrom}">
+                            <h:outputText value="#{rate.effectiveFrom}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                            </h:outputText>
+                        </p:column>
+                        
+                        <p:column headerText="Effective To" sortBy="#{rate.effectiveTo}">
+                            <h:outputText value="#{rate.effectiveTo}">
+                                <f:convertDateTime pattern="dd/MM/yyyy HH:mm"/>
+                            </h:outputText>
+                        </p:column>
+                        
+                        <p:column headerText="Actions" style="width:250px">
+                            <p:commandButton value="Edit" 
+                                           action="#{exchangeRateController.prepareEdit(rate)}"
+                                           update="@form"
+                                           icon="pi pi-pencil"
+                                           styleClass="ui-button-warning"
+                                           disabled="#{rate.isActive}"/>
+                            <p:commandButton value="Activate" 
+                                           action="#{exchangeRateController.activate(rate)}"
+                                           update="@form"
+                                           icon="pi pi-check"
+                                           styleClass="ui-button-success"
+                                           rendered="#{!rate.isActive}"
+                                           onclick="return confirm('Activate this exchange rate? This will deactivate the current active rate for this currency pair.');"/>
+                            <p:commandButton value="Deactivate" 
+                                           action="#{exchangeRateController.deactivate(rate)}"
+                                           update="@form"
+                                           icon="pi pi-ban"
+                                           styleClass="ui-button-danger"
+                                           rendered="#{rate.isActive}"
+                                           onclick="return confirm('Deactivate this exchange rate?');"/>
+                            <p:commandButton value="Delete" 
+                                           action="#{exchangeRateController.delete()}"
+                                           update="@form"
+                                           icon="pi pi-trash"
+                                           styleClass="ui-button-danger"
+                                           onclick="return confirm('Permanently delete this exchange rate?');"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+                
+                <p:spacer height="10"/>
+                
+                <p:panel header="Information" styleClass="ui-panel-info">
+                    <ul>
+                        <li>Only one exchange rate can be active for each currency pair at a time</li>
+                        <li>When a new rate is activated, the previous active rate is automatically deactivated</li>
+                        <li>The system uses the active rate at the time of transaction</li>
+                        <li>Historical rates are preserved for audit purposes</li>
+                        <li>Default system currency is Ugandan Shillings (UGX)</li>
+                    </ul>
+                </p:panel>
+            </p:panel>
+        </h:form>
+    </ui:define>
+
+</ui:composition>

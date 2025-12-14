@@ -35,7 +35,7 @@
                         </h:outputLabel>
                     </p:column>
                     <p:column>
-                        <h:outputLabel value="#{d.creater.webUserPerson.name}"/>
+                        <h:outputLabel value="#{d.creater ne null and d.creater.webUserPerson ne null ? d.creater.webUserPerson.name : 'N/A'}"/>
                     </p:column>
                     <p:column>
                         <p:commandButton value="Remove" 

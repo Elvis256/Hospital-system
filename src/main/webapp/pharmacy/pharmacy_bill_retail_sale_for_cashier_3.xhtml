@@ -497,7 +497,7 @@
                                                 </h:outputLabel>
                                             </p:column>
                                             <!--                                            <p:column headerText="User" style="overflow: hidden;">
-                                                                                            <h:outputLabel value="#{bill.creater.webUserPerson.name}"  ></h:outputLabel>
+                                                                                            <h:outputLabel value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}"  ></h:outputLabel>
                                                                                         </p:column>     -->
                                         </p:dataTable>
 

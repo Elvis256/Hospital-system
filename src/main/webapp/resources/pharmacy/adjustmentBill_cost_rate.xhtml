@@ -22,7 +22,7 @@
                     <f:convertDateTime pattern="#{sessionController.applicationPreference.longDateTimeFormat}"/>
                 </h:outputLabel>
                 <h:outputLabel value="Adjusted By"/>
-                <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}"/>
+                <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"/>
                 <h:outputLabel value="Department"/>
                 <h:outputLabel value="#{cc.attrs.bill.department.name}"/>
             </h:panelGrid>

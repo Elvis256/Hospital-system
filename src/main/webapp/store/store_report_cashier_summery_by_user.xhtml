@@ -181,7 +181,7 @@
                                 <h:outputLabel value="#{cIn.insId}"/>
                             </p:column>
                             <p:column headerText="From">
-                                <h:outputLabel value="#{cIn.fromWebUser.webUserPerson.nameWithTitle}"/>
+                                <h:outputLabel value="#{cIn.fromWebUser ne null and cIn.fromWebUser.webUserPerson ne null ? cIn.fromWebUser.webUserPerson.nameWithTitle : 'N/A'}"/>
                             </p:column>
 
                             <p:column headerText="Cash Value">
@@ -242,7 +242,7 @@
                                 <h:outputLabel value="#{cInCan.insId}"/>
                             </p:column>
                             <p:column headerText="From">
-                                <h:outputLabel value="#{cInCan.fromWebUser.webUserPerson.nameWithTitle}"/>
+                                <h:outputLabel value="#{cInCan.fromWebUser ne null and cInCan.fromWebUser.webUserPerson ne null ? cInCan.fromWebUser.webUserPerson.nameWithTitle : 'N/A'}"/>
                             </p:column>
 
                             <p:column headerText="Cash Value">
@@ -304,7 +304,7 @@
                             </p:column>
 
                             <p:column headerText="From">
-                                <h:outputLabel value="#{cOut.fromWebUser.webUserPerson.nameWithTitle}"/>
+                                <h:outputLabel value="#{cOut.fromWebUser ne null and cOut.fromWebUser.webUserPerson ne null ? cOut.fromWebUser.webUserPerson.nameWithTitle : 'N/A'}"/>
                             </p:column>
 
                             <p:column headerText="Cash Value">
@@ -365,7 +365,7 @@
                             </p:column>
 
                             <p:column headerText="From">
-                                <h:outputLabel value="#{cOutCan.fromWebUser.webUserPerson.nameWithTitle}"/>
+                                <h:outputLabel value="#{cOutCan.fromWebUser ne null and cOutCan.fromWebUser.webUserPerson ne null ? cOutCan.fromWebUser.webUserPerson.nameWithTitle : 'N/A'}"/>
                             </p:column>
 
                             <p:column headerText="Cash Value">
@@ -426,7 +426,7 @@
                             </p:column>
 
                             <p:column headerText="From">
-                                <h:outputLabel value="#{cAdj.fromWebUser.webUserPerson.nameWithTitle}"/>
+                                <h:outputLabel value="#{cAdj.fromWebUser ne null and cAdj.fromWebUser.webUserPerson ne null ? cAdj.fromWebUser.webUserPerson.nameWithTitle : 'N/A'}"/>
                             </p:column>
 
                             <p:column headerText="Cash Value">

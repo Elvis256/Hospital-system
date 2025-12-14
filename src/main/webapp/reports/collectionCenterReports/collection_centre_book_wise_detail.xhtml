@@ -274,10 +274,10 @@
                             <p:column
                                     headerText="Creater"
                                     width="5rem"
-                                    sortBy="#{c.bill.creater.webUserPerson.name}"
-                                    filterBy="#{c.bill.creater.webUserPerson.name}"
+                                    sortBy="#{c.bill.creater ne null and c.bill.creater.webUserPerson ne null ? c.bill.creater.webUserPerson.name : 'N/A'}"
+                                    filterBy="#{c.bill.creater ne null and c.bill.creater.webUserPerson ne null ? c.bill.creater.webUserPerson.name : 'N/A'}"
                                     filterMatchMode="contains">
-                                <h:outputText value="#{c.bill.creater.webUserPerson.name}"/>
+                                <h:outputText value="#{c.bill.creater ne null and c.bill.creater.webUserPerson ne null ? c.bill.creater.webUserPerson.name : 'N/A'}"/>
                             </p:column>
                             <p:column
                                     headerText="Created Date"

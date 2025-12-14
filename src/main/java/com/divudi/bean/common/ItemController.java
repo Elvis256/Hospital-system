@@ -171,6 +171,7 @@ public class ItemController implements Serializable {
     private List<ItemFee> selectedItemFeeList;
     private Institution institution;
     private Department department;
+    private Speciality speciality;
     private Institution filterInstitution;
     private Department filterDepartment;
     private FeeType feeType;
@@ -3445,6 +3446,12 @@ public class ItemController implements Serializable {
     public void prepareAdd() {
         current = new Item();
     }
+    
+    public void prepareEdit() {
+        if (current == null) {
+            current = new Item();
+        }
+    }
 
     public void prepareAddingInvestigation() {
         current = new Investigation();
@@ -3694,6 +3701,26 @@ public class ItemController implements Serializable {
 
     public void setDepartment(Department department) {
         this.department = department;
+    }
+
+    public Speciality getSpeciality() {
+        return speciality;
+    }
+
+    public void setSpeciality(Speciality speciality) {
+        this.speciality = speciality;
+    }
+
+    public void fillItemsBySpeciality() {
+        items = null;
+        if (speciality == null) {
+            items = getItemFacade().findAll("name", true);
+        } else {
+            String jpql = "SELECT i FROM Item i WHERE i.retired = false AND i.speciality = :speciality ORDER BY i.name";
+            Map<String, Object> parameters = new HashMap<>();
+            parameters.put("speciality", speciality);
+            items = getItemFacade().findByJpql(jpql, parameters);
+        }
     }
 
     public List<Item> getItemList() {

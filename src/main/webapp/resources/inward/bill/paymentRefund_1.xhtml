@@ -256,7 +256,7 @@
                          bottom:  3%!important;
                          font-size: 12px!important;
                          text-decoration: overline;">
-                            <h:outputLabel  value="Cashier : #{cc.attrs.bill.creater.webUserPerson.name}"   />
+                            <h:outputLabel  value="Cashier : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"   />
                         </div>
             <div class="footer" style="text-align: center;">
                 <br/>

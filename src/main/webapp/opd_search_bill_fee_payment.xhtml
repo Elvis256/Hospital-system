@@ -150,7 +150,7 @@
                                         </h:outputLabel>
                                     </p:column>
                                     <p:column headerText="Billed by" >
-                                        <h:outputLabel value="#{bfp.creater.webUserPerson.name}" >
+                                        <h:outputLabel value="#{bfp.creater ne null and bfp.creater.webUserPerson ne null ? bfp.creater.webUserPerson.name : 'N/A'}" >
                                         </h:outputLabel>
                                     </p:column>
 

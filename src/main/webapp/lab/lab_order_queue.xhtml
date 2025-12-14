@@ -104,7 +104,7 @@
                             
                             <p:column headerText="Ordered By" width="180">
                                 <i class="fas fa-user-md"></i>
-                                <h:outputText value=" #{order.creater.webUserPerson.name}"/>
+                                <h:outputText value=" #{order.creater ne null and order.creater.webUserPerson ne null ? order.creater.webUserPerson.name : 'N/A'}"/>
                                 <br/>
                                 <small class="text-muted">
                                     #{order.creater.department.name}

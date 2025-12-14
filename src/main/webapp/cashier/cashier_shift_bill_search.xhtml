@@ -113,10 +113,10 @@
                                       sortBy="#{bill.creater.name}"
                                       filterMatchMode="contains"
                                       filterBy="#{bill.creater.name}">
-                                <h:outputLabel value="#{bill.creater.webUserPerson.name}" ></h:outputLabel>
+                                <h:outputLabel value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" ></h:outputLabel>
                                 <h:panelGroup rendered="#{bill.cancelled or bill.refunded}" style="display: grid">
-                                    <h:outputLabel value="#{bill.cancelledBill.creater.webUserPerson.name}" style="color: red" rendered="#{bill.cancelled}"></h:outputLabel>
-                                    <h:outputLabel value="#{bill.refundedBill.creater.webUserPerson.name}" style="color: orange" rendered="#{bill.refunded}"></h:outputLabel>
+                                    <h:outputLabel value="#{bill.cancelledBill.creater ne null and bill.cancelledBill.creater.webUserPerson ne null ? bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" style="color: red" rendered="#{bill.cancelled}"></h:outputLabel>
+                                    <h:outputLabel value="#{bill.refundedBill.creater ne null and bill.refundedBill.creater.webUserPerson ne null ? bill.refundedBill.creater.webUserPerson.name : 'N/A'}" style="color: orange" rendered="#{bill.refunded}"></h:outputLabel>
                                 </h:panelGroup>
                             </p:column>
 
@@ -130,8 +130,8 @@
                                         <h:outputText value="Creater" ></h:outputText>
                                         <p:spacer width="15" height="1" ></p:spacer>
                                         <h:panelGroup>
-                                            <h:outputText value="#{bill.cancelledBill.creater.webUserPerson.name}" rendered="#{bill.cancelled}"></h:outputText>
-                                            <h:outputText value="#{bill.refundedBill.creater.webUserPerson.name}" rendered="#{bill.refunded}"></h:outputText>
+                                            <h:outputText value="#{bill.cancelledBill.creater ne null and bill.cancelledBill.creater.webUserPerson ne null ? bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" rendered="#{bill.cancelled}"></h:outputText>
+                                            <h:outputText value="#{bill.refundedBill.creater ne null and bill.refundedBill.creater.webUserPerson ne null ? bill.refundedBill.creater.webUserPerson.name : 'N/A'}" rendered="#{bill.refunded}"></h:outputText>
                                         </h:panelGroup>
 
                                         <h:outputText value="Created At" ></h:outputText>

@@ -253,7 +253,7 @@
         </div>
 
         <div style="margin-left: 3%; margin-right: 3%; margin-top: 1%">
-            <h:outputLabel value="Prepared By : #{cc.attrs.bill.creater.webUserPerson.nameWithTitle}"/>
+            <h:outputLabel value="Prepared By : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
             <h:outputLabel style="float: right" value="Approved By"/>
         </div>
 
@@ -400,7 +400,7 @@
 
                         <div style="margin-bottom: 15px;">
                             <div><strong>Prepared By: </strong>
-                                <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.nameWithTitle}"/>
+                                <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
                             </div>
                             <div><strong>Checked By:</strong></div>
                             <div><strong>Approved By:</strong></div>

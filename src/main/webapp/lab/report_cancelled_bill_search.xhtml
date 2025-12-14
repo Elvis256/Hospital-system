@@ -64,7 +64,7 @@
                                 </h:outputLabel>
                             </p:column>
                             <p:column  headerText="Billed By" styleClass="alignTop" >
-                                <h:outputLabel value="#{pi.patientInvestigation.billItem.bill.creater.webUserPerson.name}"  >
+                                <h:outputLabel value="#{pi.patientInvestigation.billItem.bill.creater ne null and pi.patientInvestigation.billItem.bill.creater.webUserPerson ne null ? pi.patientInvestigation.billItem.bill.creater.webUserPerson.name : 'N/A'}"  >
                                 </h:outputLabel>
                             </p:column>
                             
@@ -79,7 +79,7 @@
                                 </h:outputLabel>
                             </p:column>
                             <p:column  headerText="Cancelled By" styleClass="alignTop" >
-                                <h:outputLabel value="#{pi.patientInvestigation.billItem.bill.cancelledBill.creater.webUserPerson.name}"  >
+                                <h:outputLabel value="#{pi.patientInvestigation.billItem.bill.cancelledBill.creater ne null and pi.patientInvestigation.billItem.bill.cancelledBill.creater.webUserPerson ne null ? pi.patientInvestigation.billItem.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}"  >
                                 </h:outputLabel>
                             </p:column>
                             <p:column  headerText="Cancelled at" styleClass="alignTop" >

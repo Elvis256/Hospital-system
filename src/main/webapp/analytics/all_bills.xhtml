@@ -70,7 +70,7 @@
                                     <h:outputLabel   value="#{bill.department.name}"/>
                                 </p:column> 
                                 <p:column headerText="User" >                                
-                                    <h:outputLabel   value="#{bill.creater.webUserPerson.name}"/>
+                                    <h:outputLabel   value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}"/>
                                 </p:column> 
                                 <p:column headerText="Reference Bill ID" >                                
                                     <h:outputLabel   value="#{bill.referenceBill.id}"/>

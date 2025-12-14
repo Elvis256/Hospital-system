@@ -156,7 +156,7 @@
                         <td style="padding: 2px; width: 120px;">Billed By </td>
                         <td style="padding: 2px;" class="spacer"></td>
                         <td style="padding: 2px;" colspan="4">
-                            <h:outputLabel style="font-size: 14px;" value="#{cc.attrs.request.bill.creater.webUserPerson.nameWithTitle}"/>
+                            <h:outputLabel style="font-size: 14px;" value="#{cc.attrs.request.bill.creater ne null and cc.attrs.request.bill.creater.webUserPerson ne null ? cc.attrs.request.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
                         </td>
                     </tr>
 

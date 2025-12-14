@@ -16,7 +16,7 @@
                         </f:facet>
                         <h:panelGrid columns="2" class="my-2" >
                             <h:outputLabel value="Cashier"/>
-                            <h:outputLabel value="#{financialTransactionController.nonClosedShiftStartFundBill.creater.webUserPerson.name}"/>
+                            <h:outputLabel value="#{financialTransactionController.nonClosedShiftStartFundBill.creater ne null and financialTransactionController.nonClosedShiftStartFundBill.creater.webUserPerson ne null ? financialTransactionController.nonClosedShiftStartFundBill.creater.webUserPerson.name : 'N/A'}"/>
 
                             <h:outputLabel value="Start Bill ID"/>
                             <p:inputText 

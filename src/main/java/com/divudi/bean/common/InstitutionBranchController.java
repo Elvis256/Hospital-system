@@ -88,6 +88,7 @@ public class InstitutionBranchController implements Serializable {
     public void prepareAdd() {
         codeDisabled = false;
         current = new Institution();
+        current.setInstitutionType(InstitutionType.branch);
     }
 
     public void setSelectedItems(List<Institution> selectedItems) {
@@ -104,7 +105,7 @@ public class InstitutionBranchController implements Serializable {
 
     public void saveSelected() {
         if (getCurrent().getInstitutionType() == null) {
-            JsfUtil.addErrorMessage("Select Instituion Type");
+            JsfUtil.addErrorMessage("Select Institution Type");
             return;
         }
         if (getCurrent().getInstitution() == null) {

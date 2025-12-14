@@ -401,7 +401,7 @@
                                             </h:outputLabel>
                                         </p:column>
                                         <p:column headerText="Creator" >
-                                            <h:outputLabel value="#{pt.creater.webUserPerson.name}"/>
+                                            <h:outputLabel value="#{pt.creater ne null and pt.creater.webUserPerson ne null ? pt.creater.webUserPerson.name : 'N/A'}"/>
                                             <br/>
                                             <h:panelGroup rendered="#{ti.retired}" >
                                                 <h:outputLabel style="color: red;" value="Deleted By " />
@@ -529,12 +529,12 @@
                                             </h:outputLabel>
                                         </p:column>
                                         <p:column headerText="Billed By">
-                                            <h:outputLabel value="#{iss.creater.webUserPerson.name}"/>
+                                            <h:outputLabel value="#{iss.creater ne null and iss.creater.webUserPerson ne null ? iss.creater.webUserPerson.name : 'N/A'}"/>
                                             <br/>
                                             <h:panelGroup rendered="#{iss.cancelled}" >
                                                 <h:outputLabel style="color: red;" value="Cancelled By " />
                                                 <h:outputLabel style="color: red;" rendered="#{iss.cancelled}"
-                                                               value="#{iss.cancelledBill.creater.webUserPerson.name}" >
+                                                               value="#{iss.cancelledBill.creater ne null and iss.cancelledBill.creater.webUserPerson ne null ? iss.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                                 </h:outputLabel>
                                             </h:panelGroup>
                                         </p:column>
@@ -632,12 +632,12 @@
                                             </h:panelGroup>
                                         </p:column>
                                         <p:column headerText="Billed By">
-                                            <h:outputLabel value="#{iss.creater.webUserPerson.name}"/>
+                                            <h:outputLabel value="#{iss.creater ne null and iss.creater.webUserPerson ne null ? iss.creater.webUserPerson.name : 'N/A'}"/>
                                             <br/>
                                             <h:panelGroup rendered="#{iss.cancelled}" >
                                                 <h:outputLabel style="color: red;" value="Cancelled By " />
                                                 <h:outputLabel style="color: red;" rendered="#{iss.cancelled}"
-                                                               value="#{iss.cancelledBill.creater.webUserPerson.name}" >
+                                                               value="#{iss.cancelledBill.creater ne null and iss.cancelledBill.creater.webUserPerson ne null ? iss.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                                 </h:outputLabel>
                                             </h:panelGroup>
                                         </p:column>
@@ -716,12 +716,12 @@
                                             </h:panelGroup>
                                         </p:column>
                                         <p:column headerText="Added User">
-                                            <h:outputLabel value="#{bil.creater.webUserPerson.name}"/>
+                                            <h:outputLabel value="#{bil.creater ne null and bil.creater.webUserPerson ne null ? bil.creater.webUserPerson.name : 'N/A'}"/>
                                             <br/>
                                             <h:panelGroup rendered="#{bil.cancelled}" >
                                                 <h:outputLabel style="color: red;" value="Cancelled By " />
                                                 <h:outputLabel style="color: red;" rendered="#{bil.cancelled}"
-                                                               value="#{bil.cancelledBill.creater.webUserPerson.name}" >
+                                                               value="#{bil.cancelledBill.creater ne null and bil.cancelledBill.creater.webUserPerson ne null ? bil.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                                 </h:outputLabel>
                                             </h:panelGroup>
                                         </p:column>
@@ -782,17 +782,17 @@
                                             </h:panelGroup>
                                         </p:column>
                                         <p:column headerText="Added User">
-                                            <h:outputLabel value="#{pf.bill.creater.webUserPerson.name}"/>
+                                            <h:outputLabel value="#{pf.bill.creater ne null and pf.bill.creater.webUserPerson ne null ? pf.bill.creater.webUserPerson.name : 'N/A'}"/>
                                             <br/>
                                             <h:panelGroup rendered="#{pf.bill.cancelled}" >
                                                 <h:outputLabel style="color: red;" value="Cancelled By " />
                                                 <h:outputLabel style="color: red;" rendered="#{pf.bill.cancelled}"
-                                                               value="#{pf.bill.cancelledBill.creater.webUserPerson.name}" >
+                                                               value="#{pf.bill.cancelledBill.creater ne null and pf.bill.cancelledBill.creater.webUserPerson ne null ? pf.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                                 </h:outputLabel>
                                             </h:panelGroup>
                                         </p:column>
                                         <p:column headerText="Checked User">
-                                            <h:outputLabel value="#{pf.bill.checkedBy.creater.webUserPerson.name}"/>
+                                            <h:outputLabel value="#{pf.bill.checkedBy.creater ne null and pf.bill.checkedBy.creater.webUserPerson ne null ? pf.bill.checkedBy.creater.webUserPerson.name : 'N/A'}"/>
                                         </p:column>
                                         <p:column headerText="Checked At">
                                             <h:outputLabel value="#{pf.bill.checkeAt}">
@@ -841,17 +841,17 @@
                                             </h:panelGroup>
                                         </p:column>
                                         <p:column headerText="Added User">
-                                            <h:outputLabel value="#{pf.creater.webUserPerson.name}"/>
+                                            <h:outputLabel value="#{pf.creater ne null and pf.creater.webUserPerson ne null ? pf.creater.webUserPerson.name : 'N/A'}"/>
                                             <br/>
                                             <h:panelGroup rendered="#{pf.bill.cancelled}" >
                                                 <h:outputLabel style="color: red;" value="Cancelled By " />
                                                 <h:outputLabel style="color: red;" rendered="#{pf.bill.cancelled}"
-                                                               value="#{pf.bill.cancelledBill.creater.webUserPerson.name}" >
+                                                               value="#{pf.bill.cancelledBill.creater ne null and pf.bill.cancelledBill.creater.webUserPerson ne null ? pf.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                                 </h:outputLabel>
                                             </h:panelGroup>
                                         </p:column>
                                         <p:column headerText="Checked User">
-                                            <h:outputLabel value="#{pf.bill.checkedBy.creater.webUserPerson.name}"/>
+                                            <h:outputLabel value="#{pf.bill.checkedBy.creater ne null and pf.bill.checkedBy.creater.webUserPerson ne null ? pf.bill.checkedBy.creater.webUserPerson.name : 'N/A'}"/>
                                         </p:column>
                                         <p:column headerText="Checked At">
                                             <h:outputLabel value="#{pf.bill.checkeAt}">
@@ -893,13 +893,13 @@
                                             </h:panelGroup>
                                         </p:column>
                                         <p:column headerText="Added User">
-                                            <h:outputLabel value="#{p.creater.webUserPerson.name}"/>
+                                            <h:outputLabel value="#{p.creater ne null and p.creater.webUserPerson ne null ? p.creater.webUserPerson.name : 'N/A'}"/>
                                             <br/>
                                             <h:panelGroup rendered="#{p.cancelled}" >
                                                 <h:outputLabel style="color: red;" value="Cancelled By " />
                                                 <h:outputLabel 
                                                     style="color: red;" rendered="#{p.cancelled}"
-                                                    value="#{p.cancelledBill.creater.webUserPerson.name}" >
+                                                    value="#{p.cancelledBill.creater ne null and p.cancelledBill.creater.webUserPerson ne null ? p.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                                 </h:outputLabel>
                                             </h:panelGroup>
                                         </p:column>
@@ -909,7 +909,7 @@
                                             </h:outputLabel>
                                         </p:column>
                                         <p:column headerText="Checked User">
-                                            <h:outputLabel value="#{p.checkedBy.creater.webUserPerson.name}"/>
+                                            <h:outputLabel value="#{p.checkedBy.creater ne null and p.checkedBy.creater.webUserPerson ne null ? p.checkedBy.creater.webUserPerson.name : 'N/A'}"/>
                                         </p:column>
                                         <p:column headerText="Checked At">
                                             <h:outputLabel value="#{p.checkeAt}">

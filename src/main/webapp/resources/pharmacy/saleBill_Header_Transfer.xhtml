@@ -88,7 +88,7 @@
                         <h:panelGrid columns="3">
                             <h:outputLabel value="Requested Person" class="billDetails1"/>
                             <h:outputLabel style="margin: 2%" value=":" class="billDetails1"/>
-                            <h:outputLabel value="#{cc.attrs.bill.backwardReferenceBill.creater.webUserPerson.name} - #{cc.attrs.bill.backwardReferenceBill.creater.staff.code}" class="billDetails1" />
+                            <h:outputLabel value="#{cc.attrs.bill.backwardReferenceBill.creater ne null and cc.attrs.bill.backwardReferenceBill.creater.webUserPerson ne null ? cc.attrs.bill.backwardReferenceBill.creater.webUserPerson.name : 'N/A'} - #{cc.attrs.bill.backwardReferenceBill.creater.staff.code}" class="billDetails1" />
                         </h:panelGrid>
                     </div>
                 </h:panelGroup>
@@ -106,7 +106,7 @@
                         <h:panelGrid columns="3">
                             <h:outputLabel value="Issued Person" class="billDetails1"/>
                             <h:outputLabel style="margin: 2%" value=":" class="billDetails1"/>
-                            <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}" class="billDetails1" />
+                            <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}" class="billDetails1" />
                         </h:panelGrid>
                     </div>
                 </h:panelGroup>

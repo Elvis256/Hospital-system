@@ -771,7 +771,7 @@
                                     </p:column>
 
                                     <p:column headerText="Issue Approved User" width="10em">
-                                        <h:outputText value="#{i.billItem.bill.creater.webUserPerson.name}"/>
+                                        <h:outputText value="#{i.billItem.bill.creater ne null and i.billItem.bill.creater.webUserPerson ne null ? i.billItem.bill.creater.webUserPerson.name : 'N/A'}"/>
                                     </p:column>
                                 </p:dataTable>
                             </ui:repeat>

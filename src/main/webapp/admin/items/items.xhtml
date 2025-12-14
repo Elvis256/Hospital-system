@@ -214,7 +214,7 @@
                                                 <h:outputText value="" ></h:outputText>
                                                 <p:selectBooleanCheckbox value="#{itemController.current.printFeesForBills}" itemLabel="Print Separate Fees"/>
                                                 <h:outputText value="Created Person"/>
-                                                <h:outputText value="#{itemController.current.creater.webUserPerson.nameWithTitle}"/>
+                                                <h:outputText value="#{itemController.current.creater ne null and itemController.current.creater.webUserPerson ne null ? itemController.current.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
                                                 <h:outputText value="Item Id"/>
                                                 <h:outputText value="#{itemController.current.id}"/>
 

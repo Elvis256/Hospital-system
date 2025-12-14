@@ -72,7 +72,7 @@
                     <tr>
                         <td>Req By</td>
                         <td>:</td>
-                        <td><h:outputText value="#{cc.attrs.bill.creater.webUserPerson.name}" /></td>
+                        <td><h:outputText value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}" /></td>
                     </tr>
                     <tr>
                         <td>Req Date/Time</td>

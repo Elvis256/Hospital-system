@@ -45,7 +45,7 @@
                                     </h:outputText>
 
                                     <h:outputText value="Cancelled User" ></h:outputText>
-                                    <h:outputText value="#{billSearch.bill.creater.webUserPerson.name}" >
+                                    <h:outputText value="#{billSearch.bill.creater ne null and billSearch.bill.creater.webUserPerson ne null ? billSearch.bill.creater.webUserPerson.name : 'N/A'}" >
                                     </h:outputText>
 
                                     <h:outputText value="Cancelled Comment" ></h:outputText>

@@ -107,11 +107,11 @@
                             </h:outputText>
                         </p:column>
 
-                        <p:column sortBy="#{item.creater.webUserPerson.nameWithTitle}" 
-                                  filterBy="#{item.creater.webUserPerson.nameWithTitle}"
+                        <p:column sortBy="#{item.creater ne null and item.creater.webUserPerson ne null ? item.creater.webUserPerson.nameWithTitle : 'N/A'}" 
+                                  filterBy="#{item.creater ne null and item.creater.webUserPerson ne null ? item.creater.webUserPerson.nameWithTitle : 'N/A'}"
                                   filterMatchMode="contains" 
                                   headerText="Collected By">
-                            <h:outputText value="#{item.creater.webUserPerson.nameWithTitle}" />
+                            <h:outputText value="#{item.creater ne null and item.creater.webUserPerson ne null ? item.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                         </p:column>
 
                         <p:column sortBy="#{item.idStr}" 

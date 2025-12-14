@@ -63,12 +63,12 @@
                     </p:column>
 
                     <p:column >
-                        <h:outputLabel value="#{ser.bill.creater.webUserPerson.name}"/>
+                        <h:outputLabel value="#{ser.bill.creater ne null and ser.bill.creater.webUserPerson ne null ? ser.bill.creater.webUserPerson.name : 'N/A'}"/>
                         <br/>
                         <h:panelGroup rendered="#{ser.bill.cancelled}" >
                             <h:outputLabel style="color: red;" value="Cancelled By " />
                             <h:outputLabel style="color: red;" rendered="#{ser.bill.cancelled}"
-                                           value="#{ser.bill.cancelledBill.creater.webUserPerson.name}" >
+                                           value="#{ser.bill.cancelledBill.creater ne null and ser.bill.cancelledBill.creater.webUserPerson ne null ? ser.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                             </h:outputLabel>
                         </h:panelGroup>
                     </p:column>

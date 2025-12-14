@@ -326,7 +326,7 @@
                                                     <p:separator/>
                                                     <p:separator/>
                                                     <p:outputLabel  value="Creator" ></p:outputLabel>
-                                                    <p:outputLabel value="#{staffController.current.creater.webUserPerson.name}"  />
+                                                    <p:outputLabel value="#{staffController.current.creater ne null and staffController.current.creater.webUserPerson ne null ? staffController.current.creater.webUserPerson.name : 'N/A'}"  />
                                                     <p:outputLabel  value="Created At" ></p:outputLabel>
                                                     <p:outputLabel value="#{staffController.current.createdAt}" >
                                                         <f:convertDateTime pattern="#{sessionController.applicationPreference.longDateTimeFormat}"  />

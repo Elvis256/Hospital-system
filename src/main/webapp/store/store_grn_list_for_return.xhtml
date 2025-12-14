@@ -94,20 +94,20 @@
 
                             <p:column headerText="Billed by" >
                                 <h:commandLink action="store_reprint_grn" >
-                                    <h:outputLabel value="#{p.creater.webUserPerson.name}" >                                      
+                                    <h:outputLabel value="#{p.creater ne null and p.creater.webUserPerson ne null ? p.creater.webUserPerson.name : 'N/A'}" >                                      
                                     </h:outputLabel>
                                     <f:setPropertyActionListener value="#{p}" target="#{storeBillSearch.bill}"/>
                                 </h:commandLink>
                                 <br/>
                                 <h:panelGroup rendered="#{p.cancelled}" >
                                     <h:outputLabel style="color: red;" value="Cancelled by " />
-                                    <h:outputLabel style="color: red;" rendered="#{p.cancelled}" value="#{p.cancelledBill.creater.webUserPerson.name}" >                                       
+                                    <h:outputLabel style="color: red;" rendered="#{p.cancelled}" value="#{p.cancelledBill.creater ne null and p.cancelledBill.creater.webUserPerson ne null ? p.cancelledBill.creater.webUserPerson.name : 'N/A'}" >                                       
                                     </h:outputLabel>
                                 </h:panelGroup>
                                 <h:panelGroup rendered="#{p.refunded}" >
                                     <h:outputLabel style="color: red;" value="Refunded by " />
                                     <h:outputLabel style="color: red;" rendered="#{p.refunded}"
-                                                   value="#{p.refundedBill.creater.webUserPerson.name}" >                         
+                                                   value="#{p.refundedBill.creater ne null and p.refundedBill.creater.webUserPerson ne null ? p.refundedBill.creater.webUserPerson.name : 'N/A'}" >                         
                                     </h:outputLabel>
                                 </h:panelGroup>
                             </p:column>    
@@ -170,20 +170,20 @@
 
                                     <p:column >
                                         <h:commandLink action="store_reprint_grn_return" >
-                                            <h:outputLabel value="#{b.creater.webUserPerson.name}" >                                      
+                                            <h:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" >                                      
                                             </h:outputLabel>
                                             <f:setPropertyActionListener value="#{b}" target="#{storeBillSearch.bill}"/>
                                         </h:commandLink>
                                         <br/>
                                         <h:panelGroup rendered="#{b.cancelled}" >
                                             <h:outputLabel style="color: red;" value="Cancelled by " />
-                                            <h:outputLabel style="color: red;" rendered="#{p.cancelled}" value="#{p.cancelledBill.creater.webUserPerson.name}" >                                       
+                                            <h:outputLabel style="color: red;" rendered="#{p.cancelled}" value="#{p.cancelledBill.creater ne null and p.cancelledBill.creater.webUserPerson ne null ? p.cancelledBill.creater.webUserPerson.name : 'N/A'}" >                                       
                                             </h:outputLabel>
                                         </h:panelGroup>
                                         <h:panelGroup rendered="#{b.refunded}" >
                                             <h:outputLabel style="color: red;" value="Refunded by " />
                                             <h:outputLabel style="color: red;" rendered="#{b.refunded}"
-                                                           value="#{b.refundedBill.creater.webUserPerson.name}" >                         
+                                                           value="#{b.refundedBill.creater ne null and b.refundedBill.creater.webUserPerson ne null ? b.refundedBill.creater.webUserPerson.name : 'N/A'}" >                         
                                             </h:outputLabel>
                                         </h:panelGroup>
                                     </p:column>                       

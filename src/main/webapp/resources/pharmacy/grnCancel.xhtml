@@ -76,7 +76,7 @@
 
                 <div class="row">
                     <h:outputLabel value="Cancelled By " class="col-3"/>
-                    <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}" class="col-3"/>
+                    <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}" class="col-3"/>
                     <h:outputLabel value="Invoice No" class="col-2"/>
                     <h:outputLabel value="#{cc.attrs.bill.invoiceNumber}" class="col-4"/>
                 </div>
@@ -251,7 +251,7 @@
             </div>
             
             <div class="preparedBy mt-3">
-                <h:outputLabel value="Prepared By : #{cc.attrs.bill.creater.webUserPerson.nameWithTitle}" style="text-align: right!important;"/>
+                <h:outputLabel value="Prepared By : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}" style="text-align: right!important;"/>
 
             </div>
 

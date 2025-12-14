@@ -72,7 +72,7 @@
                         <tr>
                             <td><h:outputLabel value="Requested Person" styleClass="label" /></td>
                             <td><h:outputLabel value=":" /></td>
-                            <td colspan="4"><h:outputLabel value="#{cc.attrs.bill.backwardReferenceBill.creater.webUserPerson.name} - #{cc.attrs.bill.backwardReferenceBill.creater.staff.code}" /></td>
+                            <td colspan="4"><h:outputLabel value="#{cc.attrs.bill.backwardReferenceBill.creater ne null and cc.attrs.bill.backwardReferenceBill.creater.webUserPerson ne null ? cc.attrs.bill.backwardReferenceBill.creater.webUserPerson.name : 'N/A'} - #{cc.attrs.bill.backwardReferenceBill.creater.staff.code}" /></td>
                         </tr>
                     </h:panelGroup>
                     <h:panelGroup rendered="#{cc.attrs.bill.backwardReferenceBill ne null}">
@@ -85,7 +85,7 @@
                     <tr>
                         <td><h:outputLabel value="Issued Person" styleClass="label" /></td>
                         <td><h:outputLabel value=":" /></td>
-                        <td colspan="4"><h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}" /></td>
+                        <td colspan="4"><h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}" /></td>
                     </tr>
                     <tr>
                         <td><h:outputLabel value="Issue No" styleClass="label" /></td>

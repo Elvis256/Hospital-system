@@ -50,7 +50,7 @@
                                 <h:outputLabel  value="#{bill.deptId}"></h:outputLabel>
                             </p:column>                            
                             <p:column headerText="To Web User"  >                                
-                                <h:outputLabel  value="#{bill.toWebUser.webUserPerson.nameWithTitle}"></h:outputLabel>                                
+                                <h:outputLabel  value="#{bill.toWebUser ne null and bill.toWebUser.webUserPerson ne null ? bill.toWebUser.webUserPerson.nameWithTitle : 'N/A'}"></h:outputLabel>                                
                             </p:column>
                             <p:column headerText="Billed at"  >
                                 <h:outputLabel value="#{bill.createdAt}" >

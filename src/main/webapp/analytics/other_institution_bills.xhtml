@@ -85,7 +85,7 @@
                         </p:column>
 
                         <p:column headerText="User" >                                
-                            <h:outputLabel   value="#{bill.creater.webUserPerson.name}"/>
+                            <h:outputLabel   value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}"/>
                         </p:column> 
                         <p:column headerText="Numbers">
                             <h:outputLabel value="Invoice No" rendered="#{not empty bill.invoiceNumber}"/>

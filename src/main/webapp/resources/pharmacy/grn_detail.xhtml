@@ -321,7 +321,7 @@
                         </div>-->
 
             <div class="preparedBy">
-                <h:outputLabel value="Prepared By : #{cc.attrs.bill.creater.webUserPerson.nameWithTitle}" style="text-align: right!important;"/>
+                <h:outputLabel value="Prepared By : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}" style="text-align: right!important;"/>
 
             </div>
 

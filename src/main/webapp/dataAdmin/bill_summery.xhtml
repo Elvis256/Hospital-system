@@ -259,7 +259,7 @@
                                         <h:inputText value="#{billSearch.billSearch.staffFee}" ></h:inputText>
 
                                         <h:outputLabel value="Billed By :" ></h:outputLabel>
-                                        <h:outputLabel value="#{billSearch.billSearch.creater.webUserPerson.name}" ></h:outputLabel> 
+                                        <h:outputLabel value="#{billSearch.billSearch.creater ne null and billSearch.billSearch.creater.webUserPerson ne null ? billSearch.billSearch.creater.webUserPerson.name : 'N/A'}" ></h:outputLabel> 
 
                                         <h:outputLabel value="Edited By :" ></h:outputLabel>
                                         <h:outputLabel value="#{billSearch.billSearch.editor.webUserPerson.name}" ></h:outputLabel>

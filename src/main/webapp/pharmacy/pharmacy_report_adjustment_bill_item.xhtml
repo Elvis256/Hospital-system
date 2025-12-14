@@ -140,15 +140,15 @@
                                 </p:column>
 
                                 <p:column headerText="User"
-                                          sortBy="#{i.bill.creater.webUserPerson.name}"
-                                          filterBy="#{i.bill.creater.webUserPerson.name}"
+                                          sortBy="#{i.bill.creater ne null and i.bill.creater.webUserPerson ne null ? i.bill.creater.webUserPerson.name : 'N/A'}"
+                                          filterBy="#{i.bill.creater ne null and i.bill.creater.webUserPerson ne null ? i.bill.creater.webUserPerson.name : 'N/A'}"
                                           filterMatchMode="contains"
 
                                           >
                                     <f:facet name="header">
                                         <h:outputLabel value="User"/>
                                     </f:facet>
-                                    <h:outputLabel value="#{i.bill.creater.webUserPerson.name}" 
+                                    <h:outputLabel value="#{i.bill.creater ne null and i.bill.creater.webUserPerson ne null ? i.bill.creater.webUserPerson.name : 'N/A'}" 
                                                    style="width: 100px!important;" ></h:outputLabel>
                                 </p:column>
 

@@ -131,20 +131,20 @@
                                     </p:column>   
 
                                     <p:column headerText="User" >
-                                        <h:outputLabel value="#{bill.creater.webUserPerson.name}" />                                      
+                                        <h:outputLabel value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" />                                      
                                         <h:panelGroup rendered="#{bill.refunded or bill.cancelled or bill.retired}" >
                                             <br/>                                
                                         </h:panelGroup>
                                         <h:panelGroup rendered="#{bill.cancelled}" >
                                             <h:outputLabel style="color: red;" value="Cancelled By " />
                                             <h:outputLabel style="color: red;" rendered="#{bill.cancelled}" 
-                                                           value="#{bill.cancelledBill.creater.webUserPerson.name}" >                                       
+                                                           value="#{bill.cancelledBill.creater ne null and bill.cancelledBill.creater.webUserPerson ne null ? bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >                                       
                                             </h:outputLabel>
                                         </h:panelGroup>
                                         <h:panelGroup rendered="#{bill.refunded}" >
                                             <h:outputLabel style="color: red;" value="Last Refunded By " />
                                             <h:outputLabel style="color: red;" rendered="#{bill.refunded}"
-                                                           value="#{bill.refundedBill.creater.webUserPerson.name}" >
+                                                           value="#{bill.refundedBill.creater ne null and bill.refundedBill.creater.webUserPerson ne null ? bill.refundedBill.creater.webUserPerson.name : 'N/A'}" >
 
                                             </h:outputLabel>
                                         </h:panelGroup>                               

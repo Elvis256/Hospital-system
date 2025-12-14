@@ -85,8 +85,8 @@
                                         </h:outputText>
                                     </p:column>
 
-                                    <p:column headerText="Created By" sortBy="#{b.creater.webUserPerson.name}" filterBy="#{b.creater.webUserPerson.name}" filterMatchMode="contains">
-                                        <h:outputText value="#{b.creater.webUserPerson.name}">
+                                    <p:column headerText="Created By" sortBy="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" filterBy="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" filterMatchMode="contains">
+                                        <h:outputText value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}">
                                         </h:outputText>
                                     </p:column>
 
@@ -95,7 +95,7 @@
                                             <f:convertDateTime pattern="#{sessionController.applicationPreference.shortDateTimeFormat}" />
                                         </h:outputText>
                                     </p:column>
-                                    <p:column headerText="Approved By" sortBy="#{b.creater.webUserPerson.name}" filterBy="#{b.creater.webUserPerson.name}" filterMatchMode="contains">
+                                    <p:column headerText="Approved By" sortBy="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" filterBy="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" filterMatchMode="contains">
                                         <h:outputText value="#{b.paymentApprovedBy.webUserPerson.name}">
                                         </h:outputText>
                                     </p:column>
@@ -105,7 +105,7 @@
                                             <f:convertDateTime pattern="#{sessionController.applicationPreference.shortDateTimeFormat}" />
                                         </h:outputText>
                                     </p:column>
-                                    <p:column headerText="Settled By" sortBy="#{b.creater.webUserPerson.name}" filterBy="#{b.creater.webUserPerson.name}" filterMatchMode="contains">
+                                    <p:column headerText="Settled By" sortBy="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" filterBy="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" filterMatchMode="contains">
                                         <h:outputText value="#{b.paymentGeneratedBy.webUserPerson.name}">
                                         </h:outputText>
                                     </p:column>

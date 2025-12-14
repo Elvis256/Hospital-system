@@ -50,8 +50,8 @@
             <div class="d-grid gap-1" style="font-size: 11px; margin-left: 10px;">
                 <h:outputLabel value="Location From : #{cc.attrs.bill.department.name}"/>
                 <h:outputLabel value="Location To : #{cc.attrs.bill.toDepartment.name}"/>
-                <h:outputLabel rendered="#{cc.attrs.bill.backwardReferenceBill.creater ne null }" value="Requested Person : #{cc.attrs.bill.backwardReferenceBill.creater.webUserPerson.name} - #{cc.attrs.bill.backwardReferenceBill.creater.staff.code}"/>
-                <h:outputLabel value="Issued Person : #{cc.attrs.bill.creater.webUserPerson.name}"/>
+                <h:outputLabel rendered="#{cc.attrs.bill.backwardReferenceBill.creater ne null }" value="Requested Person : #{cc.attrs.bill.backwardReferenceBill.creater ne null and cc.attrs.bill.backwardReferenceBill.creater.webUserPerson ne null ? cc.attrs.bill.backwardReferenceBill.creater.webUserPerson.name : 'N/A'} - #{cc.attrs.bill.backwardReferenceBill.creater.staff.code}"/>
+                <h:outputLabel value="Issued Person : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"/>
                 <h:outputLabel value="Issue No : #{cc.attrs.bill.deptId}"/>
                 <h:outputLabel rendered="#{cc.attrs.bill.backwardReferenceBill ne null}" value="Request No : #{cc.attrs.bill.backwardReferenceBill.deptId}"/>
                 <h:panelGroup class="d-flex gap-2">

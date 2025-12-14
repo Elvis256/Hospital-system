@@ -129,7 +129,7 @@
                             <f:facet name="header">
                                 <p:outputLabel value="Creator" />
                             </f:facet>
-                            <p:outputLabel value="#{a.creater.webUserPerson.nameWithTitle}" />
+                            <p:outputLabel value="#{a.creater ne null and a.creater.webUserPerson ne null ? a.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                         </p:column>
                         <p:column>
                             <f:facet name="header">

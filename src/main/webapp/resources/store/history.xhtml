@@ -651,7 +651,7 @@
                             #{dd3.bill.fromInstitution.name}
                         </p:column>
                         <p:column headerText="Billed By">
-                            #{dd3.bill.creater.webUserPerson.name}
+                            #{dd3.bill.creater ne null and dd3.bill.creater.webUserPerson ne null ? dd3.bill.creater.webUserPerson.name : 'N/A'}
                         </p:column>    
                         <p:column headerText="Billed At">
                             <p:outputLabel value="#{dd3.bill.createdAt}" >

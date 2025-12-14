@@ -123,7 +123,7 @@
                                         </h:outputText>
                                         <br/>
                                         <i class="fas fa-user text-muted me-1"></i>
-                                        <h:outputText styleClass="text-muted small" value="#{p.referenceBill.creater.webUserPerson.name}" />
+                                        <h:outputText styleClass="text-muted small" value="#{p.referenceBill.creater ne null and p.referenceBill.creater.webUserPerson ne null ? p.referenceBill.creater.webUserPerson.name : 'N/A'}" />
                                     </div>
                                     <div class="mb-1">
                                         <i class="fas fa-credit-card text-info me-1"></i>
@@ -137,7 +137,7 @@
                                             </h:outputText>
                                             <br/>
                                             <i class="fas fa-user text-danger me-1"></i>
-                                            <h:outputText styleClass="text-danger small" value="#{p.referenceBill.cancelledBill.creater.webUserPerson.name}" />
+                                            <h:outputText styleClass="text-danger small" value="#{p.referenceBill.cancelledBill.creater ne null and p.referenceBill.cancelledBill.creater.webUserPerson ne null ? p.referenceBill.cancelledBill.creater.webUserPerson.name : 'N/A'}" />
                                         </div>
                                     </h:panelGroup>
                                     <div class="mt-2">
@@ -162,7 +162,7 @@
                                         </h:outputText>
                                         <br/>
                                         <i class="fas fa-user text-muted me-1"></i>
-                                        <h:outputText styleClass="text-muted small" value="#{p.creater.webUserPerson.name}" />
+                                        <h:outputText styleClass="text-muted small" value="#{p.creater ne null and p.creater.webUserPerson ne null ? p.creater.webUserPerson.name : 'N/A'}" />
                                     </div>
                                     <div class="mb-1">
                                         <i class="fas fa-credit-card text-info me-1"></i>
@@ -176,7 +176,7 @@
                                             </h:outputText>
                                             <br/>
                                             <i class="fas fa-user text-danger me-1"></i>
-                                            <h:outputText styleClass="text-danger small" value="#{p.cancelledBill.creater.webUserPerson.name}" />
+                                            <h:outputText styleClass="text-danger small" value="#{p.cancelledBill.creater ne null and p.cancelledBill.creater.webUserPerson ne null ? p.cancelledBill.creater.webUserPerson.name : 'N/A'}" />
                                         </div>
                                     </h:panelGroup>
                                     <h:panelGroup rendered="#{p.refunded}">
@@ -187,7 +187,7 @@
                                             </h:outputText>
                                             <br/>
                                             <i class="fas fa-user text-danger me-1"></i>
-                                            <h:outputText styleClass="text-danger small" value="#{p.refundedBill.creater.webUserPerson.name}" />
+                                            <h:outputText styleClass="text-danger small" value="#{p.refundedBill.creater ne null and p.refundedBill.creater.webUserPerson ne null ? p.refundedBill.creater.webUserPerson.name : 'N/A'}" />
                                         </div>
                                     </h:panelGroup>
                                     <h:panelGroup rendered="#{p.fullReturned}">

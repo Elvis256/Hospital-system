@@ -101,7 +101,7 @@
                     <tr>
                         <td><h:outputLabel value="Requested By" styleClass="label" /></td>
                         <td><h:outputLabel value=":" /></td>
-                        <td colspan="4"><h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.nameWithTitle}" /></td>
+                        <td colspan="4"><h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}" /></td>
                     </tr>
                     <h:panelGroup rendered="#{cc.attrs.comment ne null and cc.attrs.comment ne ''}">
                         <tr>

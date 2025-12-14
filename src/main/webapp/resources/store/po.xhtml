@@ -130,12 +130,12 @@
             </div>
 
             <div class="preparedBy" style="padding-left: 20px; margin: 20px; padding-bottom: 2px; margin-bottom: 2px;">
-                <h:outputLabel value="Prepared By : #{cc.attrs.bill.referenceBill.creater.webUserPerson.nameWithTitle}"/>
+                <h:outputLabel value="Prepared By : #{cc.attrs.bill.referenceBill.creater ne null and cc.attrs.bill.referenceBill.creater.webUserPerson ne null ? cc.attrs.bill.referenceBill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
 
             </div>
 
             <div class="authorizedBy" style="padding-left: 20px; padding-top: 2px; margin-left: 20px; margin-top: 2px;">
-                <h:outputLabel value="Authorized By : #{cc.attrs.bill.creater.webUserPerson.nameWithTitle}"/>
+                <h:outputLabel value="Authorized By : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
 
             </div>
 

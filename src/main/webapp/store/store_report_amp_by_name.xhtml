@@ -34,7 +34,7 @@
                                             <p:outputLabel value="#{i.vmp.name}"></p:outputLabel>
                                         </p:column>
                                         <p:column headerText="Creator" >
-                                            <p:outputLabel value="#{i.creater.webUserPerson.name}"></p:outputLabel>
+                                            <p:outputLabel value="#{i.creater ne null and i.creater.webUserPerson ne null ? i.creater.webUserPerson.name : 'N/A'}"></p:outputLabel>
                                         </p:column>
                                         <p:column headerText="Creator" >
                                             <p:outputLabel value="#{i.createdAt}">

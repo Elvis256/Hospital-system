@@ -100,7 +100,7 @@
 
         <div class="preparedBy">
             <h:outputLabel style="margin-right: 30%; margin-bottom: 2%"
-                           value="Prepared By : #{cc.attrs.bill.creater.webUserPerson.nameWithTitle}"/>
+                           value="Prepared By : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
             <h:outputLabel value="Prepared Date/Time : #{cc.attrs.bill.approveAt}"/>
         </div>
 

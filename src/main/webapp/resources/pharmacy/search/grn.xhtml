@@ -83,15 +83,15 @@
             </p:column>
 
             <p:column headerText="Billed By">
-                <h:outputText value="#{bill.creater.webUserPerson.name}" />
+                <h:outputText value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" />
                 <br/>
                 <h:panelGroup rendered="#{bill.cancelled}">
                     <h:outputLabel style="color: red;" value="Cancelled By " />
-                    <h:outputText style="color: red;" value="#{bill.cancelledBill.creater.webUserPerson.name}" />
+                    <h:outputText style="color: red;" value="#{bill.cancelledBill.creater ne null and bill.cancelledBill.creater.webUserPerson ne null ? bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" />
                 </h:panelGroup>
                 <h:panelGroup rendered="#{bill.refunded}">
                     <h:outputLabel style="color: red;" value="Refunded By " />
-                    <h:outputText style="color: red;" value="#{bill.refundedBill.creater.webUserPerson.name}" />
+                    <h:outputText style="color: red;" value="#{bill.refundedBill.creater ne null and bill.refundedBill.creater.webUserPerson ne null ? bill.refundedBill.creater.webUserPerson.name : 'N/A'}" />
                 </h:panelGroup>
             </p:column>
 

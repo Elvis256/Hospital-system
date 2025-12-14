@@ -67,10 +67,10 @@
                 </tr>
                 <tr>
                     <td style="padding: 1px;">
-                        <h:outputLabel value="Requested Person: #{cc.attrs.bill.backwardReferenceBill.creater.webUserPerson.name} - #{cc.attrs.bill.backwardReferenceBill.creater.staff.code}" />
+                        <h:outputLabel value="Requested Person: #{cc.attrs.bill.backwardReferenceBill.creater ne null and cc.attrs.bill.backwardReferenceBill.creater.webUserPerson ne null ? cc.attrs.bill.backwardReferenceBill.creater.webUserPerson.name : 'N/A'} - #{cc.attrs.bill.backwardReferenceBill.creater.staff.code}" />
                     </td>
                     <td style="padding: 1px;">
-                        <h:outputLabel value="Issued Person: #{cc.attrs.bill.creater.webUserPerson.name} - #{cc.attrs.bill.creater.staff.code}" />
+                        <h:outputLabel value="Issued Person: #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'} - #{cc.attrs.bill.creater.staff.code}" />
                     </td>
                 </tr>
                 <tr>

@@ -234,7 +234,7 @@
 
                 <div class="footer">
                     <div class="d-flex">
-                        <h:outputLabel value="Cashier :  #{cc.attrs.bill.creater.webUserPerson.name}"/>
+                        <h:outputLabel value="Cashier :  #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"/>
                     </div>
 
                     <div class="row">

@@ -118,7 +118,7 @@
                             <p:column headerText="Billed By">
                                 <div class="d-flex align-items-center">
                                     <i class="fas fa-user text-secondary me-2"></i>
-                                    <h:outputText value="#{bill.creater.webUserPerson.name}"/>
+                                    <h:outputText value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}"/>
                                 </div>
                             </p:column>                                                      
                             <p:column headerText="Net Value" styleClass="text-end">

@@ -171,7 +171,7 @@
                                             </div>
                                             <div class="mb-2">
                                                 <i class="fas fa-user me-1 text-success"></i>
-                                                <h:outputText value="#{bill.creater.webUserPerson.name}" styleClass="small"/>
+                                                <h:outputText value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" styleClass="small"/>
                                             </div>
 
                                             <!-- Payment Status -->
@@ -197,7 +197,7 @@
                                                 </div>
                                                 <div class="mb-1">
                                                     <i class="fas fa-user-times me-1 text-danger"></i>
-                                                    <h:outputText value="#{bill.refundedBill.creater.webUserPerson.name}" styleClass="text-danger small"/>
+                                                    <h:outputText value="#{bill.refundedBill.creater ne null and bill.refundedBill.creater.webUserPerson ne null ? bill.refundedBill.creater.webUserPerson.name : 'N/A'}" styleClass="text-danger small"/>
                                                 </div>
                                             </h:panelGroup>
 
@@ -221,7 +221,7 @@
                                                 </div>
                                                 <div class="mb-1">
                                                     <i class="fas fa-user-times me-1 text-danger"></i>
-                                                    <h:outputText value="#{bill.cancelledBill.creater.webUserPerson.name}" styleClass="text-danger small"/>
+                                                    <h:outputText value="#{bill.cancelledBill.creater ne null and bill.cancelledBill.creater.webUserPerson ne null ? bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" styleClass="text-danger small"/>
                                                 </div>
                                             </h:panelGroup>
                                         </div>
@@ -282,7 +282,7 @@
                                                 </div>
                                                 <div class="mb-2">
                                                     <i class="fas fa-user me-1 text-success"></i>
-                                                    <h:outputText value="#{bill.referenceBill.creater.webUserPerson.name}" styleClass="small"/>
+                                                    <h:outputText value="#{bill.referenceBill.creater ne null and bill.referenceBill.creater.webUserPerson ne null ? bill.referenceBill.creater.webUserPerson.name : 'N/A'}" styleClass="small"/>
                                                 </div>
 
                                                 <!-- Bill Status Messages -->
@@ -296,7 +296,7 @@
                                                     </div>
                                                     <div class="mb-1">
                                                         <i class="fas fa-user-times me-1 text-danger"></i>
-                                                        <h:outputText value="#{bill.referenceBill.cancelledBill.creater.webUserPerson.name}" styleClass="text-danger small"/>
+                                                        <h:outputText value="#{bill.referenceBill.cancelledBill.creater ne null and bill.referenceBill.cancelledBill.creater.webUserPerson ne null ? bill.referenceBill.cancelledBill.creater.webUserPerson.name : 'N/A'}" styleClass="text-danger small"/>
                                                     </div>
                                                 </h:panelGroup>
 
@@ -310,7 +310,7 @@
                                                     </div>
                                                     <div class="mb-1">
                                                         <i class="fas fa-user-times me-1 text-danger"></i>
-                                                        <h:outputText value="#{bill.referenceBill.refundedBill.creater.webUserPerson.name}" styleClass="text-danger small"/>
+                                                        <h:outputText value="#{bill.referenceBill.refundedBill.creater ne null and bill.referenceBill.refundedBill.creater.webUserPerson ne null ? bill.referenceBill.refundedBill.creater.webUserPerson.name : 'N/A'}" styleClass="text-danger small"/>
                                                     </div>
                                                 </h:panelGroup>
                                             </div>

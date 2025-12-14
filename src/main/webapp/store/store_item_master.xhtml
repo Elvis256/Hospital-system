@@ -115,7 +115,7 @@
                         <p:selectBooleanCheckbox disabled="#{!storeAmpController.editing}"  class="form-control" value="#{storeAmpController.current.discountAllowed}" itemLabel="Discount Allowed" />
 
                         <h:outputLabel value="Creator" />
-                        <h:outputLabel  class="form-control" value="#{storeAmpController.current.creater.webUserPerson.nameWithTitle}" />
+                        <h:outputLabel  class="form-control" value="#{storeAmpController.current.creater ne null and storeAmpController.current.creater.webUserPerson ne null ? storeAmpController.current.creater.webUserPerson.nameWithTitle : 'N/A'}" />
 
                         <h:outputLabel value="Created At" />
                         <h:outputLabel  class="form-control" value="#{storeAmpController.current.createdAt}">

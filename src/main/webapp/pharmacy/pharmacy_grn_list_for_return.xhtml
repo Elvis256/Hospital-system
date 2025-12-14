@@ -134,19 +134,19 @@
                             <p:column 
                                 headerText="GRN by" 
                                 width="6em" 
-                                sortBy="#{p.creater.webUserPerson.name}" 
-                                filterBy="#{p.creater.webUserPerson.name}" 
+                                sortBy="#{p.creater ne null and p.creater.webUserPerson ne null ? p.creater.webUserPerson.name : 'N/A'}" 
+                                filterBy="#{p.creater ne null and p.creater.webUserPerson ne null ? p.creater.webUserPerson.name : 'N/A'}" 
                                 filterMatchMode="contains">
-                                <h:outputText value="#{p.creater.webUserPerson.name}" />
+                                <h:outputText value="#{p.creater ne null and p.creater.webUserPerson ne null ? p.creater.webUserPerson.name : 'N/A'}" />
                                 <h:panelGroup rendered="#{p.cancelled}">
                                     <br/>
                                     <h:outputText styleClass="text-danger" value="Cancelled by " />
-                                    <h:outputText styleClass="text-danger" value="#{p.cancelledBill.creater.webUserPerson.name}" />
+                                    <h:outputText styleClass="text-danger" value="#{p.cancelledBill.creater ne null and p.cancelledBill.creater.webUserPerson ne null ? p.cancelledBill.creater.webUserPerson.name : 'N/A'}" />
                                 </h:panelGroup>
                                 <h:panelGroup rendered="#{p.refunded}">
                                     <br/>
                                     <h:outputText styleClass="text-danger" value="Refunded by " />
-                                    <h:outputText styleClass="text-danger" value="#{p.refundedBill.creater.webUserPerson.name}" />
+                                    <h:outputText styleClass="text-danger" value="#{p.refundedBill.creater ne null and p.refundedBill.creater.webUserPerson ne null ? p.refundedBill.creater.webUserPerson.name : 'N/A'}" />
                                 </h:panelGroup>
                                 <h:panelGroup rendered="#{p.fullReturned}">
                                     <br/>

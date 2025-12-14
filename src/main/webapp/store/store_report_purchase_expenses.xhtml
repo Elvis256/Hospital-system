@@ -90,7 +90,7 @@
                                     <f:facet name="header">
                                         <h:outputLabel value="Creator"/>
                                     </f:facet>
-                                    <h:outputLabel value="#{i.expenseBill.creater.webUserPerson.nameWithTitle}"  >
+                                    <h:outputLabel value="#{i.expenseBill.creater ne null and i.expenseBill.creater.webUserPerson ne null ? i.expenseBill.creater.webUserPerson.nameWithTitle : 'N/A'}"  >
                                     </h:outputLabel>
                                 </p:column>
                                 <p:column headerText="Created Time" style="text-align: right;">

@@ -81,11 +81,11 @@
                                 </f:facet>
                                 <p:outputLabel value="#{b.paymentMethod}" />
                             </p:column>
-                            <p:column sortBy="#{b.creater.webUserPerson.name}">
+                            <p:column sortBy="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}">
                                 <f:facet name="header">
                                     <p:outputLabel value="Date" />
                                 </f:facet>
-                                <p:outputLabel value="#{b.creater.webUserPerson.name}" />
+                                <p:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" />
                             </p:column>
                             <p:column sortBy="#{b.createdAt}">
                                 <f:facet name="header">

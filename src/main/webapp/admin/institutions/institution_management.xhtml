@@ -42,12 +42,29 @@
                                 >
                             </p:commandButton>
 
+                            <div class="my-3 p-2 border rounded bg-light">
+                                <p:selectBooleanCheckbox value="#{institutionController.showRetired}" 
+                                                         id="chkShowRetired">
+                                    <p:ajax listener="#{institutionController.toggleRetiredView()}" 
+                                            update="lstSelect statusInfo" />
+                                </p:selectBooleanCheckbox>
+                                <h:outputLabel for="chkShowRetired" value=" Show Retired Institutions" class="ml-2 font-weight-bold"/>
+                                <h:outputText id="statusInfo" 
+                                              value=" (Showing #{institutionController.showRetired ? 'ALL (Active + Retired)' : 'ACTIVE ONLY'})" 
+                                              styleClass="text-muted small ml-2"/>
+                            </div>
+
                             <p:selectOneListbox  id="lstSelect"
                                                  value="#{institutionController.current}" 
                                                  style="w-100"
                                                  filter="true">
-                                <f:selectItems  value="#{institutionController.items}" var="myItem" itemValue="#{myItem}" itemLabel="#{myItem.name}" ></f:selectItems>
-                                <p:ajax update="gpDetail" process="lstSelect" >
+                                <f:selectItems  value="#{institutionController.items}" 
+                                                var="myItem" 
+                                                itemValue="#{myItem}" 
+                                                itemLabel="#{myItem.retired ? '❌ [RETIRED] ' : '✓ '}#{myItem.name}" 
+                                                itemLabelEscaped="false">
+                                </f:selectItems>
+                                <p:ajax update="gpDetail statusBadge" process="lstSelect" >
                                 </p:ajax>
                             </p:selectOneListbox>
 
@@ -55,7 +72,16 @@
                         </div>
 
                         <div class="col-md-7">
-                            <p:panel class="w-100 form-control m-1" id="gpDetail" header="Details of the Institution">
+                            <p:panel class="w-100 form-control m-1" id="gpDetail">
+                                <f:facet name="header">
+                                    <div class="d-flex justify-content-between align-items-center w-100">
+                                        <span>Details of the Institution</span>
+                                        <h:panelGroup id="statusBadge">
+                                            <p:badge value="ACTIVE" severity="success" rendered="#{!institutionController.current.retired}"/>
+                                            <p:badge value="RETIRED" severity="danger" rendered="#{institutionController.current.retired}"/>
+                                        </h:panelGroup>
+                                    </div>
+                                </f:facet>
 
                                 <p:tabView  class="w-100 form-control m-1">
                                     <p:tab title="Basic Details" class="w-100 form-control m-1" >

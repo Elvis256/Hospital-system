@@ -163,7 +163,7 @@
                                 <p:column headerText="S" width="2em">
                                     <h:outputText value="#{rowIndex+1}" ></h:outputText>
                                 </p:column>
-                                <p:column headerText="Credit C. Name"><h:outputText value="#{pc.creater.webUserPerson.name}" ></h:outputText></p:column>
+                                <p:column headerText="Credit C. Name"><h:outputText value="#{pc.creater ne null and pc.creater.webUserPerson ne null ? pc.creater.webUserPerson.name : 'N/A'}" ></h:outputText></p:column>
                                 <p:column headerText="Voucher No" width="">
                                     <h:outputText value="#{pc.id}" ></h:outputText>
                                 </p:column>

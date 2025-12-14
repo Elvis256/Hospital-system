@@ -144,7 +144,7 @@
                                     <p:outputLabel value="Creator"/>
                                 </f:facet>
 
-                                <h:outputLabel value="#{ti.creater.webUserPerson.name}"/>     
+                                <h:outputLabel value="#{ti.creater ne null and ti.creater.webUserPerson ne null ? ti.creater.webUserPerson.name : 'N/A'}"/>     
 
                                 <h:panelGroup rendered="#{ti.retired}" >
                                     <h:outputLabel style="color: red;" value="Deleted By " />

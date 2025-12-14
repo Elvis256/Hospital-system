@@ -95,7 +95,7 @@
                                     <p:outputLabel value="Staff Name" rendered="#{bookingController.selectedBillSession.bill.paymentMethod eq 'Staff'}"/>
                                     <p:outputLabel value="#{bookingController.selectedBillSession.bill.toStaff.person.nameWithTitle} - (#{bookingController.selectedBillSession.bill.toStaff.code}) " rendered="#{bookingController.selectedBillSession.bill.paymentMethod eq 'Staff'}"/>
                                     <p:outputLabel value="User"/>
-                                    <p:outputLabel value="#{bookingController.selectedBillSession.bill.creater.webUserPerson.nameWithTitle}"/>
+                                    <p:outputLabel value="#{bookingController.selectedBillSession.bill.creater ne null and bookingController.selectedBillSession.bill.creater.webUserPerson ne null ? bookingController.selectedBillSession.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
                                     <p:outputLabel value="Booked At"/>
                                     <p:outputLabel value="#{bookingController.selectedBillSession.bill.createdAt}"> 
                                         <f:convertDateTime pattern="dd MMM yyyy - hh:mm a" ></f:convertDateTime>
@@ -110,7 +110,7 @@
                                     <p:outputLabel style="color: red" value="Payment" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}" />
                                     <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.billedBill.paymentMethod}" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}"/>
                                     <p:outputLabel style="color: red" value="Cancel/Refund User" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}"/>
-                                    <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.billedBill.creater.webUserPerson.nameWithTitle}" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}"/>
+                                    <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.billedBill.creater ne null and bookingController.selectedBillSession.bill.billedBill.creater.webUserPerson ne null ? bookingController.selectedBillSession.bill.billedBill.creater.webUserPerson.nameWithTitle : 'N/A'}" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}"/>
                                     <p:outputLabel style="color: red" value="Cancel/Refund At" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}"/>
                                     <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.billedBill.createdAt}" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}">
                                         <f:convertDateTime pattern="dd/MMM/yyyy - hh:mm a"  ></f:convertDateTime>
@@ -157,7 +157,7 @@
                                     <p:outputLabel value="Staff Name" rendered="#{bookingController.selectedBillSession.bill.paymentMethod eq 'Staff'}"/>
                                     <p:outputLabel value="#{bookingController.selectedBillSession.bill.toStaff.person.nameWithTitle} - (#{bookingController.selectedBillSession.bill.toStaff.code}) " rendered="#{bookingController.selectedBillSession.bill.paymentMethod eq 'Staff'}"/>
                                     <p:outputLabel value="User"/>
-                                    <p:outputLabel value="#{bookingController.selectedBillSession.bill.creater.webUserPerson.nameWithTitle}"/>
+                                    <p:outputLabel value="#{bookingController.selectedBillSession.bill.creater ne null and bookingController.selectedBillSession.bill.creater.webUserPerson ne null ? bookingController.selectedBillSession.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
                                     <p:outputLabel value="Billed At"/>
                                     <p:outputLabel value="#{bookingController.selectedBillSession.bill.createdAt}"> 
                                         <f:convertDateTime pattern="dd/MMM/yyyy - hh:mm a" ></f:convertDateTime>
@@ -168,7 +168,7 @@
                                     <p:outputLabel style="color: red" value="Payment" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}" />
                                     <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.billedBill.paymentMethod}" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}"/>
                                     <p:outputLabel style="color: red" value="Cancel/Refund User" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}"/>
-                                    <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.billedBill.creater.webUserPerson.nameWithTitle}" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}"/>
+                                    <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.billedBill.creater ne null and bookingController.selectedBillSession.bill.billedBill.creater.webUserPerson ne null ? bookingController.selectedBillSession.bill.billedBill.creater.webUserPerson.nameWithTitle : 'N/A'}" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}"/>
                                     <p:outputLabel style="color: red" value="Cancel/Refund At" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}"/>
                                     <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.billedBill.createdAt}" rendered="#{bookingController.selectedBillSession.bill.cancelled==true or bookingController.selectedBillSession.bill.refunded==true}">
                                         <f:convertDateTime pattern="dd/MMM/yyyy - hh:mm a"  ></f:convertDateTime>
@@ -180,7 +180,7 @@
                                     <p:outputLabel style="color: red" value="Cancelled Payment"/>
                                     <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.cancelledBill.paymentMethod}"/>
                                     <p:outputLabel style="color: red" value="Cancel/Refund User" />
-                                    <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.cancelledBill.creater.webUserPerson.nameWithTitle}" />
+                                    <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.cancelledBill.creater ne null and bookingController.selectedBillSession.bill.cancelledBill.creater.webUserPerson ne null ? bookingController.selectedBillSession.bill.cancelledBill.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                                     <p:outputLabel style="color: red" value="Cancel/Refund At" />
                                     <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.cancelledBill.createdAt}" >
                                         <f:convertDateTime pattern="dd/MMM/yyyy - hh:mm a"  ></f:convertDateTime>
@@ -196,7 +196,7 @@
                                     </p:outputLabel>
 
                                     <p:outputLabel style="color: red" value="Refund User" />
-                                    <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.refundedBill.creater.webUserPerson.nameWithTitle}" />
+                                    <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.refundedBill.creater ne null and bookingController.selectedBillSession.bill.refundedBill.creater.webUserPerson ne null ? bookingController.selectedBillSession.bill.refundedBill.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                                     <p:outputLabel style="color: red" value="Refund At" />
                                     <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.bill.refundedBill.createdAt}" >
                                         <!--                                        <f:convertNumber pattern="dd/MMM/yyyy - hh:mm a"  ></f:convertNumber>-->
@@ -242,7 +242,7 @@
                                     <p:outputLabel value="Agent Ref No" rendered="#{bookingController.selectedBillSession.bill.paymentMethod eq 'Agent'}"/>
                                     <p:outputLabel value="#{bookingController.selectedBillSession.billItem.agentRefNo}" rendered="#{bookingController.selectedBillSession.bill.paymentMethod eq 'Agent'}"/>
                                     <p:outputLabel value="Booking User"/>
-                                    <p:outputLabel value="#{bookingController.selectedBillSession.bill.creater.webUserPerson.nameWithTitle}"/>
+                                    <p:outputLabel value="#{bookingController.selectedBillSession.bill.creater ne null and bookingController.selectedBillSession.bill.creater.webUserPerson ne null ? bookingController.selectedBillSession.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
                                     <p:outputLabel value="Staff Name" rendered="#{bookingController.selectedBillSession.bill.paymentMethod eq 'Staff'}"/>
                                     <p:outputLabel value="#{bookingController.selectedBillSession.bill.toStaff.person.nameWithTitle} - (#{bookingController.selectedBillSession.bill.toStaff.code}) " rendered="#{bookingController.selectedBillSession.bill.paymentMethod eq 'Staff'}"/>
                                     <p:outputLabel value="Booked At"/>
@@ -268,7 +268,7 @@
                                     <p:outputLabel value="Agent Ref No" rendered="#{bookingController.selectedBillSession.bill.paidBill.paymentMethod eq 'Agent'}"/>
                                     <p:outputLabel value="#{bookingController.selectedBillSession.billItem.paidBill.agentRefNo}" rendered="#{bookingController.selectedBillSession.bill.paidBill.paymentMethod eq 'Agent'}"/>
                                     <p:outputLabel value="User"/>
-                                    <p:outputLabel value="#{bookingController.selectedBillSession.bill.paidBill.creater.webUserPerson.nameWithTitle}"/>
+                                    <p:outputLabel value="#{bookingController.selectedBillSession.bill.paidBill.creater ne null and bookingController.selectedBillSession.bill.paidBill.creater.webUserPerson ne null ? bookingController.selectedBillSession.bill.paidBill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
                                     <p:outputLabel value="Settled At"/>
                                     <p:outputLabel value="#{bookingController.selectedBillSession.bill.paidBill.createdAt}"> 
                                         <f:convertDateTime pattern="dd/MMM/yyyy - hh:mm a" ></f:convertDateTime>
@@ -312,7 +312,7 @@
                                     <p:outputLabel value="#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.toStaff.person.nameWithTitle} - (#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.toStaff.code})" rendered="#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.paymentMethod eq 'Staff'}"/>
 
                                     <p:outputLabel value="User" style="font-weight: bold"/>
-                                    <p:outputLabel value="#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.creater.webUserPerson.nameWithTitle}"/>
+                                    <p:outputLabel value="#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.creater ne null and bookingController.selectedBillSession.rescheduledFromBillSession.bill.creater.webUserPerson ne null ? bookingController.selectedBillSession.rescheduledFromBillSession.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
 
 
 
@@ -328,7 +328,7 @@
                                     <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.billedBill.paymentMethod}" rendered="#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.cancelled == true or bookingController.selectedBillSession.rescheduledFromBillSession.bill.refunded == true}"/>
 
                                     <p:outputLabel style="color: red" value="Cancel/Refund User" rendered="#{bookingController.selectedBillSession.bill.cancelled == true or bookingController.selectedBillSession.bill.refunded == true}"/>
-                                    <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.billedBill.creater.webUserPerson.nameWithTitle}" rendered="#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.cancelled == true or bookingController.selectedBillSession.rescheduledFromBillSession.bill.refunded == true}"/>
+                                    <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.billedBill.creater ne null and bookingController.selectedBillSession.rescheduledFromBillSession.bill.billedBill.creater.webUserPerson ne null ? bookingController.selectedBillSession.rescheduledFromBillSession.bill.billedBill.creater.webUserPerson.nameWithTitle : 'N/A'}" rendered="#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.cancelled == true or bookingController.selectedBillSession.rescheduledFromBillSession.bill.refunded == true}"/>
 
                                     <p:outputLabel style="color: red" value="Cancel/Refund At" rendered="#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.cancelled == true or bookingController.selectedBillSession.rescheduledFromBillSession.bill.refunded == true}"/>
                                     <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.billedBill.createdAt}" rendered="#{bookingController.selectedBillSession.rescheduledFromBillSession.bill.cancelled == true or bookingController.selectedBillSession.rescheduledFromBillSession.bill.refunded == true}">
@@ -379,7 +379,7 @@
                                     <p:outputLabel value="#{bookingController.selectedBillSession.rescheduledToBillSession.bill.toStaff.person.nameWithTitle} - (#{bookingController.selectedBillSession.rescheduledToBillSession.bill.toStaff.code})" rendered="#{bookingControllerViewScope.selectedBillSession.rescheduledToBillSession.bill.paymentMethod eq 'Staff'}"/>
 
                                     <p:outputLabel value="User" style="font-weight: bold"/>
-                                    <p:outputLabel value="#{bookingController.selectedBillSession.rescheduledToBillSession.bill.creater.webUserPerson.nameWithTitle}"/>
+                                    <p:outputLabel value="#{bookingController.selectedBillSession.rescheduledToBillSession.bill.creater ne null and bookingController.selectedBillSession.rescheduledToBillSession.bill.creater.webUserPerson ne null ? bookingController.selectedBillSession.rescheduledToBillSession.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
 
 
 
@@ -395,7 +395,7 @@
                                     <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.rescheduledToBillSession.bill.billedBill.paymentMethod}" rendered="#{bookingController.selectedBillSession.rescheduledToBillSession.bill.cancelled == true or bookingController.selectedBillSession.rescheduledToBillSession.bill.refunded == true}"/>
 
                                     <p:outputLabel style="color: red" value="Cancel/Refund User" rendered="#{bookingController.selectedBillSession.bill.cancelled == true or bookingController.selectedBillSession.bill.refunded == true}"/>
-                                    <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.rescheduledToBillSession.bill.billedBill.creater.webUserPerson.nameWithTitle}" rendered="#{bookingController.selectedBillSession.rescheduledToBillSession.bill.cancelled == true or bookingController.selectedBillSession.rescheduledToBillSession.bill.refunded == true}"/>
+                                    <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.rescheduledToBillSession.bill.billedBill.creater ne null and bookingController.selectedBillSession.rescheduledToBillSession.bill.billedBill.creater.webUserPerson ne null ? bookingController.selectedBillSession.rescheduledToBillSession.bill.billedBill.creater.webUserPerson.nameWithTitle : 'N/A'}" rendered="#{bookingController.selectedBillSession.rescheduledToBillSession.bill.cancelled == true or bookingController.selectedBillSession.rescheduledToBillSession.bill.refunded == true}"/>
 
                                     <p:outputLabel style="color: red" value="Cancel/Refund At" rendered="#{bookingController.selectedBillSession.rescheduledToBillSession.bill.cancelled == true or bookingController.selectedBillSession.rescheduledToBillSession.bill.refunded == true}"/>
                                     <p:outputLabel style="color: red" value="#{bookingController.selectedBillSession.rescheduledToBillSession.bill.billedBill.createdAt}" rendered="#{bookingController.selectedBillSession.rescheduledToBillSession.bill.cancelled == true or bookingController.selectedBillSession.rescheduledToBillSession.bill.refunded == true}">

@@ -41,7 +41,7 @@
                         </td>
                         <td>:</td>
                         <td>
-                            <h:outputLabel value="#{cc.attrs.bill.referenceBill.creater.webUserPerson.nameWithTitle}" ></h:outputLabel>
+                            <h:outputLabel value="#{cc.attrs.bill.referenceBill.creater ne null and cc.attrs.bill.referenceBill.creater.webUserPerson ne null ? cc.attrs.bill.referenceBill.creater.webUserPerson.nameWithTitle : 'N/A'}" ></h:outputLabel>
                         </td>
                         <td>
                             <h:outputLabel value="Transferred At" ></h:outputLabel>
@@ -59,7 +59,7 @@
                         </td>
                         <td>:</td>
                         <td>
-                            <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.nameWithTitle}" ></h:outputLabel>
+                            <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}" ></h:outputLabel>
                         </td>
                         <td>
                             <h:outputLabel value="Received At" ></h:outputLabel>

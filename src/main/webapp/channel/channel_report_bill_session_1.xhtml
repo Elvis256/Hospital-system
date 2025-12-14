@@ -64,7 +64,7 @@
                                     <h:outputLabel  value="#{bs.bill.appointmentAt}" />
                                 </p:column>
                                 <p:column headerText="User">
-                                    <h:outputLabel  value="#{bs.bill.creater.webUserPerson.nameWithTitle}" />
+                                    <h:outputLabel  value="#{bs.bill.creater ne null and bs.bill.creater.webUserPerson ne null ? bs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                                 </p:column>
                                 <p:column headerText="Person">
                                     <h:outputLabel  value="#{bs.bill.person.nameWithTitle}" />
@@ -106,7 +106,7 @@
                                     <h:outputLabel  value="#{bs.bill.appointmentAt}" />
                                 </p:column>
                                 <p:column headerText="User">
-                                    <h:outputLabel  value="#{bs.bill.creater.webUserPerson.nameWithTitle}" />
+                                    <h:outputLabel  value="#{bs.bill.creater ne null and bs.bill.creater.webUserPerson ne null ? bs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                                 </p:column>
                                 <p:column headerText="Person">
                                     <h:outputLabel  value="#{bs.bill.person.nameWithTitle}" />
@@ -148,7 +148,7 @@
                                     <h:outputLabel  value="#{bs.bill.appointmentAt}"/>
                                 </p:column>
                                 <p:column headerText="User">
-                                    <h:outputLabel  value="#{bs.bill.creater.webUserPerson.nameWithTitle}"/>
+                                    <h:outputLabel  value="#{bs.bill.creater ne null and bs.bill.creater.webUserPerson ne null ? bs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
                                 </p:column>
                                 <p:column headerText="Person">
                                     <h:outputLabel  value="#{bs.bill.person.nameWithTitle}"/>

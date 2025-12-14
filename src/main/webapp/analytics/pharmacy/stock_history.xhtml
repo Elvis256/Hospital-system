@@ -323,7 +323,7 @@
                                     </h:outputText>
 
                                     <p:outputLabel value="Created By"/>
-                                    <h:outputText value="#{empty stockHistoryController.current.creater ? '-' : stockHistoryController.current.creater.webUserPerson.name}"/>
+                                    <h:outputText value="#{empty stockHistoryController.current.creater ? '-' : stockHistoryController.current.creater ne null and empty stockHistoryController.current.creater ? '-' : stockHistoryController.current.creater.webUserPerson ne null ? empty stockHistoryController.current.creater ? '-' : stockHistoryController.current.creater.webUserPerson.name : 'N/A'}"/>
 
                                     <p:outputLabel value="Retired"/>
                                     <h:outputText value="#{stockHistoryController.current.retired ? 'Yes' : 'No'}"/>

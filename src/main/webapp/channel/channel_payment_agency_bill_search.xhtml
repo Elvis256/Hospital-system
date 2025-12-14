@@ -78,7 +78,7 @@
 
                                     <p:column headerText="Billed By" >
                                         <h:commandLink action="payment_bill_reprint" >
-                                            <h:outputLabel value="#{billItem.creater.webUserPerson.nameWithTitle}" ></h:outputLabel>
+                                            <h:outputLabel value="#{billItem.creater ne null and billItem.creater.webUserPerson ne null ? billItem.creater.webUserPerson.nameWithTitle : 'N/A'}" ></h:outputLabel>
                                             <f:setPropertyActionListener value="#{billItem.bill}" target="#{billSearch.bill}"/>
                                         </h:commandLink>
                                     </p:column>   
@@ -94,7 +94,7 @@
 
                                     <p:column headerText="Cancellation Details">
                                         <h:commandLink action="payment_bill_reprint" >
-                                            <h:outputLabel rendered="#{billItem.bill.cancelled}" value="#{billItem.bill.cancelledBill.creater.webUserPerson.name}" ></h:outputLabel>
+                                            <h:outputLabel rendered="#{billItem.bill.cancelled}" value="#{billItem.bill.cancelledBill.creater ne null and billItem.bill.cancelledBill.creater.webUserPerson ne null ? billItem.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" ></h:outputLabel>
                                             <f:setPropertyActionListener value="#{billItem.bill}" target="#{billSearch.bill}"/>
                                         </h:commandLink>
                                         <h:commandLink action="payment_bill_reprint" >

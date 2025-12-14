@@ -137,64 +137,59 @@
                                     <p:commandButton   
                                         class="w-100"  
                                         ajax="false" 
-                                        value="Bill Expenses" 
-                                        action="#{billExpenseController.navigateToManageBillExpenses()}" />
-
-                                    <p:commandButton   
-                                        class="w-100"  
-                                        ajax="false" 
                                         value="Relationships" 
-                                        action="#{investigationCategoryController.navigateToRelationships()}" >
-                                    </p:commandButton>
+                                        action="#{investigationCategoryController.navigateToRelationships()}" 
+                                        title="Manage family and personal relationships (Father, Mother, Spouse, etc.)" />
 
                                     <p:commandButton   
                                         class="w-100"  
                                         ajax="false" 
                                         value="Religions" 
-                                        action="#{investigationCategoryController.navigateToReligion()}" >
-                                    </p:commandButton>
+                                        action="#{investigationCategoryController.navigateToReligion()}" 
+                                        title="Manage religions for patient/staff records" />
 
                                     <p:commandButton   
                                         class="w-100"  
                                         ajax="false" 
                                         value="Nationalities" 
-                                        action="#{investigationCategoryController.navigateToReligion()}" >
-                                    </p:commandButton>
+                                        action="#{investigationCategoryController.navigateToNationality()}" 
+                                        title="Manage nationalities for patient/staff records" />
+
+                                    <p:commandButton   
+                                        class="w-100" 
+                                        ajax="false" 
+                                        value="Form Format Categories"
+                                        action="#{investigationCategoryController.navigateToFormFormatCategory()}" 
+                                        title="Manage categories for staff forms" />
+
+                                    <p:commandButton  
+                                        class="w-100" 
+                                        ajax="false" 
+                                        value="Form Format Designer" 
+                                        action="#{investigationCategoryController.navigateToFormFormat()}" 
+                                        title="Design custom staff forms with fields and layout" />
+
+                                    <p:commandButton   
+                                        class="w-100"  
+                                        ajax="false" 
+                                        value="Metadata Categories" 
+                                        action="#{investigationCategoryController.navigateToMetaDataSuperCategory()}" 
+                                        title="Manage custom metadata categories and values" />
+
+                                    <p:commandButton   
+                                        class="w-100"  
+                                        ajax="false" 
+                                        value="Bill Expenses" 
+                                        action="#{billExpenseController.navigateToManageBillExpenses()}" 
+                                        title="Manage bill expense categories" />
 
                                     <p:commandButton   
                                         class="w-100"  
                                         ajax="false" 
                                         value="Downloads"
-                                        action="#{serviceController.navigateToDownloadItems()}" >
-                                    </p:commandButton>
-                            
-                                    <p:commandButton   
-                                        class="w-100" 
-                                        ajax="false" 
-                                        value="Relationships" 
-                                        action="#{investigationCategoryController.navigateToRelationships()}" >
-                                    </p:commandButton>
+                                        action="#{serviceController.navigateToDownloadItems()}" 
+                                        title="Downloadable items and resources" />
 
-                                    <p:commandButton   
-                                        class="w-100" 
-                                        ajax="false" 
-                                        value="Forms"
-                                        action="#{investigationCategoryController.navigateToFormFormatCategory()}" >
-                                    </p:commandButton>
-
-                                    <p:commandButton  
-                                        class="w-100" 
-                                        ajax="false" 
-                                        value="Form Format" 
-                                        action="#{investigationCategoryController.navigateToFormFormat()}" >
-                                    </p:commandButton>
-
-                                    <p:commandButton   
-                                        class="w-100"  
-                                        ajax="false" 
-                                        value="Categories" 
-                                        action="#{investigationCategoryController.navigateToMetaDataSuperCategory()}" >
-                                    </p:commandButton>
                                 </div>
                             </p:tab>
                             <p:tab title="Bulk Transactions">

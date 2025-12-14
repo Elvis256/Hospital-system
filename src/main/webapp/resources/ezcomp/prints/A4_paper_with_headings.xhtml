@@ -224,7 +224,7 @@
             </div>
             <div>
                 <div style="margin-top: 20px;">
-                    <h:outputLabel value="Cashier : #{cc.attrs.bill.creater.webUserPerson.name}"/>
+                    <h:outputLabel value="Cashier : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"/>
                 </div>
             </div>
             <h:panelGroup  rendered="#{sessionController.loggedPreference.printBarcodeInOpdBill or true}" >

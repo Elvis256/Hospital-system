@@ -55,12 +55,12 @@
                                 </h:panelGroup>
                             </p:column>
                             <p:column headerText="Requested By" >
-                                <h:outputLabel value="#{b.creater.webUserPerson.name}"/>
+                                <h:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}"/>
                                 <br/>
                                 <h:panelGroup rendered="#{b.cancelled}">
                                     <h:outputLabel style="color: red;" value="Cancelled By "/>
                                     <h:outputLabel style="color: red;" rendered="#{b.cancelled}"
-                                                   value="#{b.cancelledBill.creater.webUserPerson.name}"/>
+                                                   value="#{b.cancelledBill.creater ne null and b.cancelledBill.creater.webUserPerson ne null ? b.cancelledBill.creater.webUserPerson.name : 'N/A'}"/>
                                 </h:panelGroup>
                             </p:column>
                             <p:column headerText="Requested Value" class="text-end">

@@ -1,0 +1,67 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/resources/template/template.xhtml">
+
+        <ui:define name="content">
+            <h:form id="SpecialityItemCreateForm">
+                <p:panel header="Create New Speciality Item">
+                    <h:panelGroup id="display">
+                        <p:panelGrid columns="2" styleClass="ui-panelgrid-blank" style="width: 100%">
+                            
+                            <p:outputLabel value="Item Name *" for="name" />
+                            <p:inputText id="name" value="#{itemController.current.name}" 
+                                         required="true" requiredMessage="Item Name is required"
+                                         style="width: 100%"/>
+                            
+                            <p:outputLabel value="Code" for="code" />
+                            <p:inputText id="code" value="#{itemController.current.code}" 
+                                         style="width: 100%"/>
+                            
+                            <p:outputLabel value="Print Name" for="printName" />
+                            <p:inputText id="printName" value="#{itemController.current.printName}" 
+                                         style="width: 100%"/>
+                            
+                            <p:outputLabel value="Short Name" for="shortName" />
+                            <p:inputText id="shortName" value="#{itemController.current.shortName}" 
+                                         style="width: 100%"/>
+                            
+                            <p:outputLabel value="Full Name" for="fullName" />
+                            <p:inputText id="fullName" value="#{itemController.current.fullName}" 
+                                         style="width: 100%"/>
+                            
+                            <p:outputLabel value="Description" for="description" />
+                            <p:inputTextarea id="description" value="#{itemController.current.description}" 
+                                             rows="3" style="width: 100%"/>
+                            
+                            <p:outputLabel value="Order No" for="orderNo" />
+                            <p:inputNumber id="orderNo" value="#{itemController.current.orderNo}" 
+                                           decimalPlaces="0" style="width: 100%"/>
+                            
+                        </p:panelGrid>
+                        <p:separator/>
+                        <div class="p-2">
+                            <p:commandButton actionListener="#{itemController.saveSelected}" 
+                                            value="Save" 
+                                            icon="pi pi-save"
+                                            styleClass="ui-button-success"
+                                            update="display,:growl"
+                                            action="/channel/maintanance/specialityItem/List?faces-redirect=true"/>
+                            <p:commandButton value="Cancel" 
+                                            icon="pi pi-times"
+                                            styleClass="ui-button-secondary"
+                                            action="/channel/maintanance/specialityItem/List?faces-redirect=true"
+                                            immediate="true"/>
+                        </div>
+                    </h:panelGroup>
+                </p:panel>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+</html>

@@ -238,10 +238,10 @@
                         </p:column>
 
                         <p:column headerText="User" 
-                                  sortBy="#{cashRow.payment.bill.creater.webUserPerson.name}" 
-                                  filterBy="#{cashRow.payment.bill.creater.webUserPerson.name}" 
+                                  sortBy="#{cashRow.payment.bill.creater ne null and cashRow.payment.bill.creater.webUserPerson ne null ? cashRow.payment.bill.creater.webUserPerson.name : 'N/A'}" 
+                                  filterBy="#{cashRow.payment.bill.creater ne null and cashRow.payment.bill.creater.webUserPerson ne null ? cashRow.payment.bill.creater.webUserPerson.name : 'N/A'}" 
                                   filterMatchMode="contains">
-                            <h:outputText value="#{cashRow.payment.bill.creater.webUserPerson.name}" />
+                            <h:outputText value="#{cashRow.payment.bill.creater ne null and cashRow.payment.bill.creater.webUserPerson ne null ? cashRow.payment.bill.creater.webUserPerson.name : 'N/A'}" />
                         </p:column>
 
                         <p:column headerText="Bill Type" 

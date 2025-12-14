@@ -78,7 +78,7 @@
                         <td style="padding: 2px;">#{cc.attrs.bill.billedBill.deptId}</td>
                         <td style="padding: 2px;" class="spacer"></td>
                         <td style="padding: 2px;" ><h:outputLabel value="User : " /></td>
-                        <td style="padding: 2px;" ><h:outputLabel value="#{cc.attrs.bill.billedBill.creater.webUserPerson.name}" /></td>
+                        <td style="padding: 2px;" ><h:outputLabel value="#{cc.attrs.bill.billedBill.creater ne null and cc.attrs.bill.billedBill.creater.webUserPerson ne null ? cc.attrs.bill.billedBill.creater.webUserPerson.name : 'N/A'}" /></td>
                     </tr>
                 </table>
 
@@ -112,7 +112,7 @@
                         <td style="padding: 2px;">#{cc.attrs.bill.deptId}</td>
                         <td style="padding: 2px;" class="spacer"></td>
                         <td style="padding: 2px;" ><h:outputLabel value="User : " /></td>
-                        <td style="padding: 2px;" ><h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}" /></td>
+                        <td style="padding: 2px;" ><h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}" /></td>
                     </tr>
                 </table>
 

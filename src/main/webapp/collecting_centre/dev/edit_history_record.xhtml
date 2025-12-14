@@ -63,7 +63,7 @@
                         <p:spacer></p:spacer>
 
                         <p:outputLabel value="Creater" />
-                        <p:outputLabel value="#{collectingCentreController.agentHistory.creater.webUserPerson.name}" />
+                        <p:outputLabel value="#{collectingCentreController.agentHistory.creater ne null and collectingCentreController.agentHistory.creater.webUserPerson ne null ? collectingCentreController.agentHistory.creater.webUserPerson.name : 'N/A'}" />
                         <p:spacer></p:spacer>
 
                         <p:outputLabel value="Institution" for="institution" />

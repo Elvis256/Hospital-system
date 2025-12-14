@@ -89,7 +89,7 @@
                                 <f:facet name="header">
                                     <p:outputLabel value="Creator" />
                                 </f:facet>
-                                <h:outputLabel value="#{s.creater.webUserPerson.name}" />                                      
+                                <h:outputLabel value="#{s.creater ne null and s.creater.webUserPerson ne null ? s.creater.webUserPerson.name : 'N/A'}" />                                      
                             </p:column>    
                         </p:dataTable>
                         <p:dataTable id="tblBills1" value="#{smsController.smsSummeryRows}" 

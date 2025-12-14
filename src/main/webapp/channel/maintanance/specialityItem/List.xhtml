@@ -1,0 +1,83 @@
+<?xml version='1.0' encoding='UTF-8' ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:p="http://primefaces.org/ui"
+      xmlns:f="http://xmlns.jcp.org/jsf/core">
+
+    <ui:composition template="/resources/template/template.xhtml">
+
+        <ui:define name="content">
+            <h:form id="specialityItemForm">
+                <p:panel header="Speciality Items">
+                    <p:panelGrid columns="2" styleClass="alignTop">
+                        <p:outputLabel value="Speciality:" for="speciality"/>
+                        <p:selectOneMenu id="speciality" value="#{itemController.speciality}" style="width: 200px;">
+                            <f:selectItem itemLabel="All Specialities" itemValue="#{null}"/>
+                            <f:selectItems value="#{specialityController.items}" var="s" 
+                                           itemLabel="#{s.name}" itemValue="#{s}"/>
+                            <p:ajax listener="#{itemController.fillItemsBySpeciality()}" 
+                                    update="itemTable"/>
+                        </p:selectOneMenu>
+                    </p:panelGrid>
+
+                    <p:dataTable id="itemTable" 
+                                 value="#{itemController.items}" 
+                                 var="item"
+                                 paginator="true" 
+                                 rows="20"
+                                 rowsPerPageTemplate="10,20,50,100"
+                                 emptyMessage="No items found for this speciality">
+                        
+                        <p:column headerText="Code" sortBy="#{item.code}" filterBy="#{item.code}">
+                            <h:outputText value="#{item.code}"/>
+                        </p:column>
+
+                        <p:column headerText="Name" sortBy="#{item.name}" filterBy="#{item.name}">
+                            <h:outputText value="#{item.name}"/>
+                        </p:column>
+
+                        <p:column headerText="Category">
+                            <h:outputText value="#{item.category.name}"/>
+                        </p:column>
+
+                        <p:column headerText="Speciality">
+                            <h:outputText value="#{item.speciality.name}"/>
+                        </p:column>
+
+                        <p:column headerText="Department">
+                            <h:outputText value="#{item.department.name}"/>
+                        </p:column>
+
+                        <p:column headerText="Total" style="text-align: right">
+                            <h:outputText value="#{item.total}">
+                                <f:convertNumber pattern="#,##0.00"/>
+                            </h:outputText>
+                        </p:column>
+
+                        <p:column headerText="Retired" style="text-align: center">
+                            <p:selectBooleanCheckbox value="#{item.retired}" disabled="true"/>
+                        </p:column>
+
+                        <p:column headerText="Actions" style="width: 150px;">
+                            <p:commandButton value="Edit" 
+                                             action="/channel/maintanance/specialityItem/Edit?faces-redirect=true" 
+                                             ajax="false"
+                                             icon="ui-icon-pencil"
+                                             styleClass="ui-priority-primary">
+                                <f:setPropertyActionListener target="#{itemController.current}" value="#{item}"/>
+                            </p:commandButton>
+                        </p:column>
+                    </p:dataTable>
+
+                    <p:commandButton value="Back to Specialities" 
+                                     action="/channel/maintanance/speciality/List?faces-redirect=true"
+                                     icon="ui-icon-arrowreturnthick-1-w"
+                                     styleClass="ui-priority-secondary"/>
+                </p:panel>
+            </h:form>
+        </ui:define>
+
+    </ui:composition>
+</html>

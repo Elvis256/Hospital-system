@@ -171,7 +171,7 @@
                                 <p:column headerText="Request Details">
                                     <div class="d-flex flex-column gap-1">
                                         <div>
-                                            <h:outputText value="#{b.creater.webUserPerson.name}" class="fw-bold"/>
+                                            <h:outputText value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" class="fw-bold"/>
                                         </div>
                                         <div>
                                             <small class="text-muted">
@@ -182,7 +182,7 @@
                                         </div>
                                         <h:panelGroup rendered="#{b.cancelled}">
                                             <div class="text-danger">
-                                                <small>Cancelled by #{b.cancelledBill.creater.webUserPerson.name}</small>
+                                                <small>Cancelled by #{b.cancelledBill.creater ne null and b.cancelledBill.creater.webUserPerson ne null ? b.cancelledBill.creater.webUserPerson.name : 'N/A'}</small>
                                                 <br/>
                                                 <small>
                                                     <h:outputText value="#{b.cancelledBill.createdAt}">
@@ -222,7 +222,7 @@
                                     <div class="d-flex flex-column gap-1">
                                         <h:panelGroup rendered="#{b.referenceBill ne null and b.referenceBill.creater ne null}">
                                             <div>
-                                                <h:outputText value="#{b.referenceBill.creater.webUserPerson.nameWithTitle}" class="fw-bold"/>
+                                                <h:outputText value="#{b.referenceBill.creater ne null and b.referenceBill.creater.webUserPerson ne null ? b.referenceBill.creater.webUserPerson.nameWithTitle : 'N/A'}" class="fw-bold"/>
                                             </div>
                                             <div>
                                                 <small class="text-muted">

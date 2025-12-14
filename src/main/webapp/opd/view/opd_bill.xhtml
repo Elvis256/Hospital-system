@@ -333,7 +333,7 @@
                                                 </h:outputText>
                                             </p:column>
                                             <p:column headerText="Refunded By" style="width: 9em; padding: 6px;">
-                                                <h:outputText value="#{b.creater.webUserPerson.name}"/>
+                                                <h:outputText value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}"/>
                                             </p:column>
                                             <p:column headerText="Paid" style="width: 8em; padding: 6px;">
                                                 <h:outputText value="#{b.netTotal}">

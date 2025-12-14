@@ -73,10 +73,10 @@
 
                                     <p:column 
                                         headerText="Creted By" 
-                                        sortBy="#{b.creater.webUserPerson.name}"
-                                        filterBy="#{b.creater.webUserPerson.name}"
+                                        sortBy="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}"
+                                        filterBy="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}"
                                         filterMatchMode="contains">
-                                        <h:outputText value="#{b.creater.webUserPerson.name}" />
+                                        <h:outputText value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" />
                                     </p:column>
 
 

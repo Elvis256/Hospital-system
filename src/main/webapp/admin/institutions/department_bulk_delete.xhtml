@@ -57,9 +57,9 @@
 
                         <p:column headerText="Created By" 
                                   style="font-weight:normal ;color: black;text-align: left;"
-                                  filterBy="#{sv.creater.webUserPerson.name}" filterMatchMode="contains"
-                                  sortBy="#{sv.creater.webUserPerson.name}" >
-                            <h:outputLabel value="#{sv.creater.webUserPerson.name}" />
+                                  filterBy="#{sv.creater ne null and sv.creater.webUserPerson ne null ? sv.creater.webUserPerson.name : 'N/A'}" filterMatchMode="contains"
+                                  sortBy="#{sv.creater ne null and sv.creater.webUserPerson ne null ? sv.creater.webUserPerson.name : 'N/A'}" >
+                            <h:outputLabel value="#{sv.creater ne null and sv.creater.webUserPerson ne null ? sv.creater.webUserPerson.name : 'N/A'}" />
                         </p:column>
                         
                         <p:column headerText="Created At" 

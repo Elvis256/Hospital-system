@@ -109,7 +109,7 @@
                                     <p:outputLabel value="#{l.comments}" ></p:outputLabel>
                                 </p:column>
                                 <p:column headerText="Creator">
-                                    <p:outputLabel value="#{l.creater.webUserPerson.nameWithTitle}" ></p:outputLabel>
+                                    <p:outputLabel value="#{l.creater ne null and l.creater.webUserPerson ne null ? l.creater.webUserPerson.nameWithTitle : 'N/A'}" ></p:outputLabel>
                                     <br></br>
                                     <p:outputLabel value="Deleted By  #{l.retirer.webUserPerson.nameWithTitle}" rendered="#{l.retired}" style="color: blue;"/>
                                 </p:column>

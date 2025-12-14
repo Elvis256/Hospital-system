@@ -34,7 +34,7 @@
                 <h:outputLabel value="#{cc.attrs.bill.deptId}"   /> 
                 <h:outputLabel value="Req Person"/>
                 <h:outputLabel value=":"/>
-                <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}"/>
+                <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"/>
                 <h:outputLabel value="Req Date"/>
                 <h:outputLabel value=":"/>
                 <h:outputLabel value="#{cc.attrs.bill.createdAt}">

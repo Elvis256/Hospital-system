@@ -250,7 +250,7 @@
 
                                 <p:outputLabel value="Creator"/>
                                 <h:outputLabel value=":"/>
-                                <p:outputLabel value="#{shiftController.current.creater.webUserPerson.name}"/>
+                                <p:outputLabel value="#{shiftController.current.creater ne null and shiftController.current.creater.webUserPerson ne null ? shiftController.current.creater.webUserPerson.name : 'N/A'}"/>
 
                                 <p:outputLabel value="Created At"/>
                                 <h:outputLabel value=":"/>

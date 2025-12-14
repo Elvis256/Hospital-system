@@ -165,7 +165,7 @@
             <p:spacer height="5px"/>
 
             <div class="preparedBy" style="margin-left: 3%; margin-right: 3%;">
-                <h:outputLabel value="Prepared By : #{cc.attrs.bill.creater.webUserPerson.nameWithTitle}"/>
+                <h:outputLabel value="Prepared By : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
             </div>
 
             <div style="margin-left: 3%; margin-right: 3%;">

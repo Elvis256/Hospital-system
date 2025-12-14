@@ -90,7 +90,7 @@
                                             <p:outputLabel value="" ></p:outputLabel>
                                             <p:selectBooleanCheckbox value="#{storeInventryAmpController.current.discountAllowed}" itemLabel="Discount Allowed"/>                                          
                                             <h:outputLabel value="Creator"/>
-                                            <h:outputLabel value="#{storeInventryAmpController.current.creater.webUserPerson.nameWithTitle}"/>
+                                            <h:outputLabel value="#{storeInventryAmpController.current.creater ne null and storeInventryAmpController.current.creater.webUserPerson ne null ? storeInventryAmpController.current.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
                                         </p:panelGrid>
                                     </p:panel>
 

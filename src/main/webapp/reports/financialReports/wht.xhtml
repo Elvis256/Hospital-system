@@ -367,9 +367,9 @@
 
 
                                 <p:column headerText="Cashier" width="10em" style="text-align: left;" 
-                                          sortBy="#{row.bill.creater.webUserPerson.name}" 
-                                          filterBy="#{row.bill.creater.webUserPerson.name}">
-                                    <p:outputLabel value="#{row.bill.creater.webUserPerson.name}" />
+                                          sortBy="#{row.bill.creater ne null and row.bill.creater.webUserPerson ne null ? row.bill.creater.webUserPerson.name : 'N/A'}" 
+                                          filterBy="#{row.bill.creater ne null and row.bill.creater.webUserPerson ne null ? row.bill.creater.webUserPerson.name : 'N/A'}">
+                                    <p:outputLabel value="#{row.bill.creater ne null and row.bill.creater.webUserPerson ne null ? row.bill.creater.webUserPerson.name : 'N/A'}" />
                                     <p:outputLabel value="&nbsp;(#{row.bill.creater.name})" />
                                 </p:column>
 
@@ -452,7 +452,7 @@
                                             <h:outputLabel value="By " />
                                             <h:outputLabel 
                                                 style="color: red;"
-                                                value="#{row.bill.cancelledBill.creater.webUserPerson.name}" >                                       
+                                                value="#{row.bill.cancelledBill.creater ne null and row.bill.cancelledBill.creater.webUserPerson ne null ? row.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >                                       
                                             </h:outputLabel>
                                             <h:outputLabel value="At " />
                                             <h:outputLabel 
@@ -468,7 +468,7 @@
                                             <h:outputLabel value="By " />
                                             <h:outputLabel 
                                                 style="color: orange;"
-                                                value="#{row.bill.refundedBill.creater.webUserPerson.name}" >
+                                                value="#{row.bill.refundedBill.creater ne null and row.bill.refundedBill.creater.webUserPerson ne null ? row.bill.refundedBill.creater.webUserPerson.name : 'N/A'}" >
                                             </h:outputLabel>
                                             <h:outputLabel value="At " />
                                             <h:outputLabel 

@@ -283,10 +283,10 @@
                                             <h:outputLabel value=":" ></h:outputLabel>
                                         </td>
                                         <td>
-                                            <h:outputLabel value="#{cc.attrs.bill.paidBill.creater.webUserPerson.name}" 
+                                            <h:outputLabel value="#{cc.attrs.bill.paidBill.creater ne null and cc.attrs.bill.paidBill.creater.webUserPerson ne null ? cc.attrs.bill.paidBill.creater.webUserPerson.name : 'N/A'}" 
                                                            ></h:outputLabel>
                                             <p:spacer height="1" width="20" ></p:spacer>
-                                            <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}" 
+                                            <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}" 
                                                            ></h:outputLabel>
 
                                         </td>

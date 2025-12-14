@@ -85,7 +85,7 @@
                                 <p:outputLabel value="Agent Ref No" rendered="#{bookingPastController.selectedBillSession.bill.paymentMethod eq 'Agent'}"/>
                                 <p:outputLabel value="#{bookingPastController.selectedBillSession.billItem.agentRefNo}" rendered="#{bookingPastController.selectedBillSession.bill.paymentMethod eq 'Agent'}"/>
                                 <p:outputLabel value="Booking User"/>
-                                <p:outputLabel value="#{bookingPastController.selectedBillSession.bill.creater.webUserPerson.nameWithTitle}"/>
+                                <p:outputLabel value="#{bookingPastController.selectedBillSession.bill.creater ne null and bookingPastController.selectedBillSession.bill.creater.webUserPerson ne null ? bookingPastController.selectedBillSession.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
                                 <p:outputLabel value="Booked At"/>
                                 <p:outputLabel value="#{bookingPastController.selectedBillSession.bill.createdAt}"/>
                                 <p:outputLabel value="Consultant"/>

@@ -43,7 +43,7 @@
                                 <h:outputLabel value="#{supplierPaymentController.current.cancelledBill.paymentMethod.label}" styleClass="text-danger" />
 
                                 <h:outputText value="Cancelled User" styleClass="text-danger font-weight-bold" />
-                                <h:outputText value="#{supplierPaymentController.current.cancelledBill.creater.webUserPerson.name}" styleClass="text-warning" />
+                                <h:outputText value="#{supplierPaymentController.current.cancelledBill.creater ne null and supplierPaymentController.current.cancelledBill.creater.webUserPerson ne null ? supplierPaymentController.current.cancelledBill.creater.webUserPerson.name : 'N/A'}" styleClass="text-warning" />
 
                             </p:panelGrid>
                         </div>
@@ -209,7 +209,7 @@
                                     <h:outputText value="#{supplierPaymentController.current.fromInstitution.name}"></h:outputText>
 
                                     <h:outputText value="User"></h:outputText>
-                                    <h:outputText value="#{supplierPaymentController.current.creater.webUserPerson.name}"></h:outputText>
+                                    <h:outputText value="#{supplierPaymentController.current.creater ne null and supplierPaymentController.current.creater.webUserPerson ne null ? supplierPaymentController.current.creater.webUserPerson.name : 'N/A'}"></h:outputText>
 
                                     <h:outputLabel value="Total"/>
                                     <h:outputText value="#{supplierPaymentController.current.total}">
@@ -366,7 +366,7 @@
                                         <h:outputLabel value="#{retrunBill.paymentMethod.label}" ></h:outputLabel>
 
                                         <h:outputText value="Return User" ></h:outputText>
-                                        <h:outputText value="#{retrunBill.creater.webUserPerson.name}" ></h:outputText>
+                                        <h:outputText value="#{retrunBill.creater ne null and retrunBill.creater.webUserPerson ne null ? retrunBill.creater.webUserPerson.name : 'N/A'}" ></h:outputText>
 
 
                                         <h:outputLabel value="Returned Total" ></h:outputLabel>

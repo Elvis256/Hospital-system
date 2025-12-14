@@ -121,7 +121,7 @@
                                 
                                 <p:outputLabel value="Created By" ></p:outputLabel>
                                 <p:outputLabel value=":" ></p:outputLabel>
-                                <p:outputLabel value="#{pharmacyBillSearch.bill.creater.webUserPerson.nameWithTitle}" ></p:outputLabel>
+                                <p:outputLabel value="#{pharmacyBillSearch.bill.creater ne null and pharmacyBillSearch.bill.creater.webUserPerson ne null ? pharmacyBillSearch.bill.creater.webUserPerson.nameWithTitle : 'N/A'}" ></p:outputLabel>
                                 
                                 <p:outputLabel value="Net Total" ></p:outputLabel>
                                 <p:outputLabel value=":" ></p:outputLabel>

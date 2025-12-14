@@ -17,11 +17,10 @@
                     <h:panelGroup rendered="#{webUserController.hasPrivilege('Reactivate')}" id="dataPage">
                         <p:growl id="msg"/>
 
-                        <p:panel header="Activate Institutions">
-                            <div class="d-flex my-3">
-                                <div class="col-4 d-flex"> 
-                                    <h:outputText id="lblDept" value="Institution Type" style="width: 200px;" class="mt-2"/>
-
+                        <p:panel header="View/Activate Retired Institutions">
+                            <div class="d-flex my-3 align-items-center">
+                                <div class="col-3 d-flex align-items-center"> 
+                                    <h:outputText id="lblDept" value="Institution Type" style="width: 150px;" class="mt-2"/>
                                     <p:selectOneMenu
                                         class="form-control"
                                         id="cmbDept"
@@ -33,18 +32,31 @@
                                     </p:selectOneMenu>
                                 </div>
 
-                                <div class="col-1"></div>
-
                                 <div class="col-3">
                                     <p:commandButton 
                                         ajax="false"
                                         action="#{institutionController.fillRetiredInstitution()}" 
                                         icon="fas fa-cogs"
                                         class="ui-button-warning"
-                                        value="Fill Institutions">
+                                        value="Load Institutions">
                                     </p:commandButton>
                                 </div>
 
+                                <div class="col-3">
+                                    <p:commandButton 
+                                        ajax="false"
+                                        value="Export to Excel" 
+                                        icon="fas fa-file-excel"
+                                        class="ui-button-success m-1">
+                                        <p:dataExporter type="xls" target="tbl" fileName="retired_institutions"/>
+                                    </p:commandButton>
+                                </div>
+
+                                <div class="col-3">
+                                    <h:outputText value="Total: #{institutionController.institutions.size()} retired institutions" 
+                                                  styleClass="font-weight-bold text-danger"
+                                                  rendered="#{institutionController.institutions != null}"/>
+                                </div>
                             </div>
 
 
@@ -59,47 +71,130 @@
                                 paginator="true" 
                                 paginatorPosition="bottom"
                                 paginatorTemplate="{CurrentPageReport} {FirstPageLink} {PreviousPageLink} {PageLinks} {NextPageLink} {LastPageLink} {RowsPerPageDropdown}"
-                                rowsPerPageTemplate="20,50,100">
+                                rowsPerPageTemplate="20,50,100"
+                                emptyMessage="No retired institutions found. Select a type and click 'Load Institutions' to view.">
 
-                                <p:column  headerText="No" style="width: 3em; padding: 6px;">
+                                <f:facet name="header">
+                                    <div class="d-flex justify-content-between align-items-center">
+                                        <span class="font-weight-bold">Retired Institutions</span>
+                                        <span class="badge badge-danger">All institutions shown are currently INACTIVE</span>
+                                    </div>
+                                </f:facet>
+
+                                <p:column  headerText="No" style="width: 3em; padding: 6px;" exportable="true">
                                     <h:outputText value="#{i+1}"/>
                                 </p:column>
 
-                                <p:column  headerText="ID" style="width: 7em; padding: 6px;">
-                                    <h:outputText value="#{ins}"/>
+                                <p:column  headerText="ID" style="width: 5em; padding: 6px;" exportable="true">
+                                    <h:outputText value="#{ins.id}"/>
                                 </p:column>
 
-                                <p:column filterBy="#{ins.code}" filterMatchMode="contains" headerText="Code" style="padding: 6px; width: 8em;">
+                                <p:column filterBy="#{ins.code}" filterMatchMode="contains" headerText="Code" style="padding: 6px; width: 8em;" exportable="true">
                                     <h:outputText value="#{ins.code}"/>
                                 </p:column>
 
-                                <p:column filterBy="#{ins.institutionType}" filterMatchMode="contains" headerText="Type" style="padding: 6px; width: 10em;">
+                                <p:column filterBy="#{ins.institutionType}" filterMatchMode="contains" headerText="Type" style="padding: 6px; width: 10em;" exportable="true">
                                     <h:outputText value="#{ins.institutionType}"/>
                                 </p:column>
 
-                                <p:column filterBy="#{ins.name}" filterMatchMode="contains" headerText="institution Name" style="padding: 6px;">
+                                <p:column filterBy="#{ins.name}" filterMatchMode="contains" headerText="Institution Name" style="padding: 6px;" exportable="true">
                                     <h:outputText value="#{ins.name}"/>
                                 </p:column>
 
-                                <p:column headerText="Status" class="text-center" style="padding: 6px; width: 7em;">
-                                    <p:badge value="Inactive" styleClass="ui-badge-danger" size="large"/>
-                                </p:column>
-                                
-                                <p:column headerText="Inactive" class="text-center" style="padding: 6px; width: 7em;">
-                                    <p:toggleSwitch value="#{ins.retired}" onIcon="pi pi-check" class="mt-1" offIcon="pi pi-times" />
+                                <p:column headerText="Retired Date" style="padding: 6px; width: 10em;" exportable="true" sortBy="#{ins.retiredAt}">
+                                    <h:outputText value="#{ins.retiredAt}">
+                                        <f:convertDateTime pattern="dd-MMM-yyyy HH:mm" />
+                                    </h:outputText>
                                 </p:column>
 
-                                <p:column headerText="Activate" class="text-center" style="padding: 6px;width: 7em;">
+                                <p:column headerText="Retired By" style="padding: 6px; width: 10em;" exportable="true">
+                                    <h:outputText value="#{ins.retirer.name}" rendered="#{ins.retirer != null}"/>
+                                    <h:outputText value="N/A" rendered="#{ins.retirer == null}" styleClass="text-muted"/>
+                                </p:column>
+
+                                <p:column headerText="Reason" style="padding: 6px; width: 12em;" exportable="true">
+                                    <h:outputText value="#{ins.retireComments}" rendered="#{ins.retireComments != null and ins.retireComments != ''}"/>
+                                    <h:outputText value="No reason given" rendered="#{ins.retireComments == null or ins.retireComments == ''}" styleClass="text-muted font-italic"/>
+                                </p:column>
+
+                                <p:column headerText="Status" class="text-center" style="padding: 6px; width: 7em;" exportable="false">
+                                    <p:badge value="Inactive" styleClass="ui-badge-danger" size="large"/>
+                                </p:column>
+
+                                <p:column headerText="Activate" class="text-center" style="padding: 6px;width: 7em;" exportable="false" rendered="#{webUserController.hasPrivilege('Reactivate')}">
                                     <p:commandButton 
                                         ajax="false"
-                                        value="Update"
+                                        value="Reactivate"
                                         action="#{institutionController.reactivateRetiredInstitution(ins)}"
-                                        icon="fas fa-pencil" 
-                                        class="ui-button-success">
+                                        icon="fas fa-check-circle" 
+                                        class="ui-button-success"
+                                        title="Click to reactivate this institution">
+                                        <p:confirm header="Confirm Reactivation" message="Are you sure you want to reactivate '#{ins.name}'?" icon="pi pi-exclamation-triangle" />
                                     </p:commandButton>
                                 </p:column>
 
+                                <p:column headerText="View Details" class="text-center" style="padding: 6px;width: 7em;" exportable="false">
+                                    <p:commandButton 
+                                        value="Details"
+                                        icon="fas fa-info-circle" 
+                                        class="ui-button-info"
+                                        onclick="PF('detailDialog#{ins.id}').show();"
+                                        type="button"
+                                        title="View full details">
+                                    </p:commandButton>
+                                    
+                                    <p:dialog id="detailDialog#{ins.id}" widgetVar="detailDialog#{ins.id}" header="Institution Details" modal="true" width="600" height="500">
+                                        <div class="p-3">
+                                            <h5 class="text-primary">#{ins.name}</h5>
+                                            <hr/>
+                                            <p:panelGrid columns="2" layout="grid" styleClass="w-100 ui-noborder">
+                                                <h:outputText value="ID:" styleClass="font-weight-bold"/>
+                                                <h:outputText value="#{ins.id}"/>
+                                                
+                                                <h:outputText value="Code:" styleClass="font-weight-bold"/>
+                                                <h:outputText value="#{ins.code}"/>
+                                                
+                                                <h:outputText value="Type:" styleClass="font-weight-bold"/>
+                                                <h:outputText value="#{ins.institutionType}"/>
+                                                
+                                                <h:outputText value="Address:" styleClass="font-weight-bold"/>
+                                                <h:outputText value="#{ins.address}" rendered="#{ins.address != null}"/>
+                                                <h:outputText value="N/A" rendered="#{ins.address == null}" styleClass="text-muted"/>
+                                                
+                                                <h:outputText value="Phone:" styleClass="font-weight-bold"/>
+                                                <h:outputText value="#{ins.phone}" rendered="#{ins.phone != null}"/>
+                                                <h:outputText value="N/A" rendered="#{ins.phone == null}" styleClass="text-muted"/>
+                                                
+                                                <h:outputText value="Email:" styleClass="font-weight-bold"/>
+                                                <h:outputText value="#{ins.email}" rendered="#{ins.email != null}"/>
+                                                <h:outputText value="N/A" rendered="#{ins.email == null}" styleClass="text-muted"/>
+                                                
+                                                <h:outputText value="Status:" styleClass="font-weight-bold"/>
+                                                <p:badge value="Retired/Inactive" styleClass="ui-badge-danger"/>
+                                                
+                                                <h:outputText value="Retired Date:" styleClass="font-weight-bold"/>
+                                                <h:outputText value="#{ins.retiredAt}">
+                                                    <f:convertDateTime pattern="dd-MMM-yyyy HH:mm:ss" />
+                                                </h:outputText>
+                                                
+                                                <h:outputText value="Retired By:" styleClass="font-weight-bold"/>
+                                                <h:outputText value="#{ins.retirer.name}" rendered="#{ins.retirer != null}"/>
+                                                <h:outputText value="System" rendered="#{ins.retirer == null}" styleClass="text-muted"/>
+                                                
+                                                <h:outputText value="Retire Reason:" styleClass="font-weight-bold"/>
+                                                <h:outputText value="#{ins.retireComments}" rendered="#{ins.retireComments != null and ins.retireComments != ''}"/>
+                                                <h:outputText value="No reason provided" rendered="#{ins.retireComments == null or ins.retireComments == ''}" styleClass="text-muted font-italic"/>
+                                            </p:panelGrid>
+                                        </div>
+                                    </p:dialog>
+                                </p:column>
+
                             </p:dataTable>
+                            
+                            <p:confirmDialog global="true" showEffect="fade" hideEffect="fade" responsive="true" width="350">
+                                <p:commandButton value="Yes" type="button" styleClass="ui-confirmdialog-yes ui-button-success" icon="pi pi-check" />
+                                <p:commandButton value="No" type="button" styleClass="ui-confirmdialog-no ui-button-danger" icon="pi pi-times" />
+                            </p:confirmDialog>
                         </p:panel>
                     </h:panelGroup>
                 </h:form>

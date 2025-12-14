@@ -103,7 +103,7 @@
                                         <p:outputLabel value="#{ssad.staff.person.name} - #{ssad.staff.codeInterger}" />
                                     </f:facet>
                                     <p:column>
-                                        <p:outputLabel value="#{ss.creater.webUserPerson.name}" />
+                                        <p:outputLabel value="#{ss.creater ne null and ss.creater.webUserPerson ne null ? ss.creater.webUserPerson.name : 'N/A'}" />
                                     </p:column>
                                     <p:column>
                                         <p:outputLabel value="#{ss.createdAt}" >

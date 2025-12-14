@@ -173,7 +173,7 @@
                                                                             <h:outputLabel value="#{bill1.institution.name} - #{bill.department.name}" />
                                                                         </p:column>
                                                                         <p:column headerText="Billed by" >
-                                                                            <h:outputLabel value="#{bill1.creater.webUserPerson.name}" >                                      
+                                                                            <h:outputLabel value="#{bill1.creater ne null and bill1.creater.webUserPerson ne null ? bill1.creater.webUserPerson.name : 'N/A'}" >                                      
                                                                             </h:outputLabel>
                                                                         </p:column>
                                                                         <p:column headerText="Calcelled" >
@@ -183,7 +183,7 @@
                                                                         <p:column headerText="Calcelled by" >
                                                                             <h:panelGroup rendered="#{bill1.cancelled}" >
                                                                                 <h:outputLabel style="color: red;" rendered="#{bill1.cancelled}"
-                                                                                               value="#{bill1.cancelledBill.creater.webUserPerson.name}" >                                       
+                                                                                               value="#{bill1.cancelledBill.creater ne null and bill1.cancelledBill.creater.webUserPerson ne null ? bill1.cancelledBill.creater.webUserPerson.name : 'N/A'}" >                                       
                                                                                 </h:outputLabel>
                                                                             </h:panelGroup>
                                                                         </p:column>
@@ -194,7 +194,7 @@
                                                                         <p:column headerText="Refunded by" >
                                                                             <h:panelGroup rendered="#{bill1.refunded}" >
                                                                                 <h:outputLabel value="Refunded By " />
-                                                                                <h:outputLabel rendered="#{bill1.refunded}" value="#{bill1.refundedBill.creater.webUserPerson.name}" >
+                                                                                <h:outputLabel rendered="#{bill1.refunded}" value="#{bill1.refundedBill.creater ne null and bill1.refundedBill.creater.webUserPerson ne null ? bill1.refundedBill.creater.webUserPerson.name : 'N/A'}" >
                                                                                 </h:outputLabel>
                                                                             </h:panelGroup>
                                                                         </p:column>    

@@ -362,7 +362,7 @@
                                     </h:outputLabel>
                                 </p:column>
                                 <p:column headerText="Added User" exportable="false"  style="text-align: center;">
-                                    <h:outputLabel value="#{pt.creater.webUserPerson.name}"/>
+                                    <h:outputLabel value="#{pt.creater ne null and pt.creater.webUserPerson ne null ? pt.creater.webUserPerson.name : 'N/A'}"/>
                                     <br/>
                                     <h:panelGroup rendered="#{pt.retired}" >
                                         <h:outputLabel style="color: red;" value="Deleted By " />
@@ -522,12 +522,12 @@
                                     <f:facet name="header">
                                         <h:outputLabel value="Billed By"/>
                                     </f:facet>
-                                    <h:outputLabel value="#{bi.bill.creater.webUserPerson.name}"/>
+                                    <h:outputLabel value="#{bi.bill.creater ne null and bi.bill.creater.webUserPerson ne null ? bi.bill.creater.webUserPerson.name : 'N/A'}"/>
                                     <br/>
                                     <h:panelGroup rendered="#{bi.bill.cancelled}" >
                                         <h:outputLabel style="color: red;" value="Cancelled By " />
                                         <h:outputLabel style="color: red;" rendered="#{bi.bill.cancelled}"
-                                                       value="#{bi.bill.cancelledBill.creater.webUserPerson.name}" >
+                                                       value="#{bi.bill.cancelledBill.creater ne null and bi.bill.cancelledBill.creater.webUserPerson ne null ? bi.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                         </h:outputLabel>
                                     </h:panelGroup>
                                 </p:column>
@@ -718,12 +718,12 @@
                                 </p:column>
 
                                 <p:column headerText="Billed By" exportable="false" >
-                                    <h:outputLabel value="#{iss.bill.creater.webUserPerson.name}"/>
+                                    <h:outputLabel value="#{iss.bill.creater ne null and iss.bill.creater.webUserPerson ne null ? iss.bill.creater.webUserPerson.name : 'N/A'}"/>
                                     <br/>
                                     <h:panelGroup rendered="#{iss.bill.cancelled}" >
                                         <h:outputLabel style="color: red;" value="Cancelled By " />
                                         <h:outputLabel style="color: red;" rendered="#{iss.bill.cancelled}"
-                                                       value="#{iss.bill.cancelledBill.creater.webUserPerson.name}" >
+                                                       value="#{iss.bill.cancelledBill.creater ne null and iss.bill.cancelledBill.creater.webUserPerson ne null ? iss.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                         </h:outputLabel>
                                     </h:panelGroup>
                                 </p:column>
@@ -866,12 +866,12 @@
                                     <f:facet name="header">
                                         <h:outputLabel value="Billed By"/>
                                     </f:facet>
-                                    <h:outputLabel value="#{iss.bill.creater.webUserPerson.name}"/>
+                                    <h:outputLabel value="#{iss.bill.creater ne null and iss.bill.creater.webUserPerson ne null ? iss.bill.creater.webUserPerson.name : 'N/A'}"/>
                                     <br/>
                                     <h:panelGroup rendered="#{iss.bill.cancelled}" >
                                         <h:outputLabel style="color: red;" value="Cancelled By " />
                                         <h:outputLabel style="color: red;" rendered="#{iss.bill.cancelled}"
-                                                       value="#{iss.bill.cancelledBill.creater.webUserPerson.name}" >
+                                                       value="#{iss.bill.cancelledBill.creater ne null and iss.bill.cancelledBill.creater.webUserPerson ne null ? iss.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                         </h:outputLabel>
                                     </h:panelGroup>
                                 </p:column>
@@ -968,12 +968,12 @@
                                 </p:column>
 
                                 <p:column headerText="Billed By" exportable="false" >
-                                    <h:outputLabel value="#{bil.creater.webUserPerson.name}"/>
+                                    <h:outputLabel value="#{bil.creater ne null and bil.creater.webUserPerson ne null ? bil.creater.webUserPerson.name : 'N/A'}"/>
                                     <br/>
                                     <h:panelGroup rendered="#{bil.cancelled}" >
                                         <h:outputLabel style="color: red;" value="Cancelled By " />
                                         <h:outputLabel style="color: red;" rendered="#{bil.cancelled}"
-                                                       value="#{bil.cancelledBill.creater.webUserPerson.name}" >
+                                                       value="#{bil.cancelledBill.creater ne null and bil.cancelledBill.creater.webUserPerson ne null ? bil.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                         </h:outputLabel>
                                     </h:panelGroup>
                                 </p:column>
@@ -1061,12 +1061,12 @@
                                 </p:column>
 
                                 <p:column headerText="Billed By" exportable="false" >
-                                    <h:outputLabel value="#{pf.bill.creater.webUserPerson.name}" />
+                                    <h:outputLabel value="#{pf.bill.creater ne null and pf.bill.creater.webUserPerson ne null ? pf.bill.creater.webUserPerson.name : 'N/A'}" />
                                     <br/>
                                     <h:panelGroup rendered="#{pf.bill.cancelled}" >
                                         <h:outputLabel style="color: red;" value="Cancelled By " />
                                         <h:outputLabel style="color: red;" rendered="#{pf.bill.cancelled}"
-                                                       value="#{pf.bill.cancelledBill.creater.webUserPerson.name}" >
+                                                       value="#{pf.bill.cancelledBill.creater ne null and pf.bill.cancelledBill.creater.webUserPerson ne null ? pf.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                         </h:outputLabel>
                                     </h:panelGroup>
                                 </p:column>
@@ -1158,12 +1158,12 @@
                                 </p:column>
 
                                 <p:column headerText="Billed By" exportable="false">
-                                    <h:outputLabel value="#{pf.bill.creater.webUserPerson.name}"/>
+                                    <h:outputLabel value="#{pf.bill.creater ne null and pf.bill.creater.webUserPerson ne null ? pf.bill.creater.webUserPerson.name : 'N/A'}"/>
                                     <br/>
                                     <h:panelGroup rendered="#{pf.bill.cancelled}" >
                                         <h:outputLabel style="color: red;" value="Cancelled By " />
                                         <h:outputLabel style="color: red;" rendered="#{pf.bill.cancelled}"
-                                                       value="#{pf.bill.cancelledBill.creater.webUserPerson.name}" >
+                                                       value="#{pf.bill.cancelledBill.creater ne null and pf.bill.cancelledBill.creater.webUserPerson ne null ? pf.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                         </h:outputLabel>
                                     </h:panelGroup>
                                 </p:column>
@@ -1253,12 +1253,12 @@
                                 </p:column>
 
                                 <p:column headerText="Billed By" exportable="false">
-                                    <h:outputLabel value="#{p.creater.webUserPerson.name}"/>
+                                    <h:outputLabel value="#{p.creater ne null and p.creater.webUserPerson ne null ? p.creater.webUserPerson.name : 'N/A'}"/>
                                     <br/>
                                     <h:panelGroup rendered="#{p.cancelled}" >
                                         <h:outputLabel style="color: red;" value="Cancelled By " />
                                         <h:outputLabel style="color: red;" rendered="#{p.cancelled}"
-                                                       value="#{p.cancelledBill.creater.webUserPerson.name}" >
+                                                       value="#{p.cancelledBill.creater ne null and p.cancelledBill.creater.webUserPerson ne null ? p.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                         </h:outputLabel>
                                     </h:panelGroup>
                                 </p:column>

@@ -345,7 +345,7 @@
                                     <div>
                                         <h:outputLabel value="Order Initiated by"/>
                                         <h:outputLabel value=":" style="width: 15px; text-align: center"/>
-                                        <h:outputLabel value="#{storePurchaseOrderRequestController.currentBill.creater.webUserPerson.name}"/>
+                                        <h:outputLabel value="#{storePurchaseOrderRequestController.currentBill.creater ne null and storePurchaseOrderRequestController.currentBill.creater.webUserPerson ne null ? storePurchaseOrderRequestController.currentBill.creater.webUserPerson.name : 'N/A'}"/>
                                     </div>
                                     <div>
                                         <h:outputLabel value="Order Finalized by"/>

@@ -77,22 +77,22 @@
                                         </h:panelGroup>
                                     </p:column>
                                     <p:column headerText="Billed By" >
-                                        <h:outputLabel value="#{bill.creater.webUserPerson.name}" >
+                                        <h:outputLabel value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" >
                                         </h:outputLabel>
                                         <br/>
                                         <h:panelGroup rendered="#{bill.cancelled}" >
                                             <h:outputLabel style="color: red;" value="Cancelled By "  />
-                                            <h:outputLabel style="color: red;" rendered="#{bill.cancelled}" value="#{bill.cancelledBill.creater.webUserPerson.name}" >
+                                            <h:outputLabel style="color: red;" rendered="#{bill.cancelled}" value="#{bill.cancelledBill.creater ne null and bill.cancelledBill.creater.webUserPerson ne null ? bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                             </h:outputLabel>
                                         </h:panelGroup>
                                     </p:column>
                                     <p:column headerText="Refunded By" >
-                                        <h:outputLabel value="#{bill.refundedBill.creater.webUserPerson.name}" >
+                                        <h:outputLabel value="#{bill.refundedBill.creater ne null and bill.refundedBill.creater.webUserPerson ne null ? bill.refundedBill.creater.webUserPerson.name : 'N/A'}" >
                                         </h:outputLabel>
                                         <br/>
                                         <h:panelGroup rendered="#{bill.cancelled}" >
                                             <h:outputLabel style="color: red;" value="Cancelled By "  />
-                                            <h:outputLabel style="color: red;" rendered="#{bill.cancelled}" value="#{bill.cancelledBill.creater.webUserPerson.name}" >
+                                            <h:outputLabel style="color: red;" rendered="#{bill.cancelled}" value="#{bill.cancelledBill.creater ne null and bill.cancelledBill.creater.webUserPerson ne null ? bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                             </h:outputLabel>
                                         </h:panelGroup>
                                     </p:column>
@@ -131,13 +131,13 @@
                                             </p:column>
 
                                             <p:column >
-                                                <h:outputLabel value="#{rb.creater.webUserPerson.name}" rendered="#{rb.refundedBill eq null}">
+                                                <h:outputLabel value="#{rb.creater ne null and rb.creater.webUserPerson ne null ? rb.creater.webUserPerson.name : 'N/A'}" rendered="#{rb.refundedBill eq null}">
                                                 </h:outputLabel>
                                                 <br/>
                                                 <h:panelGroup rendered="#{rb.cancelled}" >
                                                     <h:outputLabel style="color: red;" value="Cancelled by " rendered="#{rb.refundedBill eq null}" />
                                                     <h:outputLabel style="color: red;" rendered="#{rb.cancelled and rb.refundedBill eq null}"
-                                                                   value="#{rb.cancelledBill.creater.webUserPerson.name}" >
+                                                                   value="#{rb.cancelledBill.creater ne null and rb.cancelledBill.creater.webUserPerson ne null ? rb.cancelledBill.creater.webUserPerson.name : 'N/A'}" >
                                                     </h:outputLabel>
                                                 </h:panelGroup>
                                             </p:column>

@@ -41,7 +41,8 @@
                             value="#{userDepartmentController.currentInstitution}"
                             filter="true"
                             style="width: 500px;"
-                            class="w-100">
+                            class="w-100"
+                            converter="insCon">
                             <f:selectItem itemLabel="Select Institution" />
                             <f:selectItems value="#{institutionController.companies}" var="ix" itemLabel="#{ix.name}" itemValue="#{ix}" />
                             <p:ajax process="@this" update="site2 somDept" />

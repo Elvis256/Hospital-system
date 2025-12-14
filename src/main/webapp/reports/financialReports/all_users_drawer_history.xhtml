@@ -165,7 +165,7 @@
                             </p:column>
 
                            <p:column style="padding: 1px;" width="5em">
-                                 <h:outputText value="#{drawerentry.bill.toWebUser.webUserPerson.nameWithTitle}" />
+                                 <h:outputText value="#{drawerentry.bill.toWebUser ne null and drawerentry.bill.toWebUser.webUserPerson ne null ? drawerentry.bill.toWebUser.webUserPerson.nameWithTitle : 'N/A'}" />
                             </p:column>
 
                             <p:column style="padding: 6px;">

@@ -117,7 +117,7 @@
                                 <f:facet name="header" >
                                     <p:outputLabel value="Creator" />
                                 </f:facet>
-                                <p:outputLabel value="#{b.creater.webUserPerson.name}" >
+                                <p:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" >
                                 </p:outputLabel>
                             </p:column>
 
@@ -245,7 +245,7 @@
                                 <f:facet name="header" >
                                     <p:outputLabel value="Creator" />
                                 </f:facet>
-                                <p:outputLabel value="#{b.creater.webUserPerson.name}" >
+                                <p:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" >
                                 </p:outputLabel>
                             </p:column>
                             <p:column style="text-align: right;" >
@@ -366,7 +366,7 @@
                                 <f:facet name="header" >
                                     <p:outputLabel value="Creator" />
                                 </f:facet>
-                                <p:outputLabel value="#{b.creater.webUserPerson.name}" >
+                                <p:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" >
                                 </p:outputLabel>
                             </p:column>
                             <p:column style="text-align: right;" >

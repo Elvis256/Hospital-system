@@ -67,7 +67,7 @@
                         <td >:</td>
                         <td style="width: 5px;"/>
                         <td>
-                            <h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}">
+                            <h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}">
                             </h:outputLabel>
 
                         </td>

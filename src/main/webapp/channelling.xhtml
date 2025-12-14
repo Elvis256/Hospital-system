@@ -242,7 +242,7 @@
                                 <p:outputLabel value="Agent Ref No" rendered="#{bookingController.selectedBillSession.bill.paymentMethod eq 'Agent'}"/>
                                 <p:outputLabel value="#{bookingController.selectedBillSession.billItem.agentRefNo}" rendered="#{bookingController.selectedBillSession.bill.paymentMethod eq 'Agent'}"/>
                                 <p:outputLabel value="Booking User"/>
-                                <p:outputLabel value="#{bookingController.selectedBillSession.bill.creater.webUserPerson.nameWithTitle}"/>
+                                <p:outputLabel value="#{bookingController.selectedBillSession.bill.creater ne null and bookingController.selectedBillSession.bill.creater.webUserPerson ne null ? bookingController.selectedBillSession.bill.creater.webUserPerson.nameWithTitle : 'N/A'}"/>
                                 <p:outputLabel value="Booked At"/>
                                 <p:outputLabel value="#{bookingController.selectedBillSession.bill.createdAt}"> 
                                     <f:convertDateTime pattern="dd MMM yyyy - hh:mm a" ></f:convertDateTime>

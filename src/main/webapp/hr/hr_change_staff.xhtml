@@ -109,7 +109,7 @@
                             <h:outputLabel value="#{j1.department.name}"/>
                         </p:column>
                         <p:column headerText="Change User">
-                            <h:outputLabel value="#{j1.creater.webUserPerson.name}"/>
+                            <h:outputLabel value="#{j1.creater ne null and j1.creater.webUserPerson ne null ? j1.creater.webUserPerson.name : 'N/A'}"/>
                         </p:column>
                     </p:dataTable>
 
@@ -131,7 +131,7 @@
                             <h:outputLabel value="#{j2.employeeStatus}"/>
                         </p:column>
                         <p:column headerText="Change User">
-                            <h:outputLabel value="#{j2.creater.webUserPerson.name}"/>
+                            <h:outputLabel value="#{j2.creater ne null and j2.creater.webUserPerson ne null ? j2.creater.webUserPerson.name : 'N/A'}"/>
                         </p:column>
                     </p:dataTable>
 
@@ -153,7 +153,7 @@
                             <h:outputLabel value="#{j3.staffCategory.name}"/>
                         </p:column>
                         <p:column headerText="Change User">
-                            <h:outputLabel value="#{j3.creater.webUserPerson.name}"/>
+                            <h:outputLabel value="#{j3.creater ne null and j3.creater.webUserPerson ne null ? j3.creater.webUserPerson.name : 'N/A'}"/>
                         </p:column>
                     </p:dataTable>
 
@@ -175,7 +175,7 @@
                             <h:outputLabel value="#{j4.grade.name}"/>
                         </p:column>
                         <p:column headerText="Change User">
-                            <h:outputLabel value="#{j4.creater.webUserPerson.name}"/>
+                            <h:outputLabel value="#{j4.creater ne null and j4.creater.webUserPerson ne null ? j4.creater.webUserPerson.name : 'N/A'}"/>
                         </p:column>
                     </p:dataTable>
 
@@ -197,7 +197,7 @@
                             <h:outputLabel value="#{j5.designation.name}"/>
                         </p:column>
                         <p:column headerText="Change User">
-                            <h:outputLabel value="#{j5.creater.webUserPerson.name}"/>
+                            <h:outputLabel value="#{j5.creater ne null and j5.creater.webUserPerson ne null ? j5.creater.webUserPerson.name : 'N/A'}"/>
                         </p:column>
                     </p:dataTable>
 
@@ -219,7 +219,7 @@
                             <h:outputLabel value="#{j6.basic.staffPaySheetComponentValue}"/>
                         </p:column>
                         <p:column headerText="Change User">
-                            <h:outputLabel value="#{j6.creater.webUserPerson.name}"/>
+                            <h:outputLabel value="#{j6.creater ne null and j6.creater.webUserPerson ne null ? j6.creater.webUserPerson.name : 'N/A'}"/>
                         </p:column>
                     </p:dataTable>
 

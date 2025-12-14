@@ -68,7 +68,7 @@
 
                             <p:column headerText="Requested by" >
                                 <h:commandLink action="pharmacy_reprint_order_request" >
-                                    <h:outputLabel value="#{b.creater.webUserPerson.name}" >                                      
+                                    <h:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}" >                                      
                                     </h:outputLabel>
                                     <f:setPropertyActionListener value="#{b}" target="#{billSearch.bill}"/>
                                 </h:commandLink>
@@ -76,7 +76,7 @@
                                 <h:panelGroup rendered="#{b.cancelled}" >
                                     <h:outputLabel style="color: red;" value="Cancelled by " />
                                     <h:outputLabel style="color: red;" rendered="#{b.cancelled}"
-                                                   value="#{b.cancelledBill.creater.webUserPerson.name}" >                                       
+                                                   value="#{b.cancelledBill.creater ne null and b.cancelledBill.creater.webUserPerson ne null ? b.cancelledBill.creater.webUserPerson.name : 'N/A'}" >                                       
                                     </h:outputLabel>
                                 </h:panelGroup>
                             </p:column>    
@@ -103,7 +103,7 @@
 
                             <p:column headerText="Approved Person"  >
                                 <h:commandLink action="pharmacy_reprint_order_request" 
-                                               value="#{b.referenceBill.creater.webUserPerson.nameWithTitle}"  rendered="#{b.referenceBill.cancelled eq false}" >                        
+                                               value="#{b.referenceBill.creater ne null and b.referenceBill.creater.webUserPerson ne null ? b.referenceBill.creater.webUserPerson.nameWithTitle : 'N/A'}"  rendered="#{b.referenceBill.cancelled eq false}" >                        
                                     <f:setPropertyActionListener target="#{pharmacyBillSearch.bill}" value="#{b}"/>
                                 </h:commandLink>
                             </p:column>

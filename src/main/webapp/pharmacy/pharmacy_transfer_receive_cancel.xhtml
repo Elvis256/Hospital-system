@@ -351,7 +351,7 @@
                                         <div class="row mt-3">
                                             <div class="col-12">
                                                 <h:outputText value="Cancelled By: " styleClass="font-weight-bold" />
-                                                <h:outputText value="#{transferReceiveCancellationController.cancellationBill.creater.webUserPerson.name}" />
+                                                <h:outputText value="#{transferReceiveCancellationController.cancellationBill.creater ne null and transferReceiveCancellationController.cancellationBill.creater.webUserPerson ne null ? transferReceiveCancellationController.cancellationBill.creater.webUserPerson.name : 'N/A'}" />
                                                 <br/>
                                                 <h:outputText value="Department: " styleClass="font-weight-bold" />
                                                 <h:outputText value="#{transferReceiveCancellationController.cancellationBill.department.name}" />

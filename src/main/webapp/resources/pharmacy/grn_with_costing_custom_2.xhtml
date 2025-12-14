@@ -344,7 +344,7 @@
 
             <div class="preparedBy mt-3">
                 <h:outputLabel 
-                    value="Prepared By : #{cc.attrs.bill.creater.webUserPerson.nameWithTitle} &nbsp; (#{cc.attrs.bill.creater.code})"
+                    value="Prepared By : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.nameWithTitle : 'N/A'} &nbsp; (#{cc.attrs.bill.creater.code})"
                     style="text-align: right!important;"/>
             </div>
 

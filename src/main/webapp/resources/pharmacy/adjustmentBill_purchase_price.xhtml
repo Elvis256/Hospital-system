@@ -60,7 +60,7 @@
                     <tr>
                         <td><h:outputLabel value="Adjusted By" /></td>
                         <td><h:outputLabel value=":" /></td>
-                        <td><h:outputLabel value="#{cc.attrs.bill.creater.webUserPerson.name}" /></td>
+                        <td><h:outputLabel value="#{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}" /></td>
                         <td><h:outputLabel value="Department" /></td>
                         <td><h:outputLabel value=":" /></td>
                         <td><h:outputLabel value="#{cc.attrs.bill.department.name}" /></td>

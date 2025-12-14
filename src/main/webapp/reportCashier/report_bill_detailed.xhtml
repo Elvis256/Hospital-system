@@ -111,7 +111,7 @@
                                 <f:facet name="header">  
                                     <h:outputLabel value="Cashier"/>
                                 </f:facet> 
-                                <h:outputLabel value="#{b.creater.webUserPerson.name}"/>
+                                <h:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.name : 'N/A'}"/>
                             </p:column>
 
                             <p:column headerText="Id" >

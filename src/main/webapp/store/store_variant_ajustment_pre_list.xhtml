@@ -62,7 +62,7 @@
                             </p:column> 
 
                             <p:column headerText="Reported Person">
-                                #{bill.creater.webUserPerson.nameWithTitle}
+                                #{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.nameWithTitle : 'N/A'}
                             </p:column>
 
                             <p:column headerText="View Before Stock">
@@ -99,7 +99,7 @@
                                         </h:outputLabel>                        
                                     </p:column>
                                     <p:column headerText="Reported Person">
-                                        #{f.creater.webUserPerson.nameWithTitle}
+                                        #{f.creater ne null and f.creater.webUserPerson ne null ? f.creater.webUserPerson.nameWithTitle : 'N/A'}
                                     </p:column>
                                     <p:column headerText="View After Stock">
                                        

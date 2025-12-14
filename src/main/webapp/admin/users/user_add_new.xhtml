@@ -103,9 +103,10 @@
                                             styleClass="w-100 form-control"
                                             value="#{webUserController.institution}"
                                             rendered="#{!webUserController.createOnlyUserForExsistingUser}"
-                                            filter="true">
-                                            <f:selectItem itemLabel="Select Institution" />
-                                            <f:selectItems value="#{institutionController.hospitals}" var="ins" itemLabel="#{ins.name}" itemValue="#{ins}" />
+                                            filter="true"
+                                            filterMatchMode="contains">
+                                            <f:selectItem itemLabel="Select Institution" noSelectionOption="true" />
+                                            <f:selectItems value="#{institutionController.items}" var="ins" itemLabel="#{ins.name} (#{ins.institutionType})" itemValue="#{ins}" />
                                             <p:ajax process="@this" update="userSite userDept" />
                                         </p:selectOneMenu>
 

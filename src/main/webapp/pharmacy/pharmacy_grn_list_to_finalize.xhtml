@@ -86,8 +86,8 @@
                                 <h:outputLabel value="#{g.fromDepartment.name}" title="#{g.fromDepartment.name}" styleClass="text-truncate d-block"/>
                             </p:column>
 
-                            <p:column headerText="Created By" width="120px" sortBy="#{g.creater.webUserPerson.name}">
-                                <h:outputLabel value="#{g.creater.webUserPerson.name}" title="#{g.creater.webUserPerson.name}" styleClass="text-truncate d-block small"/>
+                            <p:column headerText="Created By" width="120px" sortBy="#{g.creater ne null and g.creater.webUserPerson ne null ? g.creater.webUserPerson.name : 'N/A'}">
+                                <h:outputLabel value="#{g.creater ne null and g.creater.webUserPerson ne null ? g.creater.webUserPerson.name : 'N/A'}" title="#{g.creater ne null and g.creater.webUserPerson ne null ? g.creater.webUserPerson.name : 'N/A'}" styleClass="text-truncate d-block small"/>
                             </p:column>    
 
                             <p:column headerText="Distributor" width="150px" sortBy="#{g.toInstitution.name}">

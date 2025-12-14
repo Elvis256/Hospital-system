@@ -163,7 +163,7 @@
                         <td>
                             <h:outputLabel value=":"/>
                         </td>
-                        <td><h:outputLabel value="#{cc.attrs.bill.refundedBill.creater.webUserPerson.name}"/></td>
+                        <td><h:outputLabel value="#{cc.attrs.bill.refundedBill.creater ne null and cc.attrs.bill.refundedBill.creater.webUserPerson ne null ? cc.attrs.bill.refundedBill.creater.webUserPerson.name : 'N/A'}"/></td>
                     </tr>
 
 

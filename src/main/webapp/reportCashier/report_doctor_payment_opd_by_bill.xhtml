@@ -61,7 +61,7 @@
                                         <f:facet name="header">
                                             <p:outputLabel value="Paid By" />
                                         </f:facet>
-                                        <p:outputLabel value="#{b.creater.webUserPerson.nameWithTitle}" >
+                                        <p:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.nameWithTitle : 'N/A'}" >
                                         </p:outputLabel>
                                     </p:column>
                                     

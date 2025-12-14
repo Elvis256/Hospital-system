@@ -95,7 +95,7 @@
                                     <p:outputLabel value="Generation By"/>
                                     <p:outputLabel
                                         class="w-100"
-                                        value="#{supplierPaymentController.current.creater.webUserPerson.name}">
+                                        value="#{supplierPaymentController.current.creater ne null and supplierPaymentController.current.creater.webUserPerson ne null ? supplierPaymentController.current.creater.webUserPerson.name : 'N/A'}">
                                     </p:outputLabel>
                                     <p:outputLabel value="Payment Generation Comments"/>
                                     <p:outputLabel

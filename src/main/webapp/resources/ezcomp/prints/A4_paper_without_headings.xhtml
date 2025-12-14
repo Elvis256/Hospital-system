@@ -348,7 +348,7 @@
             </div>
 
             <div style="text-decoration: overline; margin-top: 20px;">
-                <h:outputLabel value="Cashier : #{cc.attrs.bill.creater.webUserPerson.name}"/>
+                <h:outputLabel value="Cashier : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"/>
             </div>
 
             <h:panelGroup rendered="#{cc.attrs.duplicate and configOptionApplicationController.getBooleanValueByKey('OPD View Duplicate Bill Printing Details',false)}">

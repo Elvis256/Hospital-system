@@ -218,7 +218,7 @@
                                 <f:facet name="header">
                                     <h:outputLabel value="Creator"  />
                                 </f:facet>
-                                <p:outputLabel value="#{add.creater.webUserPerson.name}"></p:outputLabel>
+                                <p:outputLabel value="#{add.creater ne null and add.creater.webUserPerson ne null ? add.creater.webUserPerson.name : 'N/A'}"></p:outputLabel>
                             </p:column> 
                         </p:dataTable>
                     </p:panel>   

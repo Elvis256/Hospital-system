@@ -125,7 +125,7 @@
                                     <f:facet name="header">
                                         <h:outputLabel value="Item Name"/>
                                     </f:facet>
-                                    <h:outputLabel value="#{bi.creater.webUserPerson.name}"/>                                    
+                                    <h:outputLabel value="#{bi.creater ne null and bi.creater.webUserPerson ne null ? bi.creater.webUserPerson.name : 'N/A'}"/>                                    
                                 </p:column>
                                 <p:column headerText="Creted"
                                           >
@@ -508,7 +508,7 @@
                                     </h:outputLabel>       
                                 </p:column>                                
                                 <p:column headerText="Added User" exportable="false" >
-                                    <h:outputLabel value="#{pt.creater.webUserPerson.name}"/>     
+                                    <h:outputLabel value="#{pt.creater ne null and pt.creater.webUserPerson ne null ? pt.creater.webUserPerson.name : 'N/A'}"/>     
                                     <br/>
                                     <h:panelGroup rendered="#{pt.retired}" >
                                         <h:outputLabel style="color: red;" value="Deleted By " />

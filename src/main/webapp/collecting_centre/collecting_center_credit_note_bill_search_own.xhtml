@@ -88,14 +88,14 @@
                                         </p:column>  
                                         <p:column headerText="Billed by" >
                                             <h:commandLink action="collecting_center_credit_note_bill_reprint" >
-                                                <h:outputLabel value="#{bill.creater.webUserPerson.name}" >                                      
+                                                <h:outputLabel value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" >                                      
                                                 </h:outputLabel>
                                                 <f:setPropertyActionListener value="#{bill}" target="#{agentPaymentReceiveSearchController.bill}"/>
                                             </h:commandLink>
                                             <br/>
                                             <h:panelGroup rendered="#{bill.cancelled}" >
                                                 <h:outputLabel style="color: red;" value="Cancelled at " />
-                                                <h:outputLabel style="color: red;" rendered="#{bill.cancelled}" value="#{bill.cancelledBill.creater.webUserPerson.name}" >                                       
+                                                <h:outputLabel style="color: red;" rendered="#{bill.cancelled}" value="#{bill.cancelledBill.creater ne null and bill.cancelledBill.creater.webUserPerson ne null ? bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" >                                       
                                                 </h:outputLabel>
                                             </h:panelGroup>                               
                                         </p:column>    

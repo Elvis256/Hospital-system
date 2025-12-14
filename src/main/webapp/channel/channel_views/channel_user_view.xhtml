@@ -93,7 +93,7 @@
                                 <p:outputLabel rendered="#{bs.bill.billType eq 'ChannelPaid'}" value="Paid"/>
                             </p:column>   
                             <p:column headerText="Booked User">
-                                <h:outputLabel value="#{bs.bill.creater.webUserPerson.nameWithTitle}">                        
+                                <h:outputLabel value="#{bs.bill.creater ne null and bs.bill.creater.webUserPerson ne null ? bs.bill.creater.webUserPerson.nameWithTitle : 'N/A'}">                        
                                 </h:outputLabel>
                             </p:column>
                             <p:column headerText="Booked Date">

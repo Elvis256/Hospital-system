@@ -221,7 +221,7 @@
                                                 <strong>
                                                     <h:outputText value="Cashier:" style="font-size: var(--font-size-bill) /2 ;"></h:outputText>
                                                 </strong>
-                                                <h:outputText value="#{staffPaymentBillController.current.creater.webUserPerson.name}" style="font-size: var(--font-size-bill) /2 ;"></h:outputText>
+                                                <h:outputText value="#{staffPaymentBillController.current.creater ne null and staffPaymentBillController.current.creater.webUserPerson ne null ? staffPaymentBillController.current.creater.webUserPerson.name : 'N/A'}" style="font-size: var(--font-size-bill) /2 ;"></h:outputText>
                                             </p>
                                         </h:panelGroup>
                                     </div>

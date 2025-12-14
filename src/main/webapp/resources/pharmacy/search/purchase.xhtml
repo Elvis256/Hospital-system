@@ -102,14 +102,14 @@
                     </h:outputText>
                 </p:column>  
 
-                <p:column headerText="Billed By" style="padding: 8px;" sortBy="#{bill.creater.webUserPerson.name}" filterBy="#{bill.creater.webUserPerson.name}" filterMatchMode="contains">
-                    <h:outputText value="#{bill.creater.webUserPerson.name}" ></h:outputText>
+                <p:column headerText="Billed By" style="padding: 8px;" sortBy="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" filterBy="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" filterMatchMode="contains">
+                    <h:outputText value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" ></h:outputText>
 
                     <h:outputText rendered="#{bill.cancelled}" style="color: red;"  value=" | Cancelled By " />
-                    <h:outputText rendered="#{bill.cancelled}" style="color: red;"  value="#{bill.cancelledBill.creater.webUserPerson.name}"></h:outputText>
+                    <h:outputText rendered="#{bill.cancelled}" style="color: red;"  value="#{bill.cancelledBill.creater ne null and bill.cancelledBill.creater.webUserPerson ne null ? bill.cancelledBill.creater.webUserPerson.name : 'N/A'}"></h:outputText>
 
                     <h:outputText rendered="#{bill.refunded}" style="color: orange;"  value=" | Refunded By " />
-                    <h:outputText rendered="#{bill.refunded}" style="color: orange;"  value="#{bill.refundedBill.creater.webUserPerson.name}"></h:outputText>
+                    <h:outputText rendered="#{bill.refunded}" style="color: orange;"  value="#{bill.refundedBill.creater ne null and bill.refundedBill.creater.webUserPerson ne null ? bill.refundedBill.creater.webUserPerson.name : 'N/A'}"></h:outputText>
                 </p:column>
 
                 <p:column headerText="Payment Method" style="padding: 8px;" width="10em;" sortBy="#{bill.paymentMethod}" filterBy="#{bill.paymentMethod}" filterMatchMode="exact">

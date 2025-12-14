@@ -244,7 +244,7 @@
                                             <p:selectBooleanButton class="form-control" onIcon="fas fa-times" offIcon="fas fa-check" value="#{collectingCentreController.current.inactive}"  />
 
                                             <h:outputText value="Creator" ></h:outputText>
-                                            <h:outputText value="#{collectingCentreController.current.creater.webUserPerson.name}" ></h:outputText>
+                                            <h:outputText value="#{collectingCentreController.current.creater ne null and collectingCentreController.current.creater.webUserPerson ne null ? collectingCentreController.current.creater.webUserPerson.name : 'N/A'}" ></h:outputText>
 
                                             <h:outputText value="Created At" ></h:outputText>
                                             <h:outputText value="#{collectingCentreController.current.createdAt}" >

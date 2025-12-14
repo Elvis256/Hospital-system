@@ -140,7 +140,7 @@
                                         <p:tab title="Metadata">
                                             <p:panelGrid columns="2" class="w-100" layout="tabular">
                                                 <h:outputText value="Creator" />
-                                                <h:outputText value="#{paymentSchemeController.current.creater.webUserPerson.name}" />
+                                                <h:outputText value="#{paymentSchemeController.current.creater ne null and paymentSchemeController.current.creater.webUserPerson ne null ? paymentSchemeController.current.creater.webUserPerson.name : 'N/A'}" />
                                                 <h:outputText value="Created At" />
                                                 <p:outputLabel value="#{paymentSchemeController.current.createdAt}">
                                                     <f:convertDateTime pattern="#{sessionController.applicationPreference.longDateTimeFormat}" />

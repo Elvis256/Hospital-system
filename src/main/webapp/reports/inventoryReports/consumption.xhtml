@@ -525,7 +525,7 @@
                                 </p:column>
 
                                 <p:column headerText="Document Created By" width="10em">
-                                    <h:outputText value="#{b.bill.creater.webUserPerson.name}"/>
+                                    <h:outputText value="#{b.bill.creater ne null and b.bill.creater.webUserPerson ne null ? b.bill.creater.webUserPerson.name : 'N/A'}"/>
                                 </p:column>
 
                                 <p:column headerText="Remarks" width="10em">
@@ -752,7 +752,7 @@
                                 </p:column>
 
                                 <p:column headerText="User" width="8em">
-                                    <p:outputLabel value="#{i.billItem.bill.creater.webUserPerson.name}">
+                                    <p:outputLabel value="#{i.billItem.bill.creater ne null and i.billItem.bill.creater.webUserPerson ne null ? i.billItem.bill.creater.webUserPerson.name : 'N/A'}">
                                     </p:outputLabel>
                                 </p:column>
 

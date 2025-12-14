@@ -153,16 +153,16 @@
                                         <br/>
                                     </p:column>
 
-                                    <p:column headerText="Billed By" sortBy="#{pi.bill.creater.webUserPerson.name}" filterBy="#{pi.bill.creater.webUserPerson.name}" filterMatchMode="contains">
-                                        <h:outputLabel value="#{pi.bill.creater.webUserPerson.name}" />
+                                    <p:column headerText="Billed By" sortBy="#{pi.bill.creater ne null and pi.bill.creater.webUserPerson ne null ? pi.bill.creater.webUserPerson.name : 'N/A'}" filterBy="#{pi.bill.creater ne null and pi.bill.creater.webUserPerson ne null ? pi.bill.creater.webUserPerson.name : 'N/A'}" filterMatchMode="contains">
+                                        <h:outputLabel value="#{pi.bill.creater ne null and pi.bill.creater.webUserPerson ne null ? pi.bill.creater.webUserPerson.name : 'N/A'}" />
                                         <br/>
                                         <h:panelGroup rendered="#{pi.bill.cancelled}">
                                             <h:outputLabel style="color: red;" value="Cancelled By " />
-                                            <h:outputLabel style="color: red;" rendered="#{pi.bill.cancelled}" value="#{pi.bill.cancelledBill.creater.webUserPerson.name}" />
+                                            <h:outputLabel style="color: red;" rendered="#{pi.bill.cancelled}" value="#{pi.bill.cancelledBill.creater ne null and pi.bill.cancelledBill.creater.webUserPerson ne null ? pi.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" />
                                         </h:panelGroup>
                                         <h:panelGroup rendered="#{pi.bill.refunded}">
                                             <h:outputLabel style="color: red;" value="Refunded By " />
-                                            <h:outputLabel style="color: red;" rendered="#{pi.bill.refunded}" value="#{pi.bill.refundedBill.creater.webUserPerson.name}" />
+                                            <h:outputLabel style="color: red;" rendered="#{pi.bill.refunded}" value="#{pi.bill.refundedBill.creater ne null and pi.bill.refundedBill.creater.webUserPerson ne null ? pi.bill.refundedBill.creater.webUserPerson.name : 'N/A'}" />
                                         </h:panelGroup>
                                     </p:column>
 

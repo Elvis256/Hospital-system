@@ -134,7 +134,7 @@
                             </p:column>
 
                             <p:column headerText="Completed By" width="8em">
-                                <h:outputLabel value="#{g.creater.webUserPerson.name}"/>
+                                <h:outputLabel value="#{g.creater ne null and g.creater.webUserPerson ne null ? g.creater.webUserPerson.name : 'N/A'}"/>
                             </p:column>    
 
                             <p:column headerText="Distributor" width="12em">

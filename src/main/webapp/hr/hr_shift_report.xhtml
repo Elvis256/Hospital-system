@@ -121,7 +121,7 @@
                                                 </p:column>
 
                                                 <p:column headerText="Ceated By">
-                                                    <h:outputLabel value="#{p.creater.webUserPerson.nameWithTitle}"></h:outputLabel>
+                                                    <h:outputLabel value="#{p.creater ne null and p.creater.webUserPerson ne null ? p.creater.webUserPerson.nameWithTitle : 'N/A'}"></h:outputLabel>
                                                 </p:column>-->
                         <f:facet name="footer">
                             <p:outputLabel value="Print By : #{sessionController.loggedUser.webUserPerson.name} - " />

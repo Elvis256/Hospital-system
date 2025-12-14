@@ -1330,4 +1330,17 @@ public class EnumController implements Serializable {
         this.paymentMethodsUnderMultipleForPharmacyBilling = paymentMethodsUnderMultipleForPharmacyBilling;
     }
 
+    public Currency[] getCurrencyList() {
+        return Currency.values();
+    }
+
+    public Currency getCurrency(String name) {
+        for (Currency currency : Currency.values()) {
+            if (currency.name().equalsIgnoreCase(name)) {
+                return currency;
+            }
+        }
+        return Currency.UGX;
+    }
+
 }

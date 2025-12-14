@@ -189,7 +189,7 @@
             <br/>
 
             <!-- Cashier -->
-            <h:outputLabel value="Cashier : #{cc.attrs.bill.creater.webUserPerson.name}"
+            <h:outputLabel value="Cashier : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"
                            style="margin-top: 2cm; text-align: right; font-size: var(--sub-header-font-size); font-family: var(--font-family)"/>
 
         </h:panelGroup>

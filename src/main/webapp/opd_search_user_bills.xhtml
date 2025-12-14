@@ -206,7 +206,7 @@
                                     <h:outputLabel value="Billed By"/>
                                 </f:facet>
                                 <h:commandLink action="/opd/bill_reprint?faces-redirect=true" >
-                                    <h:outputLabel value="#{bill.creater.webUserPerson.name}" ></h:outputLabel>
+                                    <h:outputLabel value="#{bill.creater ne null and bill.creater.webUserPerson ne null ? bill.creater.webUserPerson.name : 'N/A'}" ></h:outputLabel>
                                     <f:setPropertyActionListener value="#{bill}" target="#{billSearch.bill}"/>
                                 </h:commandLink>
                             </p:column>
@@ -253,7 +253,7 @@
                                     <h:outputLabel value="Cancelled User"/>
                                 </f:facet>
                                 <h:commandLink action="/opd/bill_reprint?faces-redirect=true" >
-                                    <h:outputLabel rendered="#{bill.cancelled}" value="#{bill.cancelledBill.creater.webUserPerson.name}" ></h:outputLabel>
+                                    <h:outputLabel rendered="#{bill.cancelled}" value="#{bill.cancelledBill.creater ne null and bill.cancelledBill.creater.webUserPerson ne null ? bill.cancelledBill.creater.webUserPerson.name : 'N/A'}" ></h:outputLabel>
                                     <f:setPropertyActionListener value="#{bill}" target="#{billSearch.bill}"/>
                                 </h:commandLink>
                             </p:column>
@@ -289,7 +289,7 @@
                                     <h:outputLabel value="Refunded By"/>
                                 </f:facet>
                                 <h:commandLink action="/opd/bill_reprint?faces-redirect=true" >
-                                    <h:outputLabel rendered="#{bill.refunded}" value="#{bill.refundedBill.creater.webUserPerson.name}" ></h:outputLabel>
+                                    <h:outputLabel rendered="#{bill.refunded}" value="#{bill.refundedBill.creater ne null and bill.refundedBill.creater.webUserPerson ne null ? bill.refundedBill.creater.webUserPerson.name : 'N/A'}" ></h:outputLabel>
                                     <f:setPropertyActionListener value="#{bill}" target="#{billSearch.bill}"/>
                                 </h:commandLink>
                             </p:column>

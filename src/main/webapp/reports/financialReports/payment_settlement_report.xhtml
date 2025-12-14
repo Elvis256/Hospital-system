@@ -313,7 +313,7 @@
                             </p:column>
                             <p:column headerText="Settlement By" width="5rem">
                                 <h:outputText
-                                        value="#{bi.billItem.patientEncounter.finalBill.creater.webUserPerson.name}"/>
+                                        value="#{bi.billItem.patientEncounter.finalBill.creater ne null and bi.billItem.patientEncounter.finalBill.creater.webUserPerson ne null ? bi.billItem.patientEncounter.finalBill.creater.webUserPerson.name : 'N/A'}"/>
                             </p:column>
                             <p:column headerText="Payment Method" width="5rem">
                                 <h:outputText value="#{bi.billItem.bill.paymentMethod.name()}"/>
@@ -353,7 +353,7 @@
                             </p:column>
                             <p:column headerText="Receipt Cancelled By" width="5rem">
                                 <h:outputText
-                                        value="#{bi.billItem.bill.cancelledBill.creater.webUserPerson.name}"/>
+                                        value="#{bi.billItem.bill.cancelledBill.creater ne null and bi.billItem.bill.cancelledBill.creater.webUserPerson ne null ? bi.billItem.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}"/>
                             </p:column>
                             <p:column headerText="Receipt Cancelled Date" width="5rem">
                                 <h:outputText
@@ -414,7 +414,7 @@
                             </p:column>
                             <p:column headerText="Settlement By" width="5rem">
                                 <h:outputText
-                                        value="#{bi.bill.creater.webUserPerson.name}"/>
+                                        value="#{bi.bill.creater ne null and bi.bill.creater.webUserPerson ne null ? bi.bill.creater.webUserPerson.name : 'N/A'}"/>
                             </p:column>
                             <p:column headerText="Payment Method" width="5rem">
                                 <h:outputText value="#{bi.bill.paymentMethod.name()}"/>
@@ -449,7 +449,7 @@
                             </p:column>
                             <p:column headerText="Receipt Cancelled By" width="5rem">
                                 <h:outputText
-                                        value="#{bi.bill.cancelledBill.creater.webUserPerson.name}"/>
+                                        value="#{bi.bill.cancelledBill.creater ne null and bi.bill.cancelledBill.creater.webUserPerson ne null ? bi.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}"/>
                             </p:column>
                             <p:column headerText="Receipt Cancelled Date" width="5rem">
                                 <h:outputText
@@ -509,10 +509,10 @@
                                 </h:outputText>
                             </p:column>
                             <p:column headerText="Settlement By" width="5rem">
-                                <h:outputText value="#{bi.billItem.referenceBill.creater.webUserPerson.name}"
+                                <h:outputText value="#{bi.billItem.referenceBill.creater ne null and bi.billItem.referenceBill.creater.webUserPerson ne null ? bi.billItem.referenceBill.creater.webUserPerson.name : 'N/A'}"
                                               rendered="#{bi.billItem.referenceBill ne null}"/>
                                 <h:outputText
-                                        value="#{bi.billItem.bill.billedBill.forwardReferenceBill.creater.webUserPerson.name}"
+                                        value="#{bi.billItem.bill.billedBill.forwardReferenceBill.creater ne null and bi.billItem.bill.billedBill.forwardReferenceBill.creater.webUserPerson ne null ? bi.billItem.bill.billedBill.forwardReferenceBill.creater.webUserPerson.name : 'N/A'}"
                                         rendered="#{bi.billItem.referenceBill eq null}"/>
                             </p:column>
                             <p:column headerText="Payment Method" width="5rem">
@@ -552,7 +552,7 @@
                                 <h:outputText value="#{bi.billItem.bill.cancelledBill.deptId}"/>
                             </p:column>
                             <p:column headerText="Receipt Cancelled By" width="5rem">
-                                <h:outputText value="#{bi.billItem.bill.cancelledBill.creater.webUserPerson.name}"/>
+                                <h:outputText value="#{bi.billItem.bill.cancelledBill.creater ne null and bi.billItem.bill.cancelledBill.creater.webUserPerson ne null ? bi.billItem.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}"/>
                             </p:column>
                             <p:column headerText="Receipt Cancelled Date" width="5rem">
                                 <h:outputText value="#{bi.billItem.bill.cancelledBill.createdAt}">
@@ -606,7 +606,7 @@
                                 </h:outputText>
                             </p:column>
                             <p:column headerText="Settlement By" width="5rem">
-                                <h:outputText value="#{bi.bill.creater.webUserPerson.name}"/>
+                                <h:outputText value="#{bi.bill.creater ne null and bi.bill.creater.webUserPerson ne null ? bi.bill.creater.webUserPerson.name : 'N/A'}"/>
                             </p:column>
                             <p:column headerText="Payment Method" width="5rem">
                                 <h:outputText value="#{bi.bill.paymentMethod}"/>
@@ -640,7 +640,7 @@
                                 <h:outputText value="#{bi.bill.cancelledBill.deptId}"/>
                             </p:column>
                             <p:column headerText="Receipt Cancelled By" width="5rem">
-                                <h:outputText value="#{bi.bill.cancelledBill.creater.webUserPerson.name}"/>
+                                <h:outputText value="#{bi.bill.cancelledBill.creater ne null and bi.bill.cancelledBill.creater.webUserPerson ne null ? bi.bill.cancelledBill.creater.webUserPerson.name : 'N/A'}"/>
                             </p:column>
                             <p:column headerText="Receipt Cancelled Date" width="5rem">
                                 <h:outputText value="#{bi.bill.cancelledBill.createdAt}">

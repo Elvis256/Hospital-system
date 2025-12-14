@@ -104,7 +104,7 @@
                             </p:column>
 
                             <p:column headerText="Billed by" width="20">
-                                <p:outputLabel value="#{bi.bill.creater.webUserPerson.name}" />
+                                <p:outputLabel value="#{bi.bill.creater ne null and bi.bill.creater.webUserPerson ne null ? bi.bill.creater.webUserPerson.name : 'N/A'}" />
                             </p:column>
 
                             <p:column headerText="Net Value" width="20" style="text-align: right;">

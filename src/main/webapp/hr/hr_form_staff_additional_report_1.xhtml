@@ -190,7 +190,7 @@
                                     <f:facet name="header">
                                         <h:outputLabel value="Creator"/>
                                     </f:facet>
-                                    <p:outputLabel value="#{add.af.creater.webUserPerson.nameWithTitle}" >   <br></br> </p:outputLabel>
+                                    <p:outputLabel value="#{add.af.creater ne null and add.af.creater.webUserPerson ne null ? add.af.creater.webUserPerson.nameWithTitle : 'N/A'}" >   <br></br> </p:outputLabel>
 
                                     <p:outputLabel value="Deleted By  #{add.af.retirer.webUserPerson.nameWithTitle}" rendered="#{add.af.retired}" style="color: blue;"></p:outputLabel>
                                 </p:column>

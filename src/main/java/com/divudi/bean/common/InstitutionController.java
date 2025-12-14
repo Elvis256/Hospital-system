@@ -89,6 +89,7 @@ public class InstitutionController implements Serializable {
 
     private List<Institution> institutions;
     private InstitutionType institutionType;
+    private boolean showRetired = false;
 
     public void fillRetiredInstitution() {
         institutions = new ArrayList<>();
@@ -279,7 +280,7 @@ public class InstitutionController implements Serializable {
         }
         if (parent != null) {
             hm.put("parent", parent);
-            sql += "  and c.parentInstitution=:parent";
+            sql += "  and c.institution=:parent";
         }
         sql += " order by c.name";
         return getFacade().findByJpql(sql, hm);
@@ -900,12 +901,13 @@ public class InstitutionController implements Serializable {
 
     public void fillItems() {
         String j;
-        j = "select i "
-                + " from Institution i "
-                + " where i.retired=:ret"
-                + " order by i.name";
         Map m = new HashMap();
-        m.put("ret", false);
+        if (showRetired) {
+            j = "select i from Institution i order by i.retired desc, i.name";
+        } else {
+            j = "select i from Institution i where i.retired=:ret order by i.name";
+            m.put("ret", false);
+        }
         items = getFacade().findByJpql(j, m);
     }
 
@@ -1129,5 +1131,20 @@ public class InstitutionController implements Serializable {
                         + object.getClass().getName() + "; expected type: " + InstitutionController.class.getName());
             }
         }
+    }
+
+    public boolean isShowRetired() {
+        return showRetired;
+    }
+
+    public void setShowRetired(boolean showRetired) {
+        this.showRetired = showRetired;
+        items = null; // Force reload when toggled
+    }
+
+    public void toggleRetiredView() {
+        showRetired = !showRetired;
+        items = null;
+        fillItems();
     }
 }

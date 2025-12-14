@@ -360,7 +360,7 @@
             </div>
 
             <div style="text-decoration: overline; margin-top: 10px;">
-                <h:outputLabel value="Cashier : #{cc.attrs.bill.creater.webUserPerson.name}"/>
+                <h:outputLabel value="Cashier : #{cc.attrs.bill.creater ne null and cc.attrs.bill.creater.webUserPerson ne null ? cc.attrs.bill.creater.webUserPerson.name : 'N/A'}"/>
             </div>
             <h:panelGroup rendered="#{sessionController.userPreference.pharmacyBillFooter ne null}">
             <div class="footer" style="text-align: center;">

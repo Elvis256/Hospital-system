@@ -183,7 +183,7 @@
                                         <p:selectBooleanCheckbox value="#{investigationController.current.inactive}" itemLabel="Item Inactive"/>
 
                                         <p:outputLabel value="Created By" />
-                                        <p:outputLabel value="#{investigationController.current.creater.webUserPerson.name}" />
+                                        <p:outputLabel value="#{investigationController.current.creater ne null and investigationController.current.creater.webUserPerson ne null ? investigationController.current.creater.webUserPerson.name : 'N/A'}" />
 
                                         <p:outputLabel value="Created At" />
                                         <p:outputLabel value="#{investigationController.current.createdAt}" >

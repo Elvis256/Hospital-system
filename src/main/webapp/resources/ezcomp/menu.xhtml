@@ -1876,6 +1876,13 @@
                     </p:menuitem>
                     <p:menuitem  
                         ajax="false"  
+                        action="/admin/exchange_rate?faces-redirect=true" 
+                        value="Currency &amp; Exchange Rates" 
+                        icon="fa fa-money"
+                        rendered="#{webUserController.hasPrivilege('Admin')}" >
+                    </p:menuitem>
+                    <p:menuitem  
+                        ajax="false"  
                         action="#{staffController.navigateToManageStaffIndex()}" 
                         value="Manage Staff" 
                         icon="fa fa-user-circle"
@@ -1948,6 +1955,13 @@
                         value="Manage Metadata " 
                         icon="fa fa-database"
                         rendered="#{webUserController.hasPrivilege('AdminItems')}" >
+                    </p:menuitem>
+                    <p:menuitem  
+                        ajax="false"  
+                        action="/admin/institutions/currency_settings?faces-redirect=true" 
+                        value="Currency Settings" 
+                        icon="fa fa-money-bill"
+                        rendered="#{webUserController.hasPrivilege('AdminInstitutions')}" >
                     </p:menuitem>
 
                 </p:submenu>

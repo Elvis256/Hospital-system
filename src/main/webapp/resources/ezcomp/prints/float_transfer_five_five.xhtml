@@ -41,7 +41,7 @@
                     </tr>
                     <tr>
                         <td style="font-weight: bold;">To Staff:</td>
-                        <td><h:outputLabel value="#{cc.attrs.bill.toWebUser.webUserPerson.nameWithTitle}"></h:outputLabel></td>
+                        <td><h:outputLabel value="#{cc.attrs.bill.toWebUser ne null and cc.attrs.bill.toWebUser.webUserPerson ne null ? cc.attrs.bill.toWebUser.webUserPerson.nameWithTitle : 'N/A'}"></h:outputLabel></td>
                         <td style="font-weight: bold;">Comments:</td>
                         <td><h:outputLabel value="#{cc.attrs.bill.comments}"></h:outputLabel></td>
                     </tr>

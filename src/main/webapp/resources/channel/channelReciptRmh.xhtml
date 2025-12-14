@@ -293,7 +293,7 @@
                                             <h:outputLabel value=":" ></h:outputLabel>
                                         </td>
                                         <td>
-                                            <h:outputLabel value="#{cc.attrs.bill.paidBill.creater.webUserPerson.name}"></h:outputLabel>
+                                            <h:outputLabel value="#{cc.attrs.bill.paidBill.creater ne null and cc.attrs.bill.paidBill.creater.webUserPerson ne null ? cc.attrs.bill.paidBill.creater.webUserPerson.name : 'N/A'}"></h:outputLabel>
                                         </td>
                                     </tr>
                                     <tr>

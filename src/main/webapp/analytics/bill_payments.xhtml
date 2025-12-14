@@ -131,7 +131,7 @@
                                     <h:outputLabel value="#{payment.bill.department.name}"/>
                                 </p:column> 
                                 <p:column headerText="User" >                                
-                                    <h:outputLabel value="#{payment.bill.creater.webUserPerson.name}"/>
+                                    <h:outputLabel value="#{payment.bill.creater ne null and payment.bill.creater.webUserPerson ne null ? payment.bill.creater.webUserPerson.name : 'N/A'}"/>
                                 </p:column> 
                                 <p:column headerText="Reference Bill ID" >                                
                                     <h:outputLabel value="#{payment.bill.referenceBill.id}"/>

@@ -4,6 +4,7 @@
  */
 package com.divudi.core.entity;
 
+import com.divudi.core.data.Currency;
 import com.divudi.core.data.Denomination;
 import com.divudi.core.data.PaymentHandover;
 import com.divudi.core.data.PaymentMethod;
@@ -18,9 +19,11 @@ import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.EnumType;
 import javax.persistence.Enumerated;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import javax.persistence.Lob;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
@@ -128,6 +131,18 @@ public class Payment implements Serializable, RetirableEntity {
     private String policyNo;
 
     private boolean cashbookEntryStated;
+    
+    // Currency and Exchange Rate fields
+    @Enumerated(EnumType.STRING)
+    @Column(name = "currency")
+    private Currency currency = Currency.UGX; // Default to Ugandan Shilling
+    
+    @ManyToOne(fetch = FetchType.LAZY)
+    @JoinColumn(name = "exchange_rate_id")
+    private ExchangeRate exchangeRate; // Snapshot of exchange rate at payment time
+    
+    @Column(name = "exchange_rate_value")
+    private Double exchangeRateValue; // Value stored for historical record
     private boolean cashbookEntryCompleted;
     private boolean paymentRecordStated;
     private boolean paymentRecordCompleted;
@@ -948,6 +963,36 @@ public class Payment implements Serializable, RetirableEntity {
     @Transient
     public Double getAbsolutePaidValueTransient() {
         return Math.abs(this.paidValue);
+    }
+    
+    public Currency getCurrency() {
+        if (currency == null) {
+            currency = Currency.UGX; // Default to Ugandan Shilling
+        }
+        return currency;
+    }
+
+    public void setCurrency(Currency currency) {
+        this.currency = currency;
+    }
+
+    public ExchangeRate getExchangeRate() {
+        return exchangeRate;
+    }
+
+    public void setExchangeRate(ExchangeRate exchangeRate) {
+        this.exchangeRate = exchangeRate;
+        if (exchangeRate != null) {
+            this.exchangeRateValue = exchangeRate.getExchangeRate();
+        }
+    }
+
+    public Double getExchangeRateValue() {
+        return exchangeRateValue;
+    }
+
+    public void setExchangeRateValue(Double exchangeRateValue) {
+        this.exchangeRateValue = exchangeRateValue;
     }
 
 }

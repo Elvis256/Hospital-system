@@ -154,7 +154,7 @@
                                     <h:outputLabel value="#{inwardReportControllerBht.bill.department.name}" /><br/>
                                     <h:outputLabel value="Requested User&nbsp;" />
                                     <h:outputLabel value="&nbsp;:&nbsp;" />
-                                    <h:outputLabel value="#{inwardReportControllerBht.bill.creater.webUserPerson.nameWithTitle}" />
+                                    <h:outputLabel value="#{inwardReportControllerBht.bill.creater ne null and inwardReportControllerBht.bill.creater.webUserPerson ne null ? inwardReportControllerBht.bill.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                                 </f:facet>
                                 <p:column headerText="Item">
                                     <h:outputLabel value="#{bi.item.name}" />
@@ -174,7 +174,7 @@
                                             <h:outputLabel value="#{b.department.name}" /><br/>
                                             <h:outputLabel value="Issued User&nbsp;" />
                                             <h:outputLabel value="&nbsp;:&nbsp;" />
-                                            <h:outputLabel value="#{b.creater.webUserPerson.nameWithTitle}" />
+                                            <h:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                                         </f:facet>
                                         <p:column headerText="Item">
                                             <h:outputLabel value="#{bi.item.name}" />
@@ -191,7 +191,7 @@
                                                 <h:outputLabel value="#{b.department.name}" /><br/>
                                                 <h:outputLabel value="#{b.billTypeAtomic eq 'ISSUE_MEDICINE_ON_REQUEST_INWARD_RETURN' ? 'Returned' : 'Cancelled'} User&nbsp;" />
                                                 <h:outputLabel value="&nbsp;:&nbsp;" />
-                                                <h:outputLabel value="#{b.creater.webUserPerson.nameWithTitle}" />
+                                                <h:outputLabel value="#{b.creater ne null and b.creater.webUserPerson ne null ? b.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                                             </f:facet>
                                             <p:column headerText="Item" styleClass="#{b.billTypeAtomic eq 'ISSUE_MEDICINE_ON_REQUEST_INWARD_RETURN' ? 'ui-messages-warn' : 'ui-messages-fatal'}" >
                                                 <h:outputLabel value="#{bi.item.name}" />

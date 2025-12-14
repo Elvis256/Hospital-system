@@ -63,7 +63,7 @@
                                             </h:outputLabel>
                                             
                                             <h:outputLabel value="Created By:" />
-                                            <h:outputLabel value="#{pharmacyBillSearch.bill.creater.webUserPerson.nameWithTitle}" />
+                                            <h:outputLabel value="#{pharmacyBillSearch.bill.creater ne null and pharmacyBillSearch.bill.creater.webUserPerson ne null ? pharmacyBillSearch.bill.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                                             
                                             <h:outputLabel value="Department:" />
                                             <h:outputLabel value="#{pharmacyBillSearch.bill.department.name}" />
@@ -152,7 +152,7 @@
                                             </h:outputLabel>
                                             
                                             <h:outputLabel value="Reversed By:" />
-                                            <h:outputLabel value="#{pharmacyBillSearch.bill.cancelledBill.creater.webUserPerson.nameWithTitle}" />
+                                            <h:outputLabel value="#{pharmacyBillSearch.bill.cancelledBill.creater ne null and pharmacyBillSearch.bill.cancelledBill.creater.webUserPerson ne null ? pharmacyBillSearch.bill.cancelledBill.creater.webUserPerson.nameWithTitle : 'N/A'}" />
                                         </p:panelGrid>
                                     </p:panel>
                                 </div>
