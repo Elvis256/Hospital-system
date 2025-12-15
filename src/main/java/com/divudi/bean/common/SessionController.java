@@ -578,7 +578,7 @@ public class SessionController implements Serializable, HttpSessionListener {
         
         if (userCount != null && userCount > 0) {
             JsfUtil.addErrorMessage("First login already created. Please use the login page.");
-            return "/index";
+            return "/index?faces-redirect=true";
         }
         
         try {
@@ -637,13 +637,14 @@ public class SessionController implements Serializable, HttpSessionListener {
             wud.setWebUser(wu);
             webUserDepartmentFacade.create(wud);
 
-            firstLogin = null;
+            firstLogin = false;
             
             JsfUtil.addSuccessMessage("First login created successfully. Please login with your credentials.");
-            return "/index";
+            return "";
             
         } catch (Exception e) {
             JsfUtil.addErrorMessage("Error creating first login: " + e.getMessage());
+            e.printStackTrace();
             return "";
         }
     }
@@ -654,6 +655,9 @@ public class SessionController implements Serializable, HttpSessionListener {
     }
 
     public UserPreference getCurrentPreference() {
+        if (currentPreference == null) {
+            currentPreference = new UserPreference();
+        }
         return currentPreference;
     }
 
