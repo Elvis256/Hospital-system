@@ -1,16 +1,16 @@
 openapi: 3.0.0
 info:
-  title: Carecode System Channeling Module APIs
+  title: Avis IT System Channeling Module APIs
   description: Channel Booking APIs for third parties
   contact:
-    email: info@carecode.org
+    email: info@avisitsolutions.com
   version: "2.0"
 servers:
-# - url: https://qa.carecode.org/qa1/api/channel/
+# - url: https://api.avisitsolutions.com/qa1/api/channel/
 #   description: QA1
-# - url: https://qa.carecode.org/qa2/api/channel/
+# - url: https://api.avisitsolutions.com/qa2/api/channel/
 #   description: QA2
-- url: https://qa.carecode.org/qa3/api/channel/
+- url: https://api.avisitsolutions.com/qa3/api/channel/
   description: QA3
 tags:
 - name: Specialty List

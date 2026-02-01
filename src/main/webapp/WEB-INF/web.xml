@@ -3,8 +3,8 @@
          xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
          xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
 
-    <!-- This configuration was done by Dr M H B Ariyaratne -->
-    <!-- Special thanks to ChatGPT from OpenAI for assistance -->
+    <!-- Developed and maintained by Avis IT Solutions Uganda -->
+    <!-- https://avisitsolutions.com -->
 
     <!-- Context Parameters -->
     <context-param>
