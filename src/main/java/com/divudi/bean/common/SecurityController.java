@@ -15,6 +15,8 @@ import org.jasypt.util.text.BasicTextEncryptor;
 import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,6 +37,33 @@ public class SecurityController implements Serializable {
     private static Map<String, Character> reverseDigitMap = new HashMap<>();
 
     private static final long serialVersionUID = 1L;
+
+    private static final Logger LOGGER = Logger.getLogger(SecurityController.class.getName());
+
+    /**
+     * Secret used to encrypt/decrypt the tokens embedded in public report and
+     * booking links. Resolved once, in order, from the system property
+     * {@code hmis.text.encryption.key} then the environment variable
+     * {@code HMIS_TEXT_ENCRYPTION_KEY}. If neither is configured the legacy
+     * default is used and a warning is logged: without a strong per-deployment
+     * secret these tokens are forgeable and every patient report becomes
+     * enumerable. Set the secret in production.
+     */
+    private static final String TEXT_ENCRYPTION_KEY = resolveTextEncryptionKey();
+
+    private static String resolveTextEncryptionKey() {
+        String k = System.getProperty("hmis.text.encryption.key");
+        if (k == null || k.trim().isEmpty()) {
+            k = System.getenv("HMIS_TEXT_ENCRYPTION_KEY");
+        }
+        if (k == null || k.trim().isEmpty()) {
+            LOGGER.log(Level.WARNING, "No hmis.text.encryption.key (or HMIS_TEXT_ENCRYPTION_KEY) configured; "
+                    + "falling back to an insecure default key for report/booking-link encryption. "
+                    + "Set a strong per-deployment secret in production.");
+            return "health";
+        }
+        return k;
+    }
 
     static {
         // Initialize the digit mapping
@@ -140,7 +169,7 @@ public class SecurityController implements Serializable {
 
     public String encrypt(String word) {
         BasicTextEncryptor en = new BasicTextEncryptor();
-        en.setPassword("health");
+        en.setPassword(TEXT_ENCRYPTION_KEY);
         try {
             return en.encrypt(word);
         } catch (Exception ex) {
@@ -177,10 +206,6 @@ public class SecurityController implements Serializable {
         return en.checkPassword(planePassword, encryptedPassword);
     }
 
-    public static boolean matchPassword(String planePassword, String encryptedPassword, boolean fake) {
-        return true;
-    }
-
     public String generateRandomKey(int length) {
         if (length <= 0) {
             throw new IllegalArgumentException("Length must be a positive number");
@@ -194,7 +219,7 @@ public class SecurityController implements Serializable {
 
     public String decrypt(String word) {
         BasicTextEncryptor en = new BasicTextEncryptor();
-        en.setPassword("health");
+        en.setPassword(TEXT_ENCRYPTION_KEY);
         try {
             return en.decrypt(word);
         } catch (Exception ex) {

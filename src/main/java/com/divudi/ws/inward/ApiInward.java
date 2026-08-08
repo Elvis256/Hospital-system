@@ -5,6 +5,7 @@
  */
 package com.divudi.ws.inward;
 
+import com.divudi.bean.common.ApiKeyController;
 import com.divudi.bean.common.BillBeanController;
 import com.divudi.bean.common.InstitutionController;
 import com.divudi.bean.common.SessionController;
@@ -43,6 +44,7 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 import org.json.JSONArray;
 import org.json.JSONObject;
 
@@ -82,6 +84,8 @@ public class ApiInward {
     SessionController sessionController;
     @Inject
     InstitutionController institutionController;
+    @Inject
+    ApiKeyController apiKeyController;
 
     /**
      * Creates a new instance of ApiInward
@@ -89,11 +93,22 @@ public class ApiInward {
     public ApiInward() {
     }
 
+    private String unauthorizedJson() {
+        JSONObject o = new JSONObject();
+        o.put("error", "1");
+        o.put("error_code", 401);
+        o.put("error_description", "Unauthorized: a valid API key is required.");
+        return o.toString();
+    }
+
     //--Api
     @GET
     @Path("/admissions")
     @Produces("application/json")
-    public String getAddmissions() {
+    public String getAddmissions(@QueryParam("key") String key) {
+        if (!apiKeyController.isValidKey(key)) {
+            return unauthorizedJson();
+        }
         JSONArray array = new JSONArray();
         JSONObject jSONObjectOut = new JSONObject();
 
@@ -175,7 +190,10 @@ public class ApiInward {
     @GET
     @Path("/validateAdmission/{bht_no}")
     @Produces("application/json")
-    public String getAdmissionIsValidate(@PathParam("bht_no") String bht_no) {
+    public String getAdmissionIsValidate(@PathParam("bht_no") String bht_no, @QueryParam("key") String key) {
+        if (!apiKeyController.isValidKey(key)) {
+            return unauthorizedJson();
+        }
         JSONObject jSONObjectOut = new JSONObject();
         try {
             if (checkAdmissionIsValied(bht_no)) {
@@ -218,7 +236,11 @@ public class ApiInward {
     @Path("/payment/{bht_no}/{bank_id}/{credit_card_ref}/{amount}")
     @Produces("application/json")
     public String getPayment(@PathParam("bht_no") String bht_no, @PathParam("bank_id") String bank_id,
-            @PathParam("credit_card_ref") String credit_card_ref, @PathParam("amount") String amount) {
+            @PathParam("credit_card_ref") String credit_card_ref, @PathParam("amount") String amount,
+            @QueryParam("key") String key) {
+        if (!apiKeyController.isValidKey(key)) {
+            return unauthorizedJson();
+        }
         JSONObject jSONObjectOut = new JSONObject();
         try {
             PatientEncounter pe = fetchPatientEncounter(bht_no);

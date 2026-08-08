@@ -348,19 +348,37 @@ public class PatientPortalController implements Serializable {
     }
 
     public void otpVerification() {
-        List<Sms> smss = new ArrayList<>();
-        String j;
-        Map m = new HashMap();
-        j = "select s from Sms s where s.otp=:oc";
-        m.put("oc", patientEnteredOtp);
-        smss = smsFacade.findByJpql(j, m);
-        if (smss.isEmpty() || smss.size() > 1) {
+        otpVerify = false;
+        if (patientEnteredOtp == null || patientEnteredOtp.trim().isEmpty()
+                || PatientphoneNumber == null || PatientphoneNumber.trim().isEmpty()) {
             JsfUtil.addErrorMessage("Enter correct authentication code");
             return;
-        } else {
-            otpVerify = true;
-            findPatients();
         }
+        // An OTP is only accepted for the phone number it was sent to, is valid
+        // for 10 minutes, and can be used once (matched rows are retired below).
+        Calendar validFrom = Calendar.getInstance();
+        validFrom.add(Calendar.MINUTE, -10);
+        String j = "select s from Sms s "
+                + " where s.retired=false "
+                + " and s.otp=:oc "
+                + " and s.receipientNumber=:pn "
+                + " and s.createdAt>:since "
+                + " order by s.createdAt desc";
+        Map m = new HashMap();
+        m.put("oc", patientEnteredOtp.trim());
+        m.put("pn", PatientphoneNumber.trim());
+        m.put("since", validFrom.getTime());
+        Sms matched = smsFacade.findFirstByJpql(j, m, TemporalType.TIMESTAMP);
+        if (matched == null) {
+            JsfUtil.addErrorMessage("Enter correct authentication code");
+            return;
+        }
+        // consume the code so it cannot be replayed
+        matched.setRetired(true);
+        matched.setRetiredAt(new Date());
+        smsFacade.edit(matched);
+        otpVerify = true;
+        findPatients();
     }
 
     public void completeBooking() {
