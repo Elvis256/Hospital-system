@@ -2264,6 +2264,10 @@ public class FinancialTransactionController implements Serializable {
     }
 
     public String settleInitialFundBill() {
+        if (!getSessionController().getWebUserController().hasPrivilege("MyFinanacialTransactionManager")) {
+            JsfUtil.addErrorMessage("You have no privilege to perform financial transactions. Please contact the system administrator.");
+            return "";
+        }
         if (currentBill == null) {
             JsfUtil.addErrorMessage("Error");
             return "";
@@ -2311,6 +2315,10 @@ public class FinancialTransactionController implements Serializable {
     }
 
     public String settleIncomeBill() {
+        if (!getSessionController().getWebUserController().hasPrivilege("MyFinanacialTransactionManager")) {
+            JsfUtil.addErrorMessage("You have no privilege to perform financial transactions. Please contact the system administrator.");
+            return "";
+        }
         if (currentBill == null) {
             JsfUtil.addErrorMessage("Error");
             return "";
@@ -2342,6 +2350,10 @@ public class FinancialTransactionController implements Serializable {
     }
 
     public String settleExpensesBill() {
+        if (!getSessionController().getWebUserController().hasPrivilege("MyFinanacialTransactionManager")) {
+            JsfUtil.addErrorMessage("You have no privilege to perform financial transactions. Please contact the system administrator.");
+            return "";
+        }
         if (currentBill == null) {
             JsfUtil.addErrorMessage("Error");
             return "";
@@ -2373,6 +2385,10 @@ public class FinancialTransactionController implements Serializable {
     }
 
     public String settleFundTransferBill() {
+        if (!getSessionController().getWebUserController().hasPrivilege("MyFinanacialTransactionManager")) {
+            JsfUtil.addErrorMessage("You have no privilege to perform financial transactions. Please contact the system administrator.");
+            return "";
+        }
         if (floatTransferStarted) {
             JsfUtil.addErrorMessage("Already Started");
             return "";
@@ -2433,6 +2449,10 @@ public class FinancialTransactionController implements Serializable {
     }
 
     public String settleWithdrawalFundBill() {
+        if (!getSessionController().getWebUserController().hasPrivilege("MyFinanacialTransactionManager")) {
+            JsfUtil.addErrorMessage("You have no privilege to perform financial transactions. Please contact the system administrator.");
+            return "";
+        }
         if (currentBill == null) {
             JsfUtil.addErrorMessage("Error");
             return "";

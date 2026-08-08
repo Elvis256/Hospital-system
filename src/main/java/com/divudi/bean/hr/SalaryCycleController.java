@@ -297,6 +297,10 @@ public class SalaryCycleController implements Serializable {
     }
 
     public void delete() {
+        if (!getSessionController().getWebUserController().hasPrivilege("HrAdmin")) {
+            JsfUtil.addErrorMessage("You have no privilege to delete salary cycles. Please contact the system administrator.");
+            return;
+        }
 
         if (current != null) {
             // removeAll();
