@@ -277,6 +277,11 @@ public class AttendanceUploadController implements Serializable {
                 line = line.trim();
                 String[] strings = line.split("\\s");
 
+                // Skip blank or malformed lines (need at least code, date and time)
+                if (strings.length < 3) {
+                    continue;
+                }
+
                 //Fetch Staff From Employee Code
                 String empCode = strings[0];
                 Staff staff = getHumanResourceBean().fetchStaff(empCode);

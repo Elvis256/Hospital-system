@@ -165,7 +165,7 @@ public class PatientPortalController implements Serializable {
     public List<BillSession> fillPastBookings() {
         pastBookings = null;
         Map m = new HashMap();
-        String sql = "select bs from BillSession bs where bs.bill.billtype=:btype and bs.bill.patient=:pt and b.retired=:ret";
+        String sql = "select bs from BillSession bs where bs.bill.billtype=:btype and bs.bill.patient=:pt and bs.retired=:ret";
         m.put("btype", BillType.ChannelCredit);
         m.put("pt", patient);
         m.put("ret", false);
