@@ -404,7 +404,9 @@ public class AmpController implements Serializable {
         if (selectText.trim().isEmpty()) {
             selectedItems = getFacade().findByJpql("select c from Amp c where c.retired=false order by c.name");
         } else {
-            selectedItems = getFacade().findByJpql("select c from Amp c where c.retired=false and (c.name) like '%" + getSelectText().toUpperCase() + "%' order by c.name");
+            Map<String, Object> ampSearchParams = new HashMap<>();
+            ampSearchParams.put("txt", "%" + getSelectText().toUpperCase() + "%");
+            selectedItems = getFacade().findByJpql("select c from Amp c where c.retired=false and (c.name) like :txt order by c.name", ampSearchParams);
         }
         return selectedItems;
     }

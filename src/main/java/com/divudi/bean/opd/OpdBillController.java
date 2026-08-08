@@ -902,8 +902,10 @@ public class OpdBillController implements Serializable, ControllerWithPatient, C
 //        this.recurseCount = recurseCount;
 //    }
     public boolean findByFilter(String property, String value) {
-        String sql = "Select b From Bill b where b.retired=false and (b." + property + ") like '%" + value.toUpperCase() + " %'";
-        Bill b = getBillFacade().findFirstByJpql(sql);
+        Map<String, Object> filterParams = new HashMap<>();
+        filterParams.put("val", "%" + value.toUpperCase() + " %");
+        String sql = "Select b From Bill b where b.retired=false and (b." + property + ") like :val";
+        Bill b = getBillFacade().findFirstByJpql(sql, filterParams);
         //System.err.println("SQL " + sql);
         //System.err.println("Bill " + b);
         if (b != null) {
