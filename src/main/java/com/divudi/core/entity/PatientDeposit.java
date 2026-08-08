@@ -12,6 +12,7 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.ManyToOne;
 import javax.persistence.Temporal;
+import javax.persistence.Version;
 
 /**
  *
@@ -24,6 +25,8 @@ public class PatientDeposit implements Serializable, RetirableEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Long id;
+    @Version
+    private Long version;
     @ManyToOne
     private Patient patient;
     @ManyToOne
@@ -52,6 +55,14 @@ public class PatientDeposit implements Serializable, RetirableEntity {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getVersion() {
+        return version;
+    }
+
+    public void setVersion(Long version) {
+        this.version = version;
     }
 
     @Override
