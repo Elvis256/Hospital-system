@@ -11,6 +11,7 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import org.jasypt.util.password.BasicPasswordEncryptor;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.jasypt.util.text.BasicTextEncryptor;
 import java.security.SecureRandom;
 import java.util.HashMap;
@@ -187,23 +188,34 @@ public class SecurityController implements Serializable {
 
     public String hashAndCheck(String word) {
         try {
-            BasicPasswordEncryptor en = new BasicPasswordEncryptor();
-            String encryptedPassword = en.encryptPassword(word);
-            // This check will always return true for a successfully hashed password
-            boolean match = en.checkPassword(word, encryptedPassword);
-            if (match) {
-                return encryptedPassword;
-            } else {
-                return null; // This branch will likely never be executed
-            }
+            // Salted, iterated SHA-256 (jasypt StrongPasswordEncryptor) for new/changed
+            // passwords, replacing the previous unsalted MD5 (BasicPasswordEncryptor).
+            return new StrongPasswordEncryptor().encryptPassword(word);
         } catch (Exception e) {
             return null;
         }
     }
 
     public static boolean matchPassword(String planePassword, String encryptedPassword) {
-        BasicPasswordEncryptor en = new BasicPasswordEncryptor();
-        return en.checkPassword(planePassword, encryptedPassword);
+        if (planePassword == null || encryptedPassword == null) {
+            return false;
+        }
+        // Current scheme: strong (salted, iterated SHA-256) hashes.
+        try {
+            if (new StrongPasswordEncryptor().checkPassword(planePassword, encryptedPassword)) {
+                return true;
+            }
+        } catch (Exception ignore) {
+            // not a strong hash — fall through to the legacy check
+        }
+        // Legacy scheme: old BasicPasswordEncryptor (MD5) hashes, kept so existing
+        // users are not locked out. Their password upgrades to the strong scheme the
+        // next time it is set/changed.
+        try {
+            return new BasicPasswordEncryptor().checkPassword(planePassword, encryptedPassword);
+        } catch (Exception ignore) {
+            return false;
+        }
     }
 
     public String generateRandomKey(int length) {
