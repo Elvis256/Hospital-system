@@ -64,10 +64,16 @@ and automated divergence checks.
 
 ## Phased plan (continuing issue #12437)
 
-1. **Finish the foundation.** Nullability + null-safe getters on both
-   `*FinanceDetails`; `BigDecimalUtil` fully unit-tested (`valueOrZero`,
-   `valueOrNull`, `isNullOrZero`, scale/rounding — always `RoundingMode.HALF_UP`,
-   `DECIMAL(19,4)`). *(Partly done.)*
+1. **Finish the foundation.** `BigDecimalUtil` complete and unit-tested
+   (`valueOrZero`, `valueOrNull`, `isNullOrZero`, `money`, `divide` —
+   `DECIMAL(19,4)`, `HALF_UP`) plus the reconciliation harness. **Note: the
+   `*FinanceDetails` getters intentionally stay nullable** — `getX()` returns the
+   raw value so that "not set" (null) stays distinct from "set to zero", a
+   contract locked in by `BigDecimalIntegrationTest` /
+   `BigDecimalRegressionTest`. Null-safety is a *call-site* concern applied with
+   `BigDecimalUtil.valueOrZero(...)`, **not** by wrapping the getters. (This
+   supersedes the "add null-safe getters" wording in the older
+   `BigDecimal_Refactoring_Implementation_Guide.md`.) *(Done.)*
 2. **One write-path.** Make bill/bill-item settlement compute money in
    `BigDecimal` and populate `*FinanceDetails`; have the legacy `double` fields
    *derived* from it (mirror), so there is exactly one authoritative source.
@@ -114,7 +120,13 @@ sized as a tracked epic (#12437), not a single change.
 
 ## Immediate next step (smallest safe increment)
 
-Complete **step 1** for one entity end-to-end: finish `BillFinanceDetails`
-nullability + null-safe getters, land full `BigDecimalUtil` unit tests, and add
-the reconciliation test skeleton. That closes Phase 1 of the existing guide and
-establishes the reconciliation harness every later phase depends on.
+**Step 1 is done:** `BigDecimalUtil` gained `money()`/`divide()` and the
+`MoneyReconciliation` harness landed, both unit-tested; the `*FinanceDetails`
+getters were confirmed to (correctly) stay nullable.
+
+The next increment is **step 2 for one screen**: pick a single settlement path
+(e.g. one OPD bill), compute its money in `BigDecimal`, populate
+`BillFinanceDetails`, and add a reconciliation test asserting the new
+`BigDecimal` total matches the legacy `double` total within tolerance
+(`MoneyReconciliation.reconciles`). That proves the write-path pattern and the
+harness on real data before rolling it across modules.
