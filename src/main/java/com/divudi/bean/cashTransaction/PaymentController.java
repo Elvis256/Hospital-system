@@ -79,7 +79,32 @@ public class PaymentController implements Serializable {
     }
 
     public void relazieCheques() {
-
+        if (itemsSelected == null || itemsSelected.isEmpty()) {
+            JsfUtil.addErrorMessage("Select one or more cheques to realize");
+            return;
+        }
+        for (Payment p : itemsSelected) {
+            if (p.getPaymentMethod() != PaymentMethod.Cheque) {
+                JsfUtil.addErrorMessage("Only cheques can be realized.");
+                return;
+            }
+            if (p.isRealized() || p.isChequeRealized()) {
+                JsfUtil.addErrorMessage("You have selected some already realized cheques.");
+                return;
+            }
+        }
+        Date now = new Date();
+        for (Payment p : itemsSelected) {
+            p.setRealized(true);
+            p.setRealizedAt(now);
+            p.setChequeRealized(true);
+            p.setChequeRealizedAt(now);
+            p.setChequeRealizer(sessionController.getLoggedUser());
+            save(p);
+        }
+        JsfUtil.addSuccessMessage(itemsSelected.size() + " cheque(s) marked as realized.");
+        items = null;
+        itemsSelected = null;
         printPreview = true;
     }
 
