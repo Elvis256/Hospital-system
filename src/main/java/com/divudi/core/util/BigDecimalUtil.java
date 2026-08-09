@@ -18,7 +18,7 @@ import java.math.RoundingMode;
  */
 public class BigDecimalUtil {
 
-    /** Standard scale for monetary amounts (4 decimal places), matching DECIMAL(19,4). */
+    /** Standard scale for monetary amounts (4 decimal places), matching DECIMAL(18,4). */
     public static final int MONEY_SCALE = 4;
 
     /** Standard rounding mode for monetary amounts. */
