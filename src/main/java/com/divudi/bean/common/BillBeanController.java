@@ -4,6 +4,7 @@
  */
 package com.divudi.bean.common;
 
+import com.divudi.core.util.BillItemFinanceProjection;
 import com.divudi.core.util.JsfUtil;
 import com.divudi.bean.collectingCentre.CollectingCentreBillController;
 import com.divudi.bean.inward.InwardBeanController;
@@ -3936,6 +3937,12 @@ public class BillBeanController implements Serializable {
             billItem.setDiscountRate(billItemDiscount / qty);
             billItem.setNetRate(billItemNet / qty);
             billItem.setMarginRate((billItemMargin) / qty);
+
+            // The line amounts above are now final, so mirror them into the
+            // BigDecimal finance details (money-precision migration #12437).
+            // The bill item is managed here and cascades ALL, so this is
+            // persisted on flush without an explicit edit.
+            BillItemFinanceProjection.applyLineTotals(billItem);
 
             tot += billItemGross;
             dis += billItemDiscount;

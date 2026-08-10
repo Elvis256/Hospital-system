@@ -144,14 +144,44 @@ synthetic pre-migration bills covering ordinary, repeating-decimal, negative
 conversion was confirmed to agree with Java `HALF_UP` on every case, including
 `±10.00005 → ±10.0001`.
 
+## Item-level write path (step 2, line level)
+
+The earlier claim that item amounts "must be computed, not copied" was only half
+right. Measured against the code:
+
+- The **costing** fields (`valueAtCostRate`, `valueAtRetailRate`,
+  `valueAtWholesaleRate`, …) genuinely are computed, and pharmacy already writes
+  them — `PharmacyPreSettleController`, `GrnCostingController`,
+  `PharmacyAdjustmentController` and others.
+- The **core line amounts** (quantity, rates, gross/net totals, discount, tax)
+  are plain mirrors of `BillItem`'s legacy doubles, exactly like the bill level.
+
+So the gap was never "computation" — it was that nobody mirrored the core line
+amounts. `BillItemFinanceProjection.applyLineTotals(BillItem)` now does, wired
+into `BillBeanController.calculateBillItemsForOpdBill` immediately after the
+item's final values and rates are set (the authoritative point; the bill item is
+managed and cascades ALL, so it persists on flush).
+
+Two constraints shaped it:
+
+1. **It updates in place**, via `BillItem.getBillItemFinanceDetails()` — which
+   already does get-or-create and wires the back-reference. Replacing the entity
+   would destroy costing fields written by the pharmacy paths; a test asserts
+   they survive.
+2. **The `line*`/`bill*` split stays null.** The legacy `double` model records
+   only the *combined* discount and tax per line, never the decomposition, so the
+   combined values map to the `total*` fields and the split remains null —
+   "not migrated", as distinct from "migrated as zero".
+
 ## Immediate next step (smallest safe increment)
 
-Steps 1 and 2 are done (helpers + harness; bill-level write-path wired into
-cashier income-bill settlement). Step 3 is done at bill level.
+Steps 1 and 2 are done (helpers + harness; bill-level write path in cashier
+income-bill settlement; line-level write path in OPD). Step 3 is done at bill
+level.
 
-The next increment is the **item-level baseline**: `BILLITEMFINANCEDETAILS` has
-no write path and no backfill. Unlike the bill level it is not a straight mirror
-— pharmacy costing, free quantities and per-line tax mean the item amounts must
-be *computed*, not copied — so the write path has to come first, then a backfill
-consistent with it. Until then, the bill-level `BigDecimal` totals are the only
-migrated amounts and reporting cutover (step 4) should start there.
+The next increment is the **item-level backfill** — the counterpart of
+`05_backfill_billfinancedetails_from_double.sql` for `BILLITEMFINANCEDETAILS`,
+now that there is a write path for it to be consistent with. It should mirror
+the same seven fields and, like the write path, leave costing and the
+`line*`/`bill*` split alone. After that, reporting cutover (step 4) can begin,
+starting with reports that only need bill-level and OPD line totals.
