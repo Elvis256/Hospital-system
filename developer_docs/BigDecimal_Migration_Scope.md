@@ -218,7 +218,46 @@ written per-iteration, because `processMultiplePaymentBill` mutates the same row
 mid-loop. `marginValue` keeps the legacy `double` path — it has no migrated
 counterpart yet.
 
-**Remaining for step 4:** the rest of the money reports, each with the same
-pattern. `ReportTemplateRow` still stores `double` (and `total`/`discount` are
-nullable `Double`), so the BigDecimal is converted back at that boundary; the row
-DTO itself is a later migration.
+**Done so far in `OpdReportController`:** `genarateRowBundle`,
+`genarateRowBundleInward`, `genarateRowBundleOther`,
+`genarateDeductionRowBundleOther`, both `processMultiplePaymentBill` overloads,
+`listBills` and `populateSummaryRow`.
+
+`ReportTemplateRow` still stores `double` (and `total`/`discount` are nullable
+`Double`), so the BigDecimal is converted back at that boundary; the row DTO
+itself is a later migration.
+
+### Not every amount has something to migrate to
+
+Three distinct cases turn up, and conflating them produces false confidence:
+
+| Source | What is possible today |
+|---|---|
+| `BillItem` / `Bill` | **Migrated read** via `MoneyRead` + BigDecimal accumulation |
+| `Payment.paidValue` | Accumulation only — `Payment` has no companion entity. `MoneyRead.paidValue` is a *conversion*, parked there so the future read lands in one place |
+| `BillItemDTO` / report DTOs | Accumulation only — the DTO is projected from the legacy columns. Migrating the JPQL projection (`coalesce` onto the `*FinanceDetails` columns) is a later step |
+
+### Measured remainder
+
+**264 double-accumulation sites across 33 report files** (`+=` on a money
+getter), the largest being `QuickBookReportController` (32),
+`LaborataryReportController` (16), `InwardReportControllerBht` (16),
+`CashSummeryController` (15), `InwardReportController1` (15). 18 remain in
+`OpdReportController` itself: the dead `analyzeMultiplePayments` arithmetic and
+the report-DTO summations.
+
+Each site needs the same three judgements — is there a migrated source, is the
+row mutated mid-loop, does reading create an entity — so this is a
+file-at-a-time migration, not a mechanical sweep.
+
+### Two pre-existing bugs found while migrating
+
+- **`analyzeMultiplePayments` is a no-op.** It accumulates into its own
+  pass-by-value `double` parameters and never writes to `row`, so
+  multiple-payment bills contribute nothing to the daily income summary. Left
+  as-is: fixing it changes reported figures and the caller overwrites the row
+  afterwards anyway, so it needs a decision, not a patch.
+- **`listBills` never reset its accumulators.** `total`, `netTotal` and
+  `discount` are controller fields, so repeating a search added to the previous
+  search's totals. Fixed as part of the cutover, since a fresh search showing
+  fresh totals is unambiguously correct.

@@ -7,6 +7,7 @@ import com.divudi.core.entity.Bill;
 import com.divudi.core.entity.BillFinanceDetails;
 import com.divudi.core.entity.BillItem;
 import com.divudi.core.entity.BillItemFinanceDetails;
+import com.divudi.core.entity.Payment;
 import java.math.BigDecimal;
 
 /**
@@ -90,6 +91,62 @@ public final class MoneyRead {
             return BigDecimalUtil.money(details.getNetTotal());
         }
         return money(bill.getNetTotal());
+    }
+
+    /**
+     * A bill's gross total — migrated value if present, else the legacy
+     * {@code total}.
+     *
+     * @param bill the bill (may be null)
+     * @return the gross total at money scale; zero for a null bill
+     */
+    public static BigDecimal grossTotal(Bill bill) {
+        if (bill == null) {
+            return zero();
+        }
+        BillFinanceDetails details = bill.peekBillFinanceDetails();
+        if (details != null && details.getGrossTotal() != null) {
+            return BigDecimalUtil.money(details.getGrossTotal());
+        }
+        return money(bill.getTotal());
+    }
+
+    /**
+     * A bill's discount — migrated value if present, else the legacy
+     * {@code discount}.
+     *
+     * @param bill the bill (may be null)
+     * @return the discount at money scale; zero for a null bill
+     */
+    public static BigDecimal discount(Bill bill) {
+        if (bill == null) {
+            return zero();
+        }
+        BillFinanceDetails details = bill.peekBillFinanceDetails();
+        if (details != null && details.getBillDiscount() != null) {
+            return BigDecimalUtil.money(details.getBillDiscount());
+        }
+        return money(bill.getDiscount());
+    }
+
+    /**
+     * A payment's paid value as {@link BigDecimal}.
+     *
+     * <p><b>This is a conversion, not yet a migrated read.</b> {@code Payment}
+     * has no companion {@code *FinanceDetails} entity, so there is nothing to
+     * prefer over the legacy {@code double} — the only gain today is that
+     * callers can accumulate in {@code BigDecimal} instead of compounding
+     * floating-point error. It lives here so that when Payment does gain a
+     * migrated amount, every report picks it up from one place.
+     *
+     * @param payment the payment (may be null)
+     * @return the paid value at money scale; zero for a null payment
+     */
+    public static BigDecimal paidValue(Payment payment) {
+        if (payment == null) {
+            return zero();
+        }
+        return money(payment.getPaidValue());
     }
 
     /**

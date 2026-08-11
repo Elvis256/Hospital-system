@@ -3,6 +3,7 @@ package com.divudi.core.util;
 import com.divudi.core.entity.Bill;
 import com.divudi.core.entity.BillItem;
 import com.divudi.core.entity.BillItemFinanceDetails;
+import com.divudi.core.entity.Payment;
 import java.math.BigDecimal;
 import org.junit.jupiter.api.DisplayName;
 import org.junit.jupiter.api.Test;
@@ -80,9 +81,36 @@ public class MoneyReadTest {
     @DisplayName("a null bill item or bill reads as zero rather than throwing")
     void nullsAreSafe() {
         assertEquals(0, BigDecimal.ZERO.compareTo(MoneyRead.netTotal((BillItem) null)));
-        assertEquals(0, BigDecimal.ZERO.compareTo(MoneyRead.discount(null)));
+        assertEquals(0, BigDecimal.ZERO.compareTo(MoneyRead.discount((BillItem) null)));
         assertEquals(0, BigDecimal.ZERO.compareTo(MoneyRead.netTotal((Bill) null)));
+        assertEquals(0, BigDecimal.ZERO.compareTo(MoneyRead.discount((Bill) null)));
+        assertEquals(0, BigDecimal.ZERO.compareTo(MoneyRead.grossTotal(null)));
+        assertEquals(0, BigDecimal.ZERO.compareTo(MoneyRead.paidValue(null)));
         assertFalse(MoneyRead.isMigrated(null));
+    }
+
+    @Test
+    @DisplayName("bill gross total and discount prefer the migrated fields")
+    void billGrossAndDiscount() {
+        Bill b = new Bill();
+        b.setTotal(900.0);
+        b.setDiscount(50.0);
+        assertEquals(0, new BigDecimal("900.0000").compareTo(MoneyRead.grossTotal(b)), "legacy gross");
+        assertEquals(0, new BigDecimal("50.0000").compareTo(MoneyRead.discount(b)), "legacy discount");
+
+        b.getBillFinanceDetails().setGrossTotal(new BigDecimal("800.5000"));
+        b.getBillFinanceDetails().setBillDiscount(new BigDecimal("12.2500"));
+        assertEquals(0, new BigDecimal("800.5000").compareTo(MoneyRead.grossTotal(b)), "migrated gross");
+        assertEquals(0, new BigDecimal("12.2500").compareTo(MoneyRead.discount(b)), "migrated discount");
+    }
+
+    @Test
+    @DisplayName("payment paid value converts at money scale")
+    void paymentPaidValue() {
+        Payment p = new Payment();
+        p.setPaidValue(333.333333);
+        assertEquals(0, new BigDecimal("333.3333").compareTo(MoneyRead.paidValue(p)));
+        assertEquals(4, MoneyRead.paidValue(p).scale(), "money scale");
     }
 
     @Test
