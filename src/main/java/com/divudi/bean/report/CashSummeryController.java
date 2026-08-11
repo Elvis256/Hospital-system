@@ -46,6 +46,9 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Map;
 import java.util.Set;
+import com.divudi.core.util.BigDecimalUtil;
+import com.divudi.core.util.MoneyRead;
+import java.math.BigDecimal;
 import javax.ejb.EJB;
 import javax.enterprise.context.RequestScoped;
 import javax.inject.Inject;
@@ -326,7 +329,7 @@ public class CashSummeryController implements Serializable {
             AdmissionTypeBills admB = new AdmissionTypeBills();
             admB.setAdmissionType(at);
             admB.setTotal(getInwardProfTot(at));
-            inwardProfTot += admB.getTotal();
+            inwardProfTot = money(inwardProfTot).add(money(admB.getTotal())).doubleValue();
             lst.add(admB);
         }
 
@@ -375,7 +378,7 @@ public class CashSummeryController implements Serializable {
 
             if (netTotal != 0) {
                 //System.err.println("NET " + netTotal);
-                pharmacyTotal += netTotal;
+                pharmacyTotal = money(pharmacyTotal).add(money(netTotal)).doubleValue();
                 DailyCash dl = new DailyCash();
                 dl.setDepartment(d);
                 dl.setDepartmentTotal(netTotal);
@@ -426,7 +429,7 @@ public class CashSummeryController implements Serializable {
     public double getHosTotal() {
         double tmp = 0.0;
         for (ItemWithFee i : itemWithFees) {
-            tmp += i.getHospitalFee();
+            tmp = money(tmp).add(money(i.getHospitalFee())).doubleValue();
         }
         return tmp;
     }
@@ -434,7 +437,7 @@ public class CashSummeryController implements Serializable {
     public double getProfTotal() {
         double tmp = 0.0;
         for (ItemWithFee i : itemWithFees) {
-            tmp += i.getProFee();
+            tmp = money(tmp).add(money(i.getProFee())).doubleValue();
         }
         return tmp;
     }
@@ -449,7 +452,7 @@ public class CashSummeryController implements Serializable {
         cardTot = 0.0;
         List<Bill> tmp = bills(PaymentMethod.Card);
         for (Bill b : tmp) {
-            cardTot += b.getNetTotal();
+            cardTot = money(cardTot).add(MoneyRead.netTotal(b)).doubleValue();
         }
 
         return tmp;
@@ -478,7 +481,7 @@ public class CashSummeryController implements Serializable {
         slipTot = 0.0;
         List<Bill> tmp = bills(PaymentMethod.Slip);
         for (Bill b : tmp) {
-            slipTot += b.getNetTotal();
+            slipTot = money(slipTot).add(MoneyRead.netTotal(b)).doubleValue();
         }
 
         return tmp;
@@ -488,7 +491,7 @@ public class CashSummeryController implements Serializable {
         chequeTot = 0.0;
         List<Bill> tmp = bills(PaymentMethod.Cheque);
         for (Bill b : tmp) {
-            chequeTot += b.getNetTotal();
+            chequeTot = money(chequeTot).add(MoneyRead.netTotal(b)).doubleValue();
         }
         return tmp;
     }
@@ -514,7 +517,7 @@ public class CashSummeryController implements Serializable {
     public double getPathTotal() {
         double tmp = 0.0;
         for (BillFee b : getPathologyFees()) {
-            tmp += b.getFeeValue();
+            tmp = money(tmp).add(money(b.getFeeValue())).doubleValue();
         }
         return tmp;
     }
@@ -523,7 +526,7 @@ public class CashSummeryController implements Serializable {
         double tmp = 0.0;
         for (BillFee b : getPathologyFees()) {
             if (b.getStaff() != null) {
-                tmp += b.getFeeValue();
+                tmp = money(tmp).add(money(b.getFeeValue())).doubleValue();
             }
         }
         return tmp;
@@ -548,7 +551,7 @@ public class CashSummeryController implements Serializable {
         List<Bill> tmp = bills(BillType.CashRecieveBill);
 
         for (Bill b : tmp) {
-            creditCompanyTotal += b.getNetTotal();
+            creditCompanyTotal = money(creditCompanyTotal).add(MoneyRead.netTotal(b)).doubleValue();
 
             BillsItems newB = new BillsItems();
             newB.setBill(b);
@@ -576,7 +579,7 @@ public class CashSummeryController implements Serializable {
         List<Bill> tmp = bills(BillType.AgentPaymentReceiveBill);
 
         for (Bill b : tmp) {
-            agentCollectionTot += b.getNetTotal();
+            agentCollectionTot = money(agentCollectionTot).add(MoneyRead.netTotal(b)).doubleValue();
         }
 
         return tmp;
@@ -590,7 +593,7 @@ public class CashSummeryController implements Serializable {
             admB.setAdmissionType(at);
             admB.setBills(getInwardBills(at));
             admB.setTotal(calTotal(admB.getBills()));
-            inwardTot += admB.getTotal();
+            inwardTot = money(inwardTot).add(money(admB.getTotal())).doubleValue();
             tmp.add(admB);
         }
 
@@ -600,7 +603,7 @@ public class CashSummeryController implements Serializable {
     private double calTotal(List<Bill> lst) {
         double tmp = 0.0;
         for (Bill b : lst) {
-            tmp += b.getNetTotal();
+            tmp = money(tmp).add(MoneyRead.netTotal(b)).doubleValue();
         }
         return tmp;
     }
@@ -632,7 +635,7 @@ public class CashSummeryController implements Serializable {
         List<BillItem> tmp2 = getBillItemFacade().findByJpql(sql, temMap, TemporalType.TIMESTAMP);
 
         for (BillItem b : tmp2) {
-            tmp += b.getNetValue();
+            tmp = money(tmp).add(MoneyRead.netTotal(b)).doubleValue();
         }
 
         return tmp;
@@ -676,8 +679,8 @@ public class CashSummeryController implements Serializable {
             for (BillItem bb : billItems) {
                 if (bb.getReferanceBillItem() != null && bb.getReferanceBillItem().getItem() != null && bb.getReferanceBillItem().getItem().getDepartment() != null) {
                     if (bb.getReferanceBillItem().getItem().getDepartment().getId() == dep.getId()) {
-                        tot += bb.getNetValue();
-                        doctorPaymentTot += bb.getNetValue();
+                        tot = money(tot).add(MoneyRead.netTotal(bb)).doubleValue();
+                        doctorPaymentTot = money(doctorPaymentTot).add(MoneyRead.netTotal(bb)).doubleValue();
                     }
                 }
             }
@@ -1039,9 +1042,9 @@ public class CashSummeryController implements Serializable {
     public double getProTotal() {
         double tmp = 0.0;
         for (DailyCash d : dailyCash) {
-            tmp += d.getProfFee();
+            tmp = money(tmp).add(money(d.getProfFee())).doubleValue();
         }
-        tmp += getPathProf();
+        tmp = money(tmp).add(money(getPathProf())).doubleValue();
         return tmp;
     }
 
@@ -1052,7 +1055,7 @@ public class CashSummeryController implements Serializable {
         lstBills = bills(BillType.PettyCash);
 
         for (Bill d : lstBills) {
-            tmp += d.getNetTotal();
+            tmp = money(tmp).add(MoneyRead.netTotal(d)).doubleValue();
         }
 
         return tmp;
@@ -1260,21 +1263,21 @@ public class CashSummeryController implements Serializable {
         chequeTot = getSumByFee(BillType.OpdBill, PaymentMethod.Cheque);
         slipTot = getSumByFee(BillType.OpdBill, PaymentMethod.Slip);
 
-        cardTot += getSumByFee(BillType.PaymentBill, PaymentMethod.Card);
-        chequeTot += getSumByFee(BillType.PaymentBill, PaymentMethod.Cheque);
-        slipTot += getSumByFee(BillType.PaymentBill, PaymentMethod.Slip);
+        cardTot = money(cardTot).add(money(getSumByFee(BillType.PaymentBill, PaymentMethod.Card))).doubleValue();
+        chequeTot = money(chequeTot).add(money(getSumByFee(BillType.PaymentBill, PaymentMethod.Cheque))).doubleValue();
+        slipTot = money(slipTot).add(money(getSumByFee(BillType.PaymentBill, PaymentMethod.Slip))).doubleValue();
 
-        cardTot += getSumByBill(BillType.AgentPaymentReceiveBill, PaymentMethod.Card);
-        chequeTot += getSumByBill(BillType.AgentPaymentReceiveBill, PaymentMethod.Cheque);
-        slipTot += getSumByBill(BillType.AgentPaymentReceiveBill, PaymentMethod.Slip);
+        cardTot = money(cardTot).add(money(getSumByBill(BillType.AgentPaymentReceiveBill, PaymentMethod.Card))).doubleValue();
+        chequeTot = money(chequeTot).add(money(getSumByBill(BillType.AgentPaymentReceiveBill, PaymentMethod.Cheque))).doubleValue();
+        slipTot = money(slipTot).add(money(getSumByBill(BillType.AgentPaymentReceiveBill, PaymentMethod.Slip))).doubleValue();
 
-        cardTot += getSumByBill(BillType.CashRecieveBill, PaymentMethod.Card);
-        chequeTot += getSumByBill(BillType.CashRecieveBill, PaymentMethod.Cheque);
-        slipTot += getSumByBill(BillType.CashRecieveBill, PaymentMethod.Slip);
+        cardTot = money(cardTot).add(money(getSumByBill(BillType.CashRecieveBill, PaymentMethod.Card))).doubleValue();
+        chequeTot = money(chequeTot).add(money(getSumByBill(BillType.CashRecieveBill, PaymentMethod.Cheque))).doubleValue();
+        slipTot = money(slipTot).add(money(getSumByBill(BillType.CashRecieveBill, PaymentMethod.Slip))).doubleValue();
 
-        cardTot += getSumByBill(BillType.PettyCash, PaymentMethod.Card);
-        chequeTot += getSumByBill(BillType.PettyCash, PaymentMethod.Cheque);
-        slipTot += getSumByBill(BillType.PettyCash, PaymentMethod.Slip);
+        cardTot = money(cardTot).add(money(getSumByBill(BillType.PettyCash, PaymentMethod.Card))).doubleValue();
+        chequeTot = money(chequeTot).add(money(getSumByBill(BillType.PettyCash, PaymentMethod.Cheque))).doubleValue();
+        slipTot = money(slipTot).add(money(getSumByBill(BillType.PettyCash, PaymentMethod.Slip))).doubleValue();
 
     }
 
@@ -1327,9 +1330,9 @@ public class CashSummeryController implements Serializable {
     public double getGrantTotal() {
         grantTotal = 0.0;
         for (DailyCash d : dailyCash) {
-            grantTotal += d.getDepartmentTotal();
+            grantTotal = money(grantTotal).add(money(d.getDepartmentTotal())).doubleValue();
         }
-        grantTotal += getPathTotal() + getCreditCompanyTotal() + getAgentCollectionTot() + inwardTot + getPharmacyTotal();
+        grantTotal = money(grantTotal).add(money(getPathTotal())).add(money(getCreditCompanyTotal())).add(money(getAgentCollectionTot())).add(money(inwardTot)).add(money(getPharmacyTotal())).doubleValue();
 
         return grantTotal;
     }
@@ -1337,9 +1340,9 @@ public class CashSummeryController implements Serializable {
     public double getGrantTotal2() {
         grantTotal = 0.0;
         for (CategoryWithItem d : categoryWithItem) {
-            grantTotal += d.getSubTotal();
+            grantTotal = money(grantTotal).add(money(d.getSubTotal())).doubleValue();
         }
-        grantTotal += getPathTotal() + getCreditCompanyTotal() + getAgentCollectionTot() + inwardTot + getPharmacyTotal();
+        grantTotal = money(grantTotal).add(money(getPathTotal())).add(money(getCreditCompanyTotal())).add(money(getAgentCollectionTot())).add(money(inwardTot)).add(money(getPharmacyTotal())).doubleValue();
 
         return grantTotal;
     }
@@ -1347,9 +1350,9 @@ public class CashSummeryController implements Serializable {
     public double getGrantTotal2Hos() {
         grantTotal = 0.0;
         for (CategoryWithItem d : categoryWithItem) {
-            grantTotal += d.getSubHosTotal();
+            grantTotal = money(grantTotal).add(money(d.getSubHosTotal())).doubleValue();
         }
-        grantTotal += getPathTotal() + getCreditCompanyTotal() + getAgentCollectionTot() + inwardTot + getPharmacyTotal();
+        grantTotal = money(grantTotal).add(money(getPathTotal())).add(money(getCreditCompanyTotal())).add(money(getAgentCollectionTot())).add(money(inwardTot)).add(money(getPharmacyTotal())).doubleValue();
 
         return grantTotal;
     }
@@ -1357,9 +1360,9 @@ public class CashSummeryController implements Serializable {
     public double getGrantTotal3() {
         grantTotal = 0.0;
         for (ItemWithFee d : itemWithFees) {
-            grantTotal += d.getTotal();
+            grantTotal = money(grantTotal).add(money(d.getTotal())).doubleValue();
         }
-        grantTotal += getPathTotal() + getCreditCompanyTotal() + getAgentCollectionTot() + inwardTot + getPharmacyTotal();
+        grantTotal = money(grantTotal).add(money(getPathTotal())).add(money(getCreditCompanyTotal())).add(money(getAgentCollectionTot())).add(money(inwardTot)).add(money(getPharmacyTotal())).doubleValue();
 
         return grantTotal;
     }
@@ -1367,7 +1370,7 @@ public class CashSummeryController implements Serializable {
     public double getCategoryTotal() {
         double tmp = 0.0;
         for (CategoryWithItem d : getDailyCash2()) {
-            tmp += d.getSubTotal();
+            tmp = money(tmp).add(money(d.getSubTotal())).doubleValue();
         }
 
         return tmp;
@@ -1376,7 +1379,7 @@ public class CashSummeryController implements Serializable {
     public double getOpdHospitalTotal() {
         double tmp = 0.0;
         for (CategoryWithItem d : getDailyCash2()) {
-            tmp += d.getSubHosTotal();
+            tmp = money(tmp).add(money(d.getSubHosTotal())).doubleValue();
         }
 
         return tmp;
@@ -1385,7 +1388,7 @@ public class CashSummeryController implements Serializable {
     public double getDepartmentTotal() {
         double tmp = 0.0;
         for (DailyCash d : getDailyCash()) {
-            tmp += d.getDepartmentTotal();
+            tmp = money(tmp).add(money(d.getDepartmentTotal())).doubleValue();
         }
 
         return tmp;
@@ -1481,6 +1484,22 @@ public class CashSummeryController implements Serializable {
 
     public void setPharmacyTotal(double pharmacyTotal) {
         this.pharmacyTotal = pharmacyTotal;
+    }
+
+
+    /**
+     * Null-safe conversion of an amount to a money-scale {@link BigDecimal}
+     * (money-precision migration, #12437).
+     *
+     * <p>The accumulations in this controller add through BigDecimal at each
+     * step rather than keeping a BigDecimal accumulator, which keeps the change
+     * local and reviewable. It is equivalent for money: every addend and the
+     * running total are normalised to 4 decimal places, and
+     * {@link java.math.BigDecimal#valueOf(double)} round-trips that decimal form
+     * exactly, so no drift accumulates.
+     */
+    private static BigDecimal money(Double value) {
+        return value == null ? BigDecimal.ZERO : BigDecimalUtil.money(BigDecimal.valueOf(value));
     }
 
 }

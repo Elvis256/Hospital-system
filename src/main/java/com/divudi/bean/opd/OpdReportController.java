@@ -53,6 +53,9 @@ import com.divudi.core.entity.lab.Investigation;
 import com.divudi.core.facade.DrawerFacade;
 import com.divudi.core.facade.PaymentFacade;
 import com.divudi.core.util.CommonFunctions;
+import com.divudi.core.util.BigDecimalUtil;
+import com.divudi.core.util.MoneyRead;
+import java.math.BigDecimal;
 import com.divudi.service.BillService;
 import com.divudi.service.StockHistoryService;
 import com.divudi.core.data.dto.LabDailySummaryDTO;
@@ -443,16 +446,24 @@ public class OpdReportController implements Serializable {
         // Execute the query
         bills = getBillFacade().findByJpql(jpql.toString(), params, TemporalType.TIMESTAMP);
 
+        // Migrated reads + BigDecimal accumulation (#12437). The accumulators are
+        // also reset here: they are controller fields that were never cleared, so
+        // repeating a search kept adding to the previous search's totals.
+        BigDecimal grossAcc = BigDecimal.ZERO;
+        BigDecimal netAcc = BigDecimal.ZERO;
+        BigDecimal discountAcc = BigDecimal.ZERO;
         if (bills != null) {
             for (Bill bill : bills) {
                 if (bill != null) {
-                    total += bill.getTotal();
-                    netTotal += bill.getNetTotal();
-                    discount += bill.getDiscount();
+                    grossAcc = grossAcc.add(MoneyRead.grossTotal(bill));
+                    netAcc = netAcc.add(MoneyRead.netTotal(bill));
+                    discountAcc = discountAcc.add(MoneyRead.discount(bill));
                 }
             }
         }
-
+        total = grossAcc.doubleValue();
+        netTotal = netAcc.doubleValue();
+        discount = discountAcc.doubleValue();
     }
 
     public void resetAllFiltersExceptDateRange() {
@@ -711,47 +722,54 @@ public class OpdReportController implements Serializable {
             IncomeRow dayRow = new IncomeRow();
             dayRow.setDate(day);  // Set the date for the row
 
-            // Initialize daily totals
-            double dailyCash = 0;
-            double dailyCard = 0;
-            double dailyCredit = 0;
-            double dailyDiscount = 0;
-            double dailyNetTotal = 0;
+            // Initialize daily totals. Accumulated in BigDecimal (#12437) so a
+            // day's takings do not compound float error across its bills. These
+            // are BillItemDTO values projected from the legacy double columns, so
+            // there is no migrated amount to prefer here yet - migrating the DTO
+            // projection itself (coalesce to the *FinanceDetails columns) is a
+            // later step.
+            BigDecimal dailyCash = BigDecimal.ZERO;
+            BigDecimal dailyCard = BigDecimal.ZERO;
+            BigDecimal dailyCredit = BigDecimal.ZERO;
+            BigDecimal dailyDiscount = BigDecimal.ZERO;
+            BigDecimal dailyNetTotal = BigDecimal.ZERO;
 
             // Calculate totals for each payment method
             for (BillItemDTO bi : dailyBills) {
+                BigDecimal billNet = money(bi.getBillNetTotal());
                 if (bi.getPaymentMethod() == null) {
-                    dailyCredit += bi.getBillNetTotal();
+                    dailyCredit = dailyCredit.add(billNet);
                 } else {
                     switch (bi.getPaymentMethod()) {
                         case Card:
-                            dailyCard += bi.getBillNetTotal();
+                            dailyCard = dailyCard.add(billNet);
                             break;
                         case Cash:
-                            dailyCash += bi.getBillNetTotal();
+                            dailyCash = dailyCash.add(billNet);
                             break;
                         case Credit:
-                            dailyCredit += bi.getBillNetTotal();
+                            dailyCredit = dailyCredit.add(billNet);
                             break;
                         case MultiplePaymentMethods:
                             Bill bill = billFacade.find(bi.getId());
                             Bill batchBill = bill.getBackwardReferenceBill();
-                            analyzeMultiplePayments(dayRow, batchBill, dailyCard, dailyCash, dailyCredit);
+                            analyzeMultiplePayments(dayRow, batchBill, dailyCard.doubleValue(),
+                                    dailyCash.doubleValue(), dailyCredit.doubleValue());
                             break;
                     }
                 }
 
                 // Sum discounts and net totals
-                dailyDiscount += bi.getDiscount() != null ? bi.getDiscount() : 0;
-                dailyNetTotal += bi.getBillNetTotal() != null ? bi.getBillNetTotal() : 0;
+                dailyDiscount = dailyDiscount.add(money(bi.getDiscount()));
+                dailyNetTotal = dailyNetTotal.add(billNet);
             }
 
             // Set the calculated values
-            dayRow.setCashValue(dailyCash);
-            dayRow.setCardValue(dailyCard);
-            dayRow.setCreditValue(dailyCredit);
-            dayRow.setDiscount(dailyDiscount);
-            dayRow.setNetTotal(dailyNetTotal);
+            dayRow.setCashValue(dailyCash.doubleValue());
+            dayRow.setCardValue(dailyCard.doubleValue());
+            dayRow.setCreditValue(dailyCredit.doubleValue());
+            dayRow.setDiscount(dailyDiscount.doubleValue());
+            dayRow.setNetTotal(dailyNetTotal.doubleValue());
 
             bundle.getRows().add(dayRow);
         }
@@ -761,32 +779,43 @@ public class OpdReportController implements Serializable {
         return bundle;
     }
 
-    public void populateSummaryRow() {
-        // Initialize all sums to zero
-        double sumOfCashValues = 0.0;
-        double sumOfCardValues = 0.0;
-        double sumOfCreditValues = 0.0;
+    /**
+     * Null-safe conversion of a nullable report {@code Double} to a money-scale
+     * {@link BigDecimal} (#12437). Null reads as zero, which also removes the
+     * latent unboxing NPE the {@code +=} accumulations had on null amounts.
+     */
+    private static BigDecimal money(Double value) {
+        return value == null ? BigDecimal.ZERO : BigDecimalUtil.money(BigDecimal.valueOf(value));
+    }
 
-        double sumOfDiscount = 0.0;
-        double sumOfNetTotal = 0.0;
+    public void populateSummaryRow() {
+        // Initialize all sums to zero. Accumulated in BigDecimal (#12437): this
+        // is the grand total over every row, so it is where drift would show up
+        // most.
+        BigDecimal sumOfCashValues = BigDecimal.ZERO;
+        BigDecimal sumOfCardValues = BigDecimal.ZERO;
+        BigDecimal sumOfCreditValues = BigDecimal.ZERO;
+
+        BigDecimal sumOfDiscount = BigDecimal.ZERO;
+        BigDecimal sumOfNetTotal = BigDecimal.ZERO;
 
         // Aggregate all rows
         for (IncomeRow r : bundle.getRows()) {
-            sumOfCashValues += r.getCashValue();
-            sumOfCardValues += r.getCardValue();
-            sumOfCreditValues += r.getCreditValue();
-            sumOfDiscount += r.getDiscount();
-            sumOfNetTotal += r.getNetTotal();
+            sumOfCashValues = sumOfCashValues.add(money(r.getCashValue()));
+            sumOfCardValues = sumOfCardValues.add(money(r.getCardValue()));
+            sumOfCreditValues = sumOfCreditValues.add(money(r.getCreditValue()));
+            sumOfDiscount = sumOfDiscount.add(money(r.getDiscount()));
+            sumOfNetTotal = sumOfNetTotal.add(money(r.getNetTotal()));
         }
 
         IncomeRow summaryRow = new IncomeRow();
         // Set summary row values
-        summaryRow.setCashValue(sumOfCashValues);
-        summaryRow.setCardValue(sumOfCardValues);
-        summaryRow.setCreditValue(sumOfCreditValues);
+        summaryRow.setCashValue(sumOfCashValues.doubleValue());
+        summaryRow.setCardValue(sumOfCardValues.doubleValue());
+        summaryRow.setCreditValue(sumOfCreditValues.doubleValue());
 
-        summaryRow.setDiscount(sumOfDiscount);
-        summaryRow.setNetTotal(sumOfNetTotal);
+        summaryRow.setDiscount(sumOfDiscount.doubleValue());
+        summaryRow.setNetTotal(sumOfNetTotal.doubleValue());
 
         bundle.setSummaryRow(summaryRow);
     }
@@ -1038,6 +1067,27 @@ public class OpdReportController implements Serializable {
         for (Bill b : bills) {
             billItems.addAll(billBean.fillBillItems(b));
         }
+
+        // Money-precision migration (#12437), step 4 - reporting cutover.
+        // Net totals and discounts are read through MoneyRead (migrated
+        // BigDecimal where available, legacy double otherwise) and accumulated
+        // in BigDecimal, so the running totals no longer compound binary
+        // floating-point error across a long list of items.
+        //
+        // Deltas are accumulated rather than the row being written each
+        // iteration, because processMultiplePaymentBill() adds to the same row
+        // mid-loop; adding our delta once at the end is order-independent.
+        // marginValue keeps the legacy double path - it has no migrated
+        // counterpart yet, so there is nothing to read.
+        BigDecimal cashDelta = BigDecimal.ZERO;
+        BigDecimal cardDelta = BigDecimal.ZERO;
+        BigDecimal creditDelta = BigDecimal.ZERO;
+        BigDecimal totalDelta = BigDecimal.ZERO;
+        BigDecimal discountDelta = BigDecimal.ZERO;
+        double serviceChargeDelta = 0.0;
+        long long1Delta = 0L;
+        long long3Delta = 0L;
+
         for (BillItem bi : billItems) {
             if (!(bi.getItem() instanceof Investigation)) {
                 continue;
@@ -1045,30 +1095,32 @@ public class OpdReportController implements Serializable {
             if (null == bi.getBill().getPaymentMethod()) {
                 continue;
             } else {
+                BigDecimal net = MoneyRead.netTotal(bi);
+                BigDecimal dis = MoneyRead.discount(bi);
                 switch (bi.getBill().getPaymentMethod()) {
                     case Cash:
-                        row.setCashValue(row.getCashValue() + bi.getNetValue());
-                        row.setTotal(row.getTotal() + bi.getNetValue());
-                        row.setDiscount(row.getDiscount() + bi.getDiscount());
-                        row.setServiceCharge(row.getServiceCharge() + bi.getMarginValue());
+                        cashDelta = cashDelta.add(net);
+                        totalDelta = totalDelta.add(net);
+                        discountDelta = discountDelta.add(dis);
+                        serviceChargeDelta += bi.getMarginValue();
                         break;
                     case Card:
-                        row.setCardValue(row.getCardValue() + bi.getNetValue());
-                        row.setTotal(row.getTotal() + bi.getNetValue());
-                        row.setDiscount(row.getDiscount() + bi.getDiscount());
-                        row.setServiceCharge(row.getServiceCharge() + bi.getMarginValue());
+                        cardDelta = cardDelta.add(net);
+                        totalDelta = totalDelta.add(net);
+                        discountDelta = discountDelta.add(dis);
+                        serviceChargeDelta += bi.getMarginValue();
                         break;
                     case Credit:
-                        row.setCreditValue(row.getCreditValue() + bi.getNetValue());
-                        row.setTotal(row.getTotal() + bi.getNetValue());
-                        row.setDiscount(row.getDiscount() + bi.getDiscount());
-                        row.setServiceCharge(row.getServiceCharge() + bi.getMarginValue());
+                        creditDelta = creditDelta.add(net);
+                        totalDelta = totalDelta.add(net);
+                        discountDelta = discountDelta.add(dis);
+                        serviceChargeDelta += bi.getMarginValue();
                         break;
                     case OnlineSettlement:
-                        row.setLong1(row.getLong1() + Math.round(bi.getNetValue()));
-                        row.setTotal(row.getTotal() + bi.getNetValue());
-                        row.setDiscount(row.getDiscount() + bi.getDiscount());
-                        row.setServiceCharge(row.getServiceCharge() + bi.getMarginValue());
+                        long1Delta += Math.round(net.doubleValue());
+                        totalDelta = totalDelta.add(net);
+                        discountDelta = discountDelta.add(dis);
+                        serviceChargeDelta += bi.getMarginValue();
                         break;
                     case MultiplePaymentMethods:
                         if (!processedMultipleBills.contains(bi.getBill())) {
@@ -1077,14 +1129,23 @@ public class OpdReportController implements Serializable {
                         }
                         break;
                     default:
-                        row.setLong3(row.getLong3() + Math.round(bi.getNetValue()));
-                        row.setTotal(row.getTotal() + bi.getNetValue());
-                        row.setDiscount(row.getDiscount() + bi.getDiscount());
-                        row.setServiceCharge(row.getServiceCharge() + bi.getMarginValue());
+                        long3Delta += Math.round(net.doubleValue());
+                        totalDelta = totalDelta.add(net);
+                        discountDelta = discountDelta.add(dis);
+                        serviceChargeDelta += bi.getMarginValue();
                         break;
                 }
             }
         }
+
+        row.setCashValue(row.getCashValue() + cashDelta.doubleValue());
+        row.setCardValue(row.getCardValue() + cardDelta.doubleValue());
+        row.setCreditValue(row.getCreditValue() + creditDelta.doubleValue());
+        row.setTotal(row.getTotal() + totalDelta.doubleValue());
+        row.setDiscount(row.getDiscount() + discountDelta.doubleValue());
+        row.setServiceCharge(row.getServiceCharge() + serviceChargeDelta);
+        row.setLong1(row.getLong1() + long1Delta);
+        row.setLong3(row.getLong3() + long3Delta);
         return row;
     }
 
@@ -1093,19 +1154,41 @@ public class OpdReportController implements Serializable {
         for (Bill b : bills) {
             billItems.addAll(billBean.fillBillItems(b));
         }
+        // Migrated reads + BigDecimal accumulation, as in genarateRowBundle (#12437).
+        BigDecimal totalDelta = BigDecimal.ZERO;
+        BigDecimal discountDelta = BigDecimal.ZERO;
+        double serviceChargeDelta = 0.0;
+        long long2Delta = 0L;
+
         for (BillItem bi : billItems) {
             if (!(bi.getItem() instanceof Investigation)) {
                 continue;
             }
-            row.setLong2(row.getLong2() + Math.round(bi.getNetValue()));
-            row.setTotal(row.getTotal() + bi.getNetValue());
-            row.setDiscount(row.getDiscount() + bi.getDiscount());
-            row.setServiceCharge(row.getServiceCharge() + bi.getMarginValue());
+            BigDecimal net = MoneyRead.netTotal(bi);
+            long2Delta += Math.round(net.doubleValue());
+            totalDelta = totalDelta.add(net);
+            discountDelta = discountDelta.add(MoneyRead.discount(bi));
+            serviceChargeDelta += bi.getMarginValue();
         }
+
+        row.setLong2(row.getLong2() + long2Delta);
+        row.setTotal(row.getTotal() + totalDelta.doubleValue());
+        row.setDiscount(row.getDiscount() + discountDelta.doubleValue());
+        row.setServiceCharge(row.getServiceCharge() + serviceChargeDelta);
         return row;
     }
 
     public ReportTemplateRow genarateRowBundleOther(List<Bill> bills, ReportTemplateRow row) {
+        // Payment has no companion *FinanceDetails yet, so MoneyRead.paidValue is
+        // a conversion rather than a migrated read (#12437). The gain here is
+        // BigDecimal accumulation - no compounding float error across payments.
+        BigDecimal cashDelta = BigDecimal.ZERO;
+        BigDecimal cardDelta = BigDecimal.ZERO;
+        BigDecimal creditDelta = BigDecimal.ZERO;
+        BigDecimal totalDelta = BigDecimal.ZERO;
+        long long1Delta = 0L;
+        long long3Delta = 0L;
+
         for (Bill b : bills) {
             List<Payment> payments = new ArrayList<>();
             payments = billService.fetchBillPayments(b);
@@ -1113,35 +1196,52 @@ public class OpdReportController implements Serializable {
                 if (null == p.getPaymentMethod()) {
                     continue;
                 } else {
+                    BigDecimal paid = MoneyRead.paidValue(p);
                     switch (p.getPaymentMethod()) {
                         case Cash:
-                            row.setCashValue(row.getCashValue() + p.getPaidValue());
-                            row.setTotal(row.getTotal() + p.getPaidValue());
+                            cashDelta = cashDelta.add(paid);
+                            totalDelta = totalDelta.add(paid);
                             break;
                         case Card:
-                            row.setCardValue(row.getCardValue() + p.getPaidValue());
-                            row.setTotal(row.getTotal() + p.getPaidValue());
+                            cardDelta = cardDelta.add(paid);
+                            totalDelta = totalDelta.add(paid);
                             break;
                         case Credit:
-                            row.setCreditValue(row.getCreditValue() + p.getPaidValue());
-                            row.setTotal(row.getTotal() + p.getPaidValue());
+                            creditDelta = creditDelta.add(paid);
+                            totalDelta = totalDelta.add(paid);
                             break;
                         case OnlineSettlement:
-                            row.setLong1(row.getLong1() + Math.round(p.getPaidValue()));
-                            row.setTotal(row.getTotal() + p.getPaidValue());
+                            long1Delta += Math.round(paid.doubleValue());
+                            totalDelta = totalDelta.add(paid);
                             break;
                         default:
-                            row.setLong3(row.getLong3() + Math.round(p.getPaidValue()));
-                            row.setTotal(row.getTotal() + p.getPaidValue());
+                            long3Delta += Math.round(paid.doubleValue());
+                            totalDelta = totalDelta.add(paid);
                             break;
                     }
                 }
             }
         }
+
+        row.setCashValue(row.getCashValue() + cashDelta.doubleValue());
+        row.setCardValue(row.getCardValue() + cardDelta.doubleValue());
+        row.setCreditValue(row.getCreditValue() + creditDelta.doubleValue());
+        row.setTotal(row.getTotal() + totalDelta.doubleValue());
+        row.setLong1(row.getLong1() + long1Delta);
+        row.setLong3(row.getLong3() + long3Delta);
         return row;
     }
 
     public IncomeRow genarateDeductionRowBundleOther(List<Bill> bills, IncomeRow row) {
+        // As genarateRowBundleOther: BigDecimal accumulation over Payment amounts,
+        // which have no migrated counterpart yet (#12437).
+        BigDecimal cashDelta = BigDecimal.ZERO;
+        BigDecimal cardDelta = BigDecimal.ZERO;
+        BigDecimal creditDelta = BigDecimal.ZERO;
+        BigDecimal netTotalDelta = BigDecimal.ZERO;
+        long long1Delta = 0L;
+        long long3Delta = 0L;
+
         for (Bill b : bills) {
             List<Payment> payments = new ArrayList<>();
             payments = billService.fetchBillPayments(b);
@@ -1149,31 +1249,39 @@ public class OpdReportController implements Serializable {
                 if (null == p.getPaymentMethod()) {
                     continue;
                 } else {
+                    BigDecimal paid = MoneyRead.paidValue(p);
                     switch (p.getPaymentMethod()) {
                         case Cash:
-                            row.setCashValue(row.getCashValue() + p.getPaidValue());
-                            row.setNetTotal(row.getNetTotal() + p.getPaidValue());
+                            cashDelta = cashDelta.add(paid);
+                            netTotalDelta = netTotalDelta.add(paid);
                             break;
                         case Card:
-                            row.setCardValue(row.getCardValue() + p.getPaidValue());
-                            row.setNetTotal(row.getNetTotal() + p.getPaidValue());
+                            cardDelta = cardDelta.add(paid);
+                            netTotalDelta = netTotalDelta.add(paid);
                             break;
                         case Credit:
-                            row.setCreditValue(row.getCreditValue() + p.getPaidValue());
-                            row.setNetTotal(row.getNetTotal() + p.getPaidValue());
+                            creditDelta = creditDelta.add(paid);
+                            netTotalDelta = netTotalDelta.add(paid);
                             break;
                         case OnlineSettlement:
-                            row.setLong1(row.getLong1() + Math.round(p.getPaidValue()));
-                            row.setNetTotal(row.getNetTotal() + p.getPaidValue());
+                            long1Delta += Math.round(paid.doubleValue());
+                            netTotalDelta = netTotalDelta.add(paid);
                             break;
                         default:
-                            row.setLong3(row.getLong3() + Math.round(p.getPaidValue()));
-                            row.setNetTotal(row.getNetTotal() + p.getPaidValue());
+                            long3Delta += Math.round(paid.doubleValue());
+                            netTotalDelta = netTotalDelta.add(paid);
                             break;
                     }
                 }
             }
         }
+
+        row.setCashValue(row.getCashValue() + cashDelta.doubleValue());
+        row.setCardValue(row.getCardValue() + cardDelta.doubleValue());
+        row.setCreditValue(row.getCreditValue() + creditDelta.doubleValue());
+        row.setNetTotal(row.getNetTotal() + netTotalDelta.doubleValue());
+        row.setLong1(row.getLong1() + long1Delta);
+        row.setLong3(row.getLong3() + long3Delta);
         return row;
     }
 
@@ -1184,36 +1292,52 @@ public class OpdReportController implements Serializable {
         }
         payments = billService.fetchBillPayments(bill);
 
+        // BigDecimal accumulation, matching genarateRowBundleOther (#12437).
+        BigDecimal cashDelta = BigDecimal.ZERO;
+        BigDecimal cardDelta = BigDecimal.ZERO;
+        BigDecimal creditDelta = BigDecimal.ZERO;
+        BigDecimal totalDelta = BigDecimal.ZERO;
+        long long1Delta = 0L;
+        long long3Delta = 0L;
+
         if (!payments.isEmpty()) {
             for (Payment p : payments) {
                 if (null == p.getPaymentMethod()) {
                     continue;
                 } else {
+                    BigDecimal paid = MoneyRead.paidValue(p);
                     switch (p.getPaymentMethod()) {
                         case Cash:
-                            row.setCashValue(row.getCashValue() + p.getPaidValue());
-                            row.setTotal(row.getTotal() + p.getPaidValue());
+                            cashDelta = cashDelta.add(paid);
+                            totalDelta = totalDelta.add(paid);
                             break;
                         case Card:
-                            row.setCardValue(row.getCardValue() + p.getPaidValue());
-                            row.setTotal(row.getTotal() + p.getPaidValue());
+                            cardDelta = cardDelta.add(paid);
+                            totalDelta = totalDelta.add(paid);
                             break;
                         case Credit:
-                            row.setCreditValue(row.getCreditValue() + p.getPaidValue());
-                            row.setTotal(row.getTotal() + p.getPaidValue());
+                            creditDelta = creditDelta.add(paid);
+                            totalDelta = totalDelta.add(paid);
                             break;
                         case OnlineSettlement:
-                            row.setLong1(row.getLong1() + Math.round(p.getPaidValue()));
-                            row.setTotal(row.getTotal() + p.getPaidValue());
+                            long1Delta += Math.round(paid.doubleValue());
+                            totalDelta = totalDelta.add(paid);
                             break;
                         default:
-                            row.setLong3(row.getLong3() + Math.round(p.getPaidValue()));
-                            row.setTotal(row.getTotal() + p.getPaidValue());
+                            long3Delta += Math.round(paid.doubleValue());
+                            totalDelta = totalDelta.add(paid);
                             break;
                     }
                 }
             }
         }
+
+        row.setCashValue(row.getCashValue() + cashDelta.doubleValue());
+        row.setCardValue(row.getCardValue() + cardDelta.doubleValue());
+        row.setCreditValue(row.getCreditValue() + creditDelta.doubleValue());
+        row.setTotal(row.getTotal() + totalDelta.doubleValue());
+        row.setLong1(row.getLong1() + long1Delta);
+        row.setLong3(row.getLong3() + long3Delta);
     }
 
     private void processMultiplePaymentBill(Bill bill, IncomeRow row) {
@@ -1223,36 +1347,52 @@ public class OpdReportController implements Serializable {
         }
         payments = billService.fetchBillPayments(bill);
 
+        // BigDecimal accumulation, matching genarateDeductionRowBundleOther (#12437).
+        BigDecimal cashDelta = BigDecimal.ZERO;
+        BigDecimal cardDelta = BigDecimal.ZERO;
+        BigDecimal creditDelta = BigDecimal.ZERO;
+        BigDecimal netTotalDelta = BigDecimal.ZERO;
+        long long1Delta = 0L;
+        long long3Delta = 0L;
+
         if (!payments.isEmpty()) {
             for (Payment p : payments) {
                 if (null == p.getPaymentMethod()) {
                     continue;
                 } else {
+                    BigDecimal paid = MoneyRead.paidValue(p);
                     switch (p.getPaymentMethod()) {
                         case Cash:
-                            row.setCashValue(row.getCashValue() + p.getPaidValue());
-                            row.setNetTotal(row.getNetTotal() + p.getPaidValue());
+                            cashDelta = cashDelta.add(paid);
+                            netTotalDelta = netTotalDelta.add(paid);
                             break;
                         case Card:
-                            row.setCardValue(row.getCardValue() + p.getPaidValue());
-                            row.setNetTotal(row.getNetTotal() + p.getPaidValue());
+                            cardDelta = cardDelta.add(paid);
+                            netTotalDelta = netTotalDelta.add(paid);
                             break;
                         case Credit:
-                            row.setCreditValue(row.getCreditValue() + p.getPaidValue());
-                            row.setNetTotal(row.getNetTotal() + p.getPaidValue());
+                            creditDelta = creditDelta.add(paid);
+                            netTotalDelta = netTotalDelta.add(paid);
                             break;
                         case OnlineSettlement:
-                            row.setLong1(row.getLong1() + Math.round(p.getPaidValue()));
-                            row.setNetTotal(row.getNetTotal() + p.getPaidValue());
+                            long1Delta += Math.round(paid.doubleValue());
+                            netTotalDelta = netTotalDelta.add(paid);
                             break;
                         default:
-                            row.setLong3(row.getLong3() + Math.round(p.getPaidValue()));
-                            row.setNetTotal(row.getNetTotal() + p.getPaidValue());
+                            long3Delta += Math.round(paid.doubleValue());
+                            netTotalDelta = netTotalDelta.add(paid);
                             break;
                     }
                 }
             }
         }
+
+        row.setCashValue(row.getCashValue() + cashDelta.doubleValue());
+        row.setCardValue(row.getCardValue() + cardDelta.doubleValue());
+        row.setCreditValue(row.getCreditValue() + creditDelta.doubleValue());
+        row.setNetTotal(row.getNetTotal() + netTotalDelta.doubleValue());
+        row.setLong1(row.getLong1() + long1Delta);
+        row.setLong3(row.getLong3() + long3Delta);
     }
 
     public void initializeRows(ReportTemplateRow row) {

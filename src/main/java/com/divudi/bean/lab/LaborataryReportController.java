@@ -72,6 +72,9 @@ import java.util.stream.Collectors;
 import javax.ejb.EJB;
 import javax.inject.Inject;
 import javax.inject.Named;
+import com.divudi.core.util.BigDecimalUtil;
+import com.divudi.core.util.MoneyRead;
+import java.math.BigDecimal;
 import javax.persistence.TemporalType;
 import org.primefaces.model.StreamedContent;
 import org.primefaces.model.file.UploadedFile;
@@ -657,6 +660,18 @@ public class LaborataryReportController implements Serializable {
         totalDiscount = 0.0;
         totalServiceCharge = 0.0;
 
+        // Money-precision migration (#12437). Net totals and bill discounts are
+        // read through MoneyRead (migrated BigDecimal where available, legacy
+        // double otherwise); the fee breakdown has no migrated counterpart yet,
+        // so those are converted rather than read. Everything accumulates in
+        // BigDecimal so a long bill list does not compound float error.
+        BigDecimal hospitalFeeAcc = BigDecimal.ZERO;
+        BigDecimal reagentFeeAcc = BigDecimal.ZERO;
+        BigDecimal otherFeeAcc = BigDecimal.ZERO;
+        BigDecimal netTotalAcc = BigDecimal.ZERO;
+        BigDecimal discountAcc = BigDecimal.ZERO;
+        BigDecimal serviceChargeAcc = BigDecimal.ZERO;
+
         for (Bill bill : fetchedBills) {
             IncomeRow billIncomeRow = new IncomeRow(bill);
             bundle.getRows().add(billIncomeRow);
@@ -667,19 +682,29 @@ public class LaborataryReportController implements Serializable {
                     IncomeRow billItemIncomeRow = new IncomeRow(billItem);
                     bundle.getRows().add(billItemIncomeRow);
                     checkInInvestigationBillItem = true;
-                    totalHospitalFee += (billItem.getHospitalFee() - billItem.getReagentFee() - billItem.getOtherFee());
-                    totalReagentFee += billItem.getReagentFee();
-                    totalOtherFee += billItem.getOtherFee();
-                    totalNetTotal += billItem.getNetValue();
+                    BigDecimal reagent = money(billItem.getReagentFee());
+                    BigDecimal other = money(billItem.getOtherFee());
+                    hospitalFeeAcc = hospitalFeeAcc
+                            .add(money(billItem.getHospitalFee()).subtract(reagent).subtract(other));
+                    reagentFeeAcc = reagentFeeAcc.add(reagent);
+                    otherFeeAcc = otherFeeAcc.add(other);
+                    netTotalAcc = netTotalAcc.add(MoneyRead.netTotal(billItem));
                 }
             }
             if (checkInInvestigationBillItem == true) {
-                totalDiscount += bill.getDiscount();
-                totalServiceCharge += bill.getServiceCharge();
+                discountAcc = discountAcc.add(MoneyRead.discount(bill));
+                serviceChargeAcc = serviceChargeAcc.add(money(bill.getServiceCharge()));
             } else {
                 bundle.getRows().remove(billIncomeRow);
             }
         }
+
+        totalHospitalFee = hospitalFeeAcc.doubleValue();
+        totalReagentFee = reagentFeeAcc.doubleValue();
+        totalOtherFee = otherFeeAcc.doubleValue();
+        totalNetTotal = netTotalAcc.doubleValue();
+        totalDiscount = discountAcc.doubleValue();
+        totalServiceCharge = serviceChargeAcc.doubleValue();
     }
 
     public void processLaboratorySummary() {
@@ -826,21 +851,45 @@ public class LaborataryReportController implements Serializable {
         totalDiscount = 0.0;
         totalNetHosFee = 0.0;
 
+        // BigDecimal accumulation (#12437). These are report aggregates already
+        // summed by JPQL from the legacy columns, so there is no migrated value
+        // to prefer - the gain is that the cross-row totals no longer drift.
+        // totalCount stays a plain count, not money.
+        BigDecimal hosFeeAcc = BigDecimal.ZERO;
+        BigDecimal ccFeeAcc = BigDecimal.ZERO;
+        BigDecimal proFeeAcc = BigDecimal.ZERO;
+        BigDecimal reagentFeeAcc = BigDecimal.ZERO;
+        BigDecimal additionalFeeAcc = BigDecimal.ZERO;
+        BigDecimal netTotalAcc = BigDecimal.ZERO;
+        BigDecimal discountAcc = BigDecimal.ZERO;
+        BigDecimal netHosFeeAcc = BigDecimal.ZERO;
+
         for (TestWiseCountReport twc : tempTestWiseCounts) {
             if (twc.getCount() > 0.0) {
                 testWiseCount.add(twc);
 
+                BigDecimal hosFee = money(twc.getHosFee());
+                BigDecimal discount = money(twc.getDiscount());
                 totalCount += twc.getCount();
-                totalHosFee += (twc.getHosFee());
-                totalCCFee += twc.getCcFee();
-                totalProFee += twc.getProFee();
-                totalReagentFee += twc.getReagentFee();
-                totalAdditionalFee += twc.getOtherFee();
-                totalNetTotal += twc.getTotal();
-                totalDiscount += twc.getDiscount();
-                totalNetHosFee += twc.getHosFee() - twc.getDiscount();
+                hosFeeAcc = hosFeeAcc.add(hosFee);
+                ccFeeAcc = ccFeeAcc.add(money(twc.getCcFee()));
+                proFeeAcc = proFeeAcc.add(money(twc.getProFee()));
+                reagentFeeAcc = reagentFeeAcc.add(money(twc.getReagentFee()));
+                additionalFeeAcc = additionalFeeAcc.add(money(twc.getOtherFee()));
+                netTotalAcc = netTotalAcc.add(money(twc.getTotal()));
+                discountAcc = discountAcc.add(discount);
+                netHosFeeAcc = netHosFeeAcc.add(hosFee.subtract(discount));
             }
         }
+
+        totalHosFee = hosFeeAcc.doubleValue();
+        totalCCFee = ccFeeAcc.doubleValue();
+        totalProFee = proFeeAcc.doubleValue();
+        totalReagentFee = reagentFeeAcc.doubleValue();
+        totalAdditionalFee = additionalFeeAcc.doubleValue();
+        totalNetTotal = netTotalAcc.doubleValue();
+        totalDiscount = discountAcc.doubleValue();
+        totalNetHosFee = netHosFeeAcc.doubleValue();
 
         testWiseCounts = alphabetList(testWiseCount);
 
@@ -905,19 +954,40 @@ public class LaborataryReportController implements Serializable {
         totalDiscount = 0.0;
         totalNetHosFee = 0.0;
 
+        // BigDecimal accumulation (#12437), as in the non-DTO variant above.
+        BigDecimal hosFeeAcc = BigDecimal.ZERO;
+        BigDecimal ccFeeAcc = BigDecimal.ZERO;
+        BigDecimal proFeeAcc = BigDecimal.ZERO;
+        BigDecimal reagentFeeAcc = BigDecimal.ZERO;
+        BigDecimal additionalFeeAcc = BigDecimal.ZERO;
+        BigDecimal netTotalAcc = BigDecimal.ZERO;
+        BigDecimal discountAcc = BigDecimal.ZERO;
+        BigDecimal netHosFeeAcc = BigDecimal.ZERO;
+
         if (testWiseCountDtos != null) {
             for (TestCountDTO dto : testWiseCountDtos) {
+                BigDecimal hosFee = money(dto.getHosFee());
+                BigDecimal discount = money(dto.getDiscount());
                 totalCount += dto.getCount();
-                totalHosFee += dto.getHosFee();
-                totalCCFee += dto.getCcFee();
-                totalProFee += dto.getProFee();
-                totalReagentFee += dto.getReagentFee();
-                totalAdditionalFee += dto.getOtherFee();
-                totalNetTotal += dto.getTotal();
-                totalDiscount += dto.getDiscount();
-                totalNetHosFee += dto.getHosFee() - dto.getDiscount();
+                hosFeeAcc = hosFeeAcc.add(hosFee);
+                ccFeeAcc = ccFeeAcc.add(money(dto.getCcFee()));
+                proFeeAcc = proFeeAcc.add(money(dto.getProFee()));
+                reagentFeeAcc = reagentFeeAcc.add(money(dto.getReagentFee()));
+                additionalFeeAcc = additionalFeeAcc.add(money(dto.getOtherFee()));
+                netTotalAcc = netTotalAcc.add(money(dto.getTotal()));
+                discountAcc = discountAcc.add(discount);
+                netHosFeeAcc = netHosFeeAcc.add(hosFee.subtract(discount));
             }
         }
+
+        totalHosFee = hosFeeAcc.doubleValue();
+        totalCCFee = ccFeeAcc.doubleValue();
+        totalProFee = proFeeAcc.doubleValue();
+        totalReagentFee = reagentFeeAcc.doubleValue();
+        totalAdditionalFee = additionalFeeAcc.doubleValue();
+        totalNetTotal = netTotalAcc.doubleValue();
+        totalDiscount = discountAcc.doubleValue();
+        totalNetHosFee = netHosFeeAcc.doubleValue();
     }
 
     public void processLabTestWiseReagentCostReportDto() {
@@ -1694,42 +1764,64 @@ public class LaborataryReportController implements Serializable {
         return otherbillTypeAtomics;
     }
 
+    /**
+     * Null-safe conversion of a report amount to a money-scale
+     * {@link BigDecimal} (#12437). Null reads as zero, which also removes the
+     * latent unboxing NPE the {@code +=} accumulations had on null amounts.
+     */
+    private static BigDecimal money(Double value) {
+        return value == null ? BigDecimal.ZERO : BigDecimalUtil.money(BigDecimal.valueOf(value));
+    }
+
     private void calculateTotalsFromRows(List<? extends Object> rows, boolean isAddition) {
-        double cashValue = 0.0;
-        double cardValue = 0.0;
-        double onlineSettlementValue = 0.0;
-        double creditValue = 0.0;
-        double inwardCreditValue = 0.0;
-        double otherValue = 0.0;
-        double totalValue = 0.0;
-        double discountValue = 0.0;
-        double serviceChargeValue = 0.0;
+        // Grand totals across every row, accumulated in BigDecimal (#12437) -
+        // this is where drift is most visible. The rows are already-computed
+        // report values, so there is no migrated source to prefer here.
+        BigDecimal cashAcc = BigDecimal.ZERO;
+        BigDecimal cardAcc = BigDecimal.ZERO;
+        BigDecimal onlineSettlementAcc = BigDecimal.ZERO;
+        BigDecimal creditAcc = BigDecimal.ZERO;
+        BigDecimal inwardCreditAcc = BigDecimal.ZERO;
+        BigDecimal otherAcc = BigDecimal.ZERO;
+        BigDecimal totalAcc = BigDecimal.ZERO;
+        BigDecimal discountAcc = BigDecimal.ZERO;
+        BigDecimal serviceChargeAcc = BigDecimal.ZERO;
 
         for (Object row : rows) {
             if (row instanceof ReportTemplateRow) {
                 ReportTemplateRow rtr = (ReportTemplateRow) row;
-                cashValue += rtr.getCashValue();
-                cardValue += rtr.getCardValue();
-                onlineSettlementValue += rtr.getOnlineSettlementValue();
-                creditValue += rtr.getCreditValue();
-                inwardCreditValue += rtr.getInpatientTotal();
-                otherValue += rtr.getOtherIncomeValue();
-                totalValue += rtr.getTotal();
-                discountValue += rtr.getDiscount();
-                serviceChargeValue += rtr.getServiceCharge();
+                cashAcc = cashAcc.add(money(rtr.getCashValue()));
+                cardAcc = cardAcc.add(money(rtr.getCardValue()));
+                onlineSettlementAcc = onlineSettlementAcc.add(money(rtr.getOnlineSettlementValue()));
+                creditAcc = creditAcc.add(money(rtr.getCreditValue()));
+                inwardCreditAcc = inwardCreditAcc.add(money(rtr.getInpatientTotal()));
+                otherAcc = otherAcc.add(money(rtr.getOtherIncomeValue()));
+                totalAcc = totalAcc.add(money(rtr.getTotal()));
+                discountAcc = discountAcc.add(money(rtr.getDiscount()));
+                serviceChargeAcc = serviceChargeAcc.add(money(rtr.getServiceCharge()));
             } else if (row instanceof IncomeRow) {
                 IncomeRow ir = (IncomeRow) row;
-                cashValue += ir.getCashValue();
-                cardValue += ir.getCardValue();
-                onlineSettlementValue += ir.getOnlineSettlementValue();
-                creditValue += ir.getCreditValue();
-                inwardCreditValue += ir.getInpatientCreditValue();
-                otherValue += ir.getOtherValue();
-                totalValue += ir.getNetTotal();
-                discountValue += ir.getDiscount();
-                serviceChargeValue += ir.getServiceCharge();
+                cashAcc = cashAcc.add(money(ir.getCashValue()));
+                cardAcc = cardAcc.add(money(ir.getCardValue()));
+                onlineSettlementAcc = onlineSettlementAcc.add(money(ir.getOnlineSettlementValue()));
+                creditAcc = creditAcc.add(money(ir.getCreditValue()));
+                inwardCreditAcc = inwardCreditAcc.add(money(ir.getInpatientCreditValue()));
+                otherAcc = otherAcc.add(money(ir.getOtherValue()));
+                totalAcc = totalAcc.add(money(ir.getNetTotal()));
+                discountAcc = discountAcc.add(money(ir.getDiscount()));
+                serviceChargeAcc = serviceChargeAcc.add(money(ir.getServiceCharge()));
             }
         }
+
+        double cashValue = cashAcc.doubleValue();
+        double cardValue = cardAcc.doubleValue();
+        double onlineSettlementValue = onlineSettlementAcc.doubleValue();
+        double creditValue = creditAcc.doubleValue();
+        double inwardCreditValue = inwardCreditAcc.doubleValue();
+        double otherValue = otherAcc.doubleValue();
+        double totalValue = totalAcc.doubleValue();
+        double discountValue = discountAcc.doubleValue();
+        double serviceChargeValue = serviceChargeAcc.doubleValue();
 
         if (isAddition) {
             totalAdditionCashValue = cashValue;

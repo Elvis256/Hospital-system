@@ -31,6 +31,7 @@ import java.util.Objects;
 import java.util.Set;
 import javax.annotation.PostConstruct;
 import javax.ejb.EJB;
+import javax.inject.Inject;
 import javax.enterprise.context.SessionScoped;
 import javax.faces.component.UIComponent;
 import javax.faces.context.FacesContext;
@@ -58,6 +59,8 @@ public class UserPrivilageController implements Serializable {
     @EJB
     DepartmentFacade departmentFacade;
     // </editor-fold>
+    @Inject
+    private WebUserController webUserController;
     // <editor-fold defaultstate="collapsed" desc="Class Variables">
     private static final long serialVersionUID = 1L;
     private List<WebUserPrivilege> selectedItems;
@@ -857,6 +860,10 @@ public class UserPrivilageController implements Serializable {
     }
 
     public void saveWebUserPrivileges() {
+        if (!webUserController.hasPrivilege("AdminManagingUsers")) {
+            JsfUtil.addErrorMessage("You have no privilege to manage user privileges. Please contact the system administrator.");
+            return;
+        }
         List<PrivilegeHolder> selectedPrivileges = extractPrivileges(selectedNodes);
 
         // Retire all current web user privileges initially
@@ -945,6 +952,10 @@ public class UserPrivilageController implements Serializable {
 //        return privileges;
 //    }
     public void saveWebUserRolePrivileges() {
+        if (!webUserController.hasPrivilege("AdminManagingUsers")) {
+            JsfUtil.addErrorMessage("You have no privilege to manage role privileges. Please contact the system administrator.");
+            return;
+        }
         List<PrivilegeHolder> selectedPrivileges = extractPrivileges(selectedNodes);
 
         for (WebUserRolePrivilege wup : getCurrentWebUserRolePrivileges()) {

@@ -5,6 +5,7 @@
 package com.divudi.core.util;
 
 import java.math.BigDecimal;
+import java.math.RoundingMode;
 
 /**
  * Utility class for null-safe BigDecimal operations.
@@ -16,7 +17,42 @@ import java.math.BigDecimal;
  * @author Claude AI Assistant
  */
 public class BigDecimalUtil {
-    
+
+    /** Standard scale for monetary amounts (4 decimal places), matching DECIMAL(18,4). */
+    public static final int MONEY_SCALE = 4;
+
+    /** Standard rounding mode for monetary amounts. */
+    public static final RoundingMode MONEY_ROUNDING = RoundingMode.HALF_UP;
+
+    /**
+     * Normalises a monetary value to the standard scale and rounding.
+     * Null is treated as zero.
+     *
+     * @param value the value (may be null)
+     * @return the value at scale {@value #MONEY_SCALE}, rounded HALF_UP
+     */
+    public static BigDecimal money(BigDecimal value) {
+        return (value == null ? BigDecimal.ZERO : value).setScale(MONEY_SCALE, MONEY_ROUNDING);
+    }
+
+    /**
+     * Null-safe division at the money scale. A null or zero divisor yields zero
+     * instead of throwing, and the quotient is rounded HALF_UP to
+     * {@value #MONEY_SCALE} decimals (plain BigDecimal.divide throws on a
+     * non-terminating quotient such as 10/3).
+     *
+     * @param a the dividend (null treated as zero)
+     * @param b the divisor
+     * @return a / b at the money scale, or zero if b is null or zero
+     */
+    public static BigDecimal divide(BigDecimal a, BigDecimal b) {
+        BigDecimal dividend = a == null ? BigDecimal.ZERO : a;
+        if (b == null || b.compareTo(BigDecimal.ZERO) == 0) {
+            return BigDecimal.ZERO.setScale(MONEY_SCALE, MONEY_ROUNDING);
+        }
+        return dividend.divide(b, MONEY_SCALE, MONEY_ROUNDING);
+    }
+
     /**
      * Returns the BigDecimal value or BigDecimal.ZERO if the value is null.
      * This is the primary method for converting nullable BigDecimal values

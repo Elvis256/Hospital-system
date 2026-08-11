@@ -1260,6 +1260,10 @@ public class StaffSalaryController implements Serializable {
     }
 
     public void deleteAll() {
+        if (!getSessionController().getWebUserController().hasPrivilege("HrAdmin")) {
+            JsfUtil.addErrorMessage("You have no privilege to delete salaries. Please contact the system administrator.");
+            return;
+        }
         if (items == null) {
             return;
         }
@@ -1591,6 +1595,10 @@ public class StaffSalaryController implements Serializable {
     }
 
     public void generate() {
+        if (!getSessionController().getWebUserController().hasPrivilege("HrGenerateSalary")) {
+            JsfUtil.addErrorMessage("You have no privilege to generate salaries. Please contact the system administrator.");
+            return;
+        }
         if (getStaffController().getSelectedList() == null) {
             return;
         }
@@ -1945,6 +1953,10 @@ public class StaffSalaryController implements Serializable {
     }
 
     public void saveSalary() {
+        if (!getSessionController().getWebUserController().hasPrivilege("HrGenerateSalary")) {
+            JsfUtil.addErrorMessage("You have no privilege to save salaries. Please contact the system administrator.");
+            return;
+        }
         if (getStaffController().getSelectedList() == null) {
             return;
         }

@@ -236,7 +236,7 @@ public class DesignComponentController implements Serializable {
     public List<DesignComponent> completeDesignComponents(String query) {
         String jpql = "SELECT d FROM DesignComponent d WHERE "
                 + " d.retired=false"
-                + "and LOWER(d.name) LIKE :query";
+                + " and LOWER(d.name) LIKE :query";
         Map<String, Object> params = new HashMap<>();
         params.put("query", "%" + query.toLowerCase() + "%");
         return facade.findByJpql(jpql, params);

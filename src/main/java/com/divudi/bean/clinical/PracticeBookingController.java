@@ -470,12 +470,13 @@ public class PracticeBookingController implements Serializable {
             suggestions = new ArrayList<Staff>();
         } else {
             if (getSpeciality() != null) {
-                sql = "select p from Staff p where p.retired=false and ((p.person.name) like '%" + query.toUpperCase() + "%'or  (p.code) like '%" + query.toUpperCase() + "%' ) and p.speciality.id = " + getSpeciality().getId() + " order by p.person.name";
+                sql = "select p from Staff p where p.retired=false and ((p.person.name) like :ser or  (p.code) like :ser ) and p.speciality.id = " + getSpeciality().getId() + " order by p.person.name";
             } else {
-                sql = "select p from Staff p where p.retired=false and ((p.person.name) like '%" + query.toUpperCase() + "%'or  (p.code) like '%" + query.toUpperCase() + "%' ) order by p.person.name";
+                sql = "select p from Staff p where p.retired=false and ((p.person.name) like :ser or  (p.code) like :ser ) order by p.person.name";
             }
-            //////// // System.out.println(sql);
-            suggestions = getStaffFacade().findByJpql(sql);
+            Map staffSearchParams = new HashMap();
+            staffSearchParams.put("ser", "%" + query.toUpperCase() + "%");
+            suggestions = getStaffFacade().findByJpql(sql, staffSearchParams);
         }
         return suggestions;
     }

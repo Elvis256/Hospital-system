@@ -872,6 +872,7 @@ public class InwardSearch implements Serializable {
 
             if (dbl < getBill().getNetTotal()) {
                 JsfUtil.addErrorMessage("This Bht has No Enough Vallue To Cancel");
+                return;
             }
 
 //            if (getBill().getPatientEncounter().isPaymentFinalized()) {
@@ -929,6 +930,7 @@ public class InwardSearch implements Serializable {
 
             if (dbl < getBill().getNetTotal()) {
                 JsfUtil.addErrorMessage("This Bht has No Enough Vallue To Cancel");
+                return;
             }
 
 //            if (getBill().getPatientEncounter().isPaymentFinalized()) {
@@ -1118,7 +1120,7 @@ public class InwardSearch implements Serializable {
 
             long dayCount = CommonFunctions.getDayCount(getBill().getCreatedAt(), new Date());
             boolean disableTimeLimit = configOptionApplicationController.getBooleanValueByKey("Disable Time Limit on Provisional Bill Cancellation", false);
-            boolean hasPrivilege = true;
+            boolean hasPrivilege = getWebUserController().hasPrivilege("InwardFinalBillCancel");
 
             // Skip time check if both conditions are true: time limit is disabled AND user has privilege
             if (!disableTimeLimit && Math.abs(dayCount) > 3 && !hasPrivilege) {

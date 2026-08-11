@@ -187,7 +187,7 @@ public class Fhir {
                 + " from Patient p "
                 + " where p.phn=:phn";
         Map m = new HashMap();
-        m.put("phn", m);
+        m.put("phn", phn);
         return patientFacade.findFirstByJpql(jpql, m);
 
     }

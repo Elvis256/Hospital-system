@@ -1249,6 +1249,17 @@ public class CollectingCentreBillController implements Serializable, ControllerW
         return true;
     }
 
+    /**
+     * Available balance for a collecting centre = current balance plus its
+     * (positive) credit limit. When the centre is already over its limit the
+     * balance is negative, so the result is correctly negative and the caller
+     * blocks further billing. A previous outer Math.abs() masked this and let
+     * over-limit centres keep billing.
+     */
+    static double availableCollectingCentreBalance(double balance, double maxCreditLimit) {
+        return balance + Math.abs(maxCreditLimit);
+    }
+
     private boolean errorCheck() {
         if (getPatient().getPerson().getName() == null
                 || getPatient().getPerson().getName().trim().equals("")
@@ -1279,7 +1290,7 @@ public class CollectingCentreBillController implements Serializable, ControllerW
                 feeTotalExceptCcfs += bf.getFeeValue();
             }
         }
-        double awailableBalance = Math.abs(collectingCentre.getBallance() + Math.abs(collectingCentre.getMaxCreditLimit()));
+        double awailableBalance = availableCollectingCentreBalance(collectingCentre.getBallance(), collectingCentre.getMaxCreditLimit());
         if (collectingCentreBillingRequiresCreditBalanceManagement) {
             if (awailableBalance < Math.abs(feeTotalExceptCcfs)) {
                 JsfUtil.addErrorMessage("Collecting Centre Balance is Not Enough");

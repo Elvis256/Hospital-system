@@ -3019,6 +3019,22 @@ public class Bill implements Serializable, RetirableEntity {
         return m;
     }
 
+    /**
+     * The finance details as they are, without creating one.
+     *
+     * <p>{@link #getBillFinanceDetails()} lazily instantiates and attaches a new
+     * {@code BillFinanceDetails} when none exists, which is what write paths
+     * want but is unsafe for readers: on a managed bill the new instance is
+     * cascade-persisted on flush, so merely reading would write an empty row.
+     * Read paths (reports, reconciliation) must use this instead and handle
+     * {@code null}.
+     *
+     * @return the finance details, or null if this bill has none
+     */
+    public BillFinanceDetails peekBillFinanceDetails() {
+        return billFinanceDetails;
+    }
+
     public BillFinanceDetails getBillFinanceDetails() {
         if (billFinanceDetails == null) {
             billFinanceDetails = new BillFinanceDetails();

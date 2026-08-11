@@ -749,7 +749,8 @@ public class CreditCompanyBillSearch implements Serializable {
                     bills = getBillFacade().findByJpql(sql, temMap, TemporalType.TIMESTAMP, 100);
 
                 } else {
-                    sql = "select b from BilledBill b where b.retired=false and b.billType=:type and b.createdAt between :fromDate and :toDate and ((b.staff.person.name) like '%" + txtSearch.toUpperCase() + "%'  or (b.staff.person.phone) like '%" + txtSearch.toUpperCase() + "%'  or (b.insId) like '%" + txtSearch.toUpperCase() + "%') order by b.id desc  ";
+                    sql = "select b from BilledBill b where b.retired=false and b.billType=:type and b.createdAt between :fromDate and :toDate and ((b.staff.person.name) like :ser  or (b.staff.person.phone) like :ser  or (b.insId) like :ser) order by b.id desc  ";
+                    temMap.put("ser", "%" + txtSearch.toUpperCase() + "%");
                     temMap.put("toDate", getToDate());
                     temMap.put("fromDate", getFromDate());
                     temMap.put("type", BillType.PaymentBill);

@@ -45,6 +45,8 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 import javax.ejb.EJB;
+import com.divudi.core.util.MoneyRead;
+import java.math.BigDecimal;
 import javax.inject.Inject;
 import javax.persistence.TemporalType;
 
@@ -575,7 +577,7 @@ public class QuickBookReportController implements Serializable {
             qbf.setName("");
             qbf.setInvItemType("");
             qbf.setInvItem("");
-            qbf.setAmount(b.getNetTotal());
+            qbf.setAmount(MoneyRead.netTotal(b).doubleValue());
 //            qbf.setAmount(0 - b.getTotal());
             qbf.setDocNum(b.getInvoiceNumber());
             qbf.setPoNum(b.getDeptId());
@@ -593,14 +595,13 @@ public class QuickBookReportController implements Serializable {
             qbf.setCustFld3("");
             qbf.setCustFld4("");
             qbf.setCustFld5("");
-            grantTot += b.getNetTotal();
+            grantTot = quickBookGrandTotal(b, true);
 //            grantTot += b.getTotal();
             qbfs.add(qbf);
             System.out.println("b.getBillExpenses().size() = " + b.getBillExpenses().size());
             for (BillItem bi : b.getBillExpenses()) {
                 System.err.println("expensess");
-                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", bi.getNetValue(), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
-                grantTot += bi.getNetValue();
+                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", MoneyRead.netTotal(bi).doubleValue(), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
                 qbfs.add(qbf);
             }
             if (b.getPaymentMethod() == PaymentMethod.Cash) {
@@ -635,7 +636,7 @@ public class QuickBookReportController implements Serializable {
             qbf.setName("");
             qbf.setInvItemType("");
             qbf.setInvItem("");
-            qbf.setAmount(b.getNetTotal());
+            qbf.setAmount(MoneyRead.netTotal(b).doubleValue());
 //            qbf.setAmount(0 - b.getTotal());
             qbf.setDocNum(b.getInvoiceNumber());
             qbf.setPoNum(b.getDeptId());
@@ -651,14 +652,13 @@ public class QuickBookReportController implements Serializable {
             qbf.setCustFld3("");
             qbf.setCustFld4("");
             qbf.setCustFld5("");
-            grantTot += b.getNetTotal();
+            grantTot = quickBookGrandTotal(b, true);
 //            grantTot += b.getTotal();
             qbfs.add(qbf);
             System.out.println("b.getBillExpenses().size() = " + b.getBillExpenses().size());
             for (BillItem bi : b.getBillExpenses()) {
                 System.err.println("expensess");
-                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", bi.getNetValue(), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
-                grantTot += bi.getNetValue();
+                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", MoneyRead.netTotal(bi).doubleValue(), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
                 qbfs.add(qbf);
             }
             if (b.getPaymentMethod() == PaymentMethod.Cash) {
@@ -694,7 +694,7 @@ public class QuickBookReportController implements Serializable {
             qbf.setName("");
             qbf.setInvItemType("");
             qbf.setInvItem("");
-            qbf.setAmount(0 - b.getNetTotal());
+            qbf.setAmount(MoneyRead.netTotal(b).negate().doubleValue());
 //            qbf.setAmount(0 - b.getTotal());
             qbf.setDocNum(b.getInvoiceNumber());
             qbf.setPoNum(b.getDeptId());
@@ -711,14 +711,13 @@ public class QuickBookReportController implements Serializable {
             qbf.setCustFld3("");
             qbf.setCustFld4("");
             qbf.setCustFld5("");
-            grantTot += b.getNetTotal();
+            grantTot = quickBookGrandTotal(b, true);
 //            grantTot += b.getTotal();
             qbfs.add(qbf);
             System.out.println("b.getBillExpenses().size() = " + b.getBillExpenses().size());
             for (BillItem bi : b.getBillExpenses()) {
                 System.err.println("expensess");
-                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", (0 - bi.getNetValue()), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
-                grantTot += bi.getNetValue();
+                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", MoneyRead.netTotal(bi).negate().doubleValue(), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
                 qbfs.add(qbf);
             }
             if (b.getPaymentMethod() == PaymentMethod.Cash) {
@@ -754,7 +753,7 @@ public class QuickBookReportController implements Serializable {
             qbf.setName("");
             qbf.setInvItemType("");
             qbf.setInvItem("");
-            qbf.setAmount(b.getNetTotal());
+            qbf.setAmount(MoneyRead.netTotal(b).doubleValue());
 //            qbf.setAmount(0 - b.getTotal());
             qbf.setDocNum(b.getInvoiceNumber());
             qbf.setPoNum(b.getDeptId());
@@ -771,14 +770,13 @@ public class QuickBookReportController implements Serializable {
             qbf.setCustFld3("");
             qbf.setCustFld4("");
             qbf.setCustFld5("");
-            grantTot += b.getNetTotal();
+            grantTot = quickBookGrandTotal(b, true);
 //            grantTot += b.getTotal();
             qbfs.add(qbf);
             System.out.println("b.getBillExpenses().size() = " + b.getBillExpenses().size());
             for (BillItem bi : b.getBillExpenses()) {
                 System.err.println("expensess");
-                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", bi.getNetValue(), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
-                grantTot += bi.getNetValue();
+                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", MoneyRead.netTotal(bi).doubleValue(), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
                 qbfs.add(qbf);
             }
             if (b.getPaymentMethod() == PaymentMethod.Cash) {
@@ -843,7 +841,7 @@ public class QuickBookReportController implements Serializable {
             qbf.setName("");
             qbf.setInvItemType("");
             qbf.setInvItem("");
-            qbf.setAmount(0 - b.getTotal());
+            qbf.setAmount(MoneyRead.grossTotal(b).negate().doubleValue());
             qbf.setDocNum(b.getDeptId());
 //            qbf.setDocNum(b.getInvoiceNumber());
             qbf.setPoNum(b.getDeptId());
@@ -858,13 +856,12 @@ public class QuickBookReportController implements Serializable {
             qbf.setCustFld3("");
             qbf.setCustFld4("");
             qbf.setCustFld5("");
-            grantTot += b.getTotal();
+            grantTot = quickBookGrandTotal(b, false);
             qbfs.add(qbf);
             System.out.println("b.getBillExpenses().size() = " + b.getBillExpenses().size());
             for (BillItem bi : b.getBillExpenses()) {
                 System.err.println("expensess");
-                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", (0 - bi.getNetValue()), b.getDeptId(), b.getDeptId(), b.getDepartment().getName(), bi.getDescreption(), "", "", "", "", "");
-                grantTot += bi.getNetValue();
+                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", MoneyRead.netTotal(bi).negate().doubleValue(), b.getDeptId(), b.getDeptId(), b.getDepartment().getName(), bi.getDescreption(), "", "", "", "", "");
                 qbfs.add(qbf);
             }
             if (b.getPaymentMethod() == PaymentMethod.Cash) {
@@ -899,7 +896,7 @@ public class QuickBookReportController implements Serializable {
             qbf.setName("");
             qbf.setInvItemType("");
             qbf.setInvItem("");
-            qbf.setAmount(0 - b.getTotal());
+            qbf.setAmount(MoneyRead.grossTotal(b).negate().doubleValue());
             qbf.setDocNum(b.getDeptId());
 //            qbf.setDocNum(b.getInvoiceNumber());
             qbf.setPoNum(b.getDeptId());
@@ -914,13 +911,12 @@ public class QuickBookReportController implements Serializable {
             qbf.setCustFld3("");
             qbf.setCustFld4("");
             qbf.setCustFld5("");
-            grantTot += b.getTotal();
+            grantTot = quickBookGrandTotal(b, false);
             qbfs.add(qbf);
             System.out.println("b.getBillExpenses().size() = " + b.getBillExpenses().size());
             for (BillItem bi : b.getBillExpenses()) {
                 System.err.println("expensess");
-                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", (0 - bi.getNetValue()), b.getDeptId(), b.getDeptId(), b.getDepartment().getName(), bi.getDescreption(), "", "", "", "", "");
-                grantTot += bi.getNetValue();
+                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", MoneyRead.netTotal(bi).negate().doubleValue(), b.getDeptId(), b.getDeptId(), b.getDepartment().getName(), bi.getDescreption(), "", "", "", "", "");
                 qbfs.add(qbf);
             }
             if (b.getPaymentMethod() == PaymentMethod.Cash) {
@@ -956,7 +952,7 @@ public class QuickBookReportController implements Serializable {
             qbf.setName("");
             qbf.setInvItemType("");
             qbf.setInvItem("");
-            qbf.setAmount(0 - b.getTotal());
+            qbf.setAmount(MoneyRead.grossTotal(b).negate().doubleValue());
             qbf.setDocNum(b.getDeptId());
 //            qbf.setDocNum(b.getInvoiceNumber());
             qbf.setPoNum(b.getDeptId());
@@ -971,13 +967,12 @@ public class QuickBookReportController implements Serializable {
             qbf.setCustFld3("");
             qbf.setCustFld4("");
             qbf.setCustFld5("");
-            grantTot += b.getTotal();
+            grantTot = quickBookGrandTotal(b, false);
             qbfs.add(qbf);
             System.out.println("b.getBillExpenses().size() = " + b.getBillExpenses().size());
             for (BillItem bi : b.getBillExpenses()) {
                 System.err.println("expensess");
-                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", (0 - bi.getNetValue()), b.getDeptId(), b.getDeptId(), b.getDepartment().getName(), bi.getDescreption(), "", "", "", "", "");
-                grantTot += bi.getNetValue();
+                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", MoneyRead.netTotal(bi).negate().doubleValue(), b.getDeptId(), b.getDeptId(), b.getDepartment().getName(), bi.getDescreption(), "", "", "", "", "");
                 qbfs.add(qbf);
             }
             if (b.getPaymentMethod() == PaymentMethod.Cash) {
@@ -1013,7 +1008,7 @@ public class QuickBookReportController implements Serializable {
             qbf.setName("");
             qbf.setInvItemType("");
             qbf.setInvItem("");
-            qbf.setAmount(0 - b.getTotal());
+            qbf.setAmount(MoneyRead.grossTotal(b).negate().doubleValue());
             qbf.setDocNum(b.getDeptId());
 //            qbf.setDocNum(b.getInvoiceNumber());
             qbf.setPoNum(b.getDeptId());
@@ -1030,13 +1025,12 @@ public class QuickBookReportController implements Serializable {
             qbf.setCustFld3("");
             qbf.setCustFld4("");
             qbf.setCustFld5("");
-            grantTot += b.getTotal();
+            grantTot = quickBookGrandTotal(b, false);
             qbfs.add(qbf);
             System.out.println("b.getBillExpenses().size() = " + b.getBillExpenses().size());
             for (BillItem bi : b.getBillExpenses()) {
                 System.err.println("expensess");
-                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", (0 - bi.getNetValue()), b.getDeptId(), b.getDeptId(), b.getDepartment().getName(), bi.getDescreption(), "", "", "", "", "");
-                grantTot += bi.getNetValue();
+                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", MoneyRead.netTotal(bi).negate().doubleValue(), b.getDeptId(), b.getDeptId(), b.getDepartment().getName(), bi.getDescreption(), "", "", "", "", "");
                 qbfs.add(qbf);
             }
             if (b.getPaymentMethod() == PaymentMethod.Cash) {
@@ -1102,7 +1096,7 @@ public class QuickBookReportController implements Serializable {
             qbf.setName("");
             qbf.setInvItemType("");
             qbf.setInvItem("");
-            qbf.setAmount(0 - b.getNetTotal());
+            qbf.setAmount(MoneyRead.netTotal(b).negate().doubleValue());
 //            qbf.setAmount(0 - b.getTotal());
             qbf.setDocNum(b.getInvoiceNumber());
             qbf.setPoNum(b.getDeptId());
@@ -1120,14 +1114,13 @@ public class QuickBookReportController implements Serializable {
             qbf.setCustFld3("");
             qbf.setCustFld4("");
             qbf.setCustFld5("");
-            grantTot += b.getNetTotal();
+            grantTot = quickBookGrandTotal(b, true);
 //            grantTot += b.getTotal();
             qbfs.add(qbf);
             System.out.println("b.getBillExpenses().size() = " + b.getBillExpenses().size());
             for (BillItem bi : b.getBillExpenses()) {
                 System.err.println("expensess");
-                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", (0 - bi.getNetValue()), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
-                grantTot += bi.getNetValue();
+                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", MoneyRead.netTotal(bi).negate().doubleValue(), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
                 qbfs.add(qbf);
             }
             if (b.getPaymentMethod() == PaymentMethod.Cash) {
@@ -1162,7 +1155,7 @@ public class QuickBookReportController implements Serializable {
             qbf.setName("");
             qbf.setInvItemType("");
             qbf.setInvItem("");
-            qbf.setAmount(b.getNetTotal());
+            qbf.setAmount(MoneyRead.netTotal(b).doubleValue());
 //            qbf.setAmount(0 - b.getTotal());
             qbf.setDocNum(b.getInvoiceNumber());
             qbf.setPoNum(b.getDeptId());
@@ -1178,14 +1171,13 @@ public class QuickBookReportController implements Serializable {
             qbf.setCustFld3("");
             qbf.setCustFld4("");
             qbf.setCustFld5("");
-            grantTot += b.getNetTotal();
+            grantTot = quickBookGrandTotal(b, true);
 //            grantTot += b.getTotal();
             qbfs.add(qbf);
             System.out.println("b.getBillExpenses().size() = " + b.getBillExpenses().size());
             for (BillItem bi : b.getBillExpenses()) {
                 System.err.println("expensess");
-                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", bi.getNetValue(), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
-                grantTot += bi.getNetValue();
+                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", MoneyRead.netTotal(bi).doubleValue(), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
                 qbfs.add(qbf);
             }
             if (b.getPaymentMethod() == PaymentMethod.Cash) {
@@ -1221,7 +1213,7 @@ public class QuickBookReportController implements Serializable {
             qbf.setName("");
             qbf.setInvItemType("");
             qbf.setInvItem("");
-            qbf.setAmount(0 - b.getNetTotal());
+            qbf.setAmount(MoneyRead.netTotal(b).negate().doubleValue());
 //            qbf.setAmount(0 - b.getTotal());
             qbf.setDocNum(b.getInvoiceNumber());
             qbf.setPoNum(b.getDeptId());
@@ -1238,14 +1230,13 @@ public class QuickBookReportController implements Serializable {
             qbf.setCustFld3("");
             qbf.setCustFld4("");
             qbf.setCustFld5("");
-            grantTot += b.getNetTotal();
+            grantTot = quickBookGrandTotal(b, true);
 //            grantTot += b.getTotal();
             qbfs.add(qbf);
             System.out.println("b.getBillExpenses().size() = " + b.getBillExpenses().size());
             for (BillItem bi : b.getBillExpenses()) {
                 System.err.println("expensess");
-                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", (0 - bi.getNetValue()), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
-                grantTot += bi.getNetValue();
+                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", MoneyRead.netTotal(bi).negate().doubleValue(), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
                 qbfs.add(qbf);
             }
             if (b.getPaymentMethod() == PaymentMethod.Cash) {
@@ -1281,7 +1272,7 @@ public class QuickBookReportController implements Serializable {
             qbf.setName("");
             qbf.setInvItemType("");
             qbf.setInvItem("");
-            qbf.setAmount(b.getNetTotal());
+            qbf.setAmount(MoneyRead.netTotal(b).doubleValue());
 //            qbf.setAmount(0 - b.getTotal());
             qbf.setDocNum(b.getInvoiceNumber());
             qbf.setPoNum(b.getDeptId());
@@ -1298,14 +1289,13 @@ public class QuickBookReportController implements Serializable {
             qbf.setCustFld3("");
             qbf.setCustFld4("");
             qbf.setCustFld5("");
-            grantTot += b.getNetTotal();
+            grantTot = quickBookGrandTotal(b, true);
 //            grantTot += b.getTotal();
             qbfs.add(qbf);
             System.out.println("b.getBillExpenses().size() = " + b.getBillExpenses().size());
             for (BillItem bi : b.getBillExpenses()) {
                 System.err.println("expensess");
-                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", bi.getNetValue(), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
-                grantTot += bi.getNetValue();
+                qbf = new QuickBookFormat("SPL", "Bill", sdf.format(b.getCreatedAt()), bi.getItem().getPrintName(), "", "", "", MoneyRead.netTotal(bi).doubleValue(), b.getInvoiceNumber(), b.getDeptId(), bi.getItem().getName(), bi.getDescreption(), "", "", "", "", "");
                 qbfs.add(qbf);
             }
             if (b.getPaymentMethod() == PaymentMethod.Cash) {
@@ -2527,7 +2517,7 @@ public class QuickBookReportController implements Serializable {
             } else {
                 qbf.setName("CREDIT COMPANY:No Name");
             }
-            qbf.setAmount(b.getNetTotal());
+            qbf.setAmount(MoneyRead.netTotal(b).doubleValue());
             qbf.setMemo("Sales");
             qbf.setDocNum(sdf2.format(fromDate));
             qbfs.add(qbf);
@@ -2543,7 +2533,7 @@ public class QuickBookReportController implements Serializable {
             }
             qbf.setInvItemType("SERV");
             qbf.setInvItem("Drugs:Drugs OPD Credit");
-            qbf.setAmount(0 - b.getNetTotal());
+            qbf.setAmount(MoneyRead.netTotal(b).negate().doubleValue());
             qbf.setQbClass(b.getDepartment().getName());
             qbf.setMemo("Drugs");
             qbf.setEditQbClass(false);
@@ -2917,6 +2907,30 @@ public class QuickBookReportController implements Serializable {
 
     public void setQuickBookFormats(List<QuickBookFormat> quickBookFormats) {
         this.quickBookFormats = quickBookFormats;
+    }
+
+    /**
+     * The QuickBooks transaction total for a bill: the bill's own amount plus
+     * every expense line, read through {@link MoneyRead} (migrated BigDecimal
+     * where available, legacy double otherwise) and accumulated in BigDecimal
+     * so a long expense list does not compound floating-point error
+     * (money-precision migration, #12437).
+     *
+     * <p>This replaces twelve near-identical {@code grantTot +=} loops. It is
+     * safe to compute up front because every one of those blocks used the total
+     * only after its expense loop had finished.
+     *
+     * @param b            the bill
+     * @param useNetTotal  true to start from the bill's net total, false for its
+     *                     gross total - the two report styles differ here
+     * @return the transaction total, converted back to double for QuickBookFormat
+     */
+    private double quickBookGrandTotal(Bill b, boolean useNetTotal) {
+        BigDecimal acc = useNetTotal ? MoneyRead.netTotal(b) : MoneyRead.grossTotal(b);
+        for (BillItem bi : b.getBillExpenses()) {
+            acc = acc.add(MoneyRead.netTotal(bi));
+        }
+        return acc.doubleValue();
     }
 
     public double getGrantTot() {

@@ -5,6 +5,7 @@
  */
 package com.divudi.ws.common;
 
+import com.divudi.bean.common.ApiKeyController;
 import com.divudi.bean.common.BillBeanController;
 import com.divudi.bean.common.InstitutionController;
 import com.divudi.bean.common.PatientController;
@@ -53,6 +54,7 @@ import javax.inject.Inject;
 import javax.ws.rs.GET;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
+import javax.ws.rs.QueryParam;
 
 import com.divudi.core.util.CommonFunctions;
 import org.json.JSONArray;
@@ -104,11 +106,21 @@ public class ApiMembership {
     PatientController patientController;
     @Inject
     private BillBeanController billBean;
+    @Inject
+    ApiKeyController apiKeyController;
 
     /**
      * Creates a new instance of ApiInward
      */
     public ApiMembership() {
+    }
+
+    private String unauthorizedJson() {
+        JSONObject o = new JSONObject();
+        o.put("error", "1");
+        o.put("error_code", 401);
+        o.put("error_description", "Unauthorized: a valid API key is required.");
+        return o.toString();
     }
 
     //--Api
@@ -166,7 +178,11 @@ public class ApiMembership {
             @PathParam("dob") String dob,
             @PathParam("address") String address,
             @PathParam("phone") String phone,
-            @PathParam("nic") String nic) {
+            @PathParam("nic") String nic,
+            @QueryParam("key") String key) {
+        if (!apiKeyController.isValidKey(key)) {
+            return unauthorizedJson();
+        }
         JSONObject jSONObjectOut = new JSONObject();
         String json;
 
@@ -328,7 +344,11 @@ public class ApiMembership {
             @PathParam("patient_id") String patient_id,
             @PathParam("bank_id") String bank_id,
             @PathParam("credit_card_ref") String credit_card_ref,
-            @PathParam("memo") String memo) {
+            @PathParam("memo") String memo,
+            @QueryParam("key") String key) {
+        if (!apiKeyController.isValidKey(key)) {
+            return unauthorizedJson();
+        }
         JSONObject jSONObjectOut = new JSONObject();
         try {
             fetchErrorsPay(patient_id, bank_id, credit_card_ref, memo);

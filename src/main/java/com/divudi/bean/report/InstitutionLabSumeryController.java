@@ -126,8 +126,11 @@ public class InstitutionLabSumeryController implements Serializable {
     public void searchAll() {
         String sql;
         if (txtSearch != null) {
-            sql = "select pi from PatientInvestigation pi join pi.investigation i join pi.billItem.bill b join b.patient.person p where ((p.name) like '%" + txtSearch.toUpperCase() + "%' or (b.insId) like '%" + txtSearch.toUpperCase() + "%' or p.phone like '%" + txtSearch + "%' or (i.name) like '%" + txtSearch.toUpperCase() + "%' ) order by pi.id desc";
-            searchedPatientInvestigations = getPiFacade().findByJpql(sql, 50);
+            sql = "select pi from PatientInvestigation pi join pi.investigation i join pi.billItem.bill b join b.patient.person p where ((p.name) like :ser or (b.insId) like :ser or p.phone like :serPhone or (i.name) like :ser ) order by pi.id desc";
+            Map labSearchParams = new HashMap();
+            labSearchParams.put("ser", "%" + txtSearch.toUpperCase() + "%");
+            labSearchParams.put("serPhone", "%" + txtSearch + "%");
+            searchedPatientInvestigations = getPiFacade().findByJpql(sql, labSearchParams, 50);
         } else {
             searchedPatientInvestigations = null;
         }
@@ -1309,10 +1312,11 @@ public class InstitutionLabSumeryController implements Serializable {
         } else {
             String sql = "select pi from PatientInvestigation pi join pi.investigation i "
                     + " join pi.billItem.bill b join b.patient.person p where ((p.name) "
-                    + " like '%" + txtSearch.toUpperCase() + "%' or (b.insId) like '%"
-                    + txtSearch.toUpperCase() + "%' or p.phone like '%" + txtSearch + "%' "
-                    + " or (i.name) like '%" + txtSearch.toUpperCase() + "%' )  "
+                    + " like :ser or (b.insId) like :ser or p.phone like :serPhone "
+                    + " or (i.name) like :ser )  "
                     + " and b.createdAt between :fromDate and :toDate order by pi.id desc";
+            m.put("ser", "%" + txtSearch.toUpperCase() + "%");
+            m.put("serPhone", "%" + txtSearch + "%");
             patientInvestigations = getPiFacade().findByJpql(sql, m, TemporalType.TIMESTAMP);
         }
     }

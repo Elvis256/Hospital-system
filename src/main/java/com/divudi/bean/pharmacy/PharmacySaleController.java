@@ -2192,6 +2192,10 @@ public class PharmacySaleController implements Serializable, ControllerWithPatie
     }
 
     public String settlePreBillAndNavigateToPrint() {
+        if (!getSessionController().getWebUserController().hasPrivilege("PharmacySale")) {
+            JsfUtil.addErrorMessage("You have no privilege to settle pharmacy sales. Please contact the system administrator.");
+            return null;
+        }
         configOptionFacade.flush();
         editingQty = null;
 
@@ -2403,6 +2407,10 @@ public class PharmacySaleController implements Serializable, ControllerWithPatie
 
     @Deprecated // Plse use settlePreBillAndNavigateToPrint
     public void settlePreBill() {
+        if (!getSessionController().getWebUserController().hasPrivilege("PharmacySale")) {
+            JsfUtil.addErrorMessage("You have no privilege to settle pharmacy sales. Please contact the system administrator.");
+            return;
+        }
         configOptionFacade.flush();
         editingQty = null;
 
@@ -2991,6 +2999,10 @@ public class PharmacySaleController implements Serializable, ControllerWithPatie
     }
 
     public void settleBillWithPay() {
+        if (!getSessionController().getWebUserController().hasPrivilege("PharmacySale")) {
+            JsfUtil.addErrorMessage("You have no privilege to settle pharmacy sales. Please contact the system administrator.");
+            return;
+        }
         editingQty = null;
 
         if (billSettlingStarted) {

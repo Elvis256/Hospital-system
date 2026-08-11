@@ -3185,7 +3185,7 @@ public class ItemController implements Serializable {
                     + "ORDER BY c.name";
             parameters.put("ser", Service.class);
             parameters.put("inv", Investigation.class);
-            parameters.put("q", "%" + query.toLowerCase() + "%");
+            parameters.put("qry", "%" + query.toLowerCase() + "%");
             parameters.put("department", department);
             suggestions = getFacade().findByJpql(jpql, parameters, 20);
         }
@@ -3207,7 +3207,7 @@ public class ItemController implements Serializable {
                     + "ORDER BY c.name";
             parameters.put("ser", Service.class);
             parameters.put("inv", Investigation.class);
-            parameters.put("q", "%" + query.toLowerCase() + "%");
+            parameters.put("qry", "%" + query.toLowerCase() + "%");
             parameters.put("ins", institution);
             suggestions = getFacade().findByJpql(jpql, parameters, 20);
         }

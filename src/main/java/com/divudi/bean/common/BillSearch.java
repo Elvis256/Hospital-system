@@ -2895,6 +2895,10 @@ public class BillSearch implements Serializable {
             JsfUtil.addErrorMessage("No Professional Payment Bill to cancel");
             return;
         }
+        if (!getWebUserController().hasPrivilege("PaymentBillCancel")) {
+            JsfUtil.addErrorMessage("You have no privilege to cancel professional payment bills. Please contact the system administrator.");
+            return;
+        }
         if (errorsPresentOnProfessionalPaymentBillCancellation(bill)) {
             return;
         }
@@ -3539,6 +3543,10 @@ public class BillSearch implements Serializable {
             JsfUtil.addErrorMessage("No Bill Selected to Canel");
             return;
         }
+        if (!getWebUserController().hasPrivilege("BillCancel")) {
+            JsfUtil.addErrorMessage("You have no privilege to cancel income bills. Please contact the system administrator.");
+            return;
+        }
         if (bill.getBillTypeAtomic() != BillTypeAtomic.SUPPLEMENTARY_INCOME) {
             JsfUtil.addErrorMessage("Wrong Bill Type.");
             return;
@@ -3657,6 +3665,10 @@ public class BillSearch implements Serializable {
     public void cancelExpenseBill() {
         if (bill == null) {
             JsfUtil.addErrorMessage("No Bill Selected to Canel");
+            return;
+        }
+        if (!getWebUserController().hasPrivilege("BillCancel")) {
+            JsfUtil.addErrorMessage("You have no privilege to cancel expense bills. Please contact the system administrator.");
             return;
         }
         if (bill.getBillTypeAtomic() != BillTypeAtomic.OPERATIONAL_EXPENSES) {

@@ -310,7 +310,7 @@ public class OpticianRepairBillController implements Serializable, ControllerWit
     public String navigateToSearchOpdBills() {
         batchBill = null;
         bills = null;
-        return "/Optician/repair_bill_search?faces-redirect=true";
+        return "/optician/repair_bill_search?faces-redirect=true";
     }
 
     public void fillOpdBillItems() {
@@ -2738,7 +2738,7 @@ public class OpticianRepairBillController implements Serializable, ControllerWit
                 paymentScheme = null;
                 paymentMethod = PaymentMethod.Cash;
                 collectingCentreBillController.setCollectingCentre(null);
-                return "/Optician/repair_bill?faces-redirect=true";
+                return "/optician/repair_bill?faces-redirect=true";
             } else {
                 JsfUtil.addErrorMessage("Start Your Shift First !");
                 return "/cashier/index?faces-redirect=true";
@@ -2750,7 +2750,7 @@ public class OpticianRepairBillController implements Serializable, ControllerWit
             paymentScheme = null;
             paymentMethod = PaymentMethod.Cash;
             collectingCentreBillController.setCollectingCentre(null);
-            return "/Optician/repair_bill?faces-redirect=true";
+            return "/optician/repair_bill?faces-redirect=true";
         }
     }
 
@@ -2766,7 +2766,7 @@ public class OpticianRepairBillController implements Serializable, ControllerWit
                 if (getToken() != null) {
                     setPatient(token.getPatient());
                 }
-                return "/Optician/repair_bill?faces-redirect=true";
+                return "/optician/repair_bill?faces-redirect=true";
             } else {
                 JsfUtil.addErrorMessage("Start Your Shift First !");
                 return "/cashier/index?faces-redirect=true";
@@ -2779,7 +2779,7 @@ public class OpticianRepairBillController implements Serializable, ControllerWit
             if (getToken() != null) {
                 setPatient(token.getPatient());
             }
-            return "/Optician/repair_bill?faces-redirect=true";
+            return "/optician/repair_bill?faces-redirect=true";
         }
     }
 
@@ -2816,11 +2816,11 @@ public class OpticianRepairBillController implements Serializable, ControllerWit
         navigateToNewOpdBill();
         patient = pt;
         paymentScheme = ps;
-        return "/Optician/repair_bill?faces-redirect=true";
+        return "/optician/repair_bill?faces-redirect=true";
     }
 
     public String toOpdBilling() {
-        return "/Optician/repair_bill?faces-redirect=true";
+        return "/optician/repair_bill?faces-redirect=true";
     }
 
     public void prepareNewBillForMember() {

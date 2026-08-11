@@ -227,8 +227,14 @@ public class PatientDepositService {
     }
 
     public void handleOPDBill(Bill b, PatientDeposit pd) {
-        Double beforeBalance = pd.getBalance();
-        Double afterBalance = beforeBalance - Math.abs(b.getNetTotal());
+        Double beforeBalance = pd.getBalance() == null ? 0.0 : pd.getBalance();
+        double required = Math.abs(b.getNetTotal());
+        if (beforeBalance < required) {
+            // Hard block: rolls back the settlement transaction so the deposit
+            // cannot be overdrawn.
+            throw new InsufficientDepositBalanceException(beforeBalance, required);
+        }
+        Double afterBalance = beforeBalance - required;
         pd.setBalance(afterBalance);
         patientDepositFacade.edit(pd);
         JsfUtil.addSuccessMessage("Balance Updated.");
@@ -245,8 +251,14 @@ public class PatientDepositService {
     }
 
     public void handleOutPayment(Payment p, PatientDeposit pd) {
-        Double beforeBalance = pd.getBalance();
-        Double afterBalance = beforeBalance - Math.abs( p.getPaidValue());
+        Double beforeBalance = pd.getBalance() == null ? 0.0 : pd.getBalance();
+        double required = Math.abs(p.getPaidValue());
+        if (beforeBalance < required) {
+            // Hard block: rolls back the settlement transaction so the deposit
+            // cannot be overdrawn.
+            throw new InsufficientDepositBalanceException(beforeBalance, required);
+        }
+        Double afterBalance = beforeBalance - required;
         pd.setBalance(afterBalance);
         patientDepositFacade.edit(pd);
         JsfUtil.addSuccessMessage("Balance Updated.");

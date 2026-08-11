@@ -1444,7 +1444,8 @@ public class SessionController implements Serializable, HttpSessionListener {
         for (WebUser u : allUsers) {
             if ((u.getName()).equalsIgnoreCase(userName)) {
                 boolean passwordIsOk;
-                if (webUserController.isGrantAllPrivilegesToAllUsersForTesting()) {
+                if (webUserController.isGrantAllPrivilegesToAllUsersForTesting()
+                        && configOptionApplicationController.getBooleanValueByKey("Allow Test Login Password Bypass (INSECURE)", false)) {
                     passwordIsOk = true;
                 } else {
                     passwordIsOk = SecurityController.matchPassword(password, u.getWebUserPassword());

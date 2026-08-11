@@ -9,6 +9,8 @@ import com.divudi.bean.common.SearchController;
 import com.divudi.bean.common.SessionController;
 import com.divudi.core.data.*;
 import com.divudi.core.entity.Bill;
+import com.divudi.core.entity.BillFinanceDetails;
+import com.divudi.core.util.BillFinanceProjection;
 import com.divudi.core.entity.Payment;
 import com.divudi.core.facade.BillFacade;
 import com.divudi.core.facade.PaymentFacade;
@@ -2264,6 +2266,10 @@ public class FinancialTransactionController implements Serializable {
     }
 
     public String settleInitialFundBill() {
+        if (!getSessionController().getWebUserController().hasPrivilege("MyFinanacialTransactionManager")) {
+            JsfUtil.addErrorMessage("You have no privilege to perform financial transactions. Please contact the system administrator.");
+            return "";
+        }
         if (currentBill == null) {
             JsfUtil.addErrorMessage("Error");
             return "";
@@ -2311,6 +2317,10 @@ public class FinancialTransactionController implements Serializable {
     }
 
     public String settleIncomeBill() {
+        if (!getSessionController().getWebUserController().hasPrivilege("MyFinanacialTransactionManager")) {
+            JsfUtil.addErrorMessage("You have no privilege to perform financial transactions. Please contact the system administrator.");
+            return "";
+        }
         if (currentBill == null) {
             JsfUtil.addErrorMessage("Error");
             return "";
@@ -2328,6 +2338,11 @@ public class FinancialTransactionController implements Serializable {
         currentBill.setDeptId(deptId);
         currentBill.setInsId(deptId);
         currentBill.setBillClassType(BillClassType.BilledBill);
+        // Populate the BigDecimal finance details alongside the legacy double
+        // totals (money-precision migration #12437); cascade-persisted with the bill.
+        BillFinanceDetails incomeFinanceDetails = BillFinanceProjection.fromBillTotals(currentBill);
+        incomeFinanceDetails.setBill(currentBill);
+        currentBill.setBillFinanceDetails(incomeFinanceDetails);
         billController.save(currentBill);
         for (Payment p : getCurrentBillPayments()) {
             p.setBill(currentBill);
@@ -2342,6 +2357,10 @@ public class FinancialTransactionController implements Serializable {
     }
 
     public String settleExpensesBill() {
+        if (!getSessionController().getWebUserController().hasPrivilege("MyFinanacialTransactionManager")) {
+            JsfUtil.addErrorMessage("You have no privilege to perform financial transactions. Please contact the system administrator.");
+            return "";
+        }
         if (currentBill == null) {
             JsfUtil.addErrorMessage("Error");
             return "";
@@ -2373,6 +2392,10 @@ public class FinancialTransactionController implements Serializable {
     }
 
     public String settleFundTransferBill() {
+        if (!getSessionController().getWebUserController().hasPrivilege("MyFinanacialTransactionManager")) {
+            JsfUtil.addErrorMessage("You have no privilege to perform financial transactions. Please contact the system administrator.");
+            return "";
+        }
         if (floatTransferStarted) {
             JsfUtil.addErrorMessage("Already Started");
             return "";
@@ -2433,6 +2456,10 @@ public class FinancialTransactionController implements Serializable {
     }
 
     public String settleWithdrawalFundBill() {
+        if (!getSessionController().getWebUserController().hasPrivilege("MyFinanacialTransactionManager")) {
+            JsfUtil.addErrorMessage("You have no privilege to perform financial transactions. Please contact the system administrator.");
+            return "";
+        }
         if (currentBill == null) {
             JsfUtil.addErrorMessage("Error");
             return "";

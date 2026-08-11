@@ -620,6 +620,13 @@ public class GrnController implements Serializable {
     }
 
     public void settle() {
+        // Guard against double-submit: a GRN that already carries a generated
+        // bill number (deptId) has been settled, so re-settling it would add the
+        // received quantities to stock a second time.
+        if (getGrnBill() != null && getGrnBill().getDeptId() != null && !getGrnBill().getDeptId().trim().isEmpty()) {
+            JsfUtil.addErrorMessage("This GRN has already been settled.");
+            return;
+        }
         if (Math.abs(difference) > 1) {
             JsfUtil.addErrorMessage("The invoice does not match..! Check again");
             return;

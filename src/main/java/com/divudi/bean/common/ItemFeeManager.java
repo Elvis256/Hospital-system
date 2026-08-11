@@ -811,7 +811,7 @@ public class ItemFeeManager implements Serializable {
             return "";
         }
         fillFees();
-        return "/common/manage_item_fees?faces-redirect=true";
+        return "/admin/pricing/manage_item_fees?faces-redirect=true";
     }
 
     public List<ItemFee> fillFees(Item i) {

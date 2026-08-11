@@ -11,10 +11,13 @@ import java.io.Serializable;
 import javax.enterprise.context.SessionScoped;
 import javax.inject.Named;
 import org.jasypt.util.password.BasicPasswordEncryptor;
+import org.jasypt.util.password.StrongPasswordEncryptor;
 import org.jasypt.util.text.BasicTextEncryptor;
 import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -35,6 +38,33 @@ public class SecurityController implements Serializable {
     private static Map<String, Character> reverseDigitMap = new HashMap<>();
 
     private static final long serialVersionUID = 1L;
+
+    private static final Logger LOGGER = Logger.getLogger(SecurityController.class.getName());
+
+    /**
+     * Secret used to encrypt/decrypt the tokens embedded in public report and
+     * booking links. Resolved once, in order, from the system property
+     * {@code hmis.text.encryption.key} then the environment variable
+     * {@code HMIS_TEXT_ENCRYPTION_KEY}. If neither is configured the legacy
+     * default is used and a warning is logged: without a strong per-deployment
+     * secret these tokens are forgeable and every patient report becomes
+     * enumerable. Set the secret in production.
+     */
+    private static final String TEXT_ENCRYPTION_KEY = resolveTextEncryptionKey();
+
+    private static String resolveTextEncryptionKey() {
+        String k = System.getProperty("hmis.text.encryption.key");
+        if (k == null || k.trim().isEmpty()) {
+            k = System.getenv("HMIS_TEXT_ENCRYPTION_KEY");
+        }
+        if (k == null || k.trim().isEmpty()) {
+            LOGGER.log(Level.WARNING, "No hmis.text.encryption.key (or HMIS_TEXT_ENCRYPTION_KEY) configured; "
+                    + "falling back to an insecure default key for report/booking-link encryption. "
+                    + "Set a strong per-deployment secret in production.");
+            return "health";
+        }
+        return k;
+    }
 
     static {
         // Initialize the digit mapping
@@ -140,7 +170,7 @@ public class SecurityController implements Serializable {
 
     public String encrypt(String word) {
         BasicTextEncryptor en = new BasicTextEncryptor();
-        en.setPassword("health");
+        en.setPassword(TEXT_ENCRYPTION_KEY);
         try {
             return en.encrypt(word);
         } catch (Exception ex) {
@@ -158,27 +188,34 @@ public class SecurityController implements Serializable {
 
     public String hashAndCheck(String word) {
         try {
-            BasicPasswordEncryptor en = new BasicPasswordEncryptor();
-            String encryptedPassword = en.encryptPassword(word);
-            // This check will always return true for a successfully hashed password
-            boolean match = en.checkPassword(word, encryptedPassword);
-            if (match) {
-                return encryptedPassword;
-            } else {
-                return null; // This branch will likely never be executed
-            }
+            // Salted, iterated SHA-256 (jasypt StrongPasswordEncryptor) for new/changed
+            // passwords, replacing the previous unsalted MD5 (BasicPasswordEncryptor).
+            return new StrongPasswordEncryptor().encryptPassword(word);
         } catch (Exception e) {
             return null;
         }
     }
 
     public static boolean matchPassword(String planePassword, String encryptedPassword) {
-        BasicPasswordEncryptor en = new BasicPasswordEncryptor();
-        return en.checkPassword(planePassword, encryptedPassword);
-    }
-
-    public static boolean matchPassword(String planePassword, String encryptedPassword, boolean fake) {
-        return true;
+        if (planePassword == null || encryptedPassword == null) {
+            return false;
+        }
+        // Current scheme: strong (salted, iterated SHA-256) hashes.
+        try {
+            if (new StrongPasswordEncryptor().checkPassword(planePassword, encryptedPassword)) {
+                return true;
+            }
+        } catch (Exception ignore) {
+            // not a strong hash — fall through to the legacy check
+        }
+        // Legacy scheme: old BasicPasswordEncryptor (MD5) hashes, kept so existing
+        // users are not locked out. Their password upgrades to the strong scheme the
+        // next time it is set/changed.
+        try {
+            return new BasicPasswordEncryptor().checkPassword(planePassword, encryptedPassword);
+        } catch (Exception ignore) {
+            return false;
+        }
     }
 
     public String generateRandomKey(int length) {
@@ -194,7 +231,7 @@ public class SecurityController implements Serializable {
 
     public String decrypt(String word) {
         BasicTextEncryptor en = new BasicTextEncryptor();
-        en.setPassword("health");
+        en.setPassword(TEXT_ENCRYPTION_KEY);
         try {
             return en.decrypt(word);
         } catch (Exception ex) {

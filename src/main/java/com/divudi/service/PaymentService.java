@@ -374,14 +374,17 @@ public class PaymentService {
         // Update the credit balance
         // For sales, we add to the balance (company owes more)
         // For refunds, we subtract from the balance (company owes less)
-        double currentBalance = institution.getAllowedCredit();
-        double newBalance = currentBalance + p.getPaidValue();
+        // Atomic increment so concurrent credit bills to the same company do not
+        // lose each other's updates (previously a read-modify-write on allowedCredit
+        // that could silently drop a concurrent transaction's change).
+        Map<String, Object> params = new HashMap<>();
+        params.put("val", p.getPaidValue());
+        params.put("id", institution.getId());
+        institutionFacade.updateByJpql(
+                "UPDATE Institution i SET i.allowedCredit = i.allowedCredit + :val WHERE i.id = :id", params);
 
-        institution.setAllowedCredit(newBalance);
-        institutionFacade.edit(institution);
-
-        LOGGER.log(Level.INFO, "Updated credit company balance. Company: {0}, Previous Balance: {1}, Payment Amount: {2}, New Balance: {3}",
-                new Object[]{institution.getName(), currentBalance, p.getPaidValue(), newBalance});
+        LOGGER.log(Level.INFO, "Incremented credit company balance atomically. Company: {0}, Payment Amount: {1}",
+                new Object[]{institution.getName(), p.getPaidValue()});
     }
 
     private void updateStaffCredit(Payment p) {
