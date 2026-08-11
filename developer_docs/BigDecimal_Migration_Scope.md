@@ -239,12 +239,21 @@ Three distinct cases turn up, and conflating them produces false confidence:
 
 ### Measured remainder
 
-**264 double-accumulation sites across 33 report files** (`+=` on a money
-getter), the largest being `QuickBookReportController` (32),
+Originally **264 double-accumulation sites across 33 report files** (`+=` on a
+money getter). `QuickBookReportController` is now **fully migrated** (0 real
+sites remaining; the 8 that still match are commented-out dead code). 18 remain
+in `OpdReportController`: the dead `analyzeMultiplePayments` arithmetic and the
+report-DTO summations. The largest remaining files are
 `LaborataryReportController` (16), `InwardReportControllerBht` (16),
-`CashSummeryController` (15), `InwardReportController1` (15). 18 remain in
-`OpdReportController` itself: the dead `analyzeMultiplePayments` arithmetic and
-the report-DTO summations.
+`CashSummeryController` and `…Excel` (15 each), `InwardReportController1` (15).
+
+`QuickBookReportController` is worth noting as a pattern: twelve near-identical
+`grantTot +=` loops collapsed into one `quickBookGrandTotal(Bill, boolean)`
+helper. **The per-line amounts had to move with the total.** Migrating only the
+total would let an exported QuickBooks file contain lines that do not sum to its
+own total whenever a migrated value and its legacy double disagree — so
+`setAmount` and the `QuickBookFormat` constructors were switched to `MoneyRead`
+in the same pass.
 
 Each site needs the same three judgements — is there a migrated source, is the
 row mutated mid-loop, does reading create an entity — so this is a
