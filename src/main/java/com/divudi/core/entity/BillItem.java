@@ -1182,6 +1182,22 @@ public class BillItem implements Serializable, RetirableEntity {
         this.reagentFee = reagentFee;
     }
 
+    /**
+     * The finance details as they are, without creating one.
+     *
+     * <p>{@link #getBillItemFinanceDetails()} lazily instantiates and attaches a
+     * new {@code BillItemFinanceDetails} when none exists, which is what write
+     * paths want but is unsafe for readers: on a managed bill item the new
+     * instance is cascade-persisted on flush, so merely reading would write an
+     * empty row. Read paths (reports, reconciliation) must use this instead and
+     * handle {@code null}.
+     *
+     * @return the finance details, or null if this item has none
+     */
+    public BillItemFinanceDetails peekBillItemFinanceDetails() {
+        return billItemFinanceDetails;
+    }
+
     public BillItemFinanceDetails getBillItemFinanceDetails() {
         if (billItemFinanceDetails == null) {
             billItemFinanceDetails = new BillItemFinanceDetails();

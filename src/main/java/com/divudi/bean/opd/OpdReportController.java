@@ -53,6 +53,8 @@ import com.divudi.core.entity.lab.Investigation;
 import com.divudi.core.facade.DrawerFacade;
 import com.divudi.core.facade.PaymentFacade;
 import com.divudi.core.util.CommonFunctions;
+import com.divudi.core.util.MoneyRead;
+import java.math.BigDecimal;
 import com.divudi.service.BillService;
 import com.divudi.service.StockHistoryService;
 import com.divudi.core.data.dto.LabDailySummaryDTO;
@@ -1038,6 +1040,27 @@ public class OpdReportController implements Serializable {
         for (Bill b : bills) {
             billItems.addAll(billBean.fillBillItems(b));
         }
+
+        // Money-precision migration (#12437), step 4 - reporting cutover.
+        // Net totals and discounts are read through MoneyRead (migrated
+        // BigDecimal where available, legacy double otherwise) and accumulated
+        // in BigDecimal, so the running totals no longer compound binary
+        // floating-point error across a long list of items.
+        //
+        // Deltas are accumulated rather than the row being written each
+        // iteration, because processMultiplePaymentBill() adds to the same row
+        // mid-loop; adding our delta once at the end is order-independent.
+        // marginValue keeps the legacy double path - it has no migrated
+        // counterpart yet, so there is nothing to read.
+        BigDecimal cashDelta = BigDecimal.ZERO;
+        BigDecimal cardDelta = BigDecimal.ZERO;
+        BigDecimal creditDelta = BigDecimal.ZERO;
+        BigDecimal totalDelta = BigDecimal.ZERO;
+        BigDecimal discountDelta = BigDecimal.ZERO;
+        double serviceChargeDelta = 0.0;
+        long long1Delta = 0L;
+        long long3Delta = 0L;
+
         for (BillItem bi : billItems) {
             if (!(bi.getItem() instanceof Investigation)) {
                 continue;
@@ -1045,30 +1068,32 @@ public class OpdReportController implements Serializable {
             if (null == bi.getBill().getPaymentMethod()) {
                 continue;
             } else {
+                BigDecimal net = MoneyRead.netTotal(bi);
+                BigDecimal dis = MoneyRead.discount(bi);
                 switch (bi.getBill().getPaymentMethod()) {
                     case Cash:
-                        row.setCashValue(row.getCashValue() + bi.getNetValue());
-                        row.setTotal(row.getTotal() + bi.getNetValue());
-                        row.setDiscount(row.getDiscount() + bi.getDiscount());
-                        row.setServiceCharge(row.getServiceCharge() + bi.getMarginValue());
+                        cashDelta = cashDelta.add(net);
+                        totalDelta = totalDelta.add(net);
+                        discountDelta = discountDelta.add(dis);
+                        serviceChargeDelta += bi.getMarginValue();
                         break;
                     case Card:
-                        row.setCardValue(row.getCardValue() + bi.getNetValue());
-                        row.setTotal(row.getTotal() + bi.getNetValue());
-                        row.setDiscount(row.getDiscount() + bi.getDiscount());
-                        row.setServiceCharge(row.getServiceCharge() + bi.getMarginValue());
+                        cardDelta = cardDelta.add(net);
+                        totalDelta = totalDelta.add(net);
+                        discountDelta = discountDelta.add(dis);
+                        serviceChargeDelta += bi.getMarginValue();
                         break;
                     case Credit:
-                        row.setCreditValue(row.getCreditValue() + bi.getNetValue());
-                        row.setTotal(row.getTotal() + bi.getNetValue());
-                        row.setDiscount(row.getDiscount() + bi.getDiscount());
-                        row.setServiceCharge(row.getServiceCharge() + bi.getMarginValue());
+                        creditDelta = creditDelta.add(net);
+                        totalDelta = totalDelta.add(net);
+                        discountDelta = discountDelta.add(dis);
+                        serviceChargeDelta += bi.getMarginValue();
                         break;
                     case OnlineSettlement:
-                        row.setLong1(row.getLong1() + Math.round(bi.getNetValue()));
-                        row.setTotal(row.getTotal() + bi.getNetValue());
-                        row.setDiscount(row.getDiscount() + bi.getDiscount());
-                        row.setServiceCharge(row.getServiceCharge() + bi.getMarginValue());
+                        long1Delta += Math.round(net.doubleValue());
+                        totalDelta = totalDelta.add(net);
+                        discountDelta = discountDelta.add(dis);
+                        serviceChargeDelta += bi.getMarginValue();
                         break;
                     case MultiplePaymentMethods:
                         if (!processedMultipleBills.contains(bi.getBill())) {
@@ -1077,14 +1102,23 @@ public class OpdReportController implements Serializable {
                         }
                         break;
                     default:
-                        row.setLong3(row.getLong3() + Math.round(bi.getNetValue()));
-                        row.setTotal(row.getTotal() + bi.getNetValue());
-                        row.setDiscount(row.getDiscount() + bi.getDiscount());
-                        row.setServiceCharge(row.getServiceCharge() + bi.getMarginValue());
+                        long3Delta += Math.round(net.doubleValue());
+                        totalDelta = totalDelta.add(net);
+                        discountDelta = discountDelta.add(dis);
+                        serviceChargeDelta += bi.getMarginValue();
                         break;
                 }
             }
         }
+
+        row.setCashValue(row.getCashValue() + cashDelta.doubleValue());
+        row.setCardValue(row.getCardValue() + cardDelta.doubleValue());
+        row.setCreditValue(row.getCreditValue() + creditDelta.doubleValue());
+        row.setTotal(row.getTotal() + totalDelta.doubleValue());
+        row.setDiscount(row.getDiscount() + discountDelta.doubleValue());
+        row.setServiceCharge(row.getServiceCharge() + serviceChargeDelta);
+        row.setLong1(row.getLong1() + long1Delta);
+        row.setLong3(row.getLong3() + long3Delta);
         return row;
     }
 

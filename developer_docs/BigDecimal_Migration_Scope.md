@@ -188,10 +188,37 @@ entity default `1.0000`. Note also that `BILLITEM.BILLITEMFINANCEDETAILS_ID`
 carries **no UNIQUE index** (unlike `BILL.BILLFINANCEDETAILS_ID`), so the database
 will not catch a double-link on its own — the script verifies that itself.
 
-So **steps 1–3 are complete**. The next increment is **step 4, reporting
-cutover**: pick one money report, point it at the `BigDecimal` fields, and keep a
-reconciliation test asserting legacy-vs-BigDecimal parity until it is fully
-switched. Start with a report that needs only bill-level totals and OPD line
-amounts — those are the only migrated amounts so far. Pharmacy, inward, lab and
-channelling still have no line-level write path, so their reports must not be cut
-over yet.
+So **steps 1–3 are complete**.
+
+## Step 4 — reporting cutover (first report done)
+
+`OpdReportController.genarateRowBundle` is the first report cut over. Net totals
+and discounts now come from `MoneyRead` and are accumulated in `BigDecimal`, so
+the running totals no longer compound floating-point error across a long item
+list. Two things the cutover had to get right:
+
+**Read with a fallback, not a straight switch.** `MoneyRead` prefers the migrated
+`*FinanceDetails` value and falls back to the legacy `double` when that row was
+never migrated. A report reading the BigDecimal fields *alone* would silently
+report zero for every pharmacy, inward, lab or channelling row written since the
+backfill ran, because those modules still have no write path. The fallback keeps
+reports correct throughout coexistence and simply stops being reached as each
+module lands.
+
+**Reading must never write.** `Bill.getBillFinanceDetails()` and
+`BillItem.getBillItemFinanceDetails()` *lazily create and attach* a companion
+entity when none exists. On a managed entity, `cascade = ALL` then persists it on
+flush — so a report would write empty rows just by reading. Two non-creating
+accessors, `peekBillFinanceDetails()` and `peekBillItemFinanceDetails()`, were
+added for read paths, and `MoneyRead` uses only those. **Any future read-path
+migration must do the same.**
+
+Note the report's deltas are accumulated and applied once at the end rather than
+written per-iteration, because `processMultiplePaymentBill` mutates the same row
+mid-loop. `marginValue` keeps the legacy `double` path — it has no migrated
+counterpart yet.
+
+**Remaining for step 4:** the rest of the money reports, each with the same
+pattern. `ReportTemplateRow` still stores `double` (and `total`/`discount` are
+nullable `Double`), so the BigDecimal is converted back at that boundary; the row
+DTO itself is a later migration.
