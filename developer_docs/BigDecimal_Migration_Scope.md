@@ -247,10 +247,20 @@ money getter).
 | `QuickBookReportController` | **Done** — 0 real sites (the 8 that still match are commented-out dead code) |
 | `LaborataryReportController` | **Done** — only 3 `totalCount` sites left, which are counts, not money |
 | `OpdReportController` | Mostly done — 18 left: the dead `analyzeMultiplePayments` arithmetic and the report-DTO summations |
+| `CashSummeryController` / `…Excel` | **Done** — 0 sites in either |
 | `InwardReportControllerBht` | 16 |
-| `CashSummeryController` / `…Excel` | 15 each |
 | `InwardReportController1` | 15 |
 | ~26 further files | ~137 |
+
+The two `CashSummery` variants are near-duplicates and were migrated in one pass
+so they could not drift further apart — they already had: the Excel variant was
+missing a `grantTotal += d.getSubHosTotal()` the other had. They also use a
+slightly different style from the other reports: rather than restructuring each
+loop around a `BigDecimal` accumulator, each `+=` became
+`x = money(x).add(money(y)).doubleValue()`. That keeps ~50 edits local and
+reviewable, and is equivalent for money — every addend and running total is
+normalised to 4 decimal places, and `BigDecimal.valueOf(double)` round-trips that
+decimal form exactly, so nothing drifts.
 
 **Not every `+=` is money.** `totalCount` in the lab reports counts tests;
 converting it to a money-scale `BigDecimal` would be wrong. Check what an
