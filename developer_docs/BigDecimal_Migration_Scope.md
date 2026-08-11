@@ -240,12 +240,21 @@ Three distinct cases turn up, and conflating them produces false confidence:
 ### Measured remainder
 
 Originally **264 double-accumulation sites across 33 report files** (`+=` on a
-money getter). `QuickBookReportController` is now **fully migrated** (0 real
-sites remaining; the 8 that still match are commented-out dead code). 18 remain
-in `OpdReportController`: the dead `analyzeMultiplePayments` arithmetic and the
-report-DTO summations. The largest remaining files are
-`LaborataryReportController` (16), `InwardReportControllerBht` (16),
-`CashSummeryController` and `…Excel` (15 each), `InwardReportController1` (15).
+money getter).
+
+| File | Status |
+|---|---|
+| `QuickBookReportController` | **Done** — 0 real sites (the 8 that still match are commented-out dead code) |
+| `LaborataryReportController` | **Done** — only 3 `totalCount` sites left, which are counts, not money |
+| `OpdReportController` | Mostly done — 18 left: the dead `analyzeMultiplePayments` arithmetic and the report-DTO summations |
+| `InwardReportControllerBht` | 16 |
+| `CashSummeryController` / `…Excel` | 15 each |
+| `InwardReportController1` | 15 |
+| ~26 further files | ~137 |
+
+**Not every `+=` is money.** `totalCount` in the lab reports counts tests;
+converting it to a money-scale `BigDecimal` would be wrong. Check what an
+accumulator actually holds before migrating it.
 
 `QuickBookReportController` is worth noting as a pattern: twelve near-identical
 `grantTot +=` loops collapsed into one `quickBookGrandTotal(Bill, boolean)`
