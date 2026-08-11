@@ -179,9 +179,19 @@ Steps 1 and 2 are done (helpers + harness; bill-level write path in cashier
 income-bill settlement; line-level write path in OPD). Step 3 is done at bill
 level.
 
-The next increment is the **item-level backfill** — the counterpart of
-`05_backfill_billfinancedetails_from_double.sql` for `BILLITEMFINANCEDETAILS`,
-now that there is a write path for it to be consistent with. It should mirror
-the same seven fields and, like the write path, leave costing and the
-`line*`/`bill*` split alone. After that, reporting cutover (step 4) can begin,
-starting with reports that only need bill-level and OPD line totals.
+The item-level backfill is now done too —
+`06_backfill_billitemfinancedetails_from_double.sql`, mirroring the same seven
+fields and, like the write path, leaving costing and the `line*`/`bill*` split
+alone. It differs from the bill-level script in one respect worth remembering:
+`UNITSPERPACK` is `NOT NULL` with no database default, so backfilled rows get the
+entity default `1.0000`. Note also that `BILLITEM.BILLITEMFINANCEDETAILS_ID`
+carries **no UNIQUE index** (unlike `BILL.BILLFINANCEDETAILS_ID`), so the database
+will not catch a double-link on its own — the script verifies that itself.
+
+So **steps 1–3 are complete**. The next increment is **step 4, reporting
+cutover**: pick one money report, point it at the `BigDecimal` fields, and keep a
+reconciliation test asserting legacy-vs-BigDecimal parity until it is fully
+switched. Start with a report that needs only bill-level totals and OPD line
+amounts — those are the only migrated amounts so far. Pharmacy, inward, lab and
+channelling still have no line-level write path, so their reports must not be cut
+over yet.
